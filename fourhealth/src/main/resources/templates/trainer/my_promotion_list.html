@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<h1>로그인한놈(트레이너) 프로모션 관리 </h1>
+	<!--  <span th:text="${result}"></span>  -->
+	<table border="1">
+		<tr>
+			<td>프로모션 명</td>
+			<td>프로모션 모집일자</td>
+			<td>프로모션 마감일자</td>
+			<td>총모집인원</td>
+		</tr>
+		
+		<tr th:each="m : ${myPromotionList}">
+			<td>
+				<a th:text="${m.trainerPromotionName}" th:href="@{/}"></a>
+			</td>
+			<td th:text="${m.trainerPromotionRecruitStartDate}"></td>
+			<td th:text="${m.trainerPromotionRecruitEndDate}"></td>
+			<td th:text="${m.trainerPromotionRecruitPeople}"></td>
+		</tr>
+	</table>
+</body>
+</html>
