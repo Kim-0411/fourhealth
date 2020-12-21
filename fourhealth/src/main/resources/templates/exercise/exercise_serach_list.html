@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<style type="text/css">
+form {
+	border: solid black 1px;
+}
+</style>
+</head>
+<body>
+	<h1>신체단련</h1>
+	<span>당신에게 맞는 운동을 찾아서 오늘부터 칼로리를 태워보세요!</span>
+
+	<form th:action="@{/serachExercise}" method="post">
+		<h3>활동 및 운동찾기</h3>
+		<input type="text" name="exercise_name">
+		<button type="submit">검색하기</button>
+		<div>
+			<label><input type="radio" name="met_coefficient" value="easy">가벼움</label>
+			<label><input type="radio" name="met_coefficient" value="normal">보통</label>
+			<label><input type="radio" name="met_coefficient" value="hard">격렬함</label>
+			<label><input type="radio" name="met_coefficient" value="all">전체</label>
+		</div>
+	</form>
+	<table border="1">
+		<tr>
+			<th>운동이름</th>
+			<th>cals/시간</th>
+			<th>met계수</th>
+		</tr>
+		<tr th:each="e :${serachList}">
+			<td th:text="${e.exerciseName}"></td>
+			<td
+				th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+			<td th:text="${e.exerciseMetCoeffcient}"></td>
+		</tr>
+	</table>
+
+</body>
+</html>
