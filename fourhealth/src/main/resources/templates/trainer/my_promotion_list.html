@@ -14,10 +14,10 @@
 			<td>프로모션 마감일자</td>
 			<td>총모집인원</td>
 		</tr>
-		
+		<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
 		<tr th:each="m : ${myPromotionList}">
 			<td>
-				<a th:text="${m.trainerPromotionName}" th:href="@{/}"></a>
+				<a th:text="${m.trainerPromotionName}" th:href="@{/myPromotionMemberList(promotionCode=${m.trainerPromotionNoticeCode})}"></a>
 			</td>
 			<td th:text="${m.trainerPromotionRecruitStartDate}"></td>
 			<td th:text="${m.trainerPromotionRecruitEndDate}"></td>
