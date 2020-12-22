@@ -1,15 +1,21 @@
 package com.fourhealth.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fourhealth.dto.MatchingUserTrainer;
+import com.fourhealth.dto.MetExercise;
 import com.fourhealth.dto.NoticePromotionTrainer;
+import com.fourhealth.service.ExerciseService;
 import com.fourhealth.service.MatchingUserTrainerService;
 /*import com.fourhealth.service.MatchingUserTrainerService;*/
 import com.fourhealth.service.NoticePromotionTrainerService;
@@ -21,6 +27,8 @@ public class TrainerConroller {
 	private MatchingUserTrainerService matchingUserTrainerService;
 	@Autowired
 	private NoticePromotionTrainerService noticePromotionTrainerService;
+	@Autowired
+	private ExerciseService exerciseService;
 
 	//로그인됫다고 가정
 	@GetMapping("/myPromotion")
@@ -41,5 +49,19 @@ public class TrainerConroller {
 		model.addAttribute("memberList",getMemberList);
 		return "trainer/my_promotion_member_list";
 	}
-
+	@GetMapping("/scheduleInsert")
+	public String MemberScheduleInsert() {
+		return "trainer/member_schedule_insert";
+	}
+	
+	@RequestMapping(value = "/exerciseAdd", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<MetExercise> getExerciseList(@RequestParam Map<String, Object> map){
+		System.out.println(map);
+		String exerciseName = (String)map.get("exerciseName");
+		String metCoefficient = (String)map.get("exerciseHow");
+		System.out.println(exerciseName+metCoefficient);
+		List<MetExercise> getExerciseList = exerciseService.getSearchExercise(exerciseName, metCoefficient);
+		
+		return getExerciseList;
+}
 }

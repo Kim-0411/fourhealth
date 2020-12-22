@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+<link rel="stylesheet" href="/resources/demos/style.css">
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$.datepicker.setDefaults({
+		dateFormat : 'yy-mm-dd',
+		prevText : '이전 달',
+		nextText : '다음 달',
+		monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',
+				'10월', '11월', '12월' ],
+		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+				'9월', '10월', '11월', '12월' ],
+		dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		showMonthAfterYear : true,
+		yearSuffix : '년'
+	});
+
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+</script>
+</head>
+<body>
+	<h1>일단 기능만 날짜 정하고 운동 넣어주기</h1>
+	<p>
+		날짜: <input type="text" id="datepicker">
+	</p>
+		<h3>활동 및 운동찾기</h3>
+		<select id="serach_how">
+			<option value="easy">가벼움</option>
+			<option value="normal">보통</option>
+			<option value="hard">격렬함</option>
+			<option value="all">전체</option>
+		</select>
+		<input type="text" id="exercise_name">
+		<button type="button" id="exercise">검색하기</button>
+		
+		<table border="1">
+			<tr>
+				<td>운동명</td>
+				<td>회원최초몸무게별hour/kal</td>
+			</tr>
+			<tbody id="data">
+			
+			</tbody>
+		</table>
+		
+
+	<script type="text/javascript">
+		$('#exercise').click(function() {
+			var exerciseName = $('#exercise_name').val();
+			var exerciseHow = $('#serach_how').val();
+			console.log(exerciseName,exerciseHow);
+			var request = $.ajax({
+				method : "POST",
+				url : "/exerciseAdd",
+				data : {exerciseName : exerciseName, exerciseHow : exerciseHow},
+				dataType : 'json'
+			});
+			request.done(function(data) {
+				console.log(JSON.stringify(data));
+				var html = '';
+				for(var i = 0; i<data.length; i++){
+					html+= '<tr>';
+					html+= '<td>';
+					html+= data[i].exerciseName;
+					html+= '</td>';
+					html+= '<td>';
+					html+= data[i].exerciseMetCoeffcient; //회원아이디값에서 칼로리별계산해줘야하나 고민중
+					html+= '</td>';
+				/* 	html+= '<button type = button' */ //화면에 추가 할수있게 해줘야할듯
+					html+= '<tr>';
+					
+				}
+				$('#data').html(html);
+			});
+			request.fail(function(jqXHR, textStatus){
+				alert("Request failed" + testStatus)
+			});
+		});
+	</script>
+</body>
+</html>
