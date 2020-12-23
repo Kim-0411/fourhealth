@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+      input {
+        width: 300px;
+      }
+      [name="proDetailscon"] {
+        height: 300px;
+      }
+      
+      .select_img img {magin:20px 0;}
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+    <form th:action="@{/proInsert}" method="post" enctype="multipart/form-data">
+      <table border="1">
+        <tr>
+          <td>프로모션 작성자 아이다 :</td>
+          <td>
+            <input type="text" name="userId" th:value="${session.USERID}" />
+          </td>
+        </tr>
+        <tr>
+          <td>프로모션 이름 :</td>
+          <td><input type="text" name="proName" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 목표 :</td>
+          <td><input type="text" name="proGoal" /></td>
+        </tr>
+         <tr>
+          <td>프로모션 이미지 :</td>
+          <td><input type="file" id="gdsImg" name="proBgImage" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 간략내용 :</td>
+          <td><input type="text" name="proShortcon" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 상세내용 :</td>
+          <td><input type="text" name="proDetailscon" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집인원 :</td>
+          <td><input type="text" name="proPeople" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 가격 :</td>
+          <td><input type="number" name="proPrice" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집시작일자 :</td>
+          <td><input type="date" name="proStartDate" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집마감일자 :</td>
+          <td><input type="date" name="proEndDate" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집참여시작일자 :</td>
+          <td><input type="date" name="proAttendStartDate" /></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집참여종료일자 :</td>
+          <td><input type="date" name="proRecruitcloseDate" /></td>
+        </tr>
+      </table>
+      <div class="select_img"><img src="" /></div>
+      <button type="submit" id="proInsertBtn">등록</button>
+    </form>
+  </body>
+  
+  <script>
+  $("#gdsImg").change(function(){
+   if(this.files && this.files[0]) {
+    var reader = new FileReader;
+    reader.onload = function(data) {
+     $(".select_img img").attr("src", data.target.result).width(500);        
+    }
+    reader.readAsDataURL(this.files[0]);
+   }
+  });
+ </script>
+ 
+</html>

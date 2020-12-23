@@ -1,0 +1,108 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.PromotionMapper">
+    <resultMap type="PromotionDTO" id="resultMapPromotion">
+      <result column="trainer_promotion_notice_code" 		property="proCode"/>
+      <result column="user_id" 		property="userId"/>
+		<result column="trainer_promotion_name" 		property="proName"/>
+		<result column="trainer_promotion_goal" 		property="proGoal"/>
+      <result column="trainer_promotion_short_contents" 	property="proShortcon"/>
+      <result column="trainer_promotion_details_contents" 	property="proDetailscon"/>
+      <result column="trainer_promotion_recruit_people" 	property="proPeople"/>
+      <result column="trainer_promotion_live_add_people" 	property="proLivePeople"/>
+      <result column="trainer_promotion_price" 	property="proPrice"/>
+      <result column="trainer_promotion_recruit_total_date" 	property="proTotalDate"/>
+      <result column="trainer_promotion_recruit_start_date" 	property="proStartDate"/>
+      <result column="trainer_promtion_recruit_end_date" 	property="proEndDate"/>
+      <result column="trainer_promotion_attend_start_date" 	property="proAttendStartDate"/>
+      <result column="trainer_promotion_recruit_close_date" 	property="proRecruitcloseDate"/>
+      <result column="trainer_promotion_bg_image" property="proImageUrl"/>
+      <result column="trainer_matching_system_add_date" 	property="proyAddDate"/>
+    </resultMap>
+
+    <insert id="promotionInsert" parameterType="PromotionDTO">
+      <selectKey keyProperty="proCode" resultType="String" order="BEFORE">
+        SELECT
+          CASE
+          WHEN COUNT(1) = 0 THEN 'trainer_promotion_notice_001' 
+          ELSE CONCAT('trainer_promotion_notice_', LPAD(MAX(CAST(right(g.trainer_promotion_notice_code,3) AS DECIMAL)+1), 3, 0))
+          END AS proCode
+        FROM
+          tb_notice_promotion_trainer AS g;
+      </selectKey>
+      INSERT INTO tb_notice_promotion_trainer
+      (
+      trainer_promotion_notice_code, 
+      user_id, 
+      trainer_promotion_name, 
+      trainer_promotion_goal, 
+      trainer_promotion_short_contents, 
+      trainer_promotion_details_contents, 
+      trainer_promotion_recruit_people,
+      trainer_promotion_live_add_people, 
+      trainer_promotion_price, 
+      trainer_promotion_recruit_total_date, 
+      trainer_promotion_recruit_start_date, 
+      trainer_promtion_recruit_end_date, 
+      trainer_promotion_attend_start_date, 
+      trainer_promotion_recruit_close_date,
+      trainer_promotion_bg_image, 
+      trainer_matching_system_add_date
+      )
+      VALUES 
+      (
+        #{proCode},
+        #{userId},
+        #{proName}, 
+        #{proGoal}, 
+        #{proShortcon}, 
+        #{proDetailscon}, 
+        #{proPeople},
+        0, 
+        #{proPrice} ,
+        #{proTotalDate},
+        #{proStartDate} ,
+        #{proEndDate}, 
+        #{proAttendStartDate}, 
+        #{proRecruitcloseDate}, 
+        #{proImageUrl},
+        NOW())
+
+      </insert>
+
+      <select id="promotionCheck" resultType="String">
+        SELECT COUNT(*) 
+        FROM (
+	        SELECT 
+		        user_id
+          FROM 
+            tb_trainer 
+          WHERE 
+          user_id = #{userId}
+        )c;
+      </select>  
+      
+      <select id="promotionList" resultMap="resultMapPromotion">
+        SELECT 
+        	trainer_promotion_notice_code, 
+        	user_id, trainer_promotion_name, 
+        	trainer_promotion_goal, 
+        	trainer_promotion_short_contents, 
+        	trainer_promotion_details_contents, 
+        	trainer_promotion_recruit_people, 
+        	trainer_promotion_live_add_people, 
+        	trainer_promotion_price, 
+        	trainer_promotion_recruit_start_date,
+        	trainer_promtion_recruit_end_date, 
+        	trainer_promotion_attend_start_date, 
+        	trainer_promotion_recruit_close_date, 
+        	trainer_promotion_bg_image, 
+        	trainer_promotion_recruit_total_date, 
+        	trainer_matching_system_add_date
+		FROM 
+			tb_notice_promotion_trainer
+      </select>  
+
+</mapper>

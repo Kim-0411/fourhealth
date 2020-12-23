@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.MemberMapper">
+    <resultMap type="Memberdto" id="resultMapMember">
+        <result column="user_id" property="userId"/>
+        <result column="user_pw" property="userPw"/>
+        <result column="user_level_code" property="userLevel"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_addr" property="userAddr"/>
+        <result column="user_nickname" property="userNicname"/>
+        <result column="user_birth" property="userBirth"/>
+        <result column="user_gender" property="userGender"/>
+        <result column="user_main_bank" property="userMainBank"/>
+        <result column="user_bank_number" property="userBankNumber"/>
+        <result column="user_bank_master" property="userBankMaster"/>
+        <result column="user_reg_date" property="userRegDate"/>
+    </resultMap>
+    
+    <select id="getMember" parameterType="String" resultMap="resultMapMember">
+        SELECT 
+        *
+        FROM 
+        tb_common_user 
+	    WHERE user_id =  #{userId} ;
+	</select>
+</mapper>
