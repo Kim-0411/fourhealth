@@ -36,7 +36,12 @@ public class PromotionService {
 	    }
 	 
 	 public List<PromotionDTO> promotionList(){
-		 return promotionMapper.promotionList();
+		 List<PromotionDTO> promotionList = promotionMapper.promotionList();
+		 for(int i=0; i<promotionList.size(); i++) {
+			String imgUrl = promotionList.get(i).getProImageUrl();
+			promotionList.get(i).setProImageUrl("image/"+imgUrl);
+		 }
+		 return promotionList;
 	 }
 
 	 

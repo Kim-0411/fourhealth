@@ -5,6 +5,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -18,6 +19,12 @@ import com.fourhealth.service.MemberService;
 public class MemberController {
 	@Autowired
     private MemberService memberService;
+	
+	@GetMapping("/login")
+	public String test(Model model) {
+		model.addAttribute("test", "Hello thymeleaf");
+		return "login";
+	}
 
     @PostMapping("/login")
     public String login(@RequestParam(name = "id", required = false) String userId,
@@ -50,7 +57,7 @@ public class MemberController {
             System.out.println("로그인 실패");
         }
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 
     @GetMapping("/logout")
@@ -58,6 +65,6 @@ public class MemberController {
 
         session.invalidate();
 
-        return "redirect:/";
+        return "redirect:/login";
     }
 }

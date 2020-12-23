@@ -16,10 +16,10 @@ public class PromotionDTO {
     private String proStartDate;
     private String proEndDate;
     private String proAttendStartDate;
-    private String proRecruitcloseDate;
-    private MultipartFile proBgImage;
+    private String proRecruitcloseDate;   
     private String proyAddDate;
-    private String proImageUrl;
+    private MultipartFile proBgImage; //화면에서 사진 가져오는 DTO
+    private String proImageUrl; //디비에 들어가는 DTO
 
     public String getProCode() {
         return proCode;

@@ -11,6 +11,6 @@ public class MainController {
 	@GetMapping("/")
 	public String test(Model model) {
 		model.addAttribute("test", "Hello thymeleaf");
-		return "test";
+		return "index";
 	}
 }

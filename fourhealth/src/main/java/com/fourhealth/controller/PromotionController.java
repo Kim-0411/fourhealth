@@ -48,7 +48,7 @@ public class PromotionController {
 	            PrintWriter out = response.getWriter();
 	            out.println("<script>alert('정보를 확인해주세요.'); location.href='/';</script>");
 	            out.flush();
-	            return "redirect:/";
+	            return "redirect:/login";
 	        }
 }
 	 
@@ -57,19 +57,21 @@ public class PromotionController {
 		 System.out.println(promotionDto);
 	
 		 	String fileName = null;
+		 	
 		 	if(!promotionDto.getProBgImage().isEmpty()) {
 		 		fileName = promotionDto.getProBgImage().getOriginalFilename();
-		 		String path = "C:\\Users\\ECS\\git\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
-		 		
-		 		new File(path).mkdir();
+		 		String path = "C:\\Users\\ECS\\git\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; //패스 경로
+	 		
 		 		try {
+		 			new File(path).mkdir(); 
 					promotionDto.getProBgImage().transferTo(new File(path+fileName));
+					
 				} catch (IllegalStateException e) {	
 					e.printStackTrace();
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-		 		promotionDto.setProImageUrl(path+fileName);	 		
+		 		promotionDto.setProImageUrl(fileName);	 		
 		 	}
 
 	        String start = promotionDto.getProAttendStartDate();
@@ -94,7 +96,7 @@ public class PromotionController {
 
 	        promotionService.promotionInsert(promotionDto);
 
-	        return "redirect:/";
+	        return "redirect:/login";
 	    }
 	 
 	 @GetMapping("/proList")
