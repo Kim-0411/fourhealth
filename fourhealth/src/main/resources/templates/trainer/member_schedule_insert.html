@@ -5,7 +5,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet"
 	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-<link rel="stylesheet" href="/resources/demos/style.css">
+
 <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script>
@@ -31,6 +31,12 @@
 </head>
 <body>
 	<h1>일단 기능만 날짜 정하고 운동 넣어주기</h1>
+	<div style="float: right;">
+		<p>회원 아이디 : <span  th:text="${userInfo.userId}"></span></p>
+		<p>관리하는놈 키: <span id="height"  th:text="${userInfo.userFirstHeight}"></span></p>
+		<p>관리하는놈 몸무게 : <span id="weight" th:text="${userInfo.userFirstWeight}"></span></p>
+		<p>관리하는놈 목표 : <span  th:text="${userInfo.userFirstGoal}"></span></p>
+	</div>
 	<p>
 		날짜: <input type="text" id="datepicker">
 	</p>
@@ -47,18 +53,31 @@
 		<table border="1">
 			<tr>
 				<td>운동명</td>
-				<td>회원최초몸무게별hour/kal</td>
+				<td>met계수</td>
+				<td>선택된 회원 시간당 칼로리</td>
 			</tr>
 			<tbody id="data">
 			
 			</tbody>
 		</table>
-		
+		<h1>운동 넣어주는곳 </h1>
+		<form id="insert_exercise">
+		<input type="hidden" th:value="${userInfo.userId}" name=""> <!--스케줄코드-->
+		<input type="hidden" th:value="${userInfo.userId}" name="userId"> <!-- 회원아이디값-->
+		<input type="hidden" value="id002" name="userId"> <!-- 트레이너아이디(있다고가정 로그인됫으면 그거 가져오면될듯? )-->
+			
+		</form>
+		<button type="submit">넣어주기</button>
 
 	<script type="text/javascript">
 		$('#exercise').click(function() {
 			var exerciseName = $('#exercise_name').val();
 			var exerciseHow = $('#serach_how').val();
+			
+			var height = parseFloat($('#height').text());
+			var weight = parseFloat($('#weight').text());
+			
+			console.log(height,weight);
 			console.log(exerciseName,exerciseHow);
 			var request = $.ajax({
 				method : "POST",
@@ -66,19 +85,24 @@
 				data : {exerciseName : exerciseName, exerciseHow : exerciseHow},
 				dataType : 'json'
 			});
+			/* 	th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td> */
 			request.done(function(data) {
 				console.log(JSON.stringify(data));
 				var html = '';
 				for(var i = 0; i<data.length; i++){
 					html+= '<tr>';
 					html+= '<td>';
+					html+="<input type= 'checkbox' class ='add_exerise' value="+data[i].exerciseName+">"
 					html+= data[i].exerciseName;
 					html+= '</td>';
 					html+= '<td>';
 					html+= data[i].exerciseMetCoeffcient; //회원아이디값에서 칼로리별계산해줘야하나 고민중
 					html+= '</td>';
+					html+= '<td>';												//시간별로 계산해주려면 변수로 빼멸 될듯?
+					html+= Math.floor(data[i].exerciseMetCoeffcient *(3.5*weight*60/1000)*5);
+					html+= '</td>';
 				/* 	html+= '<button type = button' */ //화면에 추가 할수있게 해줘야할듯
-					html+= '<tr>';
+					html+= '</tr>';
 					
 				}
 				$('#data').html(html);
@@ -87,6 +111,24 @@
 				alert("Request failed" + testStatus)
 			});
 		});
+		
+	</script>
+	<script type="text/javascript">
+	$(document).on('change','input[class = add_exerise]',function(){
+		   if($(".add_exerise").is(":checked")){
+			   var html1 = "<p>운동명 :<input type ='text' value= "+$(this).val()+" readonly='readonly'> 넣어줄시간(분) :<input type ='text' value= ''></p>";
+				$('#insert_exercise').after(html1);
+		   }else{
+			   
+		   }
+	});
+/* 	$('.add_exerise').change(function(){
+        if($(".add_exerise").is(":checked")){
+            alert("체크");
+        }
+	
+    }); */
+	
 	</script>
 </body>
 </html>
