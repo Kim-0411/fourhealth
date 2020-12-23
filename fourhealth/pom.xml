@@ -82,6 +82,18 @@
 			<artifactId>fatsecret-platform</artifactId>
 			<version>2.0</version>
 		</dependency>
+		<!-- jsoup, json -->
+		<dependency>
+			<groupId>org.jsoup</groupId>
+			<artifactId>jsoup</artifactId>
+			<version>1.12.1</version>
+		</dependency>
+		<dependency>
+		    <groupId>com.googlecode.json-simple</groupId>
+		    <artifactId>json-simple</artifactId>
+		    <version>1.1.1</version>
+		</dependency>
+		<!--  -->
 	</dependencies>
 
 	<build>
