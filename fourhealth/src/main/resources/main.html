@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	  layout:decorate="@{layout/default}">
+
+<th:block layout:fragment="customTitle">
+	<title th:text="${title}"></title>
+</th:block>
+
+<th:block layout:fragment="customContent">
+	<H1>HELLO SPRING BOOT1</H1>
+</th:block>
+</html>

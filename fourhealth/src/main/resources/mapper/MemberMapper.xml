@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.MemberMapper">
+<!-- 회원가입  -->
+	<resultMap type="Member" id="resultMapMember">
+		<result column="user_id" 		property="userId"/>
+		<result column="user_level_code" property="userLevelCode"/>
+		<result column="user_pw" 		property="userPassword"/>
+		<result column="user_name" 		property="userName"/>
+		<result column="user_addr" 		property="userAddr"/>
+		<result column="user_nickname" 	property="userNickName"/>
+		<result column="user_phone" 	property="userPhone"/>
+		<result column="user_email" 	property="userEmail"/>
+		<result column="user_birth" 	property="userBirth"/>
+		<result column="user_gender" 	property="userGender"/>
+		<result column="user_main_bank" 	property="userMainBank"/>
+		<result column="user_bank_master" 	property="userBankMaster"/>
+		<result column="u_reg_date" 	property="userRegDate"/>
+	</resultMap> 
+	
+	
+	
+	
+	<insert id="addMember" parameterType="Member">
+		INSERT INTO tb_member
+		 (user_id, user_level_code, user_pw, user_name, user_addr, user_nickname, user_phone, user_email, user_birth, user_gender, user_main_bank, user_bank_master, u_reg_date)
+		VALUES (
+		  #{userId}
+		 ,#{userLevelCode}
+		 ,#{userPassword}
+		 ,#{userName}
+		 ,#{userAddr}
+		 ,#{userNickName}
+		 ,#{userPhone}
+		 ,#{userEmail}
+		 ,#{userBirth}
+		 ,#{userGender}
+		 ,#{userMainBank}
+		 ,#{userBankMaster}
+		 , NOW());
+	</insert>
+</mapper>

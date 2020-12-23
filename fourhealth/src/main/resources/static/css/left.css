@@ -1,0 +1,28 @@
+@charset "UTF-8";
+
+.backLeft {
+	position: absolute;
+	left: 0;
+	width: 50%;
+	height: 100%;
+	background: #e74c3c
+		url(https://download.unsplash.com/photo-1428279148693-1cf2163ed67d);
+	background-size: cover;
+	background-position: 50% 50%;
+}
+
+.left {
+	width: 50%;
+	height: 100%;
+	background: #2C3034;
+	left: 0;
+	position: absolute;
+	
+
+}
+
+.left .off:hover {
+	box-shadow: none;
+	color: #03A9F4;
+	background: #363A3D;
+}
