@@ -6,7 +6,7 @@
 <!-- 회원가입  -->
 	<resultMap type="Member" id="resultMapMember">
 		<result column="user_id" 		property="userId"/>
-		<result column="user_level_code" property="userLevelCode"/>
+		<result column="user_level_code" property="userLevel"/>
 		<result column="user_pw" 		property="userPassword"/>
 		<result column="user_name" 		property="userName"/>
 		<result column="user_addr" 		property="userAddr"/>
@@ -16,29 +16,61 @@
 		<result column="user_birth" 	property="userBirth"/>
 		<result column="user_gender" 	property="userGender"/>
 		<result column="user_main_bank" 	property="userMainBank"/>
+		<result column="user_bank_number"  property="userBankNumber"/>
 		<result column="user_bank_master" 	property="userBankMaster"/>
-		<result column="u_reg_date" 	property="userRegDate"/>
+		<result column="user_reg_date" 	property="userRegDate"/>
 	</resultMap> 
 	
+	<!-- 패스워드 체크   -->
+	<select id = "userPwCheck" resultType="int">
+	SELECT 
+		COUNT(*) 
+	FROM tb_common_user AS u
+		WHERE u.user_id = #{userId};
+	AND u.user_pw = #{userPassword};'
+	</select>
 	
 	
+	<!-- 아이디 중복 체크 : 아이디가 있으면 1 count, 없으면 0 -->
+	<select id = "userIdCheck" parameterType="String" resultType="int">
+	SELECT 
+		COUNT(*) 
+	FROM tb_common_user AS u
+		WHERE u.user_id = #{userId};
+	</select>
 	
+	
+	<!-- 회원가입 -->
 	<insert id="addMember" parameterType="Member">
-		INSERT INTO tb_member
-		 (user_id, user_level_code, user_pw, user_name, user_addr, user_nickname, user_phone, user_email, user_birth, user_gender, user_main_bank, user_bank_master, u_reg_date)
-		VALUES (
-		  #{userId}
-		 ,#{userLevelCode}
-		 ,#{userPassword}
-		 ,#{userName}
-		 ,#{userAddr}
-		 ,#{userNickName}
-		 ,#{userPhone}
-		 ,#{userEmail}
-		 ,#{userBirth}
-		 ,#{userGender}
-		 ,#{userMainBank}
-		 ,#{userBankMaster}
-		 , NOW());
+		INSERT INTO tb_common_user
+			(user_id, 
+			user_level_code, 
+			user_pw, 
+			user_name, 
+			user_addr, 
+			user_nickname, 
+			user_phone, 
+			user_email, 
+			user_birth, 
+			user_gender, 
+			user_main_bank, 
+			user_bank_number, 
+			user_bank_master, 
+			user_reg_date)
+	VALUES (
+			#{userId}, 
+			#{userLevel}, 
+			#{userPassword}, 
+			#{userName}, 
+			#{userAddr}, 
+			#{userNickName}, 
+			#{userPhone}, 
+			#{userEmail}, 
+			#{userBirth},
+			#{userGender}, 
+			null, 
+			null, 
+			null, 
+			NOW());
 	</insert>
 </mapper>

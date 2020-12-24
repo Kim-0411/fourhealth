@@ -1,74 +1,141 @@
 package com.fourhealth.dto;
 
 public class Member {
-	private String memberId;
-	private String memberPw;
-	private String memberName;
-	private String memberLevel;
-	private String memberEmail;
-	private String memberAddr;
-	private String memberRegDate;
-	public String getMemberId() {
-		return memberId;
+	private String userId;
+	private String userPassword;
+	private String userLevel;
+	private String userAddr;
+	private String userName;
+	private String userBirth;
+	private String userNickName;
+	private String userPhone;
+	private String userEmail;
+	private String userGender;
+	private String userMainBank;
+	private String userBankNumber;
+	private String userBankMaster;
+	private String userRegDate;
+	
+	
+	//getter. setter
+	public String getUserMainBank() {
+		return userMainBank;
 	}
-	public void setMemberId(String memberId) {
-		this.memberId = memberId;
+	public void setUserMainBank(String userMainBank) {
+		this.userMainBank = userMainBank;
 	}
-	public String getMemberPw() {
-		return memberPw;
+	public String getUserBankNumber() {
+		return userBankNumber;
 	}
-	public void setMemberPw(String memberPw) {
-		this.memberPw = memberPw;
+	public void setUserBankNumber(String userBankNumber) {
+		this.userBankNumber = userBankNumber;
 	}
-	public String getMemberName() {
-		return memberName;
+	public String getUserBankMaster() {
+		return userBankMaster;
 	}
-	public void setMemberName(String memberName) {
-		this.memberName = memberName;
+	public void setUserBankMaster(String userBankMaster) {
+		this.userBankMaster = userBankMaster;
 	}
-	public String getMemberLevel() {
-		return memberLevel;
+	public String getUserId() {
+		return userId;
 	}
-	public void setMemberLevel(String memberLevel) {
-		this.memberLevel = memberLevel;
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	public String getMemberEmail() {
-		return memberEmail;
+	public String getUserPassword() {
+		return userPassword;
 	}
-	public void setMemberEmail(String memberEmail) {
-		this.memberEmail = memberEmail;
+	public void setUserPassword(String userPassword) {
+		this.userPassword = userPassword;
 	}
-	public String getMemberAddr() {
-		return memberAddr;
+	public String getUserLevel() {
+		return userLevel;
 	}
-	public void setMemberAddr(String memberAddr) {
-		this.memberAddr = memberAddr;
+	public void setUserLevel(String userLevel) {
+		this.userLevel = userLevel;
 	}
-	public String getMemberRegDate() {
-		return memberRegDate;
+	public String getUserAddr() {
+		return userAddr;
 	}
-	public void setMemberRegDate(String memberRegDate) {
-		this.memberRegDate = memberRegDate;
+	public void setUserAddr(String userAddr) {
+		this.userAddr = userAddr;
+	}
+	public String getUserName() {
+		return userName;
+	}
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+	public String getUserBirth() {
+		return userBirth;
+	}
+	public void setUserBirth(String userBirth) {
+		this.userBirth = userBirth;
+	}
+	public String getUserNickName() {
+		return userNickName;
+	}
+	public void setUserNickName(String userNickName) {
+		this.userNickName = userNickName;
+	}
+	public String getUserPhone() {
+		return userPhone;
+	}
+	public void setUserPhone(String userPhone) {
+		this.userPhone = userPhone;
+	}
+	public String getUserEmail() {
+		return userEmail;
+	}
+	public void setUserEmail(String userEmail) {
+		this.userEmail = userEmail;
+	}
+	public String getUserGender() {
+		return userGender;
+	}
+	public void setUserGender(String userGender) {
+		this.userGender = userGender;
+	}
+	public String getUserRegDate() {
+		return userRegDate;
+	}
+	public void setUserRegDate(String userRegDate) {
+		this.userRegDate = userRegDate;
 	}
 	@Override
 	public String toString() {
 		StringBuilder builder = new StringBuilder();
-		builder.append("Member [memberId=");
-		builder.append(memberId);
-		builder.append(", memberPw=");
-		builder.append(memberPw);
-		builder.append(", memberName=");
-		builder.append(memberName);
-		builder.append(", memberLevel=");
-		builder.append(memberLevel);
-		builder.append(", memberEmail=");
-		builder.append(memberEmail);
-		builder.append(", memberAddr=");
-		builder.append(memberAddr);
-		builder.append(", memberRegDate=");
-		builder.append(memberRegDate);
+		builder.append("Member [userId=");
+		builder.append(userId);
+		builder.append(", userPassword=");
+		builder.append(userPassword);
+		builder.append(", userLevel=");
+		builder.append(userLevel);
+		builder.append(", reUserPassword=");
+		builder.append(", userAddr=");
+		builder.append(userAddr);
+		builder.append(", userName=");
+		builder.append(userName);
+		builder.append(", userBirth=");
+		builder.append(userBirth);
+		builder.append(", userNickName=");
+		builder.append(userNickName);
+		builder.append(", userPhone=");
+		builder.append(userPhone);
+		builder.append(", userEmail=");
+		builder.append(userEmail);
+		builder.append(", userGender=");
+		builder.append(userGender);
+		builder.append(", userMainBank=");
+		builder.append(userMainBank);
+		builder.append(", userBankNumber=");
+		builder.append(userBankNumber);
+		builder.append(", userBankMaster=");
+		builder.append(userBankMaster);
+		builder.append(", userRegDate=");
+		builder.append(userRegDate);
 		builder.append("]");
 		return builder.toString();
 	}
-
 }
+	

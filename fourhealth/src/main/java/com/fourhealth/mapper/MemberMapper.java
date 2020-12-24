@@ -9,7 +9,10 @@ import com.fourhealth.dto.Member;
 @Mapper
 public interface MemberMapper {
 
+	
 	public Member getMemberById(String memberId);
+	
+	//회원가입
 	public int addMember(Member member);
 	
 }

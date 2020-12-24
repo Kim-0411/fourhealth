@@ -17,8 +17,10 @@
 	background: #2C3034;
 	left: 0;
 	position: absolute;
-	
 
+}
+.content.form-group:p {
+	display: inline-block;
 }
 
 .left .off:hover {
