@@ -65,24 +65,21 @@ public class FoodController {
 		// String startIdx = "1";
 		int startIdx = 1;
 		// String endIdx = "5";
-		int endIdx = 5;
-		
+		int endIdx = 1000;
+
 		String url = null;
-		
-		//검색 처리 작업 음식 이름
-		if(food=="") {
-			 url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/"
-						+ startIdx + "/" + endIdx;
-		}else {
-			 url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/"
-						+ startIdx + "/" + endIdx + "/DESC_KOR=" + food;
+
+		// 검색 처리 작업 음식 이름
+		if (food == "") {
+			url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/"
+					+ startIdx + "/" + endIdx;
+		} else {
+			url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/"
+					+ startIdx + "/" + endIdx + "/DESC_KOR=" + food;
 		}
-		
-		//검색 처리 메이커 이름
-		
-		
-		
-		 
+
+		// 검색 처리 메이커 이름
+
 		/// DESC_KOR="+food
 		List<Map<String, String>> foodList = new ArrayList<Map<String, String>>();
 		System.out.println(url);
@@ -104,10 +101,10 @@ public class FoodController {
 			System.out.println(">>>" + result);
 
 			JSONParser parser = new JSONParser(result);
-			//result 값으로 받아서 parsing
-			
-			LinkedHashMap<String, Object> map = parser.parseObject(); 
-			
+			// result 값으로 받아서 parsing
+
+			LinkedHashMap<String, Object> map = parser.parseObject();
+
 			LinkedHashMap<String, Object> map2 = (LinkedHashMap<String, Object>) map.get("I2790");
 
 			ArrayList<Map<String, String>> arrayList = (ArrayList<Map<String, String>>) map2.get("row");
@@ -115,15 +112,15 @@ public class FoodController {
 			for (Map<String, String> subMap : arrayList) {
 				Map<String, String> foodMap = new HashMap<String, String>();
 				String foodName = subMap.get("DESC_KOR");
-				String nutrCal = subMap.get("NUTR_CONT1"); 
-				String nutrCarbo = subMap.get("NUTR_CONT2"); 
-				String nutrProtein = subMap.get("NUTR_CONT3"); 
-				String nutrFat = subMap.get("NUTR_CONT4"); 
-				String servingSize = subMap.get("SERVING_SIZE"); 
+				String nutrCal = subMap.get("NUTR_CONT1");
+				String nutrCarbo = subMap.get("NUTR_CONT2");
+				String nutrProtein = subMap.get("NUTR_CONT3");
+				String nutrFat = subMap.get("NUTR_CONT4");
+				String servingSize = subMap.get("SERVING_SIZE");
 				String makerName = subMap.get("MAKER_NAME");
 				String totalSugar = subMap.get("NUTR_CONT5");
 				String totalSodium = subMap.get("NUTR_CONT6");
-				
+
 				foodMap.put("foodName", foodName);
 				foodMap.put("foodCal", nutrCal);
 				foodMap.put("foodCarbo", nutrCarbo);
@@ -134,9 +131,8 @@ public class FoodController {
 				foodMap.put("makerName", makerName);
 				foodMap.put("foodTotalGram", servingSize);
 				foodList.add(foodMap);
-			
-			}
 
+			}
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -24,6 +24,11 @@
             <tr>
                 <th>식품이름</th>
                 <th>식품칼로리</th>
+                <th>단백질</th>
+                <th>탄수화물</th>
+                <th>지방</th>
+                <th>나트륨</th>
+            </tr>
             </tr>
         </thead>
         <tbody id="wData">
@@ -69,6 +74,9 @@
                     html += '</td>';
                     html += '<td>';
                     html += data[i].foodCal;
+                    html += '</td>';
+                    html += '<td>';
+                    html += data[i].foodCarbo;
                     html += '</td>';
                     html += '</tr>';
                 }
