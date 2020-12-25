@@ -20,9 +20,9 @@
     <form th:action="@{/proInsert}" method="post" enctype="multipart/form-data">
       <table border="1">
         <tr>
-          <td>프로모션 작성자 아이다 :</td>
+          <td>프로모션 작성자 아이디 :</td>
           <td>
-            <input type="text" name="userId" th:value="${session.USERID}" />
+            <input type="text" name="proId" th:value="${session.USERID}" />
           </td>
         </tr>
         <tr>

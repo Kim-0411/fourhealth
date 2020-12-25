@@ -1,6 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
+<style>
+img {
+	white : 200px;
+	height: 200px;
+}
+</style>
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
@@ -22,10 +28,12 @@
 		</thead>
 		<tbody>
 			<tr th:if="${#lists.size(promotionList) > 0}" th:each="p : ${promotionList}">
-				<td th:text="${p.proName}"></td>
+				<td>
+				<a th:href="@{/proDetail(proCode=${p.proCode})}"><p th:text="${p.proName}"></p></a>
+				</td>
 				<td><img th:src="${p.proImageUrl}">  </td>
 				<td th:text="${p.proShortcon}"></td>
-				<td th:text="${p.userId}"></td>
+				<td th:text="${p.proId}"></td>
 				<td th:text="${p.proAttendStartDate}"></td>
 				<td th:text="${p.proRecruitcloseDate}"></td>
 				<td th:text="${p.proPeople}"></td>
