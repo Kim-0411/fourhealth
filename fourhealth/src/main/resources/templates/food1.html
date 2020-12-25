@@ -40,9 +40,9 @@
 
     <script>
         var selectValue = "";
+        var data;
 
         function checkCategory() {
-
             $('input[type="checkbox"]:checked').each(function(index) {
                 if (index != 0) {
                     selectValue += ', ';
@@ -65,7 +65,19 @@
                 dataType: "json",
             });
             request.done(function(data) {
+                $.ajax({
+                    type: "post",
+                    url: "/foodInsert",
+                    data: {
+                        data: data
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        alert('성공');
+                    }
+                });
                 console.log(data);
+
                 alert("success");
                 for (var i = 0; i < data.length; i++) {
                     html += '<tr>';
@@ -95,6 +107,7 @@
                 alert("Request failed: " + textStatus);
             });
         });
+        console.log(data);
     </script>
 </body>
 

@@ -3,8 +3,11 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
-	<insert id="">
-
+	<insert id="insertFood2" parameterType="java.util.Map">
+		
+	INSERT INTO tb_food
+   (food_code, food_name, food_calorie, food_vitamin, food_carbo, food_protein, food_fat, food_reg_date)
+   VALUES ('', '', 0, 0, 0, 0, 0, NOW())
 		
 	</insert>
 </mapper>

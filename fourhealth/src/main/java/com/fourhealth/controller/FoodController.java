@@ -10,6 +10,11 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
+
+import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+import com.fourhealth.service.FoodService;
+
 import org.apache.tomcat.util.json.JSONParser;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -20,6 +25,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
@@ -28,6 +34,17 @@ public class FoodController {
 
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
+
+	// Generate FoodService Object
+	FoodService foodService = new FoodService();
+
+	@PostMapping("/foodInsert")
+	public @ResponseBody void foodInsert(@RequestParam Map<String, String> data) {
+		System.out.println("Controller data 표시");
+		System.out.println(data);
+
+		foodService.addFood1(data);
+	}
 
 	@GetMapping("/food1")
 	public String food1(Model model) {
@@ -65,7 +82,7 @@ public class FoodController {
 		// String startIdx = "1";
 		int startIdx = 1;
 		// String endIdx = "5";
-		int endIdx = 1000;
+		int endIdx = 10;
 
 		String url = null;
 
