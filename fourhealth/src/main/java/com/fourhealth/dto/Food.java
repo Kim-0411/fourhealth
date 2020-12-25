@@ -1,6 +1,6 @@
 package com.fourhealth.dto;
 
-public class FoodDto {
+public class Food {
 	private String foodName;
 	private String foodCal;
 	private String foodCarbo;
