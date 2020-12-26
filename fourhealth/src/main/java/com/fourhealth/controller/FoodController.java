@@ -13,6 +13,7 @@ import java.util.Map;
 import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
+import com.fourhealth.dto.Food;
 import com.fourhealth.service.FoodService;
 
 import org.apache.tomcat.util.json.JSONParser;
@@ -39,11 +40,14 @@ public class FoodController {
 	FoodService foodService = new FoodService();
 
 	@PostMapping("/foodInsert")
-	public @ResponseBody void foodInsert(@RequestParam Map<String, String> data) {
+	public @ResponseBody void foodInsert(@RequestParam Map<String, String> data, Food food) {
 		System.out.println("Controller data 표시");
 		System.out.println(data);
 
-		foodService.addFood1(data);
+		//food VO(DTO) 테스트
+		
+
+		//foodService.addFood1(data);
 	}
 
 	@GetMapping("/food1")
@@ -80,9 +84,9 @@ public class FoodController {
 		// String datatype = "json";
 		// index Start, End
 		// String startIdx = "1";
-		int startIdx = 1;
+		int startIdx = 0;
 		// String endIdx = "5";
-		int endIdx = 10;
+		int endIdx = 1;
 
 		String url = null;
 
@@ -128,6 +132,7 @@ public class FoodController {
 
 			for (Map<String, String> subMap : arrayList) {
 				Map<String, String> foodMap = new HashMap<String, String>();
+				String foodCode = subMap.get("FOOD_CD");
 				String foodName = subMap.get("DESC_KOR");
 				String nutrCal = subMap.get("NUTR_CONT1");
 				String nutrCarbo = subMap.get("NUTR_CONT2");
@@ -138,6 +143,7 @@ public class FoodController {
 				String totalSugar = subMap.get("NUTR_CONT5");
 				String totalSodium = subMap.get("NUTR_CONT6");
 
+				foodMap.put("foodCode", foodCode);
 				foodMap.put("foodName", foodName);
 				foodMap.put("foodCal", nutrCal);
 				foodMap.put("foodCarbo", nutrCarbo);
