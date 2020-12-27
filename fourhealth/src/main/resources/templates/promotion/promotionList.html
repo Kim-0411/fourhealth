@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+img {
+	white : 200px;
+	height: 200px;
+}
+</style>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+</head>
+<body>
+<table border="1">
+		<thead>
+			<tr>
+				<th>프로모션 이름</th>
+				<th>프로모션 사진</th>
+				<th>프로모션 설명</th>
+				<th>트레이너 아이디</th>
+				<th>모집기간시작</th>
+				<th>모집기간 끝</th>
+				<th>모집인원</th>
+				<th>현재모집인원</th>
+				<th>등록일자</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.size(promotionList) > 0}" th:each="p : ${promotionList}">
+				<td>
+				<a th:href="@{/proDetail(proCode=${p.proCode})}"><p th:text="${p.proName}"></p></a>
+				</td>
+				<td><img th:src="${p.proImageUrl}">  </td>
+				<td th:text="${p.proShortcon}"></td>
+				<td th:text="${p.proId}"></td>
+				<td th:text="${p.proAttendStartDate}"></td>
+				<td th:text="${p.proRecruitcloseDate}"></td>
+				<td th:text="${p.proPeople}"></td>
+				<td th:text="${p.proLivePeople}"></td>
+				<td th:text="${p.proyAddDate}"></td>			
+			</tr>		
+		</tbody>
+	</table>
+	<a th:href="@{/pro(userId=${session.USERID})}">트레이너 프로모션 등록하기</a>
+</body>
+</html>

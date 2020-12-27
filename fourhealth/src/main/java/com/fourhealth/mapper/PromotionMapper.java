@@ -10,7 +10,7 @@ import com.fourhealth.dto.PromotionDTO;
 public interface PromotionMapper {
 	
 	 public int promotionInsert(PromotionDTO promotionDto);
-	 public String promotionCheck(String userId);
+	 public String promotionCheck(String proId);
 	 public List<PromotionDTO> promotionList();
-
+	 public PromotionDTO proDetail(String proCode);
 }

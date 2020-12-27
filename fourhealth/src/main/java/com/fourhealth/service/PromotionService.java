@@ -15,9 +15,11 @@ public class PromotionService {
 	
 	 @Autowired
 	    private PromotionMapper promotionMapper;
-	 
-	 public String promotionCheck(String userId) {
-	        String a = promotionMapper.promotionCheck(userId);
+		 
+	 public String promotionCheck(String proId) {
+	     System.out.println(proId);   
+		 String a = promotionMapper.promotionCheck(proId);
+	        
 	        return a;
 	    }
 	 
@@ -43,6 +45,11 @@ public class PromotionService {
 		 }
 		 return promotionList;
 	 }
-
 	 
+	 public PromotionDTO proDetail(String proCode) {
+		 PromotionDTO promotionDTO = promotionMapper.proDetail(proCode);
+		 String imgUrl = promotionDTO.getProImageUrl();
+		 promotionDTO.setProImageUrl("image/"+imgUrl);
+		 return promotionDTO;
+	 }	 
 }

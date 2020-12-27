@@ -4,7 +4,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 public class PromotionDTO {
 	private String proCode;
-    private String userId;
+    private String proId;
     private String proName;
     private String proGoal;
     private String proShortcon;
@@ -29,12 +29,12 @@ public class PromotionDTO {
         this.proCode = proCode;
     }
 
-    public String getUserId() {
-        return userId;
+    public String getProId() {
+        return proId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setProId(String proId) {
+        this.proId = proId;
     }
 
     public String getProName() {
@@ -159,7 +159,7 @@ public class PromotionDTO {
 
 	@Override
 	public String toString() {
-		return "PromotionDTO [proCode=" + proCode + ", userId=" + userId + ", proName=" + proName + ", proGoal="
+		return "PromotionDTO [proCode=" + proCode + ", proId=" + proId + ", proName=" + proName + ", proGoal="
 				+ proGoal + ", proShortcon=" + proShortcon + ", proDetailscon=" + proDetailscon + ", proPeople="
 				+ proPeople + ", proPrice=" + proPrice + ", proLivePeople=" + proLivePeople + ", proTotalDate="
 				+ proTotalDate + ", proStartDate=" + proStartDate + ", proEndDate=" + proEndDate
