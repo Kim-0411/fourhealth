@@ -1,0 +1,20 @@
+.widget-title > h6 {
+  background: #fee2d9;
+  height: 40px;
+  width: 100%;
+  line-height: 40px;
+  border-radius: 2px;
+  margin-top: 30px;
+}
+
+.about-me-widget-thumb img {
+  height: 200px;
+  width: 200px;
+  margin: auto;
+  border-radius: 50%;
+  margin-top: 70px;
+}
+
+.section_padding_0_80 {
+  padding-top: 0;
+}

@@ -59,6 +59,10 @@
 -------------------- */
 @import "/css/indexCss/categories.css";
 
+/* -------------------- 
+:: 14.0 Single Blog CSS
+-------------------- */
+@import "/css/indexCss/blog_area.css";
 /* --------------------
 :: 1.0 Base CSS
 메인 Css
@@ -142,11 +146,6 @@ p {
 .section_padding_80_0 {
   padding-top: 80px;
   padding-bottom: 0;
-}
-
-.section_padding_0_80 {
-  padding-top: 0;
-  padding-bottom: 80px;
 }
 
 img {
@@ -621,22 +620,6 @@ li {
 
 .single-widget-area {
   margin-bottom: 50px;
-}
-
-.widget-title > h6 {
-  background: #fee2d9;
-  height: 40px;
-  width: 100%;
-  line-height: 40px;
-  border-radius: 2px;
-  margin-bottom: 30px;
-}
-
-.about-me-widget-thumb img {
-  height: 200px;
-  width: 200px;
-  margin: auto;
-  border-radius: 50%;
 }
 
 .about-me-widget h4 {
