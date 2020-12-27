@@ -7,7 +7,7 @@ import java.util.Map;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import com.fourhealth.dto.Member;
+import com.fourhealth.dto.MemberDto;
 import com.fourhealth.mapper.MemberMapper;
 
 @Service
@@ -15,18 +15,23 @@ import com.fourhealth.mapper.MemberMapper;
 
 
 public class MemberService {
-	
-	@Autowired
+	@Autowired 
 	private MemberMapper memberMapper;
 	
-	public Member getMemberById(String memberId) {
+	
+	//로그인 
+		public MemberDto getMemberById(String userId) {
+			System.out.println(userId);
+			
+			MemberDto member = memberMapper.getMemberById(userId);
+			
+			System.out.println("로그인아 성공해" + member);
+			return member;
+		}
+	
 
-		Member member = memberMapper.getMemberById(memberId);
-
-		return member;
-	}
-
-	public String addMember(Member member) {
+	//회원가입
+	public String addMember(MemberDto member) {
 		String insertCheck = "회원가입 실패";
 		if (member != null) {
 			int result = memberMapper.addMember(member);
@@ -36,5 +41,15 @@ public class MemberService {
 
 		return insertCheck;
 	}
+
+	//아이디 중복 체크
+	public int userIdCheck(String user_id) {
+		int count = memberMapper.userIdCheck(user_id);
+		
+		
+		return count;
+		
+	}
+	
 
 }

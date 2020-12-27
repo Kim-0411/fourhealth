@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${title}">회원가입</title>
+	<link rel="stylesheet" type="text/css" href="resource/css/style.css" />
+	<script src="resource/js/jquery-3.5.1.min.js"></script>
+</head>
+<body>
+	<div id="back">
+		<div class="backRight"></div>
+		<div class="backLeft"></div>
+	</div>
+
+	<div id="slideBox">
+		<div class="topLayer">
+			<div class="left" > 
+				<div class="content">
+					<h2>Sign Up</h2>
+					<form th:action="@{/addMember2}" method="post" id="sign_form">
+						<div class="form-group">
+							<input type="text" placeholder="userId" id="userId" name="userId"/>
+							<button type="button" id="userIdCheck" name="userIdCheck">중복체크</button>
+							<input type="password" placeholder="userPassword" id="userPassword" name="userPassword"/>
+							<input type="password" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
+							<input type="text" placeholder="userAddr" id="userAddr" name="userAddr"/>
+							<input type="text" placeholder="userName" id="userName" name="userName" />
+							<input type="date" placeholder="userBirth" id="userBirth" name="userBirth"/><!-- 0000-00-00 -->
+							<input type="text" placeholder="userNickName"  id="userNickName" name="userNickName"/>
+							<input type="text" placeholder="userPhone" id="userPhone" name="userPhone"/>
+							<input type="text" placeholder="userEmail" id="userEmail" name="userEmail"/>
+							<p>성별 
+							<input type="radio" name="userGender" value="man" checked="checked">남
+							<input type="radio" name="userGender" value="woman" >여
+							</p>
+							<p>회원권한
+								<input type="radio" name="userLevel" value="trainer">트레이너
+								<input type="radio" name="userLevel" value="user" checked="checked">사용자
+							</p>					
+						</div>	
+					</form>
+					<button type="button" id="goLeft" class="off">Login</button>
+					<button type="button" id="sign_up">Sign up</button>
+				</div>
+			</div>
+			<div class="right">
+				<div class="content">
+					<h2>Login</h2>
+					<form method="post" onsubmit="return false;">
+						<div class="form-group">
+							<label for="username" class="form-label">
+							<input type="text"  placeholder="userId"/>
+							<input type="text"  placeholder="userPw"/>
+							</label> 
+							<br>
+						</div>
+						<button type="button" id="goRight" class="off">Sign Up</button>
+						<button id="login" type="submit">Login</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+	
+	<script type="text/javascript">
+	
+		$(document).ready(function(){
+		  $('#goRight').on('click', function(){
+		    $('#slideBox').animate({
+		      'marginLeft' : '0'
+		    });
+		    $('.topLayer').animate({
+		      'marginLeft' : '100%'
+		    });
+		  });
+		  $('#goLeft').on('click', function(){
+		    $('#slideBox').animate({
+		      'marginLeft' : '50%'
+		    });
+		    $('.topLayer').animate({
+		      'marginLeft': '0'
+		    });
+		  });
+		}); 
+	
+	
+		
+	$("#sign_up").on("click", function(){
+			if($("#userId").val()==""){
+				alert("아이디를 입력해주세요.");
+				$("#userId").focus();
+				return false;
+			}
+
+			
+			if($("#userPassword").val()==""){
+				alert("비밀번호를 입력해주세요.");
+				$("#userPass").focus();
+				return false;
+			}
+			 if($("#userPassword").val()!=$("#userPwCheck").val()){
+			     alert("비밀번호가 일치하지 않습니다."); 
+			      $("#userPwCheck").val("").focus();
+			      return false; 
+			    }
+			if($("#userName").val()==""){
+				alert("이름을 입력해주세요.");
+				$("#userName").focus();
+				return false;
+			}
+			if($("#userBirth").val()==""){
+				alert("생년원일을 입력해주세요.");
+				$("#userBirth").focus();
+				return false;
+			}
+			if($("#userNickName").val()==""){
+				alert("닉네임을 입력해주세요.");
+				$("#userNickName").focus();
+				return false;
+			}
+			if($("#userPhone").val()==""){
+				alert("핸드폰번호를 입력해주세요.");
+				$("#userPhone").focus();
+				return false;
+			}
+			if($("#userEmail").val()==""){
+				alert("이메일을 입력해주세요.");
+				$("#userEmail").focus();
+				return false;
+			}
+			if($("#userPhone").val()==""){
+				alert("핸드폰번호를 입력해주세요.");
+				$("#userPhone").focus();
+				return false;
+			}
+			
+			else{
+				$("#sign_form").submit();
+			}
+			});
+			
+			$("#login").on("click", function(){
+				if($("#userId").val()==""){
+					alert("아이디를 입력해주세요.");
+					$("#userId").focus();
+					return false;
+				}
+				if($("#userPassword").val()==""){
+					alert("비밀번호를 입력해주세요.");
+					$("#userPass").focus();
+					return false;
+				}
+			});
+		
+/* 			//아이디 체크여부 확인 (아이디 중복일 경우 = 0 , 중복이 아닐경우 = 1 )
+			var userIdCheck = 0;
+			$(function() {
+			    //idck 버튼을 클릭했을 때 
+			    $('#userIdCheck').click(function() {
+			        
+			        //userid 를 param.
+			        var userId =  $("#userId").val(); 
+			        
+			        $.ajax({
+			            async: true,
+			            type : 'POST',
+			            data : userId,
+			            url : "check.html",
+			            dataType : "json",
+			            contentType: "application/json; charset=UTF-8",
+			            success : function(data) {
+			                if (data.cnt > 0) {
+			                    
+			                    alert("아이디가 존재합니다. 다른 아이디를 입력해주세요.");
+			                    //아이디가 존할 경우 빨강으로 , 아니면 파랑으로 처리하는 디자인
+			                    $("#divInputId").addClass("has-error")
+			                    $("#divInputId").removeClass("has-success")
+			                    $("#userid").focus();
+			                    
+			                
+			                } else {
+			                    alert("사용가능한 아이디입니다.");
+			                    //아이디가 존할 경우 빨으로 , 아니면 파랑으로 처리하는 디자인
+			                    $("#divInputId").addClass("has-success")
+			                    $("#divInputId").removeClass("has-error")
+			                    $("#userpwd").focus();
+			                    //아이디가 중복하지 않으면  userIdCheck = 1 
+			                    userIdCheck = 1;
+			                    
+			                }
+			            },
+			            error : function(error) {
+			                
+			                alert("error : " + error);
+			            }
+			        });
+			    });
+			});
+		 */
+		
+		
+	</script>
+	
+
+</body>
+</html>

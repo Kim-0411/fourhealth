@@ -1,18 +1,21 @@
 package com.fourhealth.mapper;
 
-import java.util.List;
-import java.util.Map;
+
 import org.apache.ibatis.annotations.Mapper;
-import com.fourhealth.dto.Member;
+import com.fourhealth.dto.MemberDto;
 
 
 @Mapper
 public interface MemberMapper {
 
+
+	public MemberDto getMemberById(String memberId);
 	
-	public Member getMemberById(String memberId);
+	public int userIdCheck(String userId);
 	
 	//회원가입
-	public int addMember(Member member);
+	public int addMember(MemberDto member);
+
+
 	
 }
