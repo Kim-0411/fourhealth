@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.NoticePromotionTrainerMapper">
+
+<select id="getMyMemberList" parameterType="String" resultType="NoticePromotionTrainer">
+ <!-- 트레이너(로그인)별 내프로모션에 대해 현재 등록된 인원 확인  및 리스트   (일단 결제 됫다고 가정notnull 나중에 사용해야할듯?)-->
+	 SELECT
+	 	pt.trainer_promotion_notice_code AS 'trainerPromotionNoticeCode',
+   		pt.trainer_promotion_name AS 'trainerPromotionName',
+  	 	pt.trainer_promotion_recruit_start_date AS 'trainerPromotionRecruitStartDate',
+  		pt.trainer_promtion_recruit_end_date AS 'trainerPromotionRecruitEndDate',
+  		pt.trainer_promotion_recruit_people AS 'trainerPromotionRecruitPeople'
+   
+		FROM
+	 		tb_matching_user_trainer AS mt
+		INNER JOIN
+  			tb_notice_promotion_trainer AS pt
+		ON
+   			mt.trainer_promotion_notice_code = pt.trainer_promotion_notice_code
+		WHERE
+  			mt.trainer_id = #{trainerId}; 
+</select>
+
+</mapper>
