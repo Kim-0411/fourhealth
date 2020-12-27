@@ -1,10 +1,11 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>gg</h1>
-</body>
+<html xmlns:th="http://www.thymeleaf.org" 
+	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" 
+	  layout:decorate="@{layout/default}">
+	
+	<th:block layout:fragment="customContent">
+		<h1>HELLO SPRING BOOT</h1>	
+		
+	</th:block>	
+	
 </html>
