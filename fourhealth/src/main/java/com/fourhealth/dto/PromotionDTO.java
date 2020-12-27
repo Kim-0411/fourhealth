@@ -2,9 +2,10 @@ package com.fourhealth.dto;
 
 import org.springframework.web.multipart.MultipartFile;
 
+//테이블명 : tb_notice_trainer
 public class PromotionDTO {
-	private String proCode;
-    private String proId;
+    private String proCode;
+    private String proId; // 트레이너 아이디
     private String proName;
     private String proGoal;
     private String proShortcon;
@@ -16,10 +17,10 @@ public class PromotionDTO {
     private String proStartDate;
     private String proEndDate;
     private String proAttendStartDate;
-    private String proRecruitcloseDate;   
+    private String proRecruitcloseDate;
     private String proyAddDate;
-    private MultipartFile proBgImage; //화면에서 사진 가져오는 DTO
-    private String proImageUrl; //디비에 들어가는 DTO
+    private MultipartFile proBgImage; // 화면에서 사진 가져오는 DTO
+    private String proImageUrl; // 디비에 들어가는 DTO
 
     public String getProCode() {
         return proCode;
@@ -132,41 +133,39 @@ public class PromotionDTO {
     public void setProyAddDate(String proyAddDate) {
         this.proyAddDate = proyAddDate;
     }
-    
+
     public String getProLivePeople() {
-		return proLivePeople;
-	}
+        return proLivePeople;
+    }
 
-	public void setProLivePeople(String proLivePeople) {
-		this.proLivePeople = proLivePeople;
-	}
+    public void setProLivePeople(String proLivePeople) {
+        this.proLivePeople = proLivePeople;
+    }
 
-	public MultipartFile getProBgImage() {
-		return proBgImage;
-	}
+    public MultipartFile getProBgImage() {
+        return proBgImage;
+    }
 
-	public void setProBgImage(MultipartFile proBgImage) {
-		this.proBgImage = proBgImage;
-	}
-	
-	public String getProImageUrl() {
-		return proImageUrl;
-	}
+    public void setProBgImage(MultipartFile proBgImage) {
+        this.proBgImage = proBgImage;
+    }
 
-	public void setProImageUrl(String proImageUrl) {
-		this.proImageUrl = proImageUrl;
-	}
+    public String getProImageUrl() {
+        return proImageUrl;
+    }
 
-	@Override
-	public String toString() {
-		return "PromotionDTO [proCode=" + proCode + ", proId=" + proId + ", proName=" + proName + ", proGoal="
-				+ proGoal + ", proShortcon=" + proShortcon + ", proDetailscon=" + proDetailscon + ", proPeople="
-				+ proPeople + ", proPrice=" + proPrice + ", proLivePeople=" + proLivePeople + ", proTotalDate="
-				+ proTotalDate + ", proStartDate=" + proStartDate + ", proEndDate=" + proEndDate
-				+ ", proAttendStartDate=" + proAttendStartDate + ", proRecruitcloseDate=" + proRecruitcloseDate
-				+ ", proBgImage=" + proBgImage + ", proyAddDate=" + proyAddDate + ", proImageUrl=" + proImageUrl + "]";
-	}
+    public void setProImageUrl(String proImageUrl) {
+        this.proImageUrl = proImageUrl;
+    }
 
-	
-	
+    @Override
+    public String toString() {
+        return "PromotionDTO [proCode=" + proCode + ", proId=" + proId + ", proName=" + proName + ", proGoal=" + proGoal
+                + ", proShortcon=" + proShortcon + ", proDetailscon=" + proDetailscon + ", proPeople=" + proPeople
+                + ", proPrice=" + proPrice + ", proLivePeople=" + proLivePeople + ", proTotalDate=" + proTotalDate
+                + ", proStartDate=" + proStartDate + ", proEndDate=" + proEndDate + ", proAttendStartDate="
+                + proAttendStartDate + ", proRecruitcloseDate=" + proRecruitcloseDate + ", proBgImage=" + proBgImage
+                + ", proyAddDate=" + proyAddDate + ", proImageUrl=" + proImageUrl + "]";
+    }
+
 }

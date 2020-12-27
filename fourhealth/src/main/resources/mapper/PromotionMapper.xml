@@ -5,7 +5,7 @@
 <mapper namespace="com.fourhealth.mapper.PromotionMapper">
     <resultMap type="PromotionDTO" id="resultMapPromotion">
       <result column="trainer_promotion_notice_code" 		property="proCode"/>
-      <result column="user_id" 		property="userId"/>
+      <result column="user_id" 		property="proId"/>
 		<result column="trainer_promotion_name" 		property="proName"/>
 		<result column="trainer_promotion_goal" 		property="proGoal"/>
       <result column="trainer_promotion_short_contents" 	property="proShortcon"/>
@@ -54,7 +54,7 @@
       VALUES 
       (
         #{proCode},
-        #{userId},
+        #{proId},
         #{proName}, 
         #{proGoal}, 
         #{proShortcon}, 
@@ -80,7 +80,7 @@
           FROM 
             tb_trainer 
           WHERE 
-          user_id = #{userId}
+          user_id = #{proId}
         )c;
       </select>  
       

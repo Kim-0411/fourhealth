@@ -17,7 +17,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fourhealth.dto.MemberDTO;
 import com.fourhealth.dto.PromotionDTO;
 import com.fourhealth.service.PromotionService;
 
@@ -27,6 +26,7 @@ public class PromotionController {
 	@Autowired
 	private PromotionService promotionService;
 
+	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
 	@GetMapping("/pro")
 	public String promotionCheck(@RequestParam(name = "proId", required = false) String proId,
 			HttpServletResponse response) throws IOException {
@@ -42,10 +42,11 @@ public class PromotionController {
 			PrintWriter out = response.getWriter();
 			out.println("<script>alert('정보를 확인해주세요.'); location.href='/';</script>");
 			out.flush();
-			return "redirect:/login";
+			return "redirect:/";
 		}
 	}
 
+	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/proInsert")
 	public String promotionInsert(MultipartHttpServletRequest request, PromotionDTO promotionDto)
 			throws ParseException {
@@ -55,7 +56,8 @@ public class PromotionController {
 
 		if (!promotionDto.getProBgImage().isEmpty()) {
 			fileName = promotionDto.getProBgImage().getOriginalFilename();
-			String path = "C:\\Users\\ECS\\git\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 패스 경로
+			String path = "D:\\teamProject\\fourhealth\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 개발자패스
+																														// 배포패스
 
 			try {
 				new File(path).mkdir();
@@ -94,6 +96,7 @@ public class PromotionController {
 		return "redirect:/login";
 	}
 
+	// 트레이너 프로모션 전체리스트 컨트롤러
 	@GetMapping("/proList")
 	public String promotionList(Model model) {
 		List<PromotionDTO> promotionList = promotionService.promotionList();
@@ -103,6 +106,7 @@ public class PromotionController {
 		return "promotion/promotionList";
 	}
 
+	// 트레이너 프로모션 상세정보 컨트롤러
 	@GetMapping("/proDetail")
 	public String proDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
 
@@ -115,11 +119,4 @@ public class PromotionController {
 		return "promotion/promotionDetail";
 	}
 
-	@PostMapping("/proPayment")
-	public String proPayment(PromotionDTO promotionDTO, MemberDTO memberDTO, Model model) {
-		System.out.println(promotionDTO);
-		model.addAttribute("p", promotionDTO);
-
-		return "promotion/promotionPayment";
-	}
 }

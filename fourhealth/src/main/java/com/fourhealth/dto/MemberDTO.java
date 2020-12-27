@@ -1,123 +1,124 @@
 package com.fourhealth.dto;
 
+//테이블명 : tb_common_user
 public class MemberDTO {
-	
-    private String userId;
-    private String userPw;
-    private String userLevel;
-    private String userName;
-    private String userAddr;
-    private String userNicname;
-    private String userBirth;
-    private String userGender;
-    private String userMainBank;
-    private String userBankNumber;
-    private String userBankMaster;
-    private String userRegDate;
 
-    public String getUserId() {
-        return userId;
+    private String memberId;
+    private String memberPw;
+    private String memberLevel;
+    private String memberName;
+    private String memberAddr;
+    private String memberNickname;
+    private String memberBirth;
+    private String memberGender;
+    private String memberMainBank;
+    private String memberBankNumber;
+    private String memberBankMaster;
+    private String memberRegDate;
+
+    public String getMemberId() {
+        return memberId;
     }
 
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setMemberId(String memberId) {
+        this.memberId = memberId;
     }
 
-    public String getUserPw() {
-        return userPw;
+    public String getMemberPw() {
+        return memberPw;
     }
 
-    public void setUserPw(String userPw) {
-        this.userPw = userPw;
+    public void setMemberPw(String memberPw) {
+        this.memberPw = memberPw;
     }
 
-    public String getuserLevel() {
-        return userLevel;
+    public String getMemberLevel() {
+        return memberLevel;
     }
 
-    public void setuserLevel(String userLevel) {
-        this.userLevel = userLevel;
+    public void setMemberLevel(String memberLevel) {
+        this.memberLevel = memberLevel;
     }
 
-    public String getUserName() {
-        return userName;
+    public String getMemberName() {
+        return memberName;
     }
 
-    public void setUserName(String userName) {
-        this.userName = userName;
+    public void setMemberName(String memberName) {
+        this.memberName = memberName;
     }
 
-    public String getUserAddr() {
-        return userAddr;
+    public String getMemberAddr() {
+        return memberAddr;
     }
 
-    public void setUserAddr(String userAddr) {
-        this.userAddr = userAddr;
+    public void setMemberAddr(String memberAddr) {
+        this.memberAddr = memberAddr;
     }
 
-    public String getUserNicname() {
-        return userNicname;
+    public String getMemberNickname() {
+        return memberNickname;
     }
 
-    public void setUserNicname(String userNicname) {
-        this.userNicname = userNicname;
+    public void setMemberNickname(String memberNickname) {
+        this.memberNickname = memberNickname;
     }
 
-    public String getUserBirth() {
-        return userBirth;
+    public String getMemberBirth() {
+        return memberBirth;
     }
 
-    public void setUserBirth(String userBirth) {
-        this.userBirth = userBirth;
+    public void setMemberBirth(String memberBirth) {
+        this.memberBirth = memberBirth;
     }
 
-    public String getUserGender() {
-        return userGender;
+    public String getMemberGender() {
+        return memberGender;
     }
 
-    public void setUserGender(String userGender) {
-        this.userGender = userGender;
+    public void setMemberGender(String memberGender) {
+        this.memberGender = memberGender;
     }
 
-    public String getUserMainBank() {
-        return userMainBank;
+    public String getMemberMainBank() {
+        return memberMainBank;
     }
 
-    public void setUserMainBank(String userMainBank) {
-        this.userMainBank = userMainBank;
+    public void setMemberMainBank(String memberMainBank) {
+        this.memberMainBank = memberMainBank;
     }
 
-    public String getUserBankNumber() {
-        return userBankNumber;
+    public String getMemberBankNumber() {
+        return memberBankNumber;
     }
 
-    public void setUserBankNumber(String userBankNumber) {
-        this.userBankNumber = userBankNumber;
+    public void setMemberBankNumber(String memberBankNumber) {
+        this.memberBankNumber = memberBankNumber;
     }
 
-    public String getUserBankMaster() {
-        return userBankMaster;
+    public String getMemberBankMaster() {
+        return memberBankMaster;
     }
 
-    public void setUserBankMaster(String userBankMaster) {
-        this.userBankMaster = userBankMaster;
+    public void setMemberBankMaster(String memberBankMaster) {
+        this.memberBankMaster = memberBankMaster;
     }
 
-    public String getUserRegDate() {
-        return userRegDate;
+    public String getMemberRegDate() {
+        return memberRegDate;
     }
 
-    public void setUserRegDate(String userRegDate) {
-        this.userRegDate = userRegDate;
+    public void setMemberRegDate(String memberRegDate) {
+        this.memberRegDate = memberRegDate;
     }
 
     @Override
     public String toString() {
-        return "Memberdto [UserLevel=" + userLevel + ", userAddr=" + userAddr + ", userBankMaster=" + userBankMaster
-                + ", userBankNumber=" + userBankNumber + ", userBirth=" + userBirth + ", userGender=" + userGender
-                + ", userId=" + userId + ", userMainBank=" + userMainBank + ", userName=" + userName + ", userNicname="
-                + userNicname + ", userPw=" + userPw + ", userRegDate=" + userRegDate + "]";
+        return "MemberDTO [memberAddr=" + memberAddr + ", memberBankMaster=" + memberBankMaster + ", memberBankNumber="
+                + memberBankNumber + ", memberBirth=" + memberBirth + ", memberGender=" + memberGender + ", memberId="
+                + memberId + ", memberLevel=" + memberLevel + ", memberMainBank=" + memberMainBank + ", memberName="
+                + memberName + ", memberNickname=" + memberNickname + ", memberPw=" + memberPw + ", memberRegDate="
+                + memberRegDate + "]";
     }
-
 
 }

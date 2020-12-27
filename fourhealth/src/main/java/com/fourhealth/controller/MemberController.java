@@ -1,6 +1,5 @@
 package com.fourhealth.controller;
 
-
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,17 +13,16 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.MemberDTO;
 import com.fourhealth.service.MemberService;
 
-
 @Controller
 public class MemberController {
-	@Autowired
+    @Autowired
     private MemberService memberService;
-	
-	@GetMapping("/login")
-	public String test(Model model) {
-		model.addAttribute("test", "Hello thymeleaf");
-		return "login";
-	}
+
+    @GetMapping("/login")
+    public String test(Model model) {
+        model.addAttribute("test", "Hello thymeleaf");
+        return "login";
+    }
 
     @PostMapping("/login")
     public String login(@RequestParam(name = "id", required = false) String userId,
@@ -34,13 +32,13 @@ public class MemberController {
         System.out.println("로그인에서 받은 pw------" + userPw);
 
         MemberDTO memberdto = memberService.getMember(userId);
-        String result = memberdto.getuserLevel();
+        String result = memberdto.getMemberLevel();
         String userLeverl = result.substring(result.length() - 3, result.length());
 
         String userLeverl2 = null;
 
-        if (userId != null && userPw != null && memberdto != null && memberdto.getUserPw() != null
-                && userPw.equals(memberdto.getUserPw())) {
+        if (userId != null && userPw != null && memberdto != null && memberdto.getMemberPw() != null
+                && userPw.equals(memberdto.getMemberPw())) {
             if (userLeverl.equals("001")) {
                 userLeverl2 = "관리자";
             } else if (userLeverl.equals("002")) {
@@ -50,7 +48,7 @@ public class MemberController {
             }
             session.setAttribute("USERID", userId);
             session.setAttribute("USERLEVEL", userLeverl2);
-            session.setAttribute("USERNIKNAME", memberdto.getUserNicname());
+            session.setAttribute("USERNIKNAME", memberdto.getMemberNickname());
             System.out.println("로그인 성공");
         } else {
             rattr.addAttribute("result", "입력하신 정보는 없습니다.");

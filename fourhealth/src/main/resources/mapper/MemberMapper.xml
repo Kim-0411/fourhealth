@@ -4,18 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
     <resultMap type="Memberdto" id="resultMapMember">
-        <result column="user_id" property="userId"/>
-        <result column="user_pw" property="userPw"/>
-        <result column="user_level_code" property="userLevel"/>
-        <result column="user_name" property="userName"/>
-        <result column="user_addr" property="userAddr"/>
-        <result column="user_nickname" property="userNicname"/>
-        <result column="user_birth" property="userBirth"/>
-        <result column="user_gender" property="userGender"/>
-        <result column="user_main_bank" property="userMainBank"/>
-        <result column="user_bank_number" property="userBankNumber"/>
-        <result column="user_bank_master" property="userBankMaster"/>
-        <result column="user_reg_date" property="userRegDate"/>
+        <result column="user_id" property="memberId"/>
+        <result column="user_pw" property="memberPw"/>
+        <result column="user_level_code" property="memberLevel"/>
+        <result column="user_name" property="memberName"/>
+        <result column="user_addr" property="memberAddr"/>
+        <result column="user_nickname" property="memberNickname"/>
+        <result column="user_birth" property="memberBirth"/>
+        <result column="user_gender" property="memberGender"/>
+        <result column="user_main_bank" property="memberMainBank"/>
+        <result column="user_bank_number" property="memberBankNumber"/>
+        <result column="user_bank_master" property="memberBankMaster"/>
+        <result column="user_reg_date" property="memberRegDate"/>
     </resultMap>
     
     <select id="getMember" parameterType="String" resultMap="resultMapMember">

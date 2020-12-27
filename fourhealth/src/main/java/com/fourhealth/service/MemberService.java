@@ -11,15 +11,15 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fourhealth.dto.MemberDTO;
 import com.fourhealth.mapper.MemberMapper;
 
-
 @Service
 @Transactional
 public class MemberService {
-	@Autowired
+    @Autowired
     private MemberMapper memberMapper;
 
+    // 로그인처리
     public MemberDTO getMember(String userId) {
-    	MemberDTO memberDto = memberMapper.getMember(userId);
+        MemberDTO memberDto = memberMapper.getMember(userId);
         System.out.println("맴버 서비스 ------------" + memberDto);
         return memberDto;
     }
