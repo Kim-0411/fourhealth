@@ -2,11 +2,11 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fourhealth.mapper.MemberMapper">
+<mapper namespace="com.fourhealth.mapper.FoodMapper">
 	<insert id="insertFood2" parameterType="java.util.Map">
     INSERT INTO tb_food_test
     (foodCode, foodName, foodCal)
-    VALUES ( 'ff001', '김치', 200)
+    VALUES ( #{foodCode}, #{foodName}, #{foodCal});
 
 	</insert>
 </mapper>

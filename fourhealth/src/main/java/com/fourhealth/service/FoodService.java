@@ -1,5 +1,6 @@
 package com.fourhealth.service;
 
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -29,20 +30,43 @@ public class FoodService {
 	}
 
 	public void addFood1(Map<String, String> data) {
+		// System.out.println(data[0][0]);
+
+		// System.out.println("///////////////////////////////");
+
+		// System.out.println(data.get("foodName"));
+
+		// System.out.println();
+
+		System.out.println(data.values());
+
+		for (int i = 0; i < data.size(); i++) {
+			// System.out.println("Data test : " + i + " : " + data.size());
+
+		}
+
+		// for (Map<String, String> subMap :) {
+		// // Map<String, String> foodMap = new HashMap<String, String>();
+		// String foodCode = subMap.get("FOOD_CD");
+
+		// // foodMap.put("foodCode", foodCode);
+
+		// // foodList.add(foodMap);
+
+		// }
 
 		System.out.println("Mapping data input");
-		foodMapper.insertFood2(data);
-		 if (data != null) {
-		 	int result = foodMapper.insertFood2(data);
-		 	if (result > 0) {
-		 		System.out.println("Insert food data successed!");
-		 	}
-		 	else{
-		 		System.out.println("Insert food data failed!");
-		 	}
+		// foodMapper.insertFood2(data);
+		// if (data != null) {
+		// int result = foodMapper.insertFood2(data);
+		// if (result > 0) {
+		// System.out.println("Insert food data successed!");
+		// } else {
+		// System.out.println("Insert food data failed!");
+		// }
 
-		 }
-		
+		// }
+
 	}
 
 }

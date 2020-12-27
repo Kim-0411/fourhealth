@@ -65,6 +65,7 @@
                 dataType: "json",
             });
             request.done(function(data) {
+                //ajax 두번째 처리 (DB 작업)
                 $.ajax({
                     type: "post",
                     url: "/foodInsert",

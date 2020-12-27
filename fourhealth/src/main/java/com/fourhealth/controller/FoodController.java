@@ -41,13 +41,12 @@ public class FoodController {
 
 	@PostMapping("/foodInsert")
 	public @ResponseBody void foodInsert(@RequestParam Map<String, String> data, Food food) {
-		System.out.println("Controller data 표시");
-		System.out.println(data);
+		System.out.println("From FoodController >> Controller data 표시");
+		// System.out.println(data);
 
-		//food VO(DTO) 테스트
-		
+		// food VO(DTO) 테스트
 
-		//foodService.addFood1(data);
+		foodService.addFood1(data);
 	}
 
 	@GetMapping("/food1")
@@ -86,7 +85,7 @@ public class FoodController {
 		// String startIdx = "1";
 		int startIdx = 0;
 		// String endIdx = "5";
-		int endIdx = 1;
+		int endIdx = 5;
 
 		String url = null;
 
@@ -103,6 +102,7 @@ public class FoodController {
 
 		/// DESC_KOR="+food
 		List<Map<String, String>> foodList = new ArrayList<Map<String, String>>();
+
 		System.out.println(url);
 
 		try {
