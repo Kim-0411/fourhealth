@@ -104,5 +104,30 @@
 		FROM 
 			tb_notice_promotion_trainer
       </select>  
+      
+      <select id="proDetail" resultMap="resultMapPromotion">
+        SELECT 
+          trainer_promotion_notice_code, 
+          user_id, 
+          trainer_promotion_name, 
+          trainer_promotion_goal, 
+          trainer_promotion_short_contents, 
+          trainer_promotion_details_contents, 
+          trainer_promotion_recruit_people, 
+          trainer_promotion_live_add_people, 
+          trainer_promotion_price, 
+          trainer_promotion_recruit_start_date, 
+          trainer_promtion_recruit_end_date, 
+          trainer_promotion_attend_start_date, 
+          trainer_promotion_recruit_close_date, 
+          trainer_promotion_bg_image, 
+          trainer_promotion_recruit_total_date, 
+          trainer_matching_system_add_date
+      FROM 
+      tb_notice_promotion_trainer 
+      WHERE 
+      trainer_promotion_notice_code = #{proCode}
+        </select>
+  
 
 </mapper>

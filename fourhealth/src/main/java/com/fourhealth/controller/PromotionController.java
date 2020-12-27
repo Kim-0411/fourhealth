@@ -40,9 +40,9 @@ public class PromotionController {
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('정보를 확인해주세요.'); location.href='/';</script>");
+			out.println("<script>alert('정보를 확인해주세요.'); location.href='/login';</script>");
 			out.flush();
-			return "redirect:/";
+			return "/login";
 		}
 	}
 
