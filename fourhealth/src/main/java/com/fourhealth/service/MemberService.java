@@ -18,9 +18,34 @@ public class MemberService {
 	@Autowired 
 	private MemberMapper memberMapper;
 	
+	//전체회원조회 및 관리자, 트레이너, 사용자 변환
+	public List<MemberDto> viewMember() {
+		List<MemberDto> memberList = memberMapper.viewMember();
+		
+		System.out.println(memberList);
+		
+		
+//		int listSize = memberList.size();
+//		
+//		for(int i=0; i<listSize; i++) {
+//			if("1".equals(memberList.get(i).getUserLevel())) {
+//				memberList.get(i).setUserLevel("관리자");
+//			}else if("2".equals(memberList.get(i).getUserLevel())) {
+//				memberList.get(i).setUserLevel("트레이너");
+//			}else if("3".equals(memberList.get(i).getUserLevel())) {
+//				memberList.get(i).setUserLevel("사용자");				
+//			}
+//		}
+//		
+//		System.out.println("전체회원 조회" + memberList);
+		System.out.println("test");
+		
+		return memberList;
+		
+	}
 	
 	//로그인 
-		public MemberDto getMemberById(String userId) {
+	public MemberDto getMemberById(String userId) {
 			System.out.println(userId);
 			
 			MemberDto member = memberMapper.getMemberById(userId);

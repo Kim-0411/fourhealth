@@ -3,6 +3,7 @@ package com.fourhealth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -47,8 +48,7 @@ public class MemberController {
 //		  System.out.println("회원가입화면에서 입력후 레벨값 수정--->" + member);
 
 		
-	
-	
+
 	
 	@PostMapping("/login")
 	public String Login( @RequestParam(name="userId", required = false) String userId
@@ -133,8 +133,13 @@ public class MemberController {
 		
 
 	@GetMapping("/")
-	public String main() {
-		return "main";
+	public String main(Model model) {
+		List<MemberDto> memberlist = memberService.viewMember();
+		model.addAttribute("memberlist", memberlist);
+		
+		System.out.println("뜸"+ memberlist);
+		
+		return "index";
 	}
 	
 	@GetMapping("/levelSelect")

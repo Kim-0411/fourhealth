@@ -3,7 +3,7 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
-<!-- 회원가입  -->
+	<!-- 회원가입  -->
 	<resultMap type="MemberDto" id="resultMapMember">
 		<result column="user_id" 		property="userId"/>
 		<result column="user_level_code" property="userLevel"/>
@@ -20,6 +20,27 @@
 		<result column="user_bank_master" 	property="userBankMaster"/>
 		<result column="user_reg_date" 	property="userRegDate"/>
 	</resultMap> 
+	
+	<!-- 전체 회원 조회 -->
+	<select id="viewMember" resultMap="resultMapMember" >
+	SELECT
+			user_id, 
+			user_level_code, 
+			user_pw, 
+			user_name, 
+			user_addr, 
+			user_nickname, 
+			user_phone, 
+			user_email, 
+			user_birth, 
+			user_gender, 
+			user_main_bank, 
+			user_bank_number, 
+			user_bank_master, 
+			user_reg_date
+	FROM 
+		tb_common_user;
+	</select>
 	
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
