@@ -1,19 +1,20 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
-<head th:replace="fragments/head :: headFragment"></head>
-<body id="page-top">
-
-	<div id="wrapper">
-		<div th:replace="fragments/left :: leftMenuFragment"></div>
-		<div id="content-wrapper" class="d-flex flex-column">
-			<div id="content">
-				<div th:replace="fragments/header :: headerFragment"></div>
-				<div th:replace="fragments/mainContainer :: mainContainerFragment"></div>
-			</div>
-			<div th:replace="fragments/footer :: footerFragment"></div>
-		</div>
-	</div>
-	<div th:replace="fragments/js :: jsFragment"></div>
-</body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+>
+  <head th:replace="fragments/master/head :: headFragment"></head>
+  <body id="page-top">
+    <div id="wrapper">
+      <div th:replace="fragments/master/left :: leftMenuFragment"></div>
+      <div id="content-wrapper" class="d-flex flex-column">
+        <div id="content">
+          <div th:replace="fragments/master/header :: headerFragment"></div>
+          <div th:block layout:fragment="customContent"></div>
+        </div>
+        <div th:replace="fragments/master/footer :: footerFragment"></div>
+      </div>
+    </div>
+    <div th:replace="fragments/master/js :: jsFragment"></div>
+  </body>
 </html>
