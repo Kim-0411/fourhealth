@@ -14,40 +14,60 @@ import javax.servlet.http.HttpServletRequest;
 
 import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.fourhealth.dto.Food;
+import com.fourhealth.mapper.FoodMapper;
 import com.fourhealth.service.FoodService;
 
 import org.apache.tomcat.util.json.JSONParser;
+import org.json.JSONArray;
+import org.json.simple.JSONObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class FoodController {
 
+	@Autowired
+	private FoodMapper foodMapper;
+
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
 
 	// Generate FoodService Object
 	FoodService foodService = new FoodService();
+	Food food = new Food();
 
-	@PostMapping("/foodInsert")
-	public @ResponseBody void foodInsert(@RequestParam Map<String, String> data, Food food) {
+	@RequestMapping(value = "/foodInsert", produces = "application/json", method = RequestMethod.POST)
+	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
 		System.out.println("From FoodController >> Controller data 표시");
-		// System.out.println(data);
+		System.out.println(data.toString());
 
+	
+		//data = (Map<String, String>)JSONObject.toBean(jsonObject, java.util.HashMap.class);
+
+	
 		// food VO(DTO) 테스트
 
-		foodService.addFood1(data);
+		//foodService.addFood1(data);
+
+		return "성공";
+	
 	}
+
+	
 
 	@GetMapping("/food1")
 	public String food1(Model model) {
@@ -119,7 +139,8 @@ public class FoodController {
 				// System.out.println(line);
 			}
 
-			System.out.println(">>>" + result);
+			//result 결과 확인
+			//System.out.println(">>>" + result);
 
 			JSONParser parser = new JSONParser(result);
 			// result 값으로 받아서 parsing
@@ -127,7 +148,6 @@ public class FoodController {
 			LinkedHashMap<String, Object> map = parser.parseObject();
 
 			LinkedHashMap<String, Object> map2 = (LinkedHashMap<String, Object>) map.get("I2790");
-
 			ArrayList<Map<String, String>> arrayList = (ArrayList<Map<String, String>>) map2.get("row");
 
 			for (Map<String, String> subMap : arrayList) {
@@ -155,7 +175,9 @@ public class FoodController {
 				foodMap.put("foodTotalGram", servingSize);
 				foodList.add(foodMap);
 
+
 			}
+		
 
 		} catch (IOException e) {
 			// TODO Auto-generated catch block

@@ -14,6 +14,8 @@ public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;
 
+
+
 	// Food Input Service
 	public String addFood(Food food) {
 		String foodChecker = "Insert food data failed!";
@@ -30,30 +32,16 @@ public class FoodService {
 	}
 
 	public void addFood1(Map<String, String> data) {
-		// System.out.println(data[0][0]);
+		System.out.println("받아온 data 표기");
+		
+		ArrayList list = new ArrayList();		
+		list.add(data);
+		System.out.println(list);
 
-		// System.out.println("///////////////////////////////");
+	
+		
+		
 
-		// System.out.println(data.get("foodName"));
-
-		// System.out.println();
-
-		System.out.println(data.values());
-
-		for (int i = 0; i < data.size(); i++) {
-			// System.out.println("Data test : " + i + " : " + data.size());
-
-		}
-
-		// for (Map<String, String> subMap :) {
-		// // Map<String, String> foodMap = new HashMap<String, String>();
-		// String foodCode = subMap.get("FOOD_CD");
-
-		// // foodMap.put("foodCode", foodCode);
-
-		// // foodList.add(foodMap);
-
-		// }
 
 		System.out.println("Mapping data input");
 		// foodMapper.insertFood2(data);

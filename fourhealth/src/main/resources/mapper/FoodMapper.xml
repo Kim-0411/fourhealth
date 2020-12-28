@@ -6,7 +6,10 @@
 	<insert id="insertFood2" parameterType="java.util.Map">
     INSERT INTO tb_food_test
     (foodCode, foodName, foodCal)
-    VALUES ( #{foodCode}, #{foodName}, #{foodCal});
+    VALUES
+    
+    
+     ( #{foodCode}, #{foodName}, #{foodCal});
 
 	</insert>
 </mapper>

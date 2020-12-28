@@ -41,6 +41,20 @@
     <script>
         var selectValue = "";
         var data;
+        $('#btn1').on('click',function(){
+            
+            $.ajax({
+                type: "get",
+                url: "test11",
+                data: "data",
+                dataType: "dataType",
+                success: function (response) {
+                    
+                }
+            });
+           
+
+        });
 
         function checkCategory() {
             $('input[type="checkbox"]:checked').each(function(index) {
@@ -65,47 +79,70 @@
                 dataType: "json",
             });
             request.done(function(data) {
-                //ajax 두번째 처리 (DB 작업)
+                console.log(JSON.stringify(data))
+           
+             
                 $.ajax({
                     type: "post",
                     url: "/foodInsert",
-                    data: {
-                        data: data
-                    },
-                    dataType: "json",
+                    data: JSON.stringify(data),
+                    contentType : "application/json; charset=UTF-8",
+                    dataType: "text",
                     success: function(response) {
-                        alert('성공');
+                          alert(response);
+                    },
+                    error: function(err){
+                        console(err)
                     }
-                });
-                console.log(data);
 
-                alert("success");
-                for (var i = 0; i < data.length; i++) {
-                    html += '<tr>';
-                    html += '<td>';
-                    html += data[i].foodName;
-                    html += '</td>';
-                    html += '<td>';
-                    html += data[i].foodCal;
-                    html += '</td>';
-                    html += '<td>';
-                    html += data[i].foodProtein;
-                    html += '</td>';
-                    html += '<td>';
-                    html += data[i].foodCarbo;
-                    html += '</td>';
-                    html += '<td>';
-                    html += data[i].foodFat;
-                    html += '</td>';
-                    html += '<td>';
-                    html += data[i].foodSodium;
-                    html += '</td>';
-                    html += '</tr>';
-                }
-                $('#wData').html(html);
-            });
-            request.fail(function(jqXHR, textStatus) {
-                alert("Request failed: " + textStatus);
+                });
+
+
+
+                //###############################################
+               
+            //     console.log("최초 ajax value",data)
+            //     $.ajax({
+            //         type: "post",
+            //         url: "/foodInsert",
+            //         data: {
+            //             data: data
+                        
+            //         },
+            //         dataType: "xml",
+            //         success: function(response) {
+            //             //  alert('성공');
+            //         }
+            //     });
+            //    // console.log(data);
+
+            //     alert("success");
+            //     for (var i = 0; i < data.length; i++) {
+            //         html += '<tr>';
+            //         html += '<td>';
+            //         html += data[i].foodName;
+            //         html += '</td>';
+            //         html += '<td>';
+            //         html += data[i].foodCal;
+            //         html += '</td>';
+            //         html += '<td>';
+            //         html += data[i].foodProtein;
+            //         html += '</td>';
+            //         html += '<td>';
+            //         html += data[i].foodCarbo;
+            //         html += '</td>';
+            //         html += '<td>';
+            //         html += data[i].foodFat;
+            //         html += '</td>';
+            //         html += '<td>';
+            //         html += data[i].foodSodium;
+            //         html += '</td>';
+            //         html += '</tr>';
+            //     }
+            //     $('#wData').html(html);
+            // });
+            // request.fail(function(jqXHR, textStatus) {
+            //     alert("Request failed: " + textStatus);
             });
         });
         console.log(data);
