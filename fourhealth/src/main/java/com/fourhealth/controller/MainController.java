@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class MainController {
-<<<<<<< HEAD
+
 
 	/* thymeleaf 페이지 테스트 */
 	// index page(main)
@@ -36,12 +36,11 @@ public class MainController {
 		model.addAttribute("title", "Fourhealth About");
 		return "main_layout/about";
 	}
-=======
+
     @GetMapping("/index")
     public String index() {
 
         return "main";
     }
->>>>>>> origin/DHMTest
 
 }

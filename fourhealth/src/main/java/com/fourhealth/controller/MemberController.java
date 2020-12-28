@@ -1,6 +1,8 @@
 package com.fourhealth.controller;
 
 
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +23,7 @@ import com.fourhealth.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-<<<<<<< HEAD
+
 	/*
 	 * @Autowired private ExerciseService exerciseService;
 	 */
@@ -47,13 +49,6 @@ public class MemberController {
 		return "login/login";
 	}
 
-	//로그인 처리(공통)
-	@PostMapping("/login")
-	public String commonLoginPro( @RequestParam(name="userId", required = false) String userId
-			,@RequestParam(name="userPassword", required = false) String userPassword
-			,HttpSession session
-			,RedirectAttributes rAttr) {
-=======
 
 	@GetMapping("/master_main")
 	public String masterMain() {
@@ -62,12 +57,12 @@ public class MemberController {
 
 	@GetMapping("/memberlist")
 	public String masterMemberList(Model model) {
-		List<MemberDto> memberlist = memberService.viewMember();
-		model.addAttribute("memberlist", memberlist);
+		List<MemberDto> memberList = memberService.viewMember();
+		model.addAttribute("memberList", memberList);
 
-		System.out.println("뜸" + memberlist);
+		System.out.println("뜸" + memberList);
 
-		return "master/member/member_list";
+		return "member/m_all_list";
 	}
 
 	@GetMapping("/profile_details")
@@ -132,13 +127,13 @@ public class MemberController {
 	public String Login(@RequestParam(name = "userId", required = false) String userId,
 			@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
 			RedirectAttributes rAttr) {
->>>>>>> origin/DHMTest
+
 
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
 		MemberDto member = memberService.getMemberById(userId);
-<<<<<<< HEAD
+
 		System.out.println(member.getMemberId());
 
 		if(userId != null && userPassword != null && member != null && member.getMemberPw() != null &&
@@ -146,16 +141,6 @@ public class MemberController {
 			session.setAttribute("SID", member.getMemberId());
 			session.setAttribute("SLEVEL", member.getMemberLevel());
 			session.setAttribute("SNAME", member.getMemberName());
-=======
-
-		if (userId != null && userPassword != null && member != null && member.getUserPassword() != null
-				&& userPassword.equals(member.getUserPassword())) {
-
-			session.setAttribute("SID", userId);
-			session.setAttribute("SLEVEL", member.getUserLevel());
-			session.setAttribute("SNAME", member.getUserName());
->>>>>>> origin/DHMTest
-
 			System.out.println(userId + " : 로그인 성공");
 		} else {
 			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
@@ -165,7 +150,7 @@ public class MemberController {
 
 		return "redirect:/";
 	}
-<<<<<<< HEAD
+
 	
 
 	//로그아웃(공통)
@@ -272,35 +257,6 @@ public class MemberController {
 
 */
 
-=======
-
-	@GetMapping("/login")
-	public String Login(Model model, @RequestParam(name = "result", required = false) String result) {
-		model.addAttribute("title", "로그인 화면");
-
-		if (result != null)
-			model.addAttribute("result", result);
-
-		return "login/login";
-	}
-
-	@PostMapping("/addMember")
-	public String addMember(MemberDto member) {
-
-		String result = memberService.addMember(member);
-		System.out.println(result);
-
-		return "login/login";
-	}
-
-	@RequestMapping(value = "/userIdCheck", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody int userIdCheck(@RequestParam(name = "userId", required = false) String userId) {
-		System.out.println("아이디 중복체크 ->" + userId);
-		int count = memberService.userIdCheck(userId);
-
-		return count;
-	}
-
 	// @GetMapping("/sellerModifyGoods")
 	// public ModelAndView sellerModifyGoods(@RequestParam(name="goodsCode",
 	// required = false) String goodsCode
@@ -332,6 +288,5 @@ public class MemberController {
 	// model.addAttribute("level", level); // 누른거 래밸 사용자,트레이너
 	// return "member/m_insert";
 	// }
->>>>>>> origin/DHMTest
 
 }
