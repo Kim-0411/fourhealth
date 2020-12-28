@@ -25,6 +25,11 @@ public class MemberController {
 	 * @Autowired private ExerciseService exerciseService;
 	 */
 	
+	/* 화면없음 
+	 * @GetMapping("/masterManagement") public String MasterManagement() { return
+	 * "main"; }
+	 */
+	
 	
 	/********************************************************************************************
 	 * 로그인/로그아웃
