@@ -2,7 +2,7 @@ package com.fourhealth.dto;
 
 import java.sql.Blob;
 
-public class SnsUserDto {
+public class Sns {
 
 	private String userSnsCode;
 	private String userId;
@@ -42,9 +42,18 @@ public class SnsUserDto {
 	}
 	@Override
 	public String toString() {
-		return "SnsUserDto [userSnsCode=" + userSnsCode + ", userId=" + userId + ", userSnsContents=" + userSnsContents
-				+ ", userSnsUploadFile=" + userSnsUploadFile + ", userSnsRegDate=" + userSnsRegDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("Sns [userSnsCode=");
+		builder.append(userSnsCode);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", userSnsContents=");
+		builder.append(userSnsContents);
+		builder.append(", userSnsUploadFile=");
+		builder.append(userSnsUploadFile);
+		builder.append(", userSnsRegDate=");
+		builder.append(userSnsRegDate);
+		builder.append("]");
+		return builder.toString();
 	}
-	
-	
 }

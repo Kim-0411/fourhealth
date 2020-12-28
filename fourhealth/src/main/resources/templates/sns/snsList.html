@@ -1,32 +1,29 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<html>
-<head>
-<meta charset="EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-	<form action="/snsList">
-		<table>
-			<thead>
-				<tr>
-					<th>No.</th>
-					<th>Id</th>
-					<th>Title</th>
-					<th>Contents</th>
-					<th>Date</th>
-				</tr>
-			</thead>
-			<tbody>
-				<tr th:if="${#lists.size(snsList)>0}" th:each="l:${snsList}">
-					<td th:text="${l.userSnsCode}"></td>
-					<td th:text="${l.userId}"></td>
-					<td th:text="${l.userSnsContents}"></td>
-					<td th:text="${l.userSnsUploadFile}"></td>
-					<td th:text="${l.userSnsRegDate}"></td>
-				</tr>
-			</tbody>
-		</table>
-	</form>
-</body>
+
+<th:block>
+	<title th:text="${title}"></title>
+</th:block>
+<th:block>
+	<table border="1">
+		<thead>
+			<tr>
+				<th>No.</th>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Contents</th>
+				<th>Date</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr th:if="${#lists.size(snsList)>0}" th:each="l:${snsList}">
+				<td th:text="${l.userSnsCode}"></td>
+				<td th:text="${l.userId}"></td>
+				<td th:text="${l.userSnsContents}"></td>
+				<td th:text="${l.userSnsUploadFile}"></td>
+				<td th:text="${l.userSnsRegDate}"></td>
+			</tr>
+		</tbody>
+	</table>
+</th:block>
 </html>

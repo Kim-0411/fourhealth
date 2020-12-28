@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+	<th:block>
+		<title th:text="${title}"></title>
+	</th:block>
+	<th:block>
+	<form th:action="@{/addSns}" method="post">
+		<table border="1">
+			<tr>
+				<td>Contents</td>
+				<td>
+					<textarea name="userSnsContents" id="" cols="30" rows="10"></textarea>
+				</td>
+			</tr>
+			<tr>
+				<td>attach</td>
+				<td>
+					<input type="file" />
+				</td>
+			</tr>
+			<tr>
+				<td>
+					<button type="submit">게시</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+	</th:block>
+	
+</html>
