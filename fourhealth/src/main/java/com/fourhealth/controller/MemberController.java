@@ -100,11 +100,21 @@ public class MemberController {
 	}
 	
 	//사용자,트레이너 권한 선택후 회원가입 입력하는 화면 
-	@GetMapping("/mInsert")
+	@GetMapping("/mInsertPage")
 	public String commonMInsert(@RequestParam(value = "user_level_code", required = false) String level,
 						Model model) {
+		
 		model.addAttribute("level", level); //누른거 래밸 사용자,트레이너
 		return "member/m_insert";
+	}
+	
+	@PostMapping("/mInsert")
+	public String addMember(MemberDto member){
+		
+		String result = memberService.addMember(member); 
+		System.out.println(result);
+		//임시로 그냥 메인화면으로 가기
+		return "index";
 	}
 	
 	

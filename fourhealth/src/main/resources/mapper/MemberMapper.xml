@@ -5,7 +5,7 @@
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
 
 	<!--공통 회원데이터 resultMap  -->
-    <resultMap type="Memberdto" id="resultMapMember">
+    <resultMap type="MemberDto" id="resultMapMember">
         <result column="user_id" property="memberId"/>
         <result column="user_pw" property="memberPw"/>
         <result column="user_level_code" property="memberLevel"/>
@@ -95,16 +95,16 @@
 			user_bank_master, 
 			user_reg_date)
 	VALUES (
-			#{userId}, 
-			#{userLevel}, 
-			#{userPassword}, 
-			#{userName}, 
-			#{userAddr}, 
-			#{userNickName}, 
-			#{userPhone}, 
-			#{userEmail}, 
-			#{userBirth},
-			#{userGender}, 
+			#{memberId}, 
+			#{memberLevel}, 
+			#{memberPw}, 
+			#{memberName}, 
+			#{memberAddr}, 
+			#{memberNickname}, 
+			#{memberPhone}, 
+			#{memberEmail}, 
+			#{memberBirth},
+			#{memberGender}, 
 			null, 
 			null, 
 			null, 

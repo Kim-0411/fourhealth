@@ -4,18 +4,36 @@ package com.fourhealth.dto;
 public class MemberDto {
 
     private String memberId;
-    private String memberPw;
     private String memberLevel;
+    private String memberPw;
     private String memberName;
     private String memberAddr;
     private String memberNickname;
-    private String memberBirth;
+    private String memberPhone;
+    private String memberEmail;
+	private String memberBirth;
     private String memberGender;
     private String memberMainBank;
     private String memberBankNumber;
     private String memberBankMaster;
     private String memberRegDate;
+    
+    
+    public String getMemberEmail() {
+    	return memberEmail;
+    }
+    
+    public void setMemberEmail(String memberEmail) {
+    	this.memberEmail = memberEmail;
+    }
 
+    public String getMemberPhone() {
+    	return memberPhone;
+    }
+    
+    public void setMemberPhone(String memberPhone) {
+    	this.memberPhone = memberPhone;
+    }
     public String getMemberId() {
         return memberId;
     }

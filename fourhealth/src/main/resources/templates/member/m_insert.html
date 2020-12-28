@@ -35,40 +35,40 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                             </div>
-                             <form th:action="@{/addMember}" method="post" id="sign_form">
+                             <form th:action="@{/mInsert}" method="post" id="sign_form">
                                 <div class="form-group row">
                                     <div class="col-sm-12 ">
-                                       <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="userId"/>
+                                       <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="memberId"/>
                                           <button type="button" class ="btn btn-primary"  id="userIdCheck" name="userIdCheck" style="margin: 7px;" >중복체크</button>
                                     </div>
                                     <div class="col-sm-12">
-                          		    <input type="hidden" name="userLevel" th:value="${level}">                              
-                                       <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="userPassword"/>
+                          		    <input type="hidden" name="memberLevel" th:value="${level}">                              
+                                       <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="memberPw"/>
                                     </div>
                                     <div class="col-sm-12">
                                        <input type="password" class="form-control form-control-user" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
                                     </div>
                                      <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="userAddr"/>
+                                    <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="memberAddr"/>
                                     </div>
                                      <div class="col-sm-12">
-                                          <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="userName" />
+                                          <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="memberName" />
                                     </div>
                                      <div class="col-sm-12">
-                                       <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="userBirth"/>
+                                       <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="memberBirth"/>
                                     </div>
                                      <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="userNickName"/>
+                                    <input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="memberNickname"/>
                                     </div>
                                      <div class="col-sm-12">
-                                     <input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="userPhone"/>
+                                     <input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="memberPhone"/>
                                     </div>
                                      <div class="col-sm-12">
-                                      <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="userEmail"/>
+                                      <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="memberEmail"/>
                                     </div>
                                      <div class="col-sm-12">
-                                    <input type="radio" name="userGender" value="man" checked="checked">남 
-                           			<input type="radio" name="userGender" value="woman" >여
+                                    <input type="radio" name="memberGender" value="man" checked="checked">남 
+                           			<input type="radio" name="memberGender" value="woman" >여
                                     </div>
                                		</div>
                             </form>
