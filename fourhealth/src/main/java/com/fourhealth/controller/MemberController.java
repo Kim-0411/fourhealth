@@ -57,10 +57,11 @@ public class MemberController {
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
 		MemberDto member = memberService.getMemberById(userId);
+		System.out.println(member.getMemberId());
 
 		if(userId != null && userPassword != null && member != null && member.getMemberPw() != null &&
 				userPassword.equals(member.getMemberPw())){
-			session.setAttribute("SID", userId);
+			session.setAttribute("SID", member.getMemberId());
 			session.setAttribute("SLEVEL", member.getMemberLevel());
 			session.setAttribute("SNAME", member.getMemberName());
 
