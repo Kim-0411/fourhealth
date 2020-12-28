@@ -40,9 +40,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FoodController {
 
-	@Autowired
-	private FoodMapper foodMapper;
-
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
 
