@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>회원가입</title>
+    <!-- Custom fonts for this template-->
+     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style type="text/css">
+    input{
+       margin:  10px;
+    }
+    </style>
+
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
+                            </div>
+                             <form th:action="@{/addMember}" method="post" id="sign_form">
+                                <div class="form-group row">
+                                    <div class="col-sm-12 ">
+                                       <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="userId"/>
+                                          <button type="button" class ="btn btn-primary"  id="userIdCheck" name="userIdCheck" style="margin: 7px;" >중복체크</button>
+                                    </div>
+                                    <div class="col-sm-12">
+                          		    <input type="hidden" name="userLevel" th:value="${level}">                              
+                                       <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="userPassword"/>
+                                    </div>
+                                    <div class="col-sm-12">
+                                       <input type="password" class="form-control form-control-user" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                    <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="userAddr"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                          <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="userName" />
+                                    </div>
+                                     <div class="col-sm-12">
+                                       <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="userBirth"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                    <input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="userNickName"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                     <input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="userPhone"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                      <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="userEmail"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                    <input type="radio" name="userGender" value="man" checked="checked">남 
+                           			<input type="radio" name="userGender" value="woman" >여
+                                    </div>
+                               		</div>
+                            </form>
+                                <button id="sign_up" disabled="disabled" class="btn btn-primary btn-user btn-block">
+                                       회원가입
+                                </button>
+	                            <hr>
+	                            <div class="text-center">
+	                                <a class="small" href="forgot-password.html">비밀번호 찾기</a>
+	                            </div>
+                            <div class="text-center">
+                                <a class="small" href="/">이미 회원이세요? 로그인하세요.!</a>
+                            </div>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+      <script src="vendor/jquery/jquery.min.js"></script>
+   <script type="text/javascript">
+      
+    $('#sign_up').click(function(){
+       if($("#userPassword").val()==""){
+         alert("비밀번호를 입력해주세요.");
+         $("#userPass").focus();
+         return false;
+      }
+       if($("#userPassword").val()!=$("#userPwCheck").val()){
+           alert("비밀번호가 일치하지 않습니다."); 
+            $("#userPwCheck").val("").focus();
+            return false; 
+          } 
+       if($("#userName").val()==""){
+         alert("이름을 입력해주세요.");
+         $("#userName").focus();
+         return false;
+      }
+      if($("#userBirth").val()==""){
+         alert("생년원일을 입력해주세요.");
+         $("#userBirth").focus();
+         return false;
+      }
+      if($("#userNickName").val()==""){
+         alert("닉네임을 입력해주세요.");
+         $("#userNickName").focus();
+         return false;
+      }
+      if($("#userPhone").val()==""){
+         alert("핸드폰번호를 입력해주세요.");
+         $("#userPhone").focus();
+         return false;
+      }
+      if($("#userEmail").val()==""){
+         alert("이메일을 입력해주세요.");
+         $("#userEmail").focus();
+         return false;
+      }
+      else{
+         $("#sign_form").submit();
+      }
+      });
+    
+    $('#userIdCheck').click(function(){
+       
+       var userId = $('#userId').val();
+       console.log(userId);
+       var request = $.ajax({
+            url: "/userIdCheck",
+            method: "POST",
+            data: { userId : userId },
+            dataType: "json"
+          });
+           
+          request.done(function( msg ) {
+             if(msg ==0){
+                if(userId ==''){
+                	alert('아이디를 입력해주세요');
+                }else{
+                alert('사용 가능한 아이디 입니다.');
+                	$('#sign_up').attr('disabled', false);
+                }	
+             }else{
+                alert('중복 되는 아이디가 있습니다.');
+                $('#sign_up').attr('disabled', true);
+             }
+          });
+           
+          request.fail(function( jqXHR, textStatus ) {
+            alert( "Request failed: " + textStatus );
+          });
+    })
+    
+      
+    </script>
+   <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript">
+    
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+</html>
