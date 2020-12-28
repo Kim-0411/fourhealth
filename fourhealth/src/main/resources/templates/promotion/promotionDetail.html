@@ -16,16 +16,16 @@
       <table border="1">
         <tr>
           <td>프로모션 작성자 아이디</td>
-          <td th:text="${proDetail.proId}" >
+          <td th:text="${proDetail.userId}" >
           </td>
           </tr>
         <tr>
           <td>프로모션 이름 :</td>
-          <td th:text = "${proDetail.proName}"></td>
+          <td th:text = "${proDetail.trainerPromotionName}"></td>
         </tr>
         <tr>
           <td>프로모션 목표 :</td>
-          <td th:text = "${proDetail.proGoal}"></td>
+          <td th:text = "${proDetail.trainerPromotionGoal}"></td>
         </tr>
          <tr>
           <td>프로모션 이미지 :</td>
@@ -33,42 +33,42 @@
         </tr>
         <tr>
           <td>프로모션 간략내용 :</td>
-          <td th:text = "${proDetail.proShortcon}"></td>
+          <td th:text = "${proDetail.trainerPromotionShortContents}"></td>
         </tr>
         <tr>
           <td>프로모션 상세내용 :</td>
-          <td th:text = "${proDetail.proDetailscon}"></td>
+          <td th:text = "${proDetail.trainerPromotionDetailsContents}"></td>
         </tr>
         <tr>
           <td>프로모션 모집인원 :</td>
-          <td th:text = "${proDetail.proPeople}"></td>
+          <td th:text = "${proDetail.trainerPromotionRecruitPeople}"></td>
         </tr>
         <tr>
           <td>프로모션 가격 :</td>
-          <td th:text = "${proDetail.proPrice}"></td>
+          <td th:text = "${proDetail.trainerPromotionPrice}"></td>
         </tr>
         <tr>
           <td>프로모션 모집시작일자 :</td>
-          <td th:text = "${proDetail.proStartDate}"></td>
+          <td th:text = "${proDetail.trainerPromotionAttendStartDate}"></td>
         </tr>
         <tr>
           <td>프로모션 모집마감일자 :</td>
-          <td th:text = "${proDetail.proEndDate}"></td>
+          <td th:text = "${proDetail.trainerPromotionRecruitEndDate}"></td>
         </tr>
         <tr>
           <td>프로모션 모집참여시작일자 :</td>
-          <td th:text = "${proDetail.proAttendStartDate}"></td>
+          <td th:text = "${proDetail.trainerPromotionAttendStartDate}"></td>
         </tr>
         <tr>
           <td>프로모션 모집참여종료일자 :</td>
-          <td th:text = "${proDetail.proRecruitcloseDate}"> </td>
+          <td th:text = "${proDetail.trainerPromotionRecruitCloseDate}"> </td>
         </tr>
       </table>
       
       <form th:action="@{/proPayment}" method="Post" >
-      <input type="hidden" name="proCode" th:value="${proDetail.proCode}">
-      <input type="hidden" name="proId" th:value="${proDetail.proId}"> 
-      <input type="hidden" name = "proPrice" th:value="${proDetail.proPrice}"> 
+      <input type="hidden" name="proCode" th:value="${proDetail.trainerPromotionNoticeCode}">
+      <input type="hidden" name="proId" th:value="${proDetail.userId}"> 
+      <input type="hidden" name = "proPrice" th:value="${proDetailtrainerPromotionPrice}"> 
       <input type="hidden" name = "userId" th:value="${session.USERID}"> 
       <button type="submit">모집신청하기</button>
       

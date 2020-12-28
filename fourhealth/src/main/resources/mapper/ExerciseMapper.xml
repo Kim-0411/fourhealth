@@ -4,17 +4,16 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.ExerciseMapper">
 
-	<select id="getAllExercise" resultType="MetExercise">
+	<select id="getAllExercise" resultType="MetExerciseDto">
 		SELECT
 		e.exercise_name AS 'exerciseName',
-		e.met_coefficient AS
-		'exerciseMetCoeffcient'
+		e.met_coefficient AS 'exerciseMetCoeffcient'
 		FROM
 		tb_met_exercise AS e
 		ORDER BY e.met_coefficient
 
 	</select>
-	<select id="getSearchExercise" resultType="MetExercise"
+	<select id="getSearchExercise" resultType="MetExerciseDto"
 		parameterType="String">
 		SELECT
 		e.exercise_name AS 'exerciseName',
@@ -42,7 +41,7 @@
 		ORDER BY e.met_coefficient
 	</select>
 
-	<select id="getEasyExercise" resultType="MetExercise">
+	<select id="getEasyExercise" resultType="MetExerciseDto">
 	 	SELECT
 			e.exercise_name AS 'exerciseName',
 			e.met_coefficient AS 'exerciseMetCoeffcient'
@@ -53,7 +52,7 @@
 		Order by
 			RAND() LIMIT 5
 	</select>
-	<select id="getNormalExercise" resultType="MetExercise">
+	<select id="getNormalExercise" resultType="MetExerciseDto">
 	 	SELECT
 			e.exercise_name AS 'exerciseName',
 			e.met_coefficient AS 'exerciseMetCoeffcient'
@@ -64,7 +63,7 @@
 		Order by
 			RAND() LIMIT 5
 	</select>
-	<select id="getHardExercise" resultType="MetExercise">
+	<select id="getHardExercise" resultType="MetExerciseDto">
 	 	SELECT
 			e.exercise_name AS 'exerciseName',
 			e.met_coefficient AS 'exerciseMetCoeffcient'

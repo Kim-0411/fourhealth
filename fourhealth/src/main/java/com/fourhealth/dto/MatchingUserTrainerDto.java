@@ -1,21 +1,22 @@
 package com.fourhealth.dto;
 
 public class MatchingUserTrainerDto {
-
-	private String trainerUserMatchingCode;
-	private String trainerPromotionNoticeCode;
-	private String userId;
-	private String trainerId;
-	private String userCouponCode;
-	private String paymentMethodName;
-	private int purchaseMoney;
-	private String purchaseRegDate;
-	private String purchaseFinishDate;
-	private String userRegDate;
-	private String trainerPromotionRecruitStartDate;
-	private String trainerPromotionRecruitEndDate;
-	private String trainerPromotionAttendStartDate;
-	private String trainerMatchingSystemRegDate;
+	
+	private String trainerUserMatchingCode;//트레이너 사용자 매칭 코드
+	private String trainerPromotionNoticeCode; //트레이너 프로모션 모집 공고 코드
+	private String userId; //사용자 아이디
+	private String trainerId;//트레이너 아이디
+	private String userCouponCode; //사용자 보유 쿠폰 코드
+	private String paymentMethodName; //결제 방법 이름
+	private int purchaseMoney; //결제 금액
+	private String purchaseRegDate; //결제 등록 일자
+	private String purchaseFinishDate; //결제 완료 일자
+	private String userRegDate; //트레이너 매칭 등록일자
+	private String trainerPromotionRecruitStartDate; //트레이너 프로모션 모집 시작일
+	private String trainerPromotionRecruitEndDate; //트레이너 프로모션 모집 종료일
+	private String trainerPromotionAttendStartDate;  //트레이너 프로모션 참여 시작 일자
+	private String trainerMatchingSystemRegDate; //트레이너 매칭 시스템 등록 일자
+	
 	public String getTrainerUserMatchingCode() {
 		return trainerUserMatchingCode;
 	}
@@ -100,17 +101,5 @@ public class MatchingUserTrainerDto {
 	public void setTrainerMatchingSystemRegDate(String trainerMatchingSystemRegDate) {
 		this.trainerMatchingSystemRegDate = trainerMatchingSystemRegDate;
 	}
-	@Override
-	public String toString() {
-		return "MatchingUserTrainerDto [trainerUserMatchingCode=" + trainerUserMatchingCode
-				+ ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode + ", userId=" + userId + ", trainerId="
-				+ trainerId + ", userCouponCode=" + userCouponCode + ", paymentMethodName=" + paymentMethodName
-				+ ", purchaseMoney=" + purchaseMoney + ", purchaseRegDate=" + purchaseRegDate + ", purchaseFinishDate="
-				+ purchaseFinishDate + ", userRegDate=" + userRegDate + ", trainerPromotionRecruitStartDate="
-				+ trainerPromotionRecruitStartDate + ", trainerPromotionRecruitEndDate="
-				+ trainerPromotionRecruitEndDate + ", trainerPromotionAttendStartDate="
-				+ trainerPromotionAttendStartDate + ", trainerMatchingSystemRegDate=" + trainerMatchingSystemRegDate
-				+ "]";
-	}
-	
+
 }

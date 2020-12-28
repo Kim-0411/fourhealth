@@ -1,11 +1,23 @@
 package com.fourhealth.dto;
 
 public class MetExerciseDto {
-
-	private String exerciseMetCode;
+	private String exerciseMetCode; 
 	private String exerciseName;
-	private float metCoefficient;
+	private float exerciseMetCoeffcient;
 	private String exerciseRegDate;
+	
+	public String getExerciseRegDate() {
+		return exerciseRegDate;
+	}
+	public void setExerciseRegDate(String exerciseRegDate) {
+		this.exerciseRegDate = exerciseRegDate;
+	}
+	public float getExerciseMetCoeffcient() {
+		return exerciseMetCoeffcient;
+	}
+	public void setExerciseMetCoeffcient(float exerciseMetCoeffcient) {
+		this.exerciseMetCoeffcient = exerciseMetCoeffcient;
+	}
 	public String getExerciseMetCode() {
 		return exerciseMetCode;
 	}
@@ -18,21 +30,5 @@ public class MetExerciseDto {
 	public void setExerciseName(String exerciseName) {
 		this.exerciseName = exerciseName;
 	}
-	public float getMetCoefficient() {
-		return metCoefficient;
-	}
-	public void setMetCoefficient(float metCoefficient) {
-		this.metCoefficient = metCoefficient;
-	}
-	public String getExerciseRegDate() {
-		return exerciseRegDate;
-	}
-	public void setExerciseRegDate(String exerciseRegDate) {
-		this.exerciseRegDate = exerciseRegDate;
-	}
-	@Override
-	public String toString() {
-		return "MetExerciseDto [exerciseMetCode=" + exerciseMetCode + ", exerciseName=" + exerciseName
-				+ ", metCoefficient=" + metCoefficient + ", exerciseRegDate=" + exerciseRegDate + "]";
-	}
+
 }

@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
-import com.fourhealth.dto.PromotionDTO;
+import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.service.PromotionService;
 
 @Controller
@@ -48,7 +48,7 @@ public class PromotionController {
 
 	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/proInsert")
-	public String promotionInsert(MultipartHttpServletRequest request, PromotionDTO promotionDto)
+	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
 			throws ParseException {
 		System.out.println(promotionDto);
 
@@ -71,8 +71,8 @@ public class PromotionController {
 			promotionDto.setProImageUrl(fileName);
 		}
 
-		String start = promotionDto.getProAttendStartDate();
-		String end = promotionDto.getProRecruitcloseDate();
+		String start = promotionDto.getTrainerPromotionAttendStartDate();
+		String end = promotionDto.getTrainerPromotionRecruitCloseDate();
 
 		System.out.println("proInsert start-------------" + start);
 		System.out.println("proInsert end-------------" + end);
@@ -87,7 +87,7 @@ public class PromotionController {
 		String totalDate = Long.toString(diffDays);
 
 		System.out.println(diffDays);
-		promotionDto.setProTotalDate(totalDate);
+		promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
 
 		System.out.println(promotionDto);
 
@@ -96,10 +96,10 @@ public class PromotionController {
 		return "redirect:/login";
 	}
 
-	// 트레이너 프로모션 전체리스트 컨트롤러
+	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
 	@GetMapping("/proList")
-	public String promotionList(Model model) {
-		List<PromotionDTO> promotionList = promotionService.promotionList();
+	public String commonPromotionList(Model model) {
+		List<NoticePromotionTrainerDto> promotionList = promotionService.promotionList();
 		System.out.println(promotionList);
 		model.addAttribute("promotionList", promotionList);
 
@@ -108,11 +108,11 @@ public class PromotionController {
 
 	// 트레이너 프로모션 상세정보 컨트롤러
 	@GetMapping("/proDetail")
-	public String proDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
+	public String commonProDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
 
 		System.out.println(proCode);
 
-		PromotionDTO promotionDto = promotionService.proDetail(proCode);
+		NoticePromotionTrainerDto promotionDto = promotionService.proDetail(proCode);
 		System.out.println(promotionDto);
 		model.addAttribute("proDetail", promotionDto);
 

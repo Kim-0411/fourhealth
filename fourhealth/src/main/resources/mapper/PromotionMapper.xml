@@ -3,26 +3,27 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.PromotionMapper">
-    <resultMap type="PromotionDTO" id="resultMapPromotion">
-      <result column="trainer_promotion_notice_code" 		property="proCode"/>
-      <result column="user_id" 		property="proId"/>
-		<result column="trainer_promotion_name" 		property="proName"/>
-		<result column="trainer_promotion_goal" 		property="proGoal"/>
-      <result column="trainer_promotion_short_contents" 	property="proShortcon"/>
-      <result column="trainer_promotion_details_contents" 	property="proDetailscon"/>
-      <result column="trainer_promotion_recruit_people" 	property="proPeople"/>
-      <result column="trainer_promotion_live_add_people" 	property="proLivePeople"/>
-      <result column="trainer_promotion_price" 	property="proPrice"/>
-      <result column="trainer_promotion_recruit_total_date" 	property="proTotalDate"/>
-      <result column="trainer_promotion_recruit_start_date" 	property="proStartDate"/>
-      <result column="trainer_promtion_recruit_end_date" 	property="proEndDate"/>
-      <result column="trainer_promotion_attend_start_date" 	property="proAttendStartDate"/>
-      <result column="trainer_promotion_recruit_close_date" 	property="proRecruitcloseDate"/>
-      <result column="trainer_promotion_bg_image" property="proImageUrl"/>
-      <result column="trainer_matching_system_add_date" 	property="proyAddDate"/>
+      <!-- 트레이너 모집공고 resultMap -->
+    <resultMap type="NoticePromotionTrainerDto" id="resultMapNoticePromotionTrainer">
+        <result column="trainer_promotion_notice_code" property="trainerPromotionNoticeCode"/>
+        <result column="user_id" property="userId"/>
+        <result column="trainer_promotion_name" property="trainerPromotionName"/>
+        <result column="trainer_promotion_goal" property="trainerPromotionGoal"/>
+        <result column="trainer_promotion_short_contents" property="trainerPromotionShortContents"/>
+        <result column="trainer_promotion_details_contents" property="trainerPromotionDetailsContents"/>
+        <result column="trainer_promotion_recruit_people" property="trainerPromotionRecruitPeople"/>
+        <result column="trainer_promotion_live_add_people" property="trainerPromotionLiveAddPeople"/>
+        <result column="trainer_promotion_price" property="trainerPromotionPrice"/>
+        <result column="trainer_promotion_recruit_start_date" property="trainerPromotionRecruitStartDate"/>
+        <result column="trainer_promtion_recruit_end_date" property="trainerPromotionRecruitEndDate"/>
+        <result column="trainer_promotion_attend_start_date" property="trainerPromotionAttendStartDate"/>
+        <result column="trainer_promotion_recruit_close_date" property="trainerPromotionRecruitCloseDate"/>
+        <result column="trainer_promotion_bg_image" property="proImageUrl"/>
+        <result column="trainer_promotion_recruit_total_date" property="trainerPromotionRecruitTotalDate"/>
+        <result column="trainer_matching_system_add_date" property="trainerMatchingSystemAddDate"/>
     </resultMap>
 
-    <insert id="promotionInsert" parameterType="PromotionDTO">
+    <insert id="promotionInsert" parameterType="NoticePromotionTrainerDto">
       <selectKey keyProperty="proCode" resultType="String" order="BEFORE">
         SELECT
           CASE
@@ -84,7 +85,7 @@
         )c;
       </select>  
       
-      <select id="promotionList" resultMap="resultMapPromotion">
+      <select id="promotionList" resultMap="resultMapNoticePromotionTrainer">
         SELECT 
         	trainer_promotion_notice_code, 
         	user_id, trainer_promotion_name, 
@@ -105,7 +106,7 @@
 			tb_notice_promotion_trainer
       </select>  
       
-      <select id="proDetail" resultMap="resultMapPromotion">
+      <select id="proDetail" resultMap="resultMapNoticePromotionTrainer">
         SELECT 
           trainer_promotion_notice_code, 
           user_id, 
@@ -128,6 +129,44 @@
       WHERE 
       trainer_promotion_notice_code = #{proCode}
         </select>
+        <!-- 트레이너(로그인)별 내프로모션에 대해 현재 등록된 인원 확인  및 리스트   (일단 결제 됫다고 가정notnull 나중에 사용해야할듯?)-->
+	 <select id="trainerGetMyPromotionList" resultMap="resultMapNoticePromotionTrainer" parameterType="String">
+	 SELECT
+	 	pt.trainer_promotion_notice_code,
+   		pt.trainer_promotion_name,
+  	 	pt.trainer_promotion_recruit_start_date,
+  		pt.trainer_promtion_recruit_end_date,
+  		pt.trainer_promotion_recruit_people
+   
+		FROM
+	 		tb_matching_user_trainer AS mt
+		INNER JOIN
+  			tb_notice_promotion_trainer AS pt
+		ON
+   			mt.trainer_promotion_notice_code = pt.trainer_promotion_notice_code
+		WHERE
+  			mt.trainer_id = #{trainerId}; 
+</select>
+
+
+
+	
+	<!-- 내회원 조회 페이지에서 특정 회원 클릭하여 접근시 그 회원 정보(트레이너) -->
+	<select id="trainerGetMatchingUserInfo" parameterType="String" resultType="UserDto">
+	SELECT
+		u.user_id AS 'userId',
+		u.user_first_height AS 'userFirstHeight',
+		u.user_first_weight AS 'userFirstWeight',
+		u.user_first_goal AS 'userFirstGoal'
+
+	FROM
+		tb_matching_user_trainer AS mut
+	INNER JOIN
+		tb_user AS u
+	ON
+		mut.user_id = #{userId};
+		
+	</select>
   
 
 </mapper>

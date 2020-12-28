@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fourhealth.dto.MetExercise;
+import com.fourhealth.dto.MetExerciseDto;
 import com.fourhealth.mapper.ExerciseMapper;
 
 @Service
@@ -19,28 +19,28 @@ public class ExerciseService {
 	private ExerciseMapper ExerciseMapper;
 
 	//운동전체 
-	public List<MetExercise> getAllExercise(){ 
-		List<MetExercise> metExercise = ExerciseMapper.getAllExercise(); 
+	public List<MetExerciseDto> getAllExercise(){ 
+		List<MetExerciseDto> metExercise = ExerciseMapper.getAllExercise(); 
 		return metExercise;
 	}
 	//검색한 운동
-	public List<MetExercise> getSearchExercise(String exerciseName, String metCoefficient){
-		List<MetExercise> getSerachExercise = ExerciseMapper.getSearchExercise(exerciseName, metCoefficient);
+	public List<MetExerciseDto> getSearchExercise(String exerciseName, String metCoefficient){
+		List<MetExerciseDto> getSerachExercise = ExerciseMapper.getSearchExercise(exerciseName, metCoefficient);
 		return getSerachExercise;
 	}
 	//쉬운운동(운동메인)
-	public List<MetExercise> getEasyExercise(){
-		List<MetExercise> getEasyExercise = ExerciseMapper.getEasyExercise();
+	public List<MetExerciseDto> getEasyExercise(){
+		List<MetExerciseDto> getEasyExercise = ExerciseMapper.getEasyExercise();
 		return getEasyExercise;
 	}
 	//보통운동(운동메인)
-	public List<MetExercise> getNormalExercise(){
-		List<MetExercise> getEasyExercise = ExerciseMapper.getNormalExercise();
+	public List<MetExerciseDto> getNormalExercise(){
+		List<MetExerciseDto> getEasyExercise = ExerciseMapper.getNormalExercise();
 		return getEasyExercise;
 	}
 	//격렬한운동(운동메인)
-	public List<MetExercise> getHardExercise(){
-		List<MetExercise> getEasyExercise = ExerciseMapper.getHardExercise();
+	public List<MetExerciseDto> getHardExercise(){
+		List<MetExerciseDto> getEasyExercise = ExerciseMapper.getHardExercise();
 		return getEasyExercise;
 	}
 	

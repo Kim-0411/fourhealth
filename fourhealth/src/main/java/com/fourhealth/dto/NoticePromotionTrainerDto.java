@@ -1,23 +1,41 @@
 package com.fourhealth.dto;
 
+
+import org.springframework.web.multipart.MultipartFile;
+
 public class NoticePromotionTrainerDto {
 
-	private String trainerPromotionNoticeCode;
-	private String userId;
-	private String trainerPromotionName;
-	private String trainerPromotionGoal;
-	private String trainerPromotionShortContents;
-	private String trainerPromotionDetailsContents;
-	private int trainerPromotionRecruitPeople;
-	private int trainerPromotionLiveAddPeople;
-	private int trainerPromotionPrice;
-	private String trainerPromotionRecruitStartDate;
-	private String trainerPromotionRecruitEndDate;
-	private String trainerPromotionAttendStartDate;
-	private String trainerPromotionRecruitCloseDate;
-	private String trainerPromotionBgImage;
-	private int trainerPromotionRecruitTotalDate;
-	private String trainerMatchingSystemAddDate;
+	private String trainerPromotionNoticeCode; //트레이너 프로모션 모집 공고 코드
+	private String userId; //회원공통 관리 아이디 (트레이너아이디)
+	private String trainerPromotionName; //트레이너 프로모션 명
+	private String trainerPromotionGoal; //트레이너 프로모션 목표
+	private String trainerPromotionShortContents; //트레이너 프로모션 간략 내용
+	private String trainerPromotionDetailsContents; //트레이너 프로모션 상세내용
+	private int trainerPromotionRecruitPeople; //트레이너 프로모션 모집 인원
+	private int trainerPromotionLiveAddPeople; //트레이너 프로모션 현재 등록 인원
+	private int trainerPromotionPrice; //트레이너 프로모션 가격
+	private String trainerPromotionRecruitStartDate; //트레이너 프로모션 모집 시작일
+	private String trainerPromotionRecruitEndDate; //트레이너 프로모션 모집 종료일
+	private String trainerPromotionAttendStartDate; //트레이너 프로모션 참여 시작 일자
+	private String trainerPromotionRecruitCloseDate; //트레이너 프로모션 참여 마감 일자
+	private String trainerPromotionRecruitTotalDate; //트레이너 프로모션 모집 총일자
+	private String trainerMatchingSystemAddDate; //트레이너 매칭 시스템 등록 일자
+	private MultipartFile trainerPromotionBgImage; // 화면에서 사진 가져오는 DTO
+	private String proImageUrl; // 디비에 들어가는 DTO
+	
+	public MultipartFile getProBgImage() {
+		return trainerPromotionBgImage;
+	}
+	public void setProBgImage(MultipartFile trainerPromotionBgImage) {
+		this.trainerPromotionBgImage = trainerPromotionBgImage;
+	}
+	public String getProImageUrl() {
+		return proImageUrl;
+	}
+	public void setProImageUrl(String proImageUrl) {
+		this.proImageUrl = proImageUrl;
+	}
+
 	public String getTrainerPromotionNoticeCode() {
 		return trainerPromotionNoticeCode;
 	}
@@ -72,6 +90,7 @@ public class NoticePromotionTrainerDto {
 	public void setTrainerPromotionPrice(int trainerPromotionPrice) {
 		this.trainerPromotionPrice = trainerPromotionPrice;
 	}
+
 	public String getTrainerPromotionRecruitStartDate() {
 		return trainerPromotionRecruitStartDate;
 	}
@@ -96,16 +115,11 @@ public class NoticePromotionTrainerDto {
 	public void setTrainerPromotionRecruitCloseDate(String trainerPromotionRecruitCloseDate) {
 		this.trainerPromotionRecruitCloseDate = trainerPromotionRecruitCloseDate;
 	}
-	public String getTrainerPromotionBgImage() {
-		return trainerPromotionBgImage;
-	}
-	public void setTrainerPromotionBgImage(String trainerPromotionBgImage) {
-		this.trainerPromotionBgImage = trainerPromotionBgImage;
-	}
-	public int getTrainerPromotionRecruitTotalDate() {
+	
+	public String getTrainerPromotionRecruitTotalDate() {
 		return trainerPromotionRecruitTotalDate;
 	}
-	public void setTrainerPromotionRecruitTotalDate(int trainerPromotionRecruitTotalDate) {
+	public void setTrainerPromotionRecruitTotalDate(String trainerPromotionRecruitTotalDate) {
 		this.trainerPromotionRecruitTotalDate = trainerPromotionRecruitTotalDate;
 	}
 	public String getTrainerMatchingSystemAddDate() {
@@ -114,23 +128,9 @@ public class NoticePromotionTrainerDto {
 	public void setTrainerMatchingSystemAddDate(String trainerMatchingSystemAddDate) {
 		this.trainerMatchingSystemAddDate = trainerMatchingSystemAddDate;
 	}
-	@Override
-	public String toString() {
-		return "NoticePromotionTrainerDto [trainerPromotionNoticeCode=" + trainerPromotionNoticeCode + ", userId="
-				+ userId + ", trainerPromotionName=" + trainerPromotionName + ", trainerPromotionGoal="
-				+ trainerPromotionGoal + ", trainerPromotionShortContents=" + trainerPromotionShortContents
-				+ ", trainerPromotionDetailsContents=" + trainerPromotionDetailsContents
-				+ ", trainerPromotionRecruitPeople=" + trainerPromotionRecruitPeople
-				+ ", trainerPromotionLiveAddPeople=" + trainerPromotionLiveAddPeople + ", trainerPromotionPrice="
-				+ trainerPromotionPrice + ", trainerPromotionRecruitStartDate=" + trainerPromotionRecruitStartDate
-				+ ", trainerPromotionRecruitEndDate=" + trainerPromotionRecruitEndDate
-				+ ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate
-				+ ", trainerPromotionRecruitCloseDate=" + trainerPromotionRecruitCloseDate
-				+ ", trainerPromotionBgImage=" + trainerPromotionBgImage + ", trainerPromotionRecruitTotalDate="
-				+ trainerPromotionRecruitTotalDate + ", trainerMatchingSystemAddDate=" + trainerMatchingSystemAddDate
-				+ "]";
-	}
-	
-	
-	
+
+
+
+
+
 }

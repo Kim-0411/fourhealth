@@ -29,16 +29,16 @@ img {
 		<tbody>
 			<tr th:if="${#lists.size(promotionList) > 0}" th:each="p : ${promotionList}">
 				<td>
-				<a th:href="@{/proDetail(proCode=${p.proCode})}"><p th:text="${p.proName}"></p></a>
+				<a th:href="@{/proDetail(proCode=${p.trainerPromotionNoticeCode})}"><p th:text="${p.trainerPromotionName}"></p></a>
 				</td>
 				<td><img th:src="${p.proImageUrl}">  </td>
-				<td th:text="${p.proShortcon}"></td>
-				<td th:text="${p.proId}"></td>
-				<td th:text="${p.proAttendStartDate}"></td>
-				<td th:text="${p.proRecruitcloseDate}"></td>
-				<td th:text="${p.proPeople}"></td>
-				<td th:text="${p.proLivePeople}"></td>
-				<td th:text="${p.proyAddDate}"></td>			
+				<td th:text="${p.trainerPromotionShortContents}"></td>
+				<td th:text="${p.userId}"></td>
+				<td th:text="${p.trainerPromotionAttendStartDate}"></td>
+				<td th:text="${p.trainerPromotionRecruitCloseDate}"></td>
+				<td th:text="${p.trainerPromotionRecruitPeople}"></td>
+				<td th:text="${p.trainerPromotionLiveAddPeople}"></td>
+				<td th:text="${p.trainerMatchingSystemAddDate}"></td>			
 			</tr>		
 		</tbody>
 	</table>
