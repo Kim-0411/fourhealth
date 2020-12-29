@@ -21,7 +21,11 @@ import com.fourhealth.service.MemberService;
 
 @Controller
 public class MemberController {
-
+	//트레이너 메인화면
+	@GetMapping("mainTrainer")
+	public String mainTrainer() {
+		return "trainer/trainer_main";
+	}
 
 
 }

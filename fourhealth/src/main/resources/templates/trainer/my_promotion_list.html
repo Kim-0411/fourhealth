@@ -1,28 +1,28 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
-<h1>로그인한놈(트레이너) 프로모션 관리 </h1>
-	<!--  <span th:text="${result}"></span>  -->
-	<table border="1">
-		<tr>
-			<td>프로모션 명</td>
-			<td>프로모션 모집일자</td>
-			<td>프로모션 마감일자</td>
-			<td>총모집인원</td>
-		</tr>
-		<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-		<tr th:each="m : ${myPromotionList}">
-			<td>
-				<a th:text="${m.trainerPromotionName}" th:href="@{/trainerMyPromotionMemberList(promotionCode=${m.trainerPromotionNoticeCode})}"></a>
-			</td>
-			<td th:text="${m.trainerPromotionRecruitStartDate}"></td>
-			<td th:text="${m.trainerPromotionRecruitEndDate}"></td>
-			<td th:text="${m.trainerPromotionRecruitPeople}"></td>
-		</tr>
-	</table>
-</body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{trainer_layout/default}"
+ >
+ 	<th:block layout:fragment="customContent">
+    	<h1>내 프로모션 관리(로그인 됫다고 가정) </h1>
+		<!--  <span th:text="${result}"></span>  -->
+		<table border="1">
+			<tr>
+				<td>프로모션 명</td>
+				<td>프로모션 모집일자</td>
+				<td>프로모션 마감일자</td>
+				<td>총모집인원</td>
+			</tr>
+			<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
+			<tr th:each="m : ${myPromotionList}">
+				<td>
+					<a th:text="${m.trainerPromotionName}" th:href="@{/trainerMyPromotionMemberList(promotionCode=${m.trainerPromotionNoticeCode})}"></a>
+				</td>
+				<td th:text="${m.trainerPromotionRecruitStartDate}"></td>
+				<td th:text="${m.trainerPromotionRecruitEndDate}"></td>
+				<td th:text="${m.trainerPromotionRecruitPeople}"></td>
+			</tr>
+		</table>
+  </th:block>
 </html>
