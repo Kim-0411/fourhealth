@@ -17,7 +17,7 @@
 		<!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
 		<tr th:each="m : ${myPromotionList}">
 			<td>
-				<a th:text="${m.trainerPromotionName}" th:href="@{/myPromotionMemberList(promotionCode=${m.trainerPromotionNoticeCode})}"></a>
+				<a th:text="${m.trainerPromotionName}" th:href="@{/trainerMyPromotionMemberList(promotionCode=${m.trainerPromotionNoticeCode})}"></a>
 			</td>
 			<td th:text="${m.trainerPromotionRecruitStartDate}"></td>
 			<td th:text="${m.trainerPromotionRecruitEndDate}"></td>

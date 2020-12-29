@@ -85,7 +85,7 @@
 			console.log(exerciseName,exerciseHow);
 			var request = $.ajax({
 				method : "POST",
-				url : "/exerciseAdd",
+				url : "/trainerExerciseSerach",
 				data : {exerciseName : exerciseName, exerciseHow : exerciseHow},
 				dataType : 'json'
 			});
