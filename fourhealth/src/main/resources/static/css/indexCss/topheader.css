@@ -1,0 +1,112 @@
+.top_header_area {
+  width: 100%;
+  height: 40px;
+  /*border-bottom: 1px solid #49da74;*/
+  background-color: rgb(24, 193, 20);
+}
+
+.top_header_area .top_social_bar {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  height: 40px;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+}
+
+.top_header_area .top_social_bar > a {
+  /*SNS버튼색*/
+  font-size: 12px;
+  color: #fff;
+  margin-right: 30px;
+}
+
+.top_header_area .top_social_bar > a:hover {
+  color: #49da74;
+}
+
+.top_header_area .top_social_bar > a:last-of-type {
+  margin-right: 0;
+}
+
+.top_header_area .signup-search-area {
+  height: 40px;
+  position: relative;
+  z-index: 3;
+}
+
+.top_header_area .signup-search-area a {
+  /*로그인 버튼 색*/
+  font-size: 13px;
+  color: #fff;
+}
+
+.top_header_area .signup-search-area .login a {
+  margin-right: 13px;
+  border-right: 2px solid #c2c2c2;
+  padding-right: 13px;
+}
+
+.top_header_area .signup-search-area .search_button {
+  margin-left: 54px;
+}
+
+#searchBtn {
+  position: relative;
+  z-index: 8;
+}
+
+.search-hidden-form {
+  position: absolute;
+  width: 100%;
+  z-index: 4;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+  opacity: 0;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+  font-size: 12px;
+}
+
+.search-hidden-form.search-form-open {
+  z-index: 18;
+  opacity: 1;
+  -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+}
+
+.search-hidden-form #search-anything {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #ddd;
+  top: 5px;
+  position: relative;
+  padding: 5px 10px;
+}
+
+.search-hidden-form span {
+  line-height: 30px;
+  width: 30px;
+  height: 30px;
+  position: absolute;
+  display: block;
+  text-align: center;
+  top: 5px;
+  right: 0;
+  border: 1px solid #ddd;
+  color: #888;
+  cursor: pointer;
+  z-index: 5;
+  font-size: 13px;
+  border-left: none;
+  -webkit-transition-duration: 500ms;
+  transition-duration: 500ms;
+}
+
+.search-hidden-form span:hover {
+  color: #000;
+}
