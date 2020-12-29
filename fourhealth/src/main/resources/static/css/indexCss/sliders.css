@@ -1,0 +1,15 @@
+/*메인 슬라이드 크기*/
+.carousel-inner .carousel-item {
+  margin-top: 29px;
+  width: 100%;
+  height: 415px;
+}
+
+/*메인 슬라이드 이미지*/
+.carousel-inner .carousel-item img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
