@@ -17,7 +17,7 @@ public class ScheduleController {
 
 	// 스케줄 등록해주는 페이지 (일단운동) 필요한거 매칭된 회원의 키 몸무게
 	@GetMapping("/trainerMemberScheduleInsert")
-	public String MemberScheduleInsert(Model model,
+	public String trainerMemberScheduleInsert(Model model,
 									  @RequestParam(name = "userId", required = false) String userId) {
 			UserDto getUserInfo = memberService.getTrainerMyMatchingUserInfo(userId);
 			model.addAttribute("userInfo", getUserInfo);
