@@ -24,12 +24,12 @@
     </resultMap>
 
     <insert id="promotionInsert" parameterType="NoticePromotionTrainerDto">
-      <selectKey keyProperty="proCode" resultType="String" order="BEFORE">
+      <selectKey keyProperty="trainerPromotionNoticeCode" resultType="String" order="BEFORE">
         SELECT
           CASE
           WHEN COUNT(1) = 0 THEN 'trainer_promotion_notice_001' 
           ELSE CONCAT('trainer_promotion_notice_', LPAD(MAX(CAST(right(g.trainer_promotion_notice_code,3) AS DECIMAL)+1), 3, 0))
-          END AS proCode
+          END AS trainerPromotionNoticeCode
         FROM
           tb_notice_promotion_trainer AS g;
       </selectKey>
@@ -54,20 +54,20 @@
       )
       VALUES 
       (
-        #{proCode},
-        #{proId},
-        #{proName}, 
-        #{proGoal}, 
-        #{proShortcon}, 
-        #{proDetailscon}, 
-        #{proPeople},
+        #{trainerPromotionNoticeCode},
+        #{userId},
+        #{trainerPromotionName}, 
+        #{trainerPromotionGoal}, 
+        #{trainerPromotionShortContents}, 
+        #{trainerPromotionDetailsContents}, 
+        #{trainerPromotionRecruitPeople},
         0, 
-        #{proPrice} ,
-        #{proTotalDate},
-        #{proStartDate} ,
-        #{proEndDate}, 
-        #{proAttendStartDate}, 
-        #{proRecruitcloseDate}, 
+        #{trainerPromotionPrice} ,
+        #{trainerPromotionRecruitTotalDate},
+        #{trainerPromotionRecruitStartDate} ,
+        #{trainerPromotionRecruitEndDate}, 
+        #{trainerPromotionAttendStartDate}, 
+        #{trainerPromotionRecruitCloseDate}, 
         #{proImageUrl},
         NOW())
 

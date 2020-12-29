@@ -1,12 +1,14 @@
 package com.fourhealth.controller;
 
 import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 
 import javax.servlet.http.HttpServletResponse;
 
@@ -49,19 +51,24 @@ public class PromotionController {
 	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/proInsert")
 	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
-			throws ParseException {
+			throws ParseException, FileNotFoundException {
 		System.out.println(promotionDto);
 
 		String fileName = null;
 
-		if (!promotionDto.getProBgImage().isEmpty()) {
-			fileName = promotionDto.getProBgImage().getOriginalFilename();
-			String path = "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 개발자패스
+		if (!promotionDto.getTrainerPromotionBgImage().isEmpty()) {
+			int rdv = (int) (Math.random() * 1000);
+			fileName = promotionDto.getTrainerPromotionBgImage().getOriginalFilename();
+			String rename = rdv + "_" + fileName;
+			// String path =
+			// "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
+
+			String realPath = ResourceUtils.getFile("src/main/resources/static/image/" + rename).getAbsolutePath();
 			// 배포패스
 
 			try {
-				new File(path).mkdir();
-				promotionDto.getProBgImage().transferTo(new File(path + fileName));
+				new File(realPath).mkdir();
+				promotionDto.getTrainerPromotionBgImage().transferTo(new File(realPath));
 
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
