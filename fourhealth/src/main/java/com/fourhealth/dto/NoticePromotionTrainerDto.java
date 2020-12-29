@@ -22,11 +22,11 @@ public class NoticePromotionTrainerDto {
 	private MultipartFile trainerPromotionBgImage; // 화면에서 사진 가져오는 DTO
 	private String proImageUrl; // 디비에 들어가는 DTO
 
-	public MultipartFile getProBgImage() {
+	public MultipartFile getTrainerPromotionBgImage() {
 		return trainerPromotionBgImage;
 	}
 
-	public void setProBgImage(MultipartFile trainerPromotionBgImage) {
+	public void setTrainerPromotionBgImage(MultipartFile trainerPromotionBgImage) {
 		this.trainerPromotionBgImage = trainerPromotionBgImage;
 	}
 
@@ -156,6 +156,22 @@ public class NoticePromotionTrainerDto {
 
 	public void setTrainerMatchingSystemAddDate(String trainerMatchingSystemAddDate) {
 		this.trainerMatchingSystemAddDate = trainerMatchingSystemAddDate;
+	}
+
+	@Override
+	public String toString() {
+		return "NoticePromotionTrainerDto [proImageUrl=" + proImageUrl + ", trainerMatchingSystemAddDate="
+				+ trainerMatchingSystemAddDate + ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate
+				+ ", trainerPromotionBgImage=" + trainerPromotionBgImage + ", trainerPromotionDetailsContents="
+				+ trainerPromotionDetailsContents + ", trainerPromotionGoal=" + trainerPromotionGoal
+				+ ", trainerPromotionLiveAddPeople=" + trainerPromotionLiveAddPeople + ", trainerPromotionName="
+				+ trainerPromotionName + ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode
+				+ ", trainerPromotionPrice=" + trainerPromotionPrice + ", trainerPromotionRecruitCloseDate="
+				+ trainerPromotionRecruitCloseDate + ", trainerPromotionRecruitEndDate="
+				+ trainerPromotionRecruitEndDate + ", trainerPromotionRecruitPeople=" + trainerPromotionRecruitPeople
+				+ ", trainerPromotionRecruitStartDate=" + trainerPromotionRecruitStartDate
+				+ ", trainerPromotionRecruitTotalDate=" + trainerPromotionRecruitTotalDate
+				+ ", trainerPromotionShortContents=" + trainerPromotionShortContents + ", userId=" + userId + "]";
 	}
 
 }
