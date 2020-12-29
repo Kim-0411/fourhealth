@@ -3,9 +3,19 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
+	<resultMap type="UserDto" id="resultMapUser">
+			<result column="user_id" 							property="userId"/>
+			<result column="user_platform_grade_code" 			property="userPlatFormGradeCode"/>
+			<result column="user_status_level_code" 			property="userStatusLevelCode"/>
+			<result column="user_first_height" 					property="userFirstHeight"/>
+			<result column="user_first_weight" 					property="userFirstWeight"/>
+			<result column="user_first_goal" 					property="userFirstGoal"/>
+			<result column="user_first_bmi" 					property="userFirstBmi"/>
+			<result column="user_reg_date" 						property="userRegDate"/>
+	</resultMap>
 	
 	<!--트레이너가 자기 본인의 프로모션에 등록된 회원중 한명의 회원의 정보를 가져올때.  -->
-	<select id="getTrainerMyMatchingUserInfo" parameterType="String" resultType="UserDto">
+	<select id="getTrainerMyMatchingUserInfo" parameterType="String" resultMap="resultMapUser">
 		SELECT
 			u.user_id AS 'userId',
 			u.user_first_height AS 'userFirstHeight',

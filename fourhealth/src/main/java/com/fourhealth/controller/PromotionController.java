@@ -10,9 +10,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MatchingService;
-import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PromotionService;
 
 @Controller

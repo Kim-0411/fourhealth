@@ -3,26 +3,31 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.ExerciseMapper">
-
-	<select id="getAllExerciseList" resultType="MetExerciseDto">
+	<resultMap type="MetExerciseDto" id="resultMapMetExercise">
+		<result column="exercise_met_code" 		property="exerciseMetCode"/>
+		<result column="exercise_name" 			property="exerciseName"/>
+		<result column="met_coefficient" 		property="exerciseMetCoeffcient"/>
+		<result column="exercise_reg_date" 		property="exerciseRegDate"/>
+	</resultMap>
+	
+	<select id="getAllExerciseList" resultMap="resultMapMetExercise">
 		SELECT
-		e.exercise_name AS 'exerciseName',
-		e.met_coefficient AS
-		'exerciseMetCoeffcient'
+			e.exercise_name,
+			e.met_coefficient
 		FROM
-		tb_met_exercise AS e
-		ORDER BY e.met_coefficient
-
+			tb_met_exercise AS e
+		ORDER BY
+			 e.met_coefficient;
 	</select>
-	<select id="getAllSearchExerciseList" resultType="MetExerciseDto"
-		parameterType="String">
+	
+	<select id="getAllSearchExerciseList" resultMap="resultMapMetExercise" parameterType="String">
 		SELECT
-			e.exercise_name AS 'exerciseName',
-			e.met_coefficient AS 'exerciseMetCoeffcient'
+			e.exercise_name,
+			e.met_coefficient
 		FROM
 			tb_met_exercise AS e
 		WHERE
-		e.exercise_name LIKE CONCAT('%',#{exercise_name},'%')
+			e.exercise_name LIKE CONCAT('%',#{exercise_name},'%')
 		
 		<if test="met_coefficient !=null and exercise_name != null"></if>
 		
@@ -44,40 +49,41 @@
 		<if test="met_coefficient =='all'.toString()">
 
 		</if>
-		ORDER BY e.met_coefficient
+		ORDER BY
+			e.met_coefficient;
 	</select>
 
-	<select id="getAllEasyExerciseList" resultType="MetExerciseDto">
+	<select id="getAllEasyExerciseList" resultMap="resultMapMetExercise">
 	 	SELECT
-			e.exercise_name AS 'exerciseName',
-			e.met_coefficient AS 'exerciseMetCoeffcient'
+			e.exercise_name,
+			e.met_coefficient
 		FROM
 			tb_met_exercise AS e
 		WHERE
 			e.met_coefficient BETWEEN 0.0 AND 3.0
 		Order by
-			RAND() LIMIT 5
+			RAND() LIMIT 5;
 	</select>
-	<select id="getAllNormalExerciseList" resultType="MetExerciseDto">
+	<select id="getAllNormalExerciseList" resultMap="resultMapMetExercise">
 	 	SELECT
-			e.exercise_name AS 'exerciseName',
-			e.met_coefficient AS 'exerciseMetCoeffcient'
+			e.exercise_name,
+			e.met_coefficient
 		FROM
 			tb_met_exercise AS e
 		WHERE
 			e.met_coefficient BETWEEN 3.0 AND 6.0
 		Order by
-			RAND() LIMIT 5
+			RAND() LIMIT 5;
 	</select>
-	<select id="getAllHardExerciseList" resultType="MetExerciseDto">
+	<select id="getAllHardExerciseList" resultMap="resultMapMetExercise">
 	 	SELECT
-			e.exercise_name AS 'exerciseName',
-			e.met_coefficient AS 'exerciseMetCoeffcient'
+			e.exercise_name,
+			e.met_coefficient
 		FROM
 			tb_met_exercise AS e
 		WHERE
 			e.met_coefficient >=6.0
 		Order by
-			RAND() LIMIT 5
+			RAND() LIMIT 5;
 	</select>
 </mapper>
