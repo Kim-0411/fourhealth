@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.MatchingMapper">
+
+<!--트레이너가 자신의 프로모션중 관리할 프로모션에 접근시 등록된 사용자들 목록조회  -->
+<select id="getTrainerMatchingUserList" parameterType="String" resultType="MatchingUserTrainerDto">
+	SELECT
+		mut.trainer_user_matching_code AS 'trainerUserMatchingCode',
+		mut.user_id AS 'userId'
+	FROM
+		tb_matching_user_trainer AS mut
+	INNER JOIN
+		tb_notice_promotion_trainer AS npt
+	ON
+		mut.trainer_promotion_notice_code = npt.trainer_promotion_notice_code
+	where 
+		mut.trainer_promotion_notice_code =#{promotionCode};
+	</select>
+
+</mapper>

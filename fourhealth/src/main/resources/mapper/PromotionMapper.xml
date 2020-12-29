@@ -2,10 +2,10 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fourhealth.mapper.NoticePromotionTrainerMapper">
+<mapper namespace="com.fourhealth.mapper.PromotionMapper">
 
-<select id="getMyMemberList" parameterType="String" resultType="NoticePromotionTrainer">
- <!-- 트레이너(로그인)별 내프로모션에 대해 현재 등록된 인원 확인  및 리스트   (일단 결제 됫다고 가정notnull 나중에 사용해야할듯?)-->
+<select id="getTrainerMyPromotionAllList" parameterType="String" resultType="NoticePromotionTrainerDto">
+ <!-- 로그인된 트레이너가 자신의 올린 모든  프로모션 리스트 -->
 	 SELECT
 	 	pt.trainer_promotion_notice_code AS 'trainerPromotionNoticeCode',
    		pt.trainer_promotion_name AS 'trainerPromotionName',
@@ -22,5 +22,6 @@
 		WHERE
   			mt.trainer_id = #{trainerId}; 
 </select>
+
 
 </mapper>
