@@ -1,10 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-	  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	    layout:decorate="@{master_layout/default}"
-	  >
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{master_layout/default}">
+<th:block layout:fragment="customContent">
 
-<table border="1" class="table_test">
+
+	<table border="1">
 		<thead>
 			<tr>
 				<th>아이디</th>
@@ -19,7 +20,8 @@
 			</tr>
 		</thead>
 		<tbody>
-			<tr th:if="${#lists.size(memberList) > 0}" th:each="l : ${memberList}">
+			<tr th:if="${#lists.size(memberList) > 0}"
+				th:each="l : ${memberList}">
 				<td th:text="${l.memberId}"></td>
 				<td th:text="${l.memberPw}"></td>
 				<td th:text="${l.memberName}"></td>
@@ -27,19 +29,14 @@
 				<td th:text="${l.memberEmail}"></td>
 				<td th:text="${l.memberAddr}"></td>
 				<td th:text="${l.memberRegDate}"></td>
-				<td>
-					<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
+				<td><a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
 				</td>
 				<td>
-					<!--ex : /removeMember?memberId=id001&memberLevel=관리자  -->
-					<a th:href="@{/removeMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
+					<!--ex : /removeMember?memberId=id001&memberLevel=관리자  --> <a
+					th:href="@{/removeMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
 				</td>
-			</tr>		
+			</tr>
 		</tbody>
 	</table>
-<style>
-.table_test{
-margin-left: 50px;
-}
-</style>
+</th:block>
 </html>

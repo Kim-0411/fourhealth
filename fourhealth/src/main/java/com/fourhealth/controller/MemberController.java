@@ -23,16 +23,6 @@ import com.fourhealth.service.MemberService;
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
-
-	/*
-	 * @Autowired private ExerciseService exerciseService;
-	 */
-	
-	/* 화면없음 
-	 * @GetMapping("/masterManagement") public String MasterManagement() { return
-	 * "main"; }
-	 */
-	
 	
 	/********************************************************************************************
 	 * 로그인/로그아웃
@@ -48,65 +38,7 @@ public class MemberController {
 
 		return "login/login";
 	}
-
-
-	@GetMapping("/master_main")
-	public String masterMain() {
-		return "master/main";
-	}
-
-	@GetMapping("/memberlist")
-	public String masterMemberList(Model model) {
-		List<MemberDto> memberList = memberService.viewMember();
-		model.addAttribute("memberList", memberList);
-
-		System.out.println("뜸" + memberList);
-
-		return "member/m_all_list";
-	}
-
-	@GetMapping("/profile_details")
-	public String masterProfileDetails(Model model) {
-		// 관리자 프로필 상세조회 화면
-		return "master/profile/profile_details";
-	}
-
-	@GetMapping("/profile_modify")
-	public String masterProfileModify(Model model) {
-		// 관리자 프로필 수정 화면
-		return "master/profile/profile_modify";
-	}
-
-	@GetMapping("/bank_number_details")
-	public String masterbankNumberDetails(Model model) {
-		// 관리자 계좌 상세조회 화면
-		return "master/payment/bank_number_details";
-	}
-
-	@GetMapping("/bank_number_modify")
-	public String masterbankNumberModified(Model model) {
-		// 관리자 계좌 수정 화면
-		return "master/payment/bank_number_modify";
-	}
-
-	@GetMapping("/settlement_list")
-	public String masterSettlementList(Model model) {
-		// 관리자 정산 조회 화면
-		return "master/payment/settlement_list";
-	}
-
-	@GetMapping("/inactive_accounts_list")
-	public String masterInactiveAccountsMemberList(Model model) {
-		// 관리자 휴면계정 조회 화면
-		return "master/member/member_inactive_accounts_list";
-	}
-
-	@GetMapping("/dormant_list")
-	public String masterDormantMemberList(Model model) {
-		// 관리자 탈퇴계정 조회 화면
-		return "master/member/member_dormant_list";
-	}
-
+	
 	// @PostMapping(value = "/userIdCheck")
 	// public String addMember(Member member
 	// ,@RequestParam(name = "memberId", required = false) String memberId ,
