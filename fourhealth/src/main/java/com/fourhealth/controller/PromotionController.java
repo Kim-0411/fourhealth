@@ -54,21 +54,21 @@ public class PromotionController {
 
 		String fileName = null;
 
-		if (!promotionDto.getProImageUrl().isEmpty()) {
-			fileName = promotionDto.getProImageUrl().getOriginalFilename();
+		if (!promotionDto.getProBgImage().isEmpty()) {
+			fileName = promotionDto.getProBgImage().getOriginalFilename();
 			String path = "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 개발자패스
 			// 배포패스
 
 			try {
 				new File(path).mkdir();
-				promotionDto.getProImageUrl().transferTo(new File(path + fileName));
+				promotionDto.getProBgImage().transferTo(new File(path + fileName));
 
 			} catch (IllegalStateException e) {
 				e.printStackTrace();
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			promotionDto.setProBgImage(fileName);
+			promotionDto.setProImageUrl(fileName);
 		}
 
 		String start = promotionDto.getTrainerPromotionAttendStartDate();

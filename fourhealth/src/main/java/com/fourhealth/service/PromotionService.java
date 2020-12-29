@@ -42,8 +42,8 @@ public class PromotionService {
 	public List<NoticePromotionTrainerDto> promotionList() {
 		List<NoticePromotionTrainerDto> promotionList = promotionMapper.promotionList();
 		for (int i = 0; i < promotionList.size(); i++) {
-			String imgUrl = promotionList.get(i).getProBgImage();
-			promotionList.get(i).setProBgImage("image/" + imgUrl);
+			String imgUrl = promotionList.get(i).getProImageUrl();
+			promotionList.get(i).setProImageUrl("image/" + imgUrl);
 		}
 		return promotionList;
 	}
@@ -51,8 +51,8 @@ public class PromotionService {
 	// 프로모션 상세정보 처리
 	public NoticePromotionTrainerDto proDetail(String proCode) {
 		NoticePromotionTrainerDto promotionDTO = promotionMapper.proDetail(proCode);
-		String imgUrl = promotionDTO.getProBgImage();
-		promotionDTO.setProBgImage("image/" + imgUrl);
+		String imgUrl = promotionDTO.getProImageUrl();
+		promotionDTO.setProImageUrl("image/" + imgUrl);
 		return promotionDTO;
 	}
 

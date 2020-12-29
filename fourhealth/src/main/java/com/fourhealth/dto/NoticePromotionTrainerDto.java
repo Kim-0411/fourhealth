@@ -19,22 +19,22 @@ public class NoticePromotionTrainerDto {
 	private String trainerPromotionRecruitCloseDate; // 트레이너 프로모션 참여 마감 일자
 	private String trainerPromotionRecruitTotalDate; // 트레이너 프로모션 모집 총일자
 	private String trainerMatchingSystemAddDate; // 트레이너 매칭 시스템 등록 일자
-	private String trainerPromotionBgImage; // 디비에 들어가는 DTO
-	private MultipartFile proImageUrl; // 화면에서 사진 가져오는 DTO
+	private MultipartFile trainerPromotionBgImage; // 화면에서 사진 가져오는 DTO
+	private String proImageUrl; // 디비에 들어가는 DTO
 
-	public String getProBgImage() {
+	public MultipartFile getProBgImage() {
 		return trainerPromotionBgImage;
 	}
 
-	public void setProBgImage(String trainerPromotionBgImage) {
+	public void setProBgImage(MultipartFile trainerPromotionBgImage) {
 		this.trainerPromotionBgImage = trainerPromotionBgImage;
 	}
 
-	public MultipartFile getProImageUrl() {
+	public String getProImageUrl() {
 		return proImageUrl;
 	}
 
-	public void setProImageUrl(MultipartFile proImageUrl) {
+	public void setProImageUrl(String proImageUrl) {
 		this.proImageUrl = proImageUrl;
 	}
 
@@ -156,22 +156,6 @@ public class NoticePromotionTrainerDto {
 
 	public void setTrainerMatchingSystemAddDate(String trainerMatchingSystemAddDate) {
 		this.trainerMatchingSystemAddDate = trainerMatchingSystemAddDate;
-	}
-
-	@Override
-	public String toString() {
-		return "NoticePromotionTrainerDto [proImageUrl=" + proImageUrl + ", trainerMatchingSystemAddDate="
-				+ trainerMatchingSystemAddDate + ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate
-				+ ", trainerPromotionBgImage=" + trainerPromotionBgImage + ", trainerPromotionDetailsContents="
-				+ trainerPromotionDetailsContents + ", trainerPromotionGoal=" + trainerPromotionGoal
-				+ ", trainerPromotionLiveAddPeople=" + trainerPromotionLiveAddPeople + ", trainerPromotionName="
-				+ trainerPromotionName + ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode
-				+ ", trainerPromotionPrice=" + trainerPromotionPrice + ", trainerPromotionRecruitCloseDate="
-				+ trainerPromotionRecruitCloseDate + ", trainerPromotionRecruitEndDate="
-				+ trainerPromotionRecruitEndDate + ", trainerPromotionRecruitPeople=" + trainerPromotionRecruitPeople
-				+ ", trainerPromotionRecruitStartDate=" + trainerPromotionRecruitStartDate
-				+ ", trainerPromotionRecruitTotalDate=" + trainerPromotionRecruitTotalDate
-				+ ", trainerPromotionShortContents=" + trainerPromotionShortContents + ", userId=" + userId + "]";
 	}
 
 }
