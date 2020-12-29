@@ -56,8 +56,8 @@ public class PromotionController {
 
 		if (!promotionDto.getProBgImage().isEmpty()) {
 			fileName = promotionDto.getProBgImage().getOriginalFilename();
-			String path = "D:\\teamProject\\fourhealth\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 개발자패스
-																														// 배포패스
+			String path = "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\"; // 개발자패스
+			// 배포패스
 
 			try {
 				new File(path).mkdir();
