@@ -3,13 +3,12 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
-	<insert id="insertFood2" parameterType="java.util.Map">
-    INSERT INTO tb_food_test
-    (foodCode, foodName, foodCal)
+  <insert id="insertFood2" parameterType="java.util.List">
+     INSERT INTO tb_food_test
+      (foodCode, foodName, foodCal) 
     VALUES
-    
-    
-     ( #{foodCode}, #{foodName}, #{foodCal});
-
-	</insert>
+    <foreach collection="list" item="food" separator=" , " >
+        ("${food.foodCode}", "${food.foodName}", "${food.foodCal}")
+    </foreach>
+</insert>
 </mapper>

@@ -37,8 +37,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+
+
 @Controller
 public class FoodController {
+	@Autowired
+	private FoodMapper foodMapper;
 
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
@@ -51,6 +55,32 @@ public class FoodController {
 	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
 		System.out.println("From FoodController >> Controller data 표시");
 		System.out.println(data.toString());
+		Map<String, Object> map = new HashMap<>();
+
+		map.put("foodName", data.get(0).get("foodName"));
+
+		System.out.println(map.get("foodName"));
+		System.out.println(map);
+	
+		//data = (Map<String, String>)JSONObject.toBean(jsonObject, java.util.HashMap.class);
+
+		
+		// food VO(DTO) 테스트
+	
+		
+		//foodService.addFood1(data);
+
+		//return "성공";
+		foodMapper.insertFood2(data);
+		//foodService.addFood1(data);
+		return "성공";
+	
+	}
+	/**
+	 	@RequestMapping(value = "/foodInsert", produces = "application/json", method = RequestMethod.POST)
+	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
+		System.out.println("From FoodController >> Controller data 표시");
+		System.out.println(data.toString());
 
 	
 		//data = (Map<String, String>)JSONObject.toBean(jsonObject, java.util.HashMap.class);
@@ -60,9 +90,11 @@ public class FoodController {
 
 		//foodService.addFood1(data);
 
-		return "성공";
+		//return "성공";
+		return data;
 	
 	}
+	  */
 
 	
 
@@ -100,9 +132,9 @@ public class FoodController {
 		// String datatype = "json";
 		// index Start, End
 		// String startIdx = "1";
-		int startIdx = 0;
+		int startIdx = 4001;
 		// String endIdx = "5";
-		int endIdx = 5;
+		int endIdx = 5000;
 
 		String url = null;
 

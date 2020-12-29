@@ -1,6 +1,7 @@
 package com.fourhealth.service;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,8 +14,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;
-
-
 
 	// Food Input Service
 	public String addFood(Food food) {
@@ -31,17 +30,13 @@ public class FoodService {
 		return foodChecker;
 	}
 
-	public void addFood1(Map<String, String> data) {
+	public void addFood1(String data) {
+		// Map<String, Object>
 		System.out.println("받아온 data 표기");
-		
-		ArrayList list = new ArrayList();		
-		list.add(data);
-		System.out.println(list);
 
-	
-		
-		
-
+		// ArrayList list = new ArrayList();
+		// list.add(data);
+		// System.out.println(list);
 
 		System.out.println("Mapping data input");
 		// foodMapper.insertFood2(data);
@@ -57,4 +52,18 @@ public class FoodService {
 
 	}
 
+	public String addFood1(List<Map<String, Object>> data) {
+		System.out.println("받아온 데이터 표시");
+		String resultStr = null;
+		if (data != null) {
+			int result = foodMapper.insertFood2(data);
+			if (result > 0) {
+				resultStr="Insert food data successed!";
+			} else {
+				resultStr="Insert food data failed!";
+			}
+
+		}
+		return resultStr;
+	}
 }

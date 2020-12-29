@@ -41,23 +41,23 @@
     <script>
         var selectValue = "";
         var data;
-        $('#btn1').on('click',function(){
-            
+        $('#btn1').on('click', function () {
+
             $.ajax({
                 type: "get",
                 url: "test11",
                 data: "data",
                 dataType: "dataType",
                 success: function (response) {
-                    
+
                 }
             });
-           
+
 
         });
 
         function checkCategory() {
-            $('input[type="checkbox"]:checked').each(function(index) {
+            $('input[type="checkbox"]:checked').each(function (index) {
                 if (index != 0) {
                     selectValue += ', ';
                 }
@@ -66,7 +66,7 @@
             alert(selectValue);
         }
 
-        $(".foodApiTest").click(function() {
+        $(".foodApiTest").click(function () {
             var html = "";
             var food = $('.foodInput').val();
             console.log(food)
@@ -78,71 +78,94 @@
                 },
                 dataType: "json",
             });
-            request.done(function(data) {
+            request.done(function (data) {
+                for (var i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += '<td>';
+                        html += data[i].foodName;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].foodCal;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].foodProtein;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].foodCarbo;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].foodFat;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].foodSodium;
+                        html += '</td>';
+                        html += '</tr>';
+                    }
+                    $('#wData').html(html);
                 console.log(JSON.stringify(data))
-           
-             
+
+
                 $.ajax({
                     type: "post",
                     url: "/foodInsert",
                     data: JSON.stringify(data),
-                    contentType : "application/json; charset=UTF-8",
+                    contentType: "application/json; charset=UTF-8",
                     dataType: "text",
-                    success: function(response) {
-                          alert(response);
+                    success: function (response) {
+                        alert(response);
                     },
-                    error: function(err){
-                        console(err)
-                    }
+                    // error: function (err) {
+                    //     console(err);
+                    // }
 
                 });
 
 
 
                 //###############################################
-               
-            //     console.log("최초 ajax value",data)
-            //     $.ajax({
-            //         type: "post",
-            //         url: "/foodInsert",
-            //         data: {
-            //             data: data
-                        
-            //         },
-            //         dataType: "xml",
-            //         success: function(response) {
-            //             //  alert('성공');
-            //         }
-            //     });
-            //    // console.log(data);
 
-            //     alert("success");
-            //     for (var i = 0; i < data.length; i++) {
-            //         html += '<tr>';
-            //         html += '<td>';
-            //         html += data[i].foodName;
-            //         html += '</td>';
-            //         html += '<td>';
-            //         html += data[i].foodCal;
-            //         html += '</td>';
-            //         html += '<td>';
-            //         html += data[i].foodProtein;
-            //         html += '</td>';
-            //         html += '<td>';
-            //         html += data[i].foodCarbo;
-            //         html += '</td>';
-            //         html += '<td>';
-            //         html += data[i].foodFat;
-            //         html += '</td>';
-            //         html += '<td>';
-            //         html += data[i].foodSodium;
-            //         html += '</td>';
-            //         html += '</tr>';
-            //     }
-            //     $('#wData').html(html);
-            // });
-            // request.fail(function(jqXHR, textStatus) {
-            //     alert("Request failed: " + textStatus);
+                //     console.log("최초 ajax value",data)
+                //     $.ajax({
+                //         type: "post",
+                //         url: "/foodInsert",
+                //         data: {
+                //             data: data
+
+                //         },
+                //         dataType: "xml",
+                //         success: function(response) {
+                //             //  alert('성공');
+                //         }
+                //     });
+                //    // console.log(data);
+
+                //     alert("success");
+                //     for (var i = 0; i < data.length; i++) {
+                //         html += '<tr>';
+                //         html += '<td>';
+                //         html += data[i].foodName;
+                //         html += '</td>';
+                //         html += '<td>';
+                //         html += data[i].foodCal;
+                //         html += '</td>';
+                //         html += '<td>';
+                //         html += data[i].foodProtein;
+                //         html += '</td>';
+                //         html += '<td>';
+                //         html += data[i].foodCarbo;
+                //         html += '</td>';
+                //         html += '<td>';
+                //         html += data[i].foodFat;
+                //         html += '</td>';
+                //         html += '<td>';
+                //         html += data[i].foodSodium;
+                //         html += '</td>';
+                //         html += '</tr>';
+                //     }
+                //     $('#wData').html(html);
+                // });
+                // request.fail(function(jqXHR, textStatus) {
+                //     alert("Request failed: " + textStatus);
             });
         });
         console.log(data);
