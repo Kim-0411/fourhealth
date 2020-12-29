@@ -18,7 +18,7 @@
         <result column="trainer_promtion_recruit_end_date" property="trainerPromotionRecruitEndDate"/>
         <result column="trainer_promotion_attend_start_date" property="trainerPromotionAttendStartDate"/>
         <result column="trainer_promotion_recruit_close_date" property="trainerPromotionRecruitCloseDate"/>
-        <result column="trainer_promotion_bg_image" property="proImageUrl"/>
+        <result column="trainer_promotion_bg_image" property="trainerPromotionBgImage"/>
         <result column="trainer_promotion_recruit_total_date" property="trainerPromotionRecruitTotalDate"/>
         <result column="trainer_matching_system_add_date" property="trainerMatchingSystemAddDate"/>
     </resultMap>
@@ -68,7 +68,7 @@
         #{proEndDate}, 
         #{proAttendStartDate}, 
         #{proRecruitcloseDate}, 
-        #{proImageUrl},
+        #{trainerPromotionBgImage},
         NOW())
 
       </insert>
