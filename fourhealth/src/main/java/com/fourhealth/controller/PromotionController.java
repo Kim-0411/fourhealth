@@ -110,7 +110,7 @@ public class PromotionController {
 		System.out.println(promotionList);
 		model.addAttribute("promotionList", promotionList);
 
-		return "promotion/promotionList";
+		return "main_layout/promotion/promotionList";
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러

@@ -4,10 +4,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.dto.UserDto;
-
 
 @Mapper
 public interface PromotionMapper {
@@ -22,6 +19,5 @@ public interface PromotionMapper {
 
 	// 트레이너 프로모션 상세정보
 	public NoticePromotionTrainerDto proDetail(String proCode);
-	
-	
+
 }

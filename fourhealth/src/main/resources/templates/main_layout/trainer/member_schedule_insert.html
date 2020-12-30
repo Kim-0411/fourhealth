@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<link rel="stylesheet"
+	href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+
+<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+<script>
+	$.datepicker.setDefaults({
+		dateFormat : 'yy-mm-dd',
+		prevText : '이전 달',
+		nextText : '다음 달',
+		monthNames : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월', '9월',
+				'10월', '11월', '12월' ],
+		monthNamesShort : [ '1월', '2월', '3월', '4월', '5월', '6월', '7월', '8월',
+				'9월', '10월', '11월', '12월' ],
+		dayNames : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesShort : [ '일', '월', '화', '수', '목', '금', '토' ],
+		dayNamesMin : [ '일', '월', '화', '수', '목', '금', '토' ],
+		showMonthAfterYear : true,
+		yearSuffix : '년'
+	});
+
+	$(function() {
+		$("#datepicker").datepicker();
+	});
+
+</script>
+</head>
+<body>
+	<h1>일단 기능만 날짜 정하고 운동 넣어주기</h1>
+	<div style="float: right;">
+		<p>회원 아이디 : <span  th:text="${userInfo.userId}"></span></p>
+		<p>관리하는놈 키: <span id="height"  th:text="${userInfo.userFirstHeight}"></span></p>
+		<p>관리하는놈 몸무게 : <span id="weight" th:text="${userInfo.userFirstWeight}"></span></p>
+		<p>관리하는놈 목표 : <span  th:text="${userInfo.userFirstGoal}"></span></p>
+	</div>
+	<p>
+		날짜: <input type="text" id="datepicker">
+	</p>
+		<h3 >활동 및 운동찾기</h3>
+		<select id="serach_how" >
+			<option value="easy">가벼움</option>
+			<option value="normal">보통</option>
+			<option value="hard">격렬함</option>
+			<option value="all">전체</option>
+		</select>
+		<input type="text" id="exercise_name">
+		<button type="button" id="exercise">검색하기</button>
+		
+		<table border="1">
+			<!-- <tr>
+				<td>운동명</td>
+				<td>met계수</td>
+				<td>선택된 회원 시간당 칼로리</td>
+			</tr> -->
+			<tbody id="data">
+			
+			
+			</tbody>
+		</table>
+		<form id="insert_exercise">
+		<input type="hidden" th:value="${userInfo.userId}" name=""> <!--스케줄코드-->
+		<input type="hidden" th:value="${userInfo.userId}" name="userId"> <!-- 회원아이디값-->
+		<input type="hidden" value="id002" name="userId"> <!-- 트레이너아이디(있다고가정 로그인됫으면 그거 가져오면될듯? )-->
+			
+		</form>
+		<button type="submit">넣어주기</button>
+
+	<script type="text/javascript">
+		var time = 60;
+		$('#exercise').click(function() {
+			var exerciseName = $('#exercise_name').val();
+			var exerciseHow = $('#serach_how').val();
+			//시간 기본값
+			
+			
+			var height = parseFloat($('#height').text());
+			var weight = parseFloat($('#weight').text());
+			
+			console.log(height,weight);
+			console.log(exerciseName,exerciseHow);
+			var request = $.ajax({
+				method : "POST",
+				url : "/exerciseAdd",
+				data : {exerciseName : exerciseName, exerciseHow : exerciseHow},
+				dataType : 'json'
+			});
+			request.done(function(data) {
+				console.log(JSON.stringify(data));
+				var html = '';
+				for(var i = 0; i<data.length; i++){
+					html+= '<tr>';
+					html+= "<td id = 'change_time'>";
+					html+="<input type= 'checkbox' class ='add_exerise' value="+data[i].exerciseName+">"
+					html+= data[i].exerciseName;
+					html+= "<span class = 'met' style = 'float : right;'>"+data[i].exerciseMetCoeffcient+'</span>'
+					html+="<div class = 'smallText'>"
+					html+= "<a href ='#' class ='time'>"+time+"분</a>" 
+					html+="<span id ='kal' style='float: right;'>"+Math.floor(data[i].exerciseMetCoeffcient *(3.5*weight*time/1000)*5)+"kal</span>";
+					html+="<div class = 'on_off' style='display: none;'><input type = 'text' id = 'num'><button type = 'button' class = 'change_btn'>바꾸기</button><div>";
+					html+= '</td>';
+					html+= '</div></tr>';
+				/* 	 html+= data[i].exerciseMetCoeffcient; //회원아이디값에서 칼로리별계산해줘야하나 고민중 
+					html+= '</td>';
+					html+= '<td>';												//시간별로 계산해주려면 변수로 빼멸 될듯?
+					html+= Math.floor(data[i].exerciseMetCoeffcient *(3.5*weight*60/1000)*5);
+					html+= '</td>';
+				 	html+= '<button type = button' 
+					html+= '</tr>'; */
+					
+				}
+				$('#data').html(html);
+			});
+			request.fail(function(jqXHR, textStatus){
+				alert("Request failed" + testStatus)
+			});
+		});
+		
+	</script>
+	<script type="text/javascript">
+	/* $(document).on('change','input[class = add_exerise]',function(){
+		   if($(".add_exerise").is(":checked")){
+			   var html1 = "<p>운동명 :<input type ='text' value= "+$(this).val()+" readonly='readonly'> 넣어줄시간(분) :<input type ='text' value= ''></p>";
+				$('#insert_exercise').after(html1);
+		   }
+		   
+	}); */
+	 $(document).on('click','.time', function(){
+		 $(this).parent().find('.on_off').css('display','block');
+		 
+		
+	}); 
+	
+	
+	
+	 $(document).on('click','.change_btn',function(){
+		var exerciseMetCoeffcient = parseFloat($(this).parents('#change_time').find('.met').text());
+		var inputTime = parseInt($(this).parents('#change_time').find('#num').val());
+		var weight = parseFloat($('#weight').text());
+		console.log(exerciseMetCoeffcient,inputTime,weight);
+		var timeKal = Math.floor(exerciseMetCoeffcient *(3.5*weight*inputTime/1000)*5);
+		console.log(timeKal);
+		$(this).parents('#change_time').find('#kal').text(timeKal+'kal');
+		$(this).parents('#change_time').find('.time').text(inputTime+'분');
+		$(this).parents('.on_off').css('display','none');
+		
+	}) 
+	
+	
+
+
+	
+	</script>
+</body>
+</html>

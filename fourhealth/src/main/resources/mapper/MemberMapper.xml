@@ -11,6 +11,7 @@
         <result column="user_level_code" property="memberLevel"/>
         <result column="user_name" property="memberName"/>
         <result column="user_addr" property="memberAddr"/>
+         <result column="user_email" property="memberEmail"/>
         <result column="user_nickname" property="memberNickname"/>
         <result column="user_birth" property="memberBirth"/>
         <result column="user_gender" property="memberGender"/>
