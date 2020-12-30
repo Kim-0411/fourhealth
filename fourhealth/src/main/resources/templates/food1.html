@@ -79,6 +79,7 @@
                 dataType: "json",
             });
             request.done(function (data) {
+                console.log("test",data);
                 for (var i = 0; i < data.length; i++) {
                         html += '<tr>';
                         html += '<td>';

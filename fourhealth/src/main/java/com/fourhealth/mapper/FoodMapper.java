@@ -9,15 +9,15 @@ import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
 public interface FoodMapper {
-	public int insertFood1(Food food);
+	public int insertFood(Food food);
 
-	// public int insertFood2(Map<String, String> data);
+	//public int insertFood2(Map<String, String> data);
 	//public int insertFood2(List<Map<String, Object>> data);
 
 	//get Map tpye Object
-	public int insertFood2(Map<String, Object> data);
+	public int insertFoodMapInformation(Map<String, Object> data);
 
 	//get List type Object
-	public int insertFood2(List<Map<String, Object>> data);
+	public int insertFoodListInformation(List<Map<String, Object>> data);
 
 }

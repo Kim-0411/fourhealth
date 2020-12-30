@@ -2,13 +2,24 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Food test table name : tb_food_test -->
+  <!-- Food wokring table name : tb_food -->
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
-  <insert id="insertFood2" parameterType="java.util.List">
-     INSERT INTO tb_food_test
-      (foodCode, foodName, foodCal) 
+
+  <insert id="insertFood" parameterType="java.util.List">
+    INSERT INTO tb_food_test(
+      foodCode, 
+      foodName, 
+      foodCal, 
+      foodProtein
+      ) 
     VALUES
     <foreach collection="list" item="food" separator=" , " >
-        ("${food.foodCode}", "${food.foodName}", "${food.foodCal}")
+        ("${food.foodCode}", 
+         "${food.foodName}", 
+         "${food.foodCal}", 
+         "${food.foodProtein}")
     </foreach>
-</insert>
+  </insert>
+
 </mapper>

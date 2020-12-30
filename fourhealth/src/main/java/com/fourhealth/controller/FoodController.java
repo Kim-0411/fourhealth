@@ -10,9 +10,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.fourhealth.dto.Food;
 import com.fourhealth.mapper.FoodMapper;
 import com.fourhealth.service.FoodService;
@@ -51,27 +48,19 @@ public class FoodController {
 	FoodService foodService = new FoodService();
 	Food food = new Food();
 
+	//addMasterFoodInformation
+
 	@RequestMapping(value = "/foodInsert", produces = "application/json", method = RequestMethod.POST)
 	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
 		System.out.println("From FoodController >> Controller data 표시");
 		System.out.println(data.toString());
-		Map<String, Object> map = new HashMap<>();
-
-		map.put("foodName", data.get(0).get("foodName"));
-
-		System.out.println(map.get("foodName"));
-		System.out.println(map);
-	
-		//data = (Map<String, String>)JSONObject.toBean(jsonObject, java.util.HashMap.class);
-
+		log.info("data", data.toString());
 		
-		// food VO(DTO) 테스트
-	
-		
-		//foodService.addFood1(data);
-
 		//return "성공";
-		foodMapper.insertFood2(data);
+		//int result = foodMapper.insertFoodListInformation(data);
+
+		//성공 여부 판단.
+		//System.out.println("result"+result);
 		//foodService.addFood1(data);
 		return "성공";
 	
@@ -107,38 +96,37 @@ public class FoodController {
 	@GetMapping(value = "/food1ApiTest", produces = "application/json")
 	public @ResponseBody List<Map<String, String>> food1(Model model, @RequestParam("food") String food)
 			throws Exception {
-		// List<Map<String, String>>
-		// 인증키
-		// String keyId = "910606a0c65e48fb9339";
-		// url 기본
-		// String url =
-		// "http://openapi.foodsafetykorea.go.kr/api/keyId/serviceId/dataType/startIdx/endIdx";
 
+		// 인증키 String keyId = "910606a0c65e48fb9339";
+		// url 기본 : String url = "http://openapi.foodsafetykorea.go.kr/api/keyId/serviceId/dataType/startIdx/endIdx";
 		// url 값 인자가 필요할 경우
 		// http://openapi.foodsafetykorea.go.kr/api/인증키/서비스명/요청파일타입/요청시작위치/요청종료위치/변수명=값&변수명=값2
 		// e.g) http://openapi.foodsafetykorea.go.kr/api/sample/I2790/xml/1/5/DESC_KOR=값
 		// &RESEARCH_YEAR=값 &MAKER_NAME=값
-
 		// 서비스 아이디 키값
 		// 식품영양성분 : I2790
 		// 식품레시피 : COOKRCP01
 		// 건강기능식품 : I0760
 
-		// 인증키
+		//@RequestParam 을 통해 화면에서 입력받은 food value 받아와서 api 검색 조회
+
+		//api_key, api_service_id, data_type 변수
 		String keyId = "910606a0c65e48fb9339";
 		String serviceId = "I2790";
-		// 데이터타입
 		String dataType = "json";
-		// String datatype = "json";
-		// index Start, End
-		// String startIdx = "1";
-		int startIdx = 4001;
-		// String endIdx = "5";
-		int endIdx = 5000;
+	
+		//start, end index 설정 변수(단 한번 호출시 불러올 수 있는 데이터의 수는 1000개)
+		int startIdx = 0;
+		int endIdx = 1;
 
+		//API 호출 경로 변수 초기화
 		String url = null;
 
-		// 검색 처리 작업 음식 이름
+		// 음식 이름으로 검색 처리 경로 설정
+		// DESC_KOR="+food (DESC_KOR : 음식이름 key)
+		/*
+				
+		*/
 		if (food == "") {
 			url = "http://openapi.foodsafetykorea.go.kr/api/" + keyId + "/" + serviceId + "/" + dataType + "/"
 					+ startIdx + "/" + endIdx;
@@ -147,9 +135,7 @@ public class FoodController {
 					+ startIdx + "/" + endIdx + "/DESC_KOR=" + food;
 		}
 
-		// 검색 처리 메이커 이름
-
-		/// DESC_KOR="+food
+		//
 		List<Map<String, String>> foodList = new ArrayList<Map<String, String>>();
 
 		System.out.println(url);
