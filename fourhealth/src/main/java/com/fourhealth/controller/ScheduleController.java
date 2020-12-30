@@ -16,12 +16,13 @@ public class ScheduleController {
 	private MemberService memberService;
 
 	// 스케줄 등록해주는 페이지 (일단운동) 필요한거 매칭된 회원의 키 몸무게
-	@GetMapping("/trainerMemberScheduleInsert")
-	public String trainerMemberScheduleInsert(Model model,
+	@GetMapping("/trainerInsertMemberSchedule")
+	public String trainerInsertMemberSchedule(Model model,
 									  @RequestParam(name = "userId", required = false) String userId) {
 			UserDto getUserInfo = memberService.getTrainerMyMatchingUserInfo(userId);
+			System.out.println(getUserInfo);
 			model.addAttribute("userInfo", getUserInfo);
-			return"trainer/my_promotion_member_insert_exercise.html"; 
+			return"trainer/my_promotion_member_insert_exercise"; 
 	}
 
 

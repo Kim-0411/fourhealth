@@ -17,16 +17,17 @@
 	<!--트레이너가 자기 본인의 프로모션에 등록된 회원중 한명의 회원의 정보를 가져올때.  -->
 	<select id="getTrainerMyMatchingUserInfo" parameterType="String" resultMap="resultMapUser">
 		SELECT
-			u.user_id AS 'userId',
-			u.user_first_height AS 'userFirstHeight',
-			u.user_first_weight AS 'userFirstWeight',
-			u.user_first_goal AS 'userFirstGoal'
-
+			u.user_id,
+			u.user_first_height,
+			u.user_first_weight,
+			u.user_first_goal 
 		FROM
 			tb_matching_user_trainer AS mut
 		INNER JOIN
 			tb_user AS u
-		ON
+		on
+			u.user_id = mut.user_id
+		where
 			mut.user_id = #{userId};
 	</select>
 	

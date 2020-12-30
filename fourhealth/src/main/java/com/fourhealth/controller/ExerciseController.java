@@ -56,8 +56,8 @@ public class ExerciseController {
 	}
 	
 	// 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
-	@RequestMapping(value = "/trainerExerciseSerach", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<MetExerciseDto> getTrainerExerciseList(@RequestParam Map<String, Object> map) {
+	@RequestMapping(value = "/serachTrainerExercise", method = RequestMethod.POST, produces = "application/json")
+	public @ResponseBody List<MetExerciseDto> serachTrainerExercise(@RequestParam Map<String, Object> map) {
 		System.out.println(map);
 		String exerciseName = (String) map.get("exerciseName");
 		String metCoefficient = (String) map.get("exerciseHow");

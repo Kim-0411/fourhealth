@@ -33,7 +33,7 @@
 <body>
 	<h1>일단 기능만 날짜 정하고 운동 넣어주기</h1>
 	<div style="float: right;">
-		<p>회원 아이디 : <span  th:text="${userInfo.userId}"></span></p>
+		 <p>회원 아이디 : <span  th:text="${userInfo.userId}"></span></p>
 		<p>관리하는놈 키: <span id="height"  th:text="${userInfo.userFirstHeight}"></span></p>
 		<p>관리하는놈 몸무게 : <span id="weight" th:text="${userInfo.userFirstWeight}"></span></p>
 		<p>관리하는놈 목표 : <span  th:text="${userInfo.userFirstGoal}"></span></p>
@@ -63,9 +63,9 @@
 			</tbody>
 		</table>
 		<form id="insert_exercise">
-		<input type="hidden" th:value="${userInfo.userId}" name=""> <!--스케줄코드-->
-		<input type="hidden" th:value="${userInfo.userId}" name="userId"> <!-- 회원아이디값-->
-		<input type="hidden" value="id002" name="userId"> <!-- 트레이너아이디(있다고가정 로그인됫으면 그거 가져오면될듯? )-->
+		<input type="hidden" th:value="${userInfo.userId}" name=""> 스케줄코드
+		<input type="hidden" th:value="${userInfo.userId}" name="userId"> 회원아이디값
+		<input type="hidden" value="id002" name="userId"><!--  트레이너아이디(있다고가정 로그인됫으면 그거 가져오면될듯? )  -->
 			
 		</form>
 		<button type="submit">넣어주기</button>
@@ -85,7 +85,7 @@
 			console.log(exerciseName,exerciseHow);
 			var request = $.ajax({
 				method : "POST",
-				url : "/trainerExerciseSerach",
+				url : "/serachTrainerExercise",
 				data : {exerciseName : exerciseName, exerciseHow : exerciseHow},
 				dataType : 'json'
 			});

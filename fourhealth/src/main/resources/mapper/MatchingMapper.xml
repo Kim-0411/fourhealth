@@ -24,6 +24,7 @@
 <select id="getTrainerMatchingUserList" parameterType="String" resultMap="resultMapMatchingUserTrainer">
 	SELECT
 		mut.trainer_user_matching_code,
+		mut.trainer_promotion_notice_code,
 		mut.user_id 
 	FROM
 		tb_matching_user_trainer AS mut
