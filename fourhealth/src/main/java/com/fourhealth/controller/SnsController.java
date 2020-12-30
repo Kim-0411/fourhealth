@@ -1,5 +1,9 @@
 package com.fourhealth.controller;
 
+/*
+ * SNS 관련
+ */
+
 import java.util.List;
 
 import javax.annotation.PostConstruct;

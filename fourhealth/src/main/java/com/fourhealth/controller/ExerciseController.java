@@ -1,5 +1,9 @@
 package com.fourhealth.controller;
 
+/*
+ * 운동(관리자, 트레이너, 사용자)
+ */
+
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;

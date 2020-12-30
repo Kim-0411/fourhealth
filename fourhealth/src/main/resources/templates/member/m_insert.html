@@ -20,7 +20,6 @@
        margin:  10px;
     }
     </style>
-
 </head>
 
 <body class="bg-gradient-primary">
@@ -35,40 +34,40 @@
                             <div class="text-center">
                                 <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
                             </div>
-                             <form th:action="@{/mInsert}" method="post" id="sign_form">
+                            <form th:action="@{/mInsert}" method="post" id="sign_form">
                                 <div class="form-group row">
                                     <div class="col-sm-12 ">
-                                       <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="memberId"/>
-                                          <button type="button" class ="btn btn-primary"  id="userIdCheck" name="userIdCheck" style="margin: 7px;" >중복체크</button>
+                                        <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="userId"/>
+                                        <button type="button" class ="btn btn-primary"  id="userIdCheck" name="userIdCheck" style="margin: 7px;" >중복체크</button>
                                     </div>
                                     <div class="col-sm-12">
-                          		    <input type="hidden" name="memberLevel" th:value="${level}">                              
-                                       <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="memberPw"/>
+     	                     		    <input type="hidden" name="userLevelCode" th:value="${level}">                              
+                                        <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="userPw"/>
                                     </div>
                                     <div class="col-sm-12">
-                                       <input type="password" class="form-control form-control-user" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
+                                        <input type="password" class="form-control form-control-user" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="memberAddr"/>
+                                    <div class="col-sm-12">
+            	                        <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="userAddr"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                          <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="memberName" />
+                                    <div class="col-sm-12">
+                                        <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="userName" />
                                     </div>
-                                     <div class="col-sm-12">
-                                       <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="memberBirth"/>
+                                    <div class="col-sm-12">
+                 	                    <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="userBirth"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="memberNickname"/>
+                                    <div class="col-sm-12">
+                              			<input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="userNickname"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                     <input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="memberPhone"/>
+                                    <div class="col-sm-12">
+                             			<input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="userPhone"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                      <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="memberEmail"/>
+                                    <div class="col-sm-12">
+                             		    <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="userEmail"/>
                                     </div>
-                                     <div class="col-sm-12">
-                                    <input type="radio" name="memberGender" value="man" checked="checked">남 
-                           			<input type="radio" name="memberGender" value="woman" >여
+                                    <div class="col-sm-12">
+         	                            <input type="radio" name="userGender" value="man" checked="checked">남 
+                          	 			<input type="radio" name="userGender" value="woman" >여
                                     </div>
                                		</div>
                             </form>
@@ -76,21 +75,20 @@
                                        회원가입
                                 </button>
 	                            <hr>
-	                            <div class="text-center">
-	                                <a class="small" href="forgot-password.html">비밀번호 찾기</a>
-	                            </div>
-                            <div class="text-center">
-                                <a class="small" href="/">이미 회원이세요? 로그인하세요.!</a>
-                            </div>
+	                        	    <div class="text-center">
+	                            	    <a class="small" href="forgot-password.html">비밀번호 찾기</a>
+	                           		</div>
+                            		<div class="text-center">
+                                		<a class="small" href="/">이미 회원이세요? 로그인하세요.!</a>
+                            		</div>
                         </div>
                    </div>
                 </div>
             </div>
         </div>
-
     </div>
-      <script src="vendor/jquery/jquery.min.js"></script>
-   <script type="text/javascript">
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script type="text/javascript">
       
     $('#sign_up').click(function(){
        if($("#userPassword").val()==""){
@@ -162,7 +160,6 @@
             alert( "Request failed: " + textStatus );
           });
     })
-    
       
     </script>
    <!-- Bootstrap core JavaScript-->

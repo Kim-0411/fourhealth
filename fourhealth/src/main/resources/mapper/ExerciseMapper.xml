@@ -11,8 +11,8 @@
 		FROM
 		tb_met_exercise AS e
 		ORDER BY e.met_coefficient
-
 	</select>
+	
 	<select id="getSearchExercise" resultType="MetExerciseDto"
 		parameterType="String">
 		SELECT
@@ -52,6 +52,7 @@
 		Order by
 			RAND() LIMIT 5
 	</select>
+	
 	<select id="getNormalExercise" resultType="MetExerciseDto">
 	 	SELECT
 			e.exercise_name AS 'exerciseName',
@@ -63,6 +64,7 @@
 		Order by
 			RAND() LIMIT 5
 	</select>
+	
 	<select id="getHardExercise" resultType="MetExerciseDto">
 	 	SELECT
 			e.exercise_name AS 'exerciseName',

@@ -1,12 +1,12 @@
 package com.fourhealth.controller;
 
 /*
- * 질병(관리자, 트레이너, 사용자)
+ * 종합 게시판(신고, 문의, 등등...)
  */
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DiseaseController {
+public class BoardController {
 
 }

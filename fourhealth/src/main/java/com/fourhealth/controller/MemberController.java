@@ -1,10 +1,10 @@
 package com.fourhealth.controller;
 
-
-import java.util.List;
+/*
+ * 회원가입, 로그인, 사용자/트레이너 정보 수정, 프로필, 공통 데이터 , 사용자/트레이너 정보 공개 관리, 등등....
+ */
 
 import javax.servlet.http.HttpSession;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fourhealth.dto.MemberDto;
+import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.service.MemberService;
 
 @Controller
@@ -64,15 +64,15 @@ public class MemberController {
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
-		MemberDto member = memberService.getMemberById(userId);
+		CommonUserDto user = memberService.getMemberById(userId);
 
-		System.out.println(member.getMemberId());
+		System.out.println(user.getUserId());
 
-		if(userId != null && userPassword != null && member != null && member.getMemberPw() != null &&
-				userPassword.equals(member.getMemberPw())){
-			session.setAttribute("SID", member.getMemberId());
-			session.setAttribute("SLEVEL", member.getMemberLevel());
-			session.setAttribute("SNAME", member.getMemberName());
+		if(userId != null && userPassword != null && user != null && user.getUserPw() != null &&
+				userPassword.equals(user.getUserPw())){
+			session.setAttribute("SID", user.getUserId());
+			session.setAttribute("SLEVEL", user.getUserLevelCode());
+			session.setAttribute("SNAME", user.getUserName());
 			System.out.println(userId + " : 로그인 성공");
 		} else {
 			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
@@ -119,7 +119,7 @@ public class MemberController {
 	}
 	
 	@PostMapping("/mInsert")
-	public String addMember(MemberDto member){
+	public String addMember(CommonUserDto member){
 		
 		String result = memberService.addMember(member); 
 		System.out.println(result);
@@ -129,10 +129,10 @@ public class MemberController {
 	
 	
 	//회원가입 화면에서 아이디 중복처리 확인 
-	@RequestMapping(value="/userIdCheck", method = RequestMethod.POST, produces = "application/json")
+	@RequestMapping(value="/memberIdCheck", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody int commonIdCheck(@RequestParam(name = "userId", required = false) String userId){
 		System.out.println("아이디 중복체크 ->" + userId);
-		int count = memberService.userIdCheck(userId);
+		int count = memberService.memberIdCheck(userId);
 		
 		return count;
 	}

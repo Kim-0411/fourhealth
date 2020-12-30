@@ -5,20 +5,20 @@
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
 
 	<!--공통 회원데이터 resultMap  -->
-    <resultMap type="MemberDto" id="resultMapMember">
-        <result column="user_id" property="memberId"/>
-        <result column="user_pw" property="memberPw"/>
-        <result column="user_level_code" property="memberLevel"/>
-        <result column="user_name" property="memberName"/>
-        <result column="user_addr" property="memberAddr"/>
-         <result column="user_email" property="memberEmail"/>
-        <result column="user_nickname" property="memberNickname"/>
-        <result column="user_birth" property="memberBirth"/>
-        <result column="user_gender" property="memberGender"/>
-        <result column="user_main_bank" property="memberMainBank"/>
-        <result column="user_bank_number" property="memberBankNumber"/>
-        <result column="user_bank_master" property="memberBankMaster"/>
-        <result column="user_reg_date" property="memberRegDate"/>
+    <resultMap type="CommonUserDto" id="resultMapMember">
+        <result column="user_id" property="userId"/>
+        <result column="user_pw" property="userPw"/>
+        <result column="user_level_code" property="userLevelCode"/>
+        <result column="user_name" property="userName"/>
+        <result column="user_addr" property="userAddr"/>
+         <result column="user_email" property="userEmail"/>
+        <result column="user_nickname" property="userNickname"/>
+        <result column="user_birth" property="userBirth"/>
+        <result column="user_gender" property="userGender"/>
+        <result column="user_main_bank" property="userMainBank"/>
+        <result column="user_bank_number" property="userBankNumber"/>
+        <result column="user_bank_master" property="userBankMaster"/>
+        <result column="user_reg_date" property="userRegDate"/>
     </resultMap>
     
   
@@ -70,7 +70,7 @@
 	
 		
 	<!-- 아이디 중복 체크 : 아이디가 있으면 1 count, 없으면 0 -->
-	<select id = "userIdCheck" parameterType="String" resultType="int">
+	<select id = "memberIdCheck" parameterType="String" resultType="int">
 	SELECT 
 		COUNT(*) 
 	FROM tb_common_user AS u
@@ -79,7 +79,7 @@
 	
 	
 	<!-- 회원가입 -->
-	<insert id="addMember" parameterType="MemberDto">
+	<insert id="addMember" parameterType="CommonUserDto">
 		INSERT INTO tb_common_user
 			(user_id, 
 			user_level_code, 
@@ -96,16 +96,16 @@
 			user_bank_master, 
 			user_reg_date)
 	VALUES (
-			#{memberId}, 
-			#{memberLevel}, 
-			#{memberPw}, 
-			#{memberName}, 
-			#{memberAddr}, 
-			#{memberNickname}, 
-			#{memberPhone}, 
-			#{memberEmail}, 
-			#{memberBirth},
-			#{memberGender}, 
+			#{userId}, 
+			#{userLevel}, 
+			#{userPw}, 
+			#{userName}, 
+			#{userAddr}, 
+			#{userNickname}, 
+			#{userPhone}, 
+			#{userEmail}, 
+			#{userBirth},
+			#{userGender}, 
 			null, 
 			null, 
 			null, 
@@ -127,6 +127,5 @@
 		mut.trainer_promotion_notice_code =#{promotionCode};
 	</select>
 	 -->
-	
 	
 </mapper>

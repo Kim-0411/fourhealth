@@ -12,7 +12,6 @@ import com.fourhealth.mapper.ExerciseMapper;
 
 @Service
 @Transactional
-
 public class ExerciseService {
 
 	@Autowired

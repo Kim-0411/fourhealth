@@ -1,5 +1,9 @@
 package com.fourhealth.controller;
 
+/*
+ * 음식(관리자, 트레이너, 사용자)
+ */
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -10,17 +14,10 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-
-import com.fasterxml.jackson.databind.ser.std.StdKeySerializers.Default;
 import com.fourhealth.dto.Food;
 import com.fourhealth.service.FoodService;
 
 import org.apache.tomcat.util.json.JSONParser;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
-import org.jsoup.select.Elements;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -158,7 +155,6 @@ public class FoodController {
 			}
 
 		} catch (IOException e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 

@@ -1,5 +1,9 @@
 package com.fourhealth.mapper;
 
+/*
+ * 음식(관리자, 트레이너, 사용자)
+ */
+
 import java.util.Map;
 
 import com.fourhealth.dto.Food;

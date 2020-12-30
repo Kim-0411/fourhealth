@@ -2,7 +2,8 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.fourhealth.mapper.MemberMapper">
+<mapper namespace="com.fourhealth.mapper.SnsMapper">
+
 	<insert id="addSns" parameterType="Sns">
 		INSERT INTO tb_sns_user
 			(user_sns_code, user_id, user_sns_contents, user_sns_upload_file, user_sns_reg_date)
@@ -13,6 +14,7 @@
 			, #{userSnsUpload}
 			, NOW());
 	</insert>
+	
 	<select id="getSnsList" resultType="Sns">
 		SELECT 
 			  user_sns_code 		AS userSnsCode

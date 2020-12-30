@@ -1,12 +1,12 @@
 package com.fourhealth.mapper;
 
 /*
- * 질병(관리자, 트레이너, 사용자)
+ * 스케쥴, 수행률
  */
 
 import org.apache.ibatis.annotations.Mapper;
 
 @Mapper
-public class DiseaseMapper {
+public interface ScheduleMapper {
 
 }

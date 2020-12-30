@@ -9,7 +9,11 @@ import com.fourhealth.dto.Food;
 import com.fourhealth.mapper.FoodMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;

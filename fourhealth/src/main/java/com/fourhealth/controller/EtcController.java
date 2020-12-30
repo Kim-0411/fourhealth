@@ -1,12 +1,12 @@
 package com.fourhealth.controller;
 
 /*
- * 질병(관리자, 트레이너, 사용자)
+ * 평점, 메세지, 등등..
  */
 
 import org.springframework.stereotype.Controller;
 
 @Controller
-public class DiseaseController {
+public class EtcController {
 
 }

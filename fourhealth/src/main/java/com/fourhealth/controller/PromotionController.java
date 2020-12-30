@@ -1,5 +1,8 @@
-
 package com.fourhealth.controller;
+
+/*
+ * 프로모션 등록, 수정, 삭제
+ */
 
 import java.io.File;
 import java.io.IOException;

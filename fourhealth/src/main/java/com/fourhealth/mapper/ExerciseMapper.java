@@ -1,11 +1,14 @@
 package com.fourhealth.mapper;
 
+/*
+ * 운동(관리자, 트레이너, 사용자)
+ */
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
 import com.fourhealth.dto.MetExerciseDto;
-
 
 @Mapper
 public interface ExerciseMapper {

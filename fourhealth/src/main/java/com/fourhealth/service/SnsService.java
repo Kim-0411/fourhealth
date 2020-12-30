@@ -9,7 +9,6 @@ import org.springframework.transaction.annotation.Transactional;
 import com.fourhealth.dto.Sns;
 import com.fourhealth.mapper.SnsMapper;
 
-
 @Service
 @Transactional
 public class SnsService {

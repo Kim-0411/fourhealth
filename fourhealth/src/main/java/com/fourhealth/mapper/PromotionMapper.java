@@ -1,13 +1,14 @@
 package com.fourhealth.mapper;
 
+/*
+ * 프로모션 등록, 수정, 삭제
+ */
+
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.dto.UserDto;
-
 
 @Mapper
 public interface PromotionMapper {
