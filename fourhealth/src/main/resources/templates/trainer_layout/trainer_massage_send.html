@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{trainer_layout/default}"
+>
+  <th:block layout:fragment="customContent">
+   <h1>프로모션 별 메시지 송신</h1>
+    <div>
+    	<form action="sendTrainerSelectPromotionMember" id="message_send" method="post"> 
+    	<!--로그인 처리 되어있다고 가정  -->
+    	<input type="hidden" value="id002" name="trainerId">
+    	<div class="row">
+    		<div class="col-lg-4 col-md-4 col-sm-4 m-2 ">
+    			<label>프로모션 선택:</label>
+    			<select class="form-control" name="trainer_promotion_notice_code">
+    			<th:block th:each="p : ${myPromotion}">
+	 			 	<option th:text="${p.trainerPromotionName}" th:value="${p.trainerPromotionNoticeCode}"></option>
+	 			 </th:block>
+				</select>
+            </div>
+    		<div class="col-lg-8 col-md-8 col-sm-8 m-2"> 
+    			<textarea rows="20" name="msgContents" placeholder="내용" class="form-control" ></textarea>
+    		</div>	
+    	</div>
+    	 
+    <div id="submit_btn">
+    	<a href="javascript:message_send.submit();"  class="btn btn-primary btn-icon-split">
+			<span class="icon text-white-50">
+            <i class="fas fa-check"></i>
+            </span>
+            <span class="text">보내기</span>
+            </a>
+    </div>
+    	</form>
+    </div>
+  </th:block>
+  
+		
+	
+  
+  
+  
+  
+</html>
