@@ -5,9 +5,17 @@
 .center-block {
   text-align: center;
 }
-table {
+
+.promotionList {
   margin-top: 20px;
-  margin-left: auto;
-  margin-right: auto;
+}
+
+#promotionListImg {
+  display: block;
+  padding-top: 5px;
+  margin: 0px auto;
+}
+
+.row {
   text-align: center;
 }

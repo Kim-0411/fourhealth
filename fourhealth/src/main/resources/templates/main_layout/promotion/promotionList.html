@@ -8,9 +8,23 @@
 >
   <title th:text="${title}"></title>
 
-  <th:block layout:fragment="mainContent">
+  <th:block layout:fragment="mainContent"> 
         <div class="container">
-          <table class="table table-bordered">
+          <div class="row"> 
+            <div class="col-lg-3 col-md-6 promotionList" th:if="${#lists.size(promotionList) > 0}"
+              th:each="p : ${promotionList}"> 
+              <div class="card"> 
+              <img id="promotionListImg" th:src="${p.proImageUrl}" class="card-img-top" alt="..."> 
+                <div class="card-body"> 
+                  <h5 class="card-title" th:text="${p.trainerPromotionName}"></h5> 
+                  <p class="card-text" th:text="${p.trainerPromotionShortContents}"></p> 
+                  <a th:href="@{/proDetail(proCode=${p.trainerPromotionNoticeCode})}" class="btn btn-primary">프로모션 상세보기</a> 
+                </div> 
+            </div> 
+          </div> 
+        </div>
+
+          <!-- <table class="table table-bordered">
             <thead>
               <tr>
                 <th>프로모션 이름</th>
@@ -45,7 +59,7 @@
                 <td th:text="${p.trainerMatchingSystemAddDate}"></td>
               </tr>
             </tbody>
-          </table>
+          </table> -->
           <a th:href="@{/pro(proId=${session.SID})}"
             >트레이너 프로모션 등록하기</a
           >
