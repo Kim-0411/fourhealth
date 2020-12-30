@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  lang="en"
+>
+  <!-- head Start -->
+  <head th:replace="fragments/head :: headFragment"></head>
+  <!-- head END -->
+
+  <body>
+    <!-- Preloader Start -->
+    <div id="preloader">
+      <div class="yummy-load"></div>
+    </div>
+
+    <!-- ****** Top Header Area Start ****** -->
+    <div th:replace="fragments/TopHeader :: topHeaderFragment"></div>
+    <!-- ****** Top Header Area End ****** -->
+
+    <!-- ****** Header Area Start ****** -->
+    <header
+      class="header_area"
+      th:replace="fragments/header :: headerFragment"
+    ></header>
+    <!-- ****** Header Area End ****** -->
+
+    <!-- ****** Welcome Post Area Start ****** -->
+    <div th:replace="fragments/sliders :: slidersFragment"></div>
+    <!--****** Welcome Area End ****** -->
+
+    <!-- ****** Categories Area Start ****** -->
+    <div th:replace="fragments/Categories :: CategoriesFragment"></div>
+    <!-- ****** Categories Area End ****** -->
+
+    <!-- ****** Blog Area Start ****** -->
+    <div th:replace="fragments/blog_area2 :: blogareaFragment"></div>
+    <!-- ****** Blog Area End ****** -->
+
+    <!-- ****** Instagram Area Start ****** -->
+    <!-- ****** Our Creative Portfolio Area End ****** -->
+
+    <!-- ****** Footer Social Icon Area Start ****** -->
+    <div
+      th:replace="fragments/Footer_Social_Icon :: FooterSocialIconFragment"
+    ></div>
+    <!-- ****** Footer Social Icon Area End ****** -->
+
+    <!-- ****** Footer Menu Area Start ****** -->
+    <div th:replace="fragments/Footer_Menu :: FooterMenuFragment"></div>
+    <!-- ****** Footer Menu Area End ****** -->
+
+    <!-- Jquery-2.2.4 js start-->
+    <div th:replace="fragments/Jquery :: jsFragment"></div>
+    <!-- Jquery-2.2.4 js END -->
+  </body>
+</html>

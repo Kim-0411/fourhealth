@@ -184,3 +184,6 @@ gradle-app.setting
 **/build/
 
 # End of https://www.toptal.com/developers/gitignore/api/windows,macos,maven,gradle,java,java-web,eclipse
+.vscode/launch.json
+.vscode
+.vscode/settings.json

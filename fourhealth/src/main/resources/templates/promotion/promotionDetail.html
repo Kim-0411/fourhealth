@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <style>
+	img {
+		white : 200px;
+		height: 200px;
+	}
+    </style>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <title>Document</title>
+  </head>
+  <body>
+      <table border="1">
+        <tr>
+          <td>프로모션 작성자 아이디</td>
+          <td th:text="${proDetail.userId}" >
+          </td>
+          </tr>
+        <tr>
+          <td>프로모션 이름 :</td>
+          <td th:text = "${proDetail.trainerPromotionName}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 목표 :</td>
+          <td th:text = "${proDetail.trainerPromotionGoal}"></td>
+        </tr>
+         <tr>
+          <td>프로모션 이미지 :</td>
+          <td><img th:src="${proDetail.proImageUrl}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 간략내용 :</td>
+          <td th:text = "${proDetail.trainerPromotionShortContents}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 상세내용 :</td>
+          <td th:text = "${proDetail.trainerPromotionDetailsContents}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집인원 :</td>
+          <td th:text = "${proDetail.trainerPromotionRecruitPeople}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 가격 :</td>
+          <td th:text = "${proDetail.trainerPromotionPrice}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집시작일자 :</td>
+          <td th:text = "${proDetail.trainerPromotionAttendStartDate}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집마감일자 :</td>
+          <td th:text = "${proDetail.trainerPromotionRecruitEndDate}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집참여시작일자 :</td>
+          <td th:text = "${proDetail.trainerPromotionAttendStartDate}"></td>
+        </tr>
+        <tr>
+          <td>프로모션 모집참여종료일자 :</td>
+          <td th:text = "${proDetail.trainerPromotionRecruitCloseDate}"> </td>
+        </tr>
+      </table>
+      
+      <form th:action="@{/proPayment}" method="Post" >
+      <input type="hidden" name="proCode" th:value="${proDetail.trainerPromotionNoticeCode}">
+      <input type="hidden" name="proId" th:value="${proDetail.userId}"> 
+      <input type="hidden" name = "proPrice" th:value="${proDetailtrainerPromotionPrice}"> 
+      <input type="hidden" name = "userId" th:value="${session.USERID}"> 
+      <button type="submit">모집신청하기</button>
+      
+    </form>
+  </body>
+ 
+</html>
