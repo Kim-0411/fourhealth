@@ -1,18 +1,17 @@
 package com.fourhealth.controller;
 
-import java.util.List;
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.MsgDto;
-import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.mapper.MessageMapper;
 import com.fourhealth.service.MatchingService;
 import com.fourhealth.service.MessageService;
 import com.fourhealth.service.PromotionService;
@@ -32,27 +31,28 @@ public class EtcController {
 	@GetMapping("trainerSendMessage")
 	public String trainerSendMessage(Model model) {
 		//id002트레이너 가정 로그인 프로세스 완료시 바꿔야함 
-		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService.getTrainerMyPromotionAllList("id002");
-		model.addAttribute("myPromotion",getTrainerMyPromotionAllList);
+		model.addAttribute("trainerId","id002");
 		return "trainer/trainer_massage_send";
 	}
 	
-	//진행중
-	//트레이너가 프로모션별로 등록되어 있는 회원들에게 전체 메시지 보냄.
+	//트레이너가 회원에게 쪽지 보내기.
 	@PostMapping("sendTrainerSelectPromotionMember")
-	public String sendTrainerSelectPromotionMember(MsgDto msg
-												  ,@RequestParam(name = "trainer_promotion_notice_code",required = false)String promotionCode) {
+	public String sendTrainerSelectPromotionMember(MsgDto msg,HttpServletResponse response) throws IOException {
 		
-		
-		//프로모션 모집 공고 코드를 통해 등록되어 있는 회원아이디 가져온거.
-		List<MatchingUserTrainerDto> matchingUserList = matchingService.getTrainerMatchingUserList(promotionCode);
-		msg.setMatchingUserTrainer(matchingUserList);
-		System.out.println(msg);
-		
-		String result = messageService.sendTrainerSelectPromotionMember(msg);
+		String result = messageService.sendTrainerToUser(msg);
 		System.out.println(result);
 		
-		return "redirect:/mainTrainer";
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(result.equals("성공")) {
+			out.println("<script>alert('성공적으로 메시지가 전송되었습니다.');location.href='/mainTrainer';</script>");
+			out.flush(); 
+		}else {
+			out.println("<script>alert('실패.');location.href='/mainTrainer';</script>");
+			out.flush(); 
+		}
+
+		return null;
 	}
 
 

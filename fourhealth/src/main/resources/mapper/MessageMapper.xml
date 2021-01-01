@@ -5,42 +5,32 @@
 <mapper namespace="com.fourhealth.mapper.MessageMapper">
 	 <resultMap type="MsgDto" id="resultMapMsg">
         <result column="msg_code" property="msgCode"/>
-        <result column="user_id" property="userId"/>
-        <result column="trainer_id" property="trainerId"/>
-        <result column="msg_boomerang_code" property="msgBoomerangCode"/>
+        <result column="send_id" property="sendId"/>
+        <result column="receive_id" property="receiveId"/>
         <result column="msg_contents" property="msgContents"/>
         <result column="msg_read_date" property="msgReadDate"/>
         <result column="msg_send_date" property="msgSendDate"/>
-        <collection property ="matchingUserTrainer" javaType="java.util.ArrayList" ofType="MatchingUserTrainerDto">
-        	<id column="trainer_promotion_notice_code" property="trainerPromotionNoticeCode"/>
-        	<result column="trainer_id" property="trainerId"/>
-        	<result column="userId" property="user_id"/>
-        </collection>
       </resultMap>
-      
-      
-			<!--전체 메시지 보내주기 고민좀 해봐야할듯 ....  -->
-	<!--  <insert id="addTrainerSelectPromotionAllMessage" parameterType="MsgDto">
+			
+	 <insert id="sendTrainerToUser" parameterType="MsgDto">
  	 	<selectKey keyProperty="msgCode" resultType="String" order="BEFORE">
         		SELECT
         	  	CASE
           		WHEN COUNT(1) = 0 THEN 'msg_001' 
          		ELSE CONCAT('msg_', LPAD(MAX(CAST(right(m.msg_code,3) AS DECIMAL)+1), 3, 0))
-         		END AS trainerPromotionNoticeCode
+         		END AS msgCode
        	 	FROM
         	 tb_msg AS m;
       </selectKey>
       			INSERT INTO tb_msg
       			(
       				msg_code,
-      				user_id,
-      				trainer_id,
-      			  	msg_boomerang_code,
+      				send_id,
+      				receive_id,
       			  	msg_contents, 
       			  	msg_read_date, 
       			  	msg_send_date
       			 )
-				VALUES (#{msgCode}, #{matchingUserTrainer.userId}, #{trainerId}, 'msg_boomerang_002', #{msgContents}, '', NOW());
-				VALUES (#{msgCode}, #{trainer_id},'msg_boomerang_002', #{msgContents}, '2020-12-12', NOW());
-      </insert>  -->
+				VALUES (#{msgCode}, #{sendId}, #{receiveId}, #{msgContents}, #{msgReadDate,jdbcType=DATE}, NOW());
+      </insert>  
 </mapper>

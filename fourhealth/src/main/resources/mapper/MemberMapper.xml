@@ -14,6 +14,23 @@
 			<result column="user_reg_date" 						property="userRegDate"/>
 	</resultMap>
 	
+	<!--공통 회원데이터 resultMap  -->
+    <resultMap type="MemberDto" id="resultMapMember">
+        	<result column="user_id" property="memberId"/>
+       		<result column="user_pw" property="memberPw"/>
+        	<result column="user_level_code" property="memberLevel"/>
+        	<result column="user_name" property="memberName"/>
+        	<result column="user_addr" property="memberAddr"/>
+        	<result column="user_email" property="memberEmail"/>
+        	<result column="user_nickname" property="memberNickname"/>
+        	<result column="user_birth" property="memberBirth"/>
+        	<result column="user_gender" property="memberGender"/>
+        	<result column="user_main_bank" property="memberMainBank"/>
+        	<result column="user_bank_number" property="memberBankNumber"/>
+        	<result column="user_bank_master" property="memberBankMaster"/>
+        	<result column="user_reg_date" property="memberRegDate"/>
+    </resultMap>
+	
 	<!--트레이너가 자기 본인의 프로모션에 등록된 회원중 한명의 회원의 정보를 가져올때.  -->
 	<select id="getTrainerMyMatchingUserInfo" parameterType="String" resultMap="resultMapUser">
 		SELECT
@@ -29,6 +46,14 @@
 			u.user_id = mut.user_id
 		where
 			mut.user_id = #{userId};
+	</select>
+	
+	<select id="getAllUserId" resultMap="resultMapMember">
+		SELECT
+			u.user_id
+		FROM
+			tb_common_user AS u;
+		
 	</select>
 	
 

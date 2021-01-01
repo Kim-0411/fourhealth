@@ -19,6 +19,8 @@ public class PromotionService {
 	public List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList(String trainerId) {
 		
 		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionMapper.getTrainerMyPromotionAllList(trainerId);
+			
+			
 		
 		return getTrainerMyPromotionAllList;
 		
