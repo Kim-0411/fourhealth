@@ -68,6 +68,8 @@
   mainContent Css
 -------------------- */
 @import "/css/main_css/mainContent/promotionList.css";
+@import "/css/main_css/mainContent/promotionDetail.css";
+@import "/css/main_css/mainContent/promotionInsert.css";
 
 /* --------------------
 :: 1.0 Base CSS

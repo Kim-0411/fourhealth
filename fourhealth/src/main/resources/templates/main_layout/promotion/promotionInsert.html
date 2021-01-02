@@ -1,86 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <style>
-      input {
-        width: 300px;
-      }
-      [name="proDetailscon"] {
-        height: 300px;
-      }
+  <html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
 
-      .select_img img {
-        magin: 20px 0;
-      }
-    </style>
+  <th:block layout:fragment="mainContent"> 
+  <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-    <title>Document</title>
   </head>
   <body>
+    <div class="row">
+    <div class="container">
     <form th:action="@{/proInsert}" method="post" enctype="multipart/form-data">
-      <table border="1">
-        <tr>
-          <td>프로모션 작성자 아이디 :</td>
-          <td>
-            <input type="text" name="userId" th:value="${session.SID}" />
-          </td>
-        </tr>
-        <tr>
-          <td>프로모션 이름 :</td>
-          <td><input type="text" name="trainerPromotionName" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 목표 :</td>
-          <td><input type="text" name="trainerPromotionGoal" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 이미지 :</td>
-          <td>
-            <input type="file" id="gdsImg" name="trainerPromotionBgImage" />
-          </td>
-        </tr>
-        <tr>
-          <td>프로모션 간략내용 :</td>
-          <td><input type="text" name="trainerPromotionShortContents" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 상세내용 :</td>
-          <td><input type="text" name="trainerPromotionDetailsContents" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집인원 :</td>
-          <td><input type="text" name="trainerPromotionRecruitPeople" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 가격 :</td>
-          <td><input type="number" name="trainerPromotionLiveAddPeople" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집시작일자 :</td>
-          <td><input type="date" name="trainerPromotionRecruitStartDate" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집마감일자 :</td>
-          <td><input type="date" name="trainerPromotionRecruitEndDate" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집참여시작일자 :</td>
-          <td><input type="date" name="trainerPromotionAttendStartDate" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집참여종료일자 :</td>
-          <td><input type="date" name="trainerPromotionRecruitCloseDate" /></td>
-        </tr>
-      </table>
+      
+      <div class="col-mb-3">
+        <label for="userId">프로모션 작성자 아이디</label>
+        <input type="text" class="form-control" name="userId" id="userId" th:value="${session.SID}">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionName">프로모션 이름</label>
+        <input type="text" class="form-control" name="trainerPromotionName" id="trainerPromotionName" placeholder="프로모션 이름을 입력해 주세요">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionGoal">프로모션 목표 </label>
+        <input type="text" class="form-control" name="trainerPromotionGoal" id="trainerPromotionGoal" placeholder="프로모션 목표를 입력해 주세요">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionBgImage">프로모션 이미지 </label>
+        <input type="file" class="form-control" name="trainerPromotionBgImage"  id="trainerPromotionBgImage" placeholder="프로모션이미지를">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionShortContents">프로모션 간략내용 </label>
+        <input type="text" class="form-control" name="trainerPromotionShortContents" id="trainerPromotionShortContents" placeholder="프로모션 간략 내용을 입력해 주세요">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionDetailsContents">프로모션 상세내용</label>
+        <textarea class="form-control" rows="5" name="trainerPromotionDetailsContents"  id="trainerPromotionDetailsContents" placeholder="프로모션 상세 내용을 입력해 주세요" ></textarea>
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionRecruitPeople">프로모션 모집인원 </label>
+        <input type="text" class="form-control" name="trainerPromotionRecruitPeople"  id="trainerPromotionRecruitPeople" placeholder="프로모션 간략 내용을 입력해 주세요">
+      </div>
+
+      <div class="col-mb-3">
+        <label for="trainerPromotionPrice">프로모션 가격 </label>
+        <input type="number" class="form-control" name="trainerPromotionPrice"  id="trainerPromotionPrice" placeholder="프로모션 간략 내용을 입력해 주세요">
+      </div>
+
+      
+      <div class="col-lg-6 col-mb-3">
+        <label for="tag">프로모션 모집시작일자</label>
+        <input type="date" class="form-control" name="trainerPromotionRecruitStartDate"  id="trainerPromotionRecruitStartDate" placeholder="프로모션 날짜를 입력해 주세요">
+      </div>
+
+      <div class="col-lg-6 col-mb-3">
+        <label for="trainerPromotionRecruitEndDate">프로모션 모집마감일자</label>
+        <input type="date" class="form-control" name="trainerPromotionRecruitEndDate"  id="trainerPromotionRecruitEndDate" placeholder="프로모션 날짜를 입력해 주세요">
+      </div>
+
+      <div class="col-lg-6 col-mb-3">
+        <label for="trainerPromotionAttendStartDate">프로모션 시작일자 </label>
+        <input type="date" class="form-control" name="trainerPromotionAttendStartDate"  id="trainerPromotionAttendStartDate" placeholder="프로모션 날짜를 입력해 주세요">
+      </div>
+
+      <div class="col-lg-6 col-mb-3">
+        <label for="trainerPromotionRecruitCloseDate">프로모션 종료일자 </label>
+        <input type="date" class="form-control" name="trainerPromotionRecruitCloseDate"   id="trainerPromotionRecruitCloseDate" placeholder="프로모션 날짜를 입력해 주세요">
+      </div>
+    </div>
+  </div>
       <div class="select_img"><img src="" /></div>
+
       <button type="submit" id="proInsertBtn">등록</button>
     </form>
+
   </body>
 
   <script>
-    $("#gdsImg").change(function () {
+    $("#trainerPromotionBgImage").change(function () {
       if (this.files && this.files[0]) {
         var reader = new FileReader();
         reader.onload = function (data) {
@@ -89,5 +97,34 @@
         reader.readAsDataURL(this.files[0]);
       }
     });
+
+    $("#trainerPromotionRecruitEndDate").change(function(){
+      var promotionRecruitStartDate= $('#trainerPromotionRecruitStartDate').val();
+      var promotionRecruitEndDate= $('#trainerPromotionRecruitEndDate').val();
+
+      if(promotionRecruitStartDate>promotionRecruitEndDate){
+        alert("프로모션 모집마감일자를 확인해주세요.")
+      }
+    });
+
+    $("#trainerPromotionAttendStartDate").change(function(){
+      var promotionRecruitEndDate= $('#trainerPromotionRecruitEndDate').val();
+      var promotionAttendStartDate = $('#trainerPromotionAttendStartDate').val();
+
+      if(promotionRecruitEndDate>promotionAttendStartDate){
+        alert("프로모션 시작일자를 확인해주세요.")
+      }
+    });
+
+    $("#trainerPromotionRecruitCloseDate").change(function(){
+      var promotionAttendStartDate = $('#trainerPromotionAttendStartDate').val();
+      var promotionRecruitCloseDate = $('#trainerPromotionRecruitCloseDate').val();
+
+      if(promotionAttendStartDate>promotionRecruitCloseDate){
+        alert("프로모션 종료일자를 확인해주세요.")
+      }
+    });
+
+
   </script>
 </html>
