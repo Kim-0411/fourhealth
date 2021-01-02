@@ -8,6 +8,7 @@
         <result column="send_id" property="sendId"/>
         <result column="receive_id" property="receiveId"/>
         <result column="msg_contents" property="msgContents"/>
+        <result column="msg_send_cancel" property="msgSendCancel"/>
         <result column="msg_read_date" property="msgReadDate"/>
         <result column="msg_send_date" property="msgSendDate"/>
       </resultMap>
@@ -28,9 +29,33 @@
       				send_id,
       				receive_id,
       			  	msg_contents, 
+      			  	msg_send_cancel,
       			  	msg_read_date, 
       			  	msg_send_date
       			 )
-				VALUES (#{msgCode}, #{sendId}, #{receiveId}, #{msgContents}, #{msgReadDate,jdbcType=DATE}, NOW());
+				VALUES (#{msgCode}, #{sendId}, #{receiveId}, #{msgContents},#{msgSendCancel,jdbcType=DATE}, #{msgReadDate,jdbcType=DATE}, NOW());
       </insert>  
+      
+      <select id="getAllSendMessageList" resultMap="resultMapMsg" parameterType="String">
+      			SELECT
+      				m.msg_code,
+					m.receive_id,
+					m.msg_contents,
+					m.msg_send_cancel,
+					m.msg_send_date,
+					m.msg_read_date
+				FROM
+					tb_msg AS m
+				WHERE 
+					m.send_id = #{userId};
+      </select>
+      
+      <update id="modifyAllcancelMsg" parameterType="String" >
+      	UPDATE tb_msg
+			SET msg_send_cancel ='1'
+		WHERE
+			msg_code = #{msgCode};
+      </update>
+      
+      
 </mapper>

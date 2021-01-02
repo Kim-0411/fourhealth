@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{trainer_layout/default}"
+ >
+ 
+ 	<th:block layout:fragment="customContent">
+    	<h1>보낸 쪽지함(로그인 됫다고 가정) </h1>
+		<button type = "button" id="del">삭제</button>    	
+		<table class="table">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>받은사람</td>
+				<td>내용</td>
+				<td>발송일자</td>
+				<td>수신일자</td>
+				<td>취소</td>
+			</tr>
+			<tr th:each="m : ${sendMsg}">
+				<td>
+					<input type="checkbox">
+				</td>
+				<td class="msg_val">
+					<input type="hidden" th:value="${m.msgCode}" id="msg_code">
+					<a th:text="${m.receiveId}"></a>
+				</td>
+				<td th:text="${m.msgContents}"></td>
+				<td th:text="${m.msgSendDate}"></td>
+				<td th:text="${m.msgReadDate}"></td>
+				<td th:if="${m.msgReadDate.toString().equals('읽지않음') && m.msgSendCancel ==null}">
+					<a class="msg_del" role="button">취소하기</a>
+				</td>
+				<td th:if="${m.msgSendCancel !=null}" >
+					<span>취소성공</span>
+				</td>
+			</tr>
+		</table>
+	</th:block>
+
+</html>
+	<script th:inline="javascript">
+	
+	$(document).on('click','.msg_del', function(){
+		var msgCode = $(this).parents('tr').children('.msg_val').find('#msg_code').val();
+		var msgChange = $(this).parents('tr').find('.msg_del');
+		console.log(msgChange);
+		if(confirm('발송 취소하시겠습니까?') == true){
+			var request = $.ajax({
+				method : "GET",
+				url : "/cancelMsg",
+				data : {msgCode : msgCode},
+				dataType : 'json'
+			});
+			request.done(function(data) {
+				alert('성공적으로 취소하였습니다.');
+				var html ='<span>취소성공</span>';
+				msgChange.replaceWith(html);
+				
+				
+				
+			});
+			request.fail(function(jqXHR, textStatus){
+				alert("Request failed" + textStatus);
+			});
+			};
+		
+		
+		
+		
+	}); 
+	
+</script> 
+
+
+
+
+
+
+
+
+	

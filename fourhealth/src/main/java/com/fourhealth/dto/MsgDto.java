@@ -7,6 +7,7 @@ public class MsgDto {
 	private String sendId;							//송신자 아이디 
 	private String receiveId;						//수신자 아이디
 	private String msgContents;						//메시지 내용
+	private String msgSendCancel;					//발송 취소 여부
 	private String msgReadDate;						//읽은 일자
 	private String msgSendDate;						//발송 일자
 	
@@ -16,6 +17,12 @@ public class MsgDto {
 	}
 	public String getSendId() {
 		return sendId;
+	}
+	public String getMsgSendCancel() {
+		return msgSendCancel;
+	}
+	public void setMsgSendCancel(String msgSendCancel) {
+		this.msgSendCancel = msgSendCancel;
 	}
 	public void setSendId(String sendId) {
 		this.sendId = sendId;

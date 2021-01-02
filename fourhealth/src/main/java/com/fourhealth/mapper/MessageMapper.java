@@ -1,14 +1,21 @@
 package com.fourhealth.mapper;
 
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Mapper;
 
 import com.fourhealth.dto.MsgDto;
 
 @Mapper
 public interface MessageMapper {
-	//고민좀..
-	//트레이너가 만들어놓은 프로모션중 하나의 프로모션에 등록되에 있는 회원에게 전체 메시지 보내는 메서드
+	//트레이너가 회원에게 메시지 보내기.
 	public int sendTrainerToUser(MsgDto msg);
+	
+	//특정회원의 자신이 보낸 메시지 함 (전체)
+	public List<MsgDto> getAllSendMessageList(String userId);
+	
+	//특정회원이 메시지를 보내고 상대가 보기전에 발송 취소(전체)
+	public int modifyAllcancelMsg(String msgCode);
 
 }
