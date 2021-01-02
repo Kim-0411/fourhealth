@@ -12,6 +12,9 @@ import com.fourhealth.dto.UserDto;
 
 @Mapper
 public interface MemberMapper {
+
+	//관리자 단에서 회원 삭제
+	int deleteMember(String memberId);
 	//관리자 단에서 전체 회원 조회
 	public List<MemberDto> viewMember();
 	//로그인 처리

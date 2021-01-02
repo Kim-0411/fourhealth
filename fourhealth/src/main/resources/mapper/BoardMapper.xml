@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 신고 게시판 다른 매퍼와 중복되지 않게 namespace 기재 -->
+<mapper namespace="com.fourhealth.mapper.BoardMapper">
+
+	<!-- 신고 게시판 resultMap -->
+	<resultMap type="UserReportDto" id="resultMapUserReport">
+		<result column="report_user_code" property="reportUserCode" />
+		<result column="trainer_user_matching_code"
+			property="trainerUserMatchingCode" />
+		<result column="report_categories_code"
+			property="reportCategoriesCode" />
+		<result column="report_user_reason_detail"
+			property="reportUserReasonDetail" />
+		<result column="report_user_reg_date"
+			property="reportUserRegDate" />
+	</resultMap>
+ 
+ 	<!-- 신고 등록하기 -->
+	
+	<!-- 전체 신고 리스트 보여주기 -->
+ 	<select id="reportList" resultMap="resultMapUserReport">
+		SELECT
+		ur.report_user_code
+		,ur.trainer_user_matching_code
+		,ur.report_categories_code
+		,ur.report_user_reason_detail
+		,ur.report_user_reg_date
+		FROM
+		tb_user_report AS ur
+	</select>
+
+</mapper>

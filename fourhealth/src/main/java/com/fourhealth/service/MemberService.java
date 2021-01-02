@@ -19,6 +19,13 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 
+	//관리자 회원 삭제
+	public int deleteMember(String memberId) {
+	
+		 int result = memberMapper.deleteMember(memberId);
+		return result;
+	}
+	
 	// 전체회원조회 및 관리자, 트레이너, 사용자 변환
 	public List<MemberDto> viewMember() { 
 		List<MemberDto> memberList = memberMapper.viewMember();

@@ -8,7 +8,7 @@ public class UserDto {
 	private String userFirstHeight; //사용자 가입시 키
 	private String userFirstWeight; //사용자 가입시 최초 체중
 	private String userFirstGoal; //사용자 가입시 최초 다이어트 체중 목표
-	private String userFirstBmi; //사욧ㅇ자 가입시 최초 BMI
+	private String userFirstBmi; //사용자 가입시 최초 BMI
 	private String userRegDate; //사용자 정보 등록일자
 	
 	public String getUserId() {
