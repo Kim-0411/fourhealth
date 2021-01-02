@@ -12,12 +12,7 @@ import com.fourhealth.dto.UserDto;
 
 @Mapper
 public interface MemberMapper {
-	//회원 삭제시 권한
-	int RemoveMemberById(String memberId, String memberLevel);
-	
-	//로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크 
-	
-	
+
 	//관리자 회원 리스트에 삭제 (메세지)
 	int removeMasterMsg(String membeId);
 	

@@ -33,7 +33,6 @@ public class MemberService {
 		
 		if(memberDto != null && memberDto.getMemberPw() != null && memberPw.equals(memberDto.getMemberPw())) {
 			
-			System.out.println("######################");
 			System.out.println("test성공");
 		
 			int removeCheck = memberMapper.removeMemberById(memberId);

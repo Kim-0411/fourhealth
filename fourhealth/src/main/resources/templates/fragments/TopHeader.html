@@ -27,7 +27,7 @@
               <a th:href="@{/register}" th:if="${session.SID eq null}">Sing up</a>
             </div>
                <th:block th:unless="${session.SID eq null}">
-		           <label style="color:white"> [[${session.SLEVEL}]] &nbsp; [[${session.SNICKNAME}]] 
+		           <label style="color:white"> [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp; [[${session.SNICKNAME}]] 
 		         <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
 					<span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
 		           </label>

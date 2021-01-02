@@ -18,22 +18,27 @@ public class MasterController {
 	@Autowired
 	private MemberService memberService;
 	
+	
+	
+	
+	
+	//관리자 회원 삭제  
 	@GetMapping("/removeMasterMember")
 	public String removeMasterMember( Model model
-								,@RequestParam(name="memberId", required = false) String memberId
-								,@RequestParam(name="memberLevel", required = false) String memberLevel) {
+									,@RequestParam(name="memberId", required = false) String memberId
+									,@RequestParam(name="memberLevel", required = false) String memberLevel) {
 		model.addAttribute("title", "회원 탈퇴");
 		model.addAttribute("memberId", memberId);
 		model.addAttribute("memberLevel", memberLevel);
 		return "master/member/member_remove";
 	}
 	
-	//관리자 회원삭제
+	//관리자 회원 삭제
 	@PostMapping("/removeMasterMember")
 	public String removeMasterMember(@RequestParam(name="memberId", required = false) String memberId
-							  ,@RequestParam(name="memberPw", required = false) String memberPw
-							  ,@RequestParam(name="memberLevel", required = false) String memberLevel
-							  ,RedirectAttributes redirectAttr) {
+									,@RequestParam(name="memberPw", required = false) String memberPw
+									,@RequestParam(name="memberLevel", required = false) String memberLevel
+									,RedirectAttributes redirectAttr) {
 		System.out.println("회원삭제화면에서 입력받은 값(id)--->"	+ memberId);
 		System.out.println("회원삭제화면에서 입력받은 값(pw)--->"	+ memberPw);
 		System.out.println("회원삭제화면에서 입력받은 값(level)--->"+ memberLevel);

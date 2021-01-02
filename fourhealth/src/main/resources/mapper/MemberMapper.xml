@@ -30,13 +30,13 @@
 			user_id = #{memberId};
 	</delete>
 	
-	<!-- <delete id="removeMasterMsg" parameterType="String">
+	<delete id="removeMasterMsg" parameterType="String">
 		DELETE
 		FROM
 			tb_msg
 		WHERE
 			user_id = #{msg_code};
-	</delete> -->
+	</delete>
 	
 	<delete id="removeMemberById" parameterType="String">
 		DELETE
@@ -46,55 +46,6 @@
 			user_id = #{memberId};
 	</delete>
 	
-	
-	
-	<!-- 
-	<delete id="removeLoginById" parameterType="String">
-		DELETE
-		FROM
-			tb_login
-		WHERE
-			login_id = #{memberId};
-	</delete>
-
-	<delete id="removeOrderById" parameterType="String">
-		DELETE
-		FROM
-			tb_order
-		WHERE
-			o_id = #{memberId};
-	</delete>
-
-	<delete id="removeGoodsById" parameterType="String">
-		DELETE
-		FROM
-			tb_goods
-		WHERE
-			g_seller_id = #{memberId};
-	</delete>
-
-	<delete id="removeMemberById" parameterType="String">
-		DELETE
-		FROM
-			tb_member
-		WHERE
-			m_id = #{memberId};
-	</delete> -->
-	
-	
-	<!-- 로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크  -->
-	<!-- <select id="viewMember"  parameterType="MemberDto">
-		SELECT 
-			p.user_platform_grade_name 
-		FROM 
-			tb_grade_platform_user AS p
-		INNER JOIN
-			tb_user AS u
-		ON
-			p.user_platform_grade_code = u.user_platform_grade_code  
-		WHERE 
-			u.user_id = #{memberId};
-	</select> -->
     
   <!-- 전체회원 단에서 회원 수정 -->
 <!-- 	<update id="modifyMasterMember" parameterType="MemberDto">c

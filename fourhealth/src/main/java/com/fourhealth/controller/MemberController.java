@@ -18,14 +18,18 @@ import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fatsecret.platform.services.Request;
+import com.fourhealth.dto.GradePlatformUserDto;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MemberService;
+import com.fourhealth.service.UserService;
 
 @Controller
 public class MemberController {
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private UserService userService;
 	
 	/********************************************************************************************
 	 * 로그인/로그아웃
@@ -71,15 +75,14 @@ public class MemberController {
 				System.out.println("로그인 후 레벨 체크" + memberDto);
 				
 				//로그인 후 사용자 플랫폼 권한 체크하여 치환
-//				UserDto userDto = memberService.getMemberById(userId);
-//				String userPlatformLevel = memberDto.getMemberId()
-				
+				GradePlatformUserDto gradePlatformUserDto = userService.getUserGrade(userId);
 				
 				session.setAttribute("SID", memberDto.getMemberId());
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-				
+				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
+				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
 			System.out.println(userId + " : 로그인 성공");
 			
 			
