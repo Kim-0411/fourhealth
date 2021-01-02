@@ -4,7 +4,6 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <!-- 신고 게시판 다른 매퍼와 중복되지 않게 namespace 기재 -->
 <mapper namespace="com.fourhealth.mapper.BoardMapper">
-
 	<!-- 신고 게시판 resultMap -->
 	<resultMap type="UserReportDto" id="resultMapUserReport">
 		<result column="report_user_code" property="reportUserCode" />
@@ -17,7 +16,45 @@
 		<result column="report_user_reg_date"
 			property="reportUserRegDate" />
 	</resultMap>
- 
+	<resultMap type="CategoriesReportDto" id="resultMapReportReason">
+		<result column="report_categories_code" property="reportCategoriesCode" />
+		<result column="report_categories_contents" property="reportCategoriesContents" />
+		<result column="report_categories_reg_date" property="reportCategoriesRegDate" />
+	</resultMap>
+	<!-- <resultMap type="MatchingUserTrainerDto" id="resultMapReportPromotion">
+		<result column="trainer_user_matching_code" property=""></result>
+		<result column="trainer_promotion_notice_code" property=""></result>
+		<result column="user_id" property=""></result>
+		<result column="trainer_id" property=""></result>
+		<result column="user_coupon_code" property=""></result>
+		<result column="trainer_promotion_name" property=""></result>
+		<result column="payment" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+		<result column="" property=""></result>
+	</resultMap> -->
+
+<!-- 프로모션 가져오기  -->
+ 	<select id="reportPromotionList" parameterType="String" resultType="MatchingUserTrainerDto">
+		SELECT
+			m.trainer_promotion_name AS 'trainerPromotionName'
+		FROM
+			tb_matching_user_trainer AS m
+		WHERE
+			m.user_id = #{userId};
+ 	</select>
+ <!-- 신고 사유 가져오기 -->
+ <select id="reportReasonList" resultMap="resultMapReportReason">
+SELECT
+*
+FROM
+tb_categories_report
+ </select>
  	<!-- 신고 등록하기 -->
 	
 	<!-- 전체 신고 리스트 보여주기 -->

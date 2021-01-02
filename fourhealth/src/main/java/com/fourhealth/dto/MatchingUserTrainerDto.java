@@ -7,6 +7,7 @@ public class MatchingUserTrainerDto {
 	private String userId; //사용자 아이디
 	private String trainerId;//트레이너 아이디
 	private String userCouponCode; //사용자 보유 쿠폰 코드
+	private String trainerPromotionName; //프로모션 이름
 	private String paymentMethodName; //결제 방법 이름
 	private int purchaseMoney; //결제 금액
 	private String purchaseRegDate; //결제 등록 일자
@@ -17,6 +18,12 @@ public class MatchingUserTrainerDto {
 	private String trainerPromotionAttendStartDate;  //트레이너 프로모션 참여 시작 일자
 	private String trainerMatchingSystemRegDate; //트레이너 매칭 시스템 등록 일자
 	
+	public String getTrainerPromotionName() {
+		return trainerPromotionName;
+	}
+	public void setTrainerPromotionName(String trainerPromotionName) {
+		this.trainerPromotionName = trainerPromotionName;
+	}
 	public String getTrainerUserMatchingCode() {
 		return trainerUserMatchingCode;
 	}
@@ -102,4 +109,16 @@ public class MatchingUserTrainerDto {
 		this.trainerMatchingSystemRegDate = trainerMatchingSystemRegDate;
 	}
 
+	@Override
+	public String toString() {
+		return "MatchingUserTrainerDto [trainerUserMatchingCode=" + trainerUserMatchingCode
+				+ ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode + ", userId=" + userId + ", trainerId="
+				+ trainerId + ", userCouponCode=" + userCouponCode + ", trainerPromotionName=" + trainerPromotionName
+				+ ", paymentMethodName=" + paymentMethodName + ", purchaseMoney=" + purchaseMoney + ", purchaseRegDate="
+				+ purchaseRegDate + ", purchaseFinishDate=" + purchaseFinishDate + ", userRegDate=" + userRegDate
+				+ ", trainerPromotionRecruitStartDate=" + trainerPromotionRecruitStartDate
+				+ ", trainerPromotionRecruitEndDate=" + trainerPromotionRecruitEndDate
+				+ ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate
+				+ ", trainerMatchingSystemRegDate=" + trainerMatchingSystemRegDate + "]";
+	}
 }
