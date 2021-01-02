@@ -57,5 +57,20 @@
 			msg_code = #{msgCode};
       </update>
       
+      <select id="getAllReceiveMessageList" parameterType="String" resultMap="resultMapMsg">
+      	SELECT
+			m.msg_code,
+			m.send_id,
+			m.msg_contents,
+			m.msg_read_date,
+			m.msg_send_date
+		FROM
+			tb_msg AS m
+		WHERE
+			m.receive_id = #{userId}
+		AND
+			m.msg_send_cancel IS NULL;
+      </select>
+      
       
 </mapper>

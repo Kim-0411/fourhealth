@@ -22,6 +22,7 @@ public class MessageService {
 	  private MessageMapper messageMapper;
 	  @Autowired
 	  private MemberMapper memberMapper;
+	  
 	  MemberDto member;
 	  MsgDto msg;
 	  
@@ -64,12 +65,17 @@ public class MessageService {
 		  
 		  return getAllSendMessageList;
 	  }
-	  
+	//트레이너가 메시지 보낸거 발송취소
 	  public int modifyAllcancelMsg(String msgCode) {
 		  int modifyAllcancelMsg = messageMapper.modifyAllcancelMsg(msgCode);
 		  System.out.println(modifyAllcancelMsg);
 		  
 		  
 		  return modifyAllcancelMsg;
+	  }
+	//트레이너 받은 메시지 관리
+	  public List<MsgDto> getAllReceiveMessageList(String userId){
+		  List<MsgDto> getAllReceiveMessageList = messageMapper.getAllReceiveMessageList(userId);
+		  return getAllReceiveMessageList;
 	  }
 }

@@ -2,7 +2,7 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{trainer_layout/default}"
+  layout:decorate="~{default_layout/trainer/default}"
 >
   <th:block layout:fragment="customContent">
    <h1>메시지 송신</h1>
@@ -13,15 +13,15 @@
     	<div class="row">
     		<div class="col-lg-4 col-md-4 col-sm-4 m-2 ">
     			<label>받을사람(아이디):</label>
-    			<input type="text" class="form-control" name="receiveId">
+    			<input type="text" class="form-control" name="receiveId" id="receiveId">
             </div>
     		<div class="col-lg-8 col-md-8 col-sm-8 m-2"> 
-    			<textarea rows="20" name="msgContents" placeholder="내용" class="form-control" ></textarea>
+    			<textarea rows="20" name="msgContents" placeholder="내용" class="form-control" id="text_area"></textarea>
     		</div>	
     	</div>
     	 
-    <div id="submit_btn">
-    	<a href="javascript:message_send.submit();"  class="btn btn-primary btn-icon-split">
+    <div >
+    	<a class="btn btn-primary btn-icon-split" id="submit_btn">
 			<span class="icon text-white-50">
             <i class="fas fa-check"></i>
             </span>
@@ -31,6 +31,19 @@
     	</form>
     </div>
   </th:block>
-
-  
 </html>
+<script th:inline="javascript">
+	$('#submit_btn').click(function(){
+		var textArea = $('#text_area').val().length;
+		console.log(textArea);
+		if($('#receiveId').val()==""){
+			alert('사용자아이디를 확인해주세요.');
+		}else if(textArea<10){
+			alert('전송하실 메시지의 길이를 10글자 이상적어주세요.');
+		}else{
+			message_send.submit();
+		}
+			
+		 
+	});
+</script>

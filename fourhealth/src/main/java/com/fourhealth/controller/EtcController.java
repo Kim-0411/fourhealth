@@ -81,4 +81,13 @@ public class EtcController {
 	
 		return cancelMsg;
 	}
+	
+	//트레이너 받은 메시지 관리
+	@GetMapping("trainerMessageReceiveManage")
+	public String trainerReceiveMessage(Model model) {
+		//트레이너 로그인 id002가정
+		List<MsgDto> getAllReceiveMessageList = messageService.getAllReceiveMessageList("id002");
+		model.addAttribute("receiveMsg",getAllReceiveMessageList);
+		return "trainer/trainer_message_receive_management";
+	}
 }

@@ -17,5 +17,8 @@ public interface MessageMapper {
 	
 	//특정회원이 메시지를 보내고 상대가 보기전에 발송 취소(전체)
 	public int modifyAllcancelMsg(String msgCode);
+	
+	//나에게 온 메시지 확인(전체)
+	public List<MsgDto> getAllReceiveMessageList(String userId);
 
 }

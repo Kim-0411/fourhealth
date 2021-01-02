@@ -1,0 +1,34 @@
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="~{default_layout/trainer/default}"
+ >
+ <th:block layout:fragment="customContent">
+	<h1>받은 쪽지함(로그인 됫다고 가정 id002) </h1>
+	<button type = "button" id="del">삭제</button>    	
+		<table class="table">
+			<tr>
+				<td><input type="checkbox"></td>
+				<td>보낸사람</td>
+				<td>내용</td>
+				<td>발송일자</td>
+				<td>읽은일자</td>
+			</tr>
+			<tr th:each="m : ${receiveMsg}">
+				<td>
+					<input type="checkbox">
+				</td>
+				<td class="msg_val">
+					<input type="hidden" th:value="${m.msgCode}" id="msg_code">
+					<a th:text="${m.sendId}"></a>
+				</td>
+				<td th:text="${m.msgContents}"></td>
+				<td th:text="${m.msgSendDate}"></td>
+				<td>
+					<span th:if="${m.msgReadDate == null}">읽지않음</span>
+					<span th:unless="${m.msgReadDate == null}" th:text="${m.msgReadDate}"></span>
+				</td>
+			</tr>
+		</table>
+ </th:block>
+</html>

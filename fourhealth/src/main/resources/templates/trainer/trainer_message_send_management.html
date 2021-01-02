@@ -2,12 +2,11 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{trainer_layout/default}"
+  layout:decorate="~{default_layout/trainer/default}"
  >
- 
  	<th:block layout:fragment="customContent">
-    	<h1>보낸 쪽지함(로그인 됫다고 가정) </h1>
-		<button type = "button" id="del">삭제</button>    	
+    	<h1>보낸 쪽지함(로그인 됫다고 가정 id002)</h1>
+		<a href="#" class="btn btn-google btn-block col-lg-1"><i class="fa-fw"></i>삭제</a>
 		<table class="table">
 			<tr>
 				<td><input type="checkbox"></td>
@@ -25,7 +24,9 @@
 					<input type="hidden" th:value="${m.msgCode}" id="msg_code">
 					<a th:text="${m.receiveId}"></a>
 				</td>
-				<td th:text="${m.msgContents}"></td>
+				<td>
+					<a th:text="${#strings.substring(m.msgContents,0,7)}+..."> <!--  th:href="@{/replyMessage()}" --></a>
+				</td>
 				<td th:text="${m.msgSendDate}"></td>
 				<td th:text="${m.msgReadDate}"></td>
 				<td th:if="${m.msgReadDate.toString().equals('읽지않음') && m.msgSendCancel ==null}">
@@ -52,12 +53,11 @@
 				data : {msgCode : msgCode},
 				dataType : 'json'
 			});
+			
 			request.done(function(data) {
 				alert('성공적으로 취소하였습니다.');
 				var html ='<span>취소성공</span>';
 				msgChange.replaceWith(html);
-				
-				
 				
 			});
 			request.fail(function(jqXHR, textStatus){
@@ -65,18 +65,7 @@
 			});
 			};
 		
-		
-		
-		
 	}); 
 	
 </script> 
 
-
-
-
-
-
-
-
-	
