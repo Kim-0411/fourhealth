@@ -12,12 +12,55 @@ import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
+
+
 @Service
 @Transactional
 
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	//삭제처리
+	public String removeMasterMember(String memberId, String memberPw, String memberLevel) {
+		String result = "회원 삭제 실패";
+		
+		
+		
+		//id member테이블 조회하고 조회한 결과 값 중 비밀번호와 화면에서 입력받은 비밀번호가 일치하면 삭제 처리
+		MemberDto memberDto = memberMapper.getMemberById(memberId);
+		
+		
+		if(memberDto != null && memberDto.getMemberPw() != null && memberPw.equals(memberDto.getMemberPw())) {
+			
+			System.out.println("######################");
+			System.out.println("test성공");
+		
+			int removeCheck = memberMapper.removeMemberById(memberId);
+			/*
+			int removeCheck = memberMapper.removeLoginById(memberId);
+			
+			if("판매자".equals(memberLevel)) removeCheck += memberMapper.removeGoodsById(memberId);
+			
+			if("구매자".equals(memberLevel)) removeCheck += memberMapper.removeOrderById(memberId);
+			
+			removeCheck += memberMapper.removeMemberById(memberId);
+			*/
+			//if(removeCheck > 0) result = "회원 삭제 성공";
+			
+		}
+		return null;
+//		return result;
+	}
+	
+	//전체회원조회 후 수정처리
+	public String modifyMasterMember(MemberDto membedto) {
+		String result = "회원 수정 실패";
+		int modifyMemberCheck = memberMapper.modifyMasterMember(membedto);
+		if(modifyMemberCheck > 0) result = "회원 수정 성공";
+		return result;
+	}
+	
 
 	// 전체회원조회 및 관리자, 트레이너, 사용자 변환
 	public List<MemberDto> viewMember() { 
@@ -95,5 +138,8 @@ public class MemberService {
 		UserDto userInfo = memberMapper.trainerGetMatchingUserInfo(userId);
 		return userInfo;
 	}
+
+
+	
 
 }

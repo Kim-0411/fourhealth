@@ -14,9 +14,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import com.fatsecret.platform.services.Request;
 import com.fourhealth.dto.MemberDto;
+import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MemberService;
 
 @Controller
@@ -27,6 +30,7 @@ public class MemberController {
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
+	
 
 	//로그인 화면(공통)
 	@GetMapping("/login")
@@ -39,47 +43,53 @@ public class MemberController {
 		return "login/login";
 	}
 	
-	// @PostMapping(value = "/userIdCheck")
-	// public String addMember(Member member
-	// ,@RequestParam(name = "memberId", required = false) String memberId ,
-	// HttpServletResponse response ) throws IOException {
-	// System.out.println("회원가입화면에서 입력받은 값--->" + count);
-	//
-	// String userLevel = member.getUserLevel();
-	// if(userLevel.equals("trainer")){
-	// member.setUserLevel("user_level_002");
-	// }else if (userLevel.equals("user")) {
-	// member.setUserLevel("user_level_003");
-	// }else {
-	// member.setUserLevel("user_level_001");
-	// }
-	// System.out.println("회원가입화면에서 입력후 레벨값 수정--->" + member);
-
+	
 	@PostMapping("/login")
 	public String Login(@RequestParam(name = "userId", required = false) String userId,
-			@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
-			RedirectAttributes rAttr) {
-
-
+						@RequestParam(name = "userPassword", required = false) String userPassword, 
+						HttpSession session,
+						RedirectAttributes rAttr) {
+		
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
-		MemberDto member = memberService.getMemberById(userId);
+		MemberDto memberDto = memberService.getMemberById(userId);
+		System.out.println(memberDto.getMemberId());
 
-		System.out.println(member.getMemberId());
-
-		if(userId != null && userPassword != null && member != null && member.getMemberPw() != null &&
-				userPassword.equals(member.getMemberPw())){
-			session.setAttribute("SID", member.getMemberId());
-			session.setAttribute("SLEVEL", member.getMemberLevel());
-			session.setAttribute("SNAME", member.getMemberName());
+		if(userId != null && userPassword != null && memberDto != null && 
+				memberDto.getMemberPw() != null && userPassword.equals(memberDto.getMemberPw())){
+				
+				//로그인 후 각 권한 체크하여 한글로 치환
+				String userLevel = memberDto.getMemberLevel();
+				if(userLevel.equals("user_level_002")){
+					memberDto.setMemberLevel("트레이너");
+				}else if (userLevel.equals("user_level_003")) {
+					memberDto.setMemberLevel("사용자");
+				}else {
+					memberDto.setMemberLevel("관리자");
+				}
+				System.out.println("로그인 후 레벨 체크" + memberDto);
+				
+				//로그인 후 사용자 플랫폼 권한 체크하여 치환
+//				UserDto userDto = memberService.getMemberById(userId);
+//				String userPlatformLevel = memberDto.getMemberId()
+				
+				
+				session.setAttribute("SID", memberDto.getMemberId());
+				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+				session.setAttribute("SNAME", memberDto.getMemberName());
+				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+				
 			System.out.println(userId + " : 로그인 성공");
+			
+			
+			
+			
 		} else {
 			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
 			System.out.println(userId + " : 로그인 실패");
 			return "redirect:/login";
 		}
-
 		return "redirect:/";
 	}
 
@@ -115,7 +125,7 @@ public class MemberController {
 						Model model) {
 		
 		model.addAttribute("level", level); //누른거 래밸 사용자,트레이너
-		return "member/m_insert";
+		return "member/member_insert";
 	}
 	
 	@PostMapping("/mInsert")

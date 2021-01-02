@@ -12,10 +12,30 @@ import com.fourhealth.dto.UserDto;
 
 @Mapper
 public interface MemberMapper {
+	//회원 삭제시 권한
+	int RemoveMemberById(String memberId, String memberLevel);
+	
+	//로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크 
+	
+	
+	//관리자 회원 리스트에 삭제 (메세지)
+	int removeMasterMsg(String membeId);
+	
+	//관리자 회원 리스트에서 삭제
+	int removeMasterMember(String memberId);
+	
+	//관리자 회원 리스트에서 삭제
+	int removeMemberById(String memberId);
+	
+	//관리자 단에서 전체 회원리스트에서 수정
+	int modifyMasterMember(MemberDto memberDto);
+	
 	//관리자 단에서 전체 회원 조회
 	public List<MemberDto> viewMember();
+	
 	//로그인 처리
 	public MemberDto getMemberById(String memberId);
+	
 	//회원 가입시 중복 체크 
 	public int userIdCheck(String userId);
 
@@ -31,6 +51,8 @@ public interface MemberMapper {
 	 */
 	// 내회원 조회 페이지에서 특정 회원 클릭하여 접근시 그 회원 정보(트레이너)
 	public UserDto trainerGetMatchingUserInfo(String userId);
+
+
 
 
 

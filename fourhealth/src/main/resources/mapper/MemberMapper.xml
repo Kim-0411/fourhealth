@@ -5,24 +5,134 @@
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
 
 	<!--공통 회원데이터 resultMap  -->
-    <resultMap type="MemberDto" id="resultMapMember">
-        <result column="user_id" property="memberId"/>
-        <result column="user_pw" property="memberPw"/>
+    <resultMap type="MemberDto" 		id="resultMapMember">
+        <result column="user_id" 		property="memberId"/>
+        <result column="user_pw" 		property="memberPw"/>
         <result column="user_level_code" property="memberLevel"/>
-        <result column="user_name" property="memberName"/>
-        <result column="user_addr" property="memberAddr"/>
-         <result column="user_email" property="memberEmail"/>
-        <result column="user_nickname" property="memberNickname"/>
-        <result column="user_birth" property="memberBirth"/>
-        <result column="user_gender" property="memberGender"/>
+        <result column="user_name" 		property="memberName"/>
+        <result column="user_addr" 		property="memberAddr"/>
+        <result column="user_email"		property="memberEmail"/>
+        <result column="user_nickname" 	property="memberNickname"/>
+        <result column="user_birth" 	property="memberBirth"/>
+        <result column="user_gender" 	property="memberGender"/>
         <result column="user_main_bank" property="memberMainBank"/>
         <result column="user_bank_number" property="memberBankNumber"/>
         <result column="user_bank_master" property="memberBankMaster"/>
-        <result column="user_reg_date" property="memberRegDate"/>
+        <result column="user_reg_date" 	property="memberRegDate"/>
     </resultMap>
     
-  
+    <!-- 관리자페이지 단에서 삭제를 위한 쿼리 1~3 -->
+    <delete id="removeMasterMember" parameterType="String">
+		DELETE
+		FROM
+			tb_common_user
+		WHERE
+			user_id = #{memberId};
+	</delete>
+	
+	<!-- <delete id="removeMasterMsg" parameterType="String">
+		DELETE
+		FROM
+			tb_msg
+		WHERE
+			user_id = #{msg_code};
+	</delete> -->
+	
+	<delete id="removeMemberById" parameterType="String">
+		DELETE
+		FROM
+			tb_common_user
+		WHERE
+			user_id = #{memberId};
+	</delete>
+	
+	
+	
+	<!-- 
+	<delete id="removeLoginById" parameterType="String">
+		DELETE
+		FROM
+			tb_login
+		WHERE
+			login_id = #{memberId};
+	</delete>
+
+	<delete id="removeOrderById" parameterType="String">
+		DELETE
+		FROM
+			tb_order
+		WHERE
+			o_id = #{memberId};
+	</delete>
+
+	<delete id="removeGoodsById" parameterType="String">
+		DELETE
+		FROM
+			tb_goods
+		WHERE
+			g_seller_id = #{memberId};
+	</delete>
+
+	<delete id="removeMemberById" parameterType="String">
+		DELETE
+		FROM
+			tb_member
+		WHERE
+			m_id = #{memberId};
+	</delete> -->
+	
+	
+	<!-- 로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크  -->
+	<!-- <select id="viewMember"  parameterType="MemberDto">
+		SELECT 
+			p.user_platform_grade_name 
+		FROM 
+			tb_grade_platform_user AS p
+		INNER JOIN
+			tb_user AS u
+		ON
+			p.user_platform_grade_code = u.user_platform_grade_code  
+		WHERE 
+			u.user_id = #{memberId};
+	</select> -->
     
+  <!-- 전체회원 단에서 회원 수정 -->
+<!-- 	<update id="modifyMasterMember" parameterType="MemberDto">c
+		UPDATE tb_common_user
+		<trim prefix="SET" suffixOverrides=",">
+			<if test="memberPw != null and memberPw neq ''.toString()">
+				user_pw	= #{memberPw},
+			</if>
+			<if test="memberName != null and memberName neq ''.toString()">
+				user_name	= #{memberName},
+			</if>
+			<if test="memberLevel != null and memberLevel neq ''.toString()">
+				user_level_code= #{memberLevel},
+			</if>
+			<if test="memberEmail != null and memberEmail neq ''.toString()">
+				user_email= #{memberEmail},
+			</if>
+			<if test="memberAddr != null and memberAddr neq ''.toString()">
+				user_addr	= #{memberAddr},
+			</if>
+		</trim>
+		WHERE
+			user_id = #{memberId}
+	</update> -->
+	
+	<!-- 관리자페이지 단에서 회원 수정  -->
+	<update id="modifyMasterMember" parameterType="MemberDto">
+		UPDATE tb_common_user
+		SET 
+			 user_pw		= #{memberPw}
+			,user_name		= #{memberName}
+			,user_email		= #{memberEmail}
+			,user_addr		= #{memberAddr}
+		WHERE
+			user_id = #{memberId}
+	</update>
+	
+	
    <!-- 전체 회원 조회 -->
 	<select id="viewMember" resultMap="resultMapMember" >
 	SELECT

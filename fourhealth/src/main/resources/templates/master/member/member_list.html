@@ -11,38 +11,33 @@
 					<table border="1">
 						<thead>
 							<tr>
-								<th>userId</th>
-								<th>userLevel</th>
-								<th>userPassword</th>
-								<th>userName</th>
-								<th>userAddr</th>
-								<th>userNickName</th>
-								<th>userPhone</th>
-								<th>userEmail</th>
-								<th>userBirth</th>
-								<th>userGender</th>
-								<th>userMainBank</th>
-								<th>userBankNumber</th>
-								<th>userBankMaster</th>
-								<th>userRegDate</th>
+								<th>아이디</th>
+								<th>비밀번호</th>
+								<th>이름</th>
+								<th>권한</th>
+								<th>이메일</th>
+								<th>주소</th>
+								<th>등록날짜</th>
 								<th>수정</th>
 								<th>삭제</th>
 							</tr>
 						</thead>
-						<tbody><!--이거 수정 모르겠음.타임리프 공부  -->
-							<!-- <tr th:each="l : ${memberlist}">
-								<td th:text="${l.userId}"></td>
-								<td th:text="${l.userLevel}"></td>
-								<td th:text="${l.userPassword}"></td>
-								<td th:text="${l.userName}"></td>
-								<td th:text="${l.userAddr}"></td>
-								<a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a>
-								</td>
-								<td>ex : /removeMember?memberId=id001&memberLevel=관리자 <a
-									th:href="@{/removeMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
+						<tbody>
+							<tr th:if="${#lists.size(memberList) > 0}" th:each="l : ${memberList}">
+							<td th:text="${l.memberId}"></td>
+							<td th:text="${l.memberPw}"></td>
+							<td th:text="${l.memberName}"></td>
+							<td th:text="${l.memberLevel}"></td>
+							<td th:text="${l.memberEmail}"></td>
+							<td th:text="${l.memberAddr}"></td>
+							<td th:text="${l.memberRegDate}"></td>
+							<td><a th:href="@{/modifyMasterMember(memberId=${l.memberId})}">수정</a>
+							</td>
+							<td>
+								<td><a th:href="@{/removeMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
 								</td>
 							</tr>
-						</tbody> -->
+						</tbody>
 					</table>
 	</div>
 </th:block>
