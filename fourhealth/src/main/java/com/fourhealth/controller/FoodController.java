@@ -39,6 +39,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @Controller
 public class FoodController {
 
+	//api 호출시 index 번호 설정을 위한 변수
 	int startIdx;
 	int endIdx;
 
