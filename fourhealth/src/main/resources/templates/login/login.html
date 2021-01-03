@@ -42,12 +42,11 @@
                                     </div>
                                     <form th:action="@{/login}" method="post" id="memberlogin" class="memberlogin" >
                                         <div class="form-group">
-                                            <input type="text" class="form-control form-control-user"
-                                                id="userId" name="userId" placeholder="memberId">
+                                            <input type="text" class="form-control form-control-user"  id="userId" name="userId" placeholder="userId">
                                         </div>
                                         <div class="form-group">
                                             <input type="password" class="form-control form-control-user"
-                                                id="userPassword" name="userPassword" placeholder="memberPw">
+                                                id="userPassword" name="userPassword" placeholder="userPassword">
                                         </div>
                                         <div class="form-group">
                                             <div class="custom-control custom-checkbox small">
@@ -84,7 +83,7 @@
         </div>
 
     </div>
-      <script src="vendor/jquery/jquery.min.js"></script>
+   <script src="vendor/jquery/jquery.min.js"></script>
    <script type="text/javascript">
       
    </script>
@@ -92,16 +91,17 @@
     <script type="text/javascript">
     
     $('#login').click(function(){
-        if($("#memberId").val()==""){
+        if($("#userId").val()==""){
           alert("아이디를 입력해주세요.");
-          $("#memberId").focus();
+          $("#userId").focus();
           return false;
        }
-  	 	if($("#memberPw").val()==""){
+  	 	if($("#userPassword").val()==""){
  	      alert("비밀번호를 입력해주세요.");
-          $("#memberPw").focus();
+          $("#userPassword").focus();
           return false;
-        } 
+       } 
+
   	 	else{
           $("#memberlogin").submit();
           console.log('로그인성공');
