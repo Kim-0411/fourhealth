@@ -25,7 +25,7 @@
 					<a th:text="${m.receiveId}"></a>
 				</td>
 				<td>
-					<a th:text="${#strings.substring(m.msgContents,0,7)}+..."> <!--  th:href="@{/replyMessage()}" --></a>
+					<a th:href="@{/trainerSendMessageRead}" th:text="${#strings.substring(m.msgContents,0,7)}+..."></a>
 				</td>
 				<td th:text="${m.msgSendDate}"></td>
 				<td th:text="${m.msgReadDate}"></td>

@@ -90,4 +90,9 @@ public class EtcController {
 		model.addAttribute("receiveMsg",getAllReceiveMessageList);
 		return "trainer/trainer_message_receive_management";
 	}
+	
+	@GetMapping("trainerSendMessageRead")
+	public String trainerReadMessage() {
+		return "trainer/trainer_send_message_read";
+	}
 }
