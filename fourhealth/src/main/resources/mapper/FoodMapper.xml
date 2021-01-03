@@ -6,8 +6,10 @@
   <!-- Food wokring table name : tb_food -->
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
 
+
+  <!-- 관리자 FOOD -->
   <insert id="insertFoodListInformation" parameterType="java.util.List">
-    INSERT INTO tb_food(
+    INSERT IGNORE INTO tb_food_backup(
       food_code, 
       food_name, 
       food_group,
@@ -37,8 +39,9 @@
          "${food.foodChole}",
          "${food.makerName}",
          NOW()
-         )
+      )   
     </foreach>
+    
   </insert>
 
 </mapper>

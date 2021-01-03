@@ -60,12 +60,22 @@ public class FoodController {
 		System.out.println(data.toString());
 		//log.info("data", data.toString());
 		
+		
+
+		for(int i=0; i<data.size(); i++) {
+			if(data.get(i).get("foodCal") == ""){
+				data.get(i).put("foodGroup", 0);
+				
+			}
+		}
+
+	
 		int result = foodMapper.insertFoodListInformation(data);
 
-		//성공 여부 판단.
+		//성공 여부 판단
 		System.out.println("############ 성공여부판단 ############");
 		System.out.println("result"+result);
-		//foodService.addFood1(data);
+		// //foodService.addFood1(data);
 		return "성공";
 	
 	}
@@ -123,8 +133,13 @@ public class FoodController {
 		String dataType = "json";
 	
 		//start, end index 설정 변수(단 한번 호출시 불러올 수 있는 데이터의 수는 1000개)
-		startIdx = 292;
-		endIdx = 293;
+
+		//현재 문제가 발생하는 데이터 영역
+		startIdx = 32001;
+		endIdx = 33000;
+
+		// startIdx = 0;
+		// endIdx = 3;
 
 		//API 호출 경로 변수 초기화
 		String url = null;
@@ -206,16 +221,29 @@ public class FoodController {
 
 				//foodList에 다시 설정
 				foodList.add(foodMap);
-
+			
 			}
-		
 
+			
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		
 		}
 
 		return foodList;
 
+	}
+
+	//######################################################################//
+	//				    		좀더 세밀한 API 식품 정보 처리					  //
+	//######################################################################//
+
+	@GetMapping("food_another")
+	public String foodAnother(){
+		//FatSecret 작업 가능하면 시작
+		//기존의 db는 수는 많지만, 군데군데 부족한 부분은 많음
+
+		return null;
 	}
 }
