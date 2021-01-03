@@ -38,6 +38,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class FoodController {
+
+	int startIdx;
+	int endIdx;
+
 	@Autowired
 	private FoodMapper foodMapper;
 
@@ -54,13 +58,13 @@ public class FoodController {
 	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
 		System.out.println("From FoodController >> Controller data 표시");
 		System.out.println(data.toString());
-		log.info("data", data.toString());
+		//log.info("data", data.toString());
 		
-		//return "성공";
-		//int result = foodMapper.insertFoodListInformation(data);
+		int result = foodMapper.insertFoodListInformation(data);
 
 		//성공 여부 판단.
-		//System.out.println("result"+result);
+		System.out.println("############ 성공여부판단 ############");
+		System.out.println("result"+result);
 		//foodService.addFood1(data);
 		return "성공";
 	
@@ -86,12 +90,15 @@ public class FoodController {
 	  */
 
 	
-
+	// food 메인 페이지로 이동
 	@GetMapping("/food1")
 	public String food1(Model model) {
 		model.addAttribute("title", "식품안전나라 API test");
 		return "food1";
 	}
+
+
+	// food 호출을 위한 ajax 호출 경로 설정
 
 	@GetMapping(value = "/food1ApiTest", produces = "application/json")
 	public @ResponseBody List<Map<String, String>> food1(Model model, @RequestParam("food") String food)
@@ -116,8 +123,8 @@ public class FoodController {
 		String dataType = "json";
 	
 		//start, end index 설정 변수(단 한번 호출시 불러올 수 있는 데이터의 수는 1000개)
-		int startIdx = 0;
-		int endIdx = 1;
+		startIdx = 292;
+		endIdx = 293;
 
 		//API 호출 경로 변수 초기화
 		String url = null;
@@ -167,29 +174,38 @@ public class FoodController {
 
 			for (Map<String, String> subMap : arrayList) {
 				Map<String, String> foodMap = new HashMap<String, String>();
-				String foodCode = subMap.get("FOOD_CD");
-				String foodName = subMap.get("DESC_KOR");
-				String nutrCal = subMap.get("NUTR_CONT1");
-				String nutrCarbo = subMap.get("NUTR_CONT2");
-				String nutrProtein = subMap.get("NUTR_CONT3");
-				String nutrFat = subMap.get("NUTR_CONT4");
-				String servingSize = subMap.get("SERVING_SIZE");
-				String makerName = subMap.get("MAKER_NAME");
-				String totalSugar = subMap.get("NUTR_CONT5");
-				String totalSodium = subMap.get("NUTR_CONT6");
+	
+				//모든 음식은 1회 제공량 기준으로 변수 할당
+				String foodCode = subMap.get("FOOD_CD"); // 음식 코드 
+				String foodGroup = subMap.get("GROUP_NAME"); //식품 그룹
+				String foodName = subMap.get("DESC_KOR"); // 음식 이름
+				String nutrCal = subMap.get("NUTR_CONT1"); // 음식 칼로리
+				String nutrCarbo = subMap.get("NUTR_CONT2");// 음식 탄수화물
+				String nutrProtein = subMap.get("NUTR_CONT3");// 음식 단백질
+				String totalSugar = subMap.get("NUTR_CONT5");// 음식 당
+				String totalSodium = subMap.get("NUTR_CONT6");// 음식 나트륨
+				String nutrFat = subMap.get("NUTR_CONT4"); // 음식 지방
+				String nutrCholesterol = subMap.get("NUTR_CONT7"); //음식 콜레스테롤
+				String servingSize = subMap.get("SERVING_SIZE"); // 음식 총 내용량
+				String makerName = subMap.get("MAKER_NAME");// 음식 제조사
 
-				foodMap.put("foodCode", foodCode);
-				foodMap.put("foodName", foodName);
-				foodMap.put("foodCal", nutrCal);
-				foodMap.put("foodCarbo", nutrCarbo);
-				foodMap.put("foodProtein", nutrProtein);
-				foodMap.put("foodFat", nutrFat);
-				foodMap.put("foodSugar", totalSugar);
-				foodMap.put("foodSodium", totalSodium);
-				foodMap.put("makerName", makerName);
-				foodMap.put("foodTotalGram", servingSize);
+				//받아온 변수들 foodMap에 다시 해당 키와 값으로 할당
+				//모든 코드의 키와 값은 음식의 1회 제공량을 기준으로 한다.
+				foodMap.put("foodCode", foodCode); // 음식 코드 키와 값
+				foodMap.put("foodGroup", foodGroup);// 음식 그룹 키와 값
+				foodMap.put("foodName", foodName); // 음식 이름 키와 값
+				foodMap.put("foodTotalGram", servingSize);// 음식 총내용량 키와 값
+				foodMap.put("foodCal", nutrCal);// 음식 칼로리 키와 값
+				foodMap.put("foodCarbo", nutrCarbo);// 음식 탄수화물 키와 값
+				foodMap.put("foodProtein", nutrProtein);// 음식 단백질 키와 값
+				foodMap.put("foodFat", nutrFat);// 음식 지방 키와 값
+				foodMap.put("foodSugar", totalSugar);// 음식 당 키와 값
+				foodMap.put("foodSodium", totalSodium);// 음식 나트륨 키와 값
+				foodMap.put("foodChole", nutrCholesterol);// 음식 콜레스테롤 키와 값
+				foodMap.put("makerName", makerName);// 음식 제조사 키와 값
+
+				//foodList에 다시 설정
 				foodList.add(foodMap);
-
 
 			}
 		

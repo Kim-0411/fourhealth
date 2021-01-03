@@ -6,19 +6,38 @@
   <!-- Food wokring table name : tb_food -->
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
 
-  <insert id="insertFood" parameterType="java.util.List">
-    INSERT INTO tb_food_test(
-      foodCode, 
-      foodName, 
-      foodCal, 
-      foodProtein
+  <insert id="insertFoodListInformation" parameterType="java.util.List">
+    INSERT INTO tb_food(
+      food_code, 
+      food_name, 
+      food_group,
+      food_gram,
+      food_calorie,
+      food_carbo,
+      food_protein,
+      food_fat,
+      food_sodium,
+      food_cholesterol,
+      food_sugar,
+      food_makerName,
+      food_reg_date
       ) 
     VALUES
     <foreach collection="list" item="food" separator=" , " >
         ("${food.foodCode}", 
          "${food.foodName}", 
-         "${food.foodCal}", 
-         "${food.foodProtein}")
+         "${food.foodGroup}",
+         "${food.foodTotalGram}", 
+         "${food.foodCal}",
+         "${food.foodCarbo}",
+         "${food.foodProtein}",
+         "${food.foodFat}",
+         "${food.foodSugar}",
+         "${food.foodSodium}",
+         "${food.foodChole}",
+         "${food.makerName}",
+         NOW()
+         )
     </foreach>
   </insert>
 
