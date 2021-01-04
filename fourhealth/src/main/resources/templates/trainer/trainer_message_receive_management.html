@@ -22,7 +22,9 @@
 					<input type="hidden" th:value="${m.msgCode}" id="msg_code">
 					<a th:text="${m.sendId}"></a>
 				</td>
-				<td th:text="${m.msgContents}"></td>
+				<td>
+					<a th:href="@{/trainerReceiveMessageRead(msgCode=${m.msgCode})}" th:text="${#strings.substring(m.msgContents,0,7)}+..."></a>
+				</td>
 				<td th:text="${m.msgSendDate}"></td>
 				<td>
 					<span th:if="${m.msgReadDate == null}">읽지않음</span>

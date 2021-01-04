@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fasterxml.jackson.core.sym.Name;
 import com.fourhealth.dto.MetExerciseDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.MatchingService;
@@ -90,9 +91,22 @@ public class EtcController {
 		model.addAttribute("receiveMsg",getAllReceiveMessageList);
 		return "trainer/trainer_message_receive_management";
 	}
-	
+	//보낸메시지 읽기
 	@GetMapping("trainerSendMessageRead")
-	public String trainerReadMessage() {
+	public String trainerSendMessageRead(Model model
+									,@RequestParam(name = "msgCode",required = false) String msgCode) {
+		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
+		model.addAttribute("msgInfo" ,getAllSendMessageInfo);
 		return "trainer/trainer_send_message_read";
+	}
+	//받은메시지 읽기및 읽음처리
+	@GetMapping("trainerReceiveMessageRead")
+	public String trainerReceiveMessageRead(Model model
+											,@RequestParam(name = "msgCode",required = false) String msgCode) {
+		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
+		String result = messageService.getAllMessageReadPro(msgCode);
+		System.out.println(result);
+		model.addAttribute("msgInfo" ,getAllSendMessageInfo);
+		return "trainer/trainer_receive_message_read";
 	}
 }

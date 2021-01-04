@@ -20,5 +20,14 @@ public interface MessageMapper {
 	
 	//나에게 온 메시지 확인(전체)
 	public List<MsgDto> getAllReceiveMessageList(String userId);
+	
+	//내가 보낸 메시지 상세정보(전체)
+	public MsgDto getAllSendMessageInfo(String msgCode);
+	
+	//메시지 읽음 처리(전체)
+	public int getAllMessageReadPro(String msgCode);
+	
+	//나에게 온 메시지중 읽지 않은 메시지(전체)
+	public List<MsgDto> getAllNoReadMessage(String userId);
 
 }

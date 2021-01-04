@@ -78,4 +78,28 @@ public class MessageService {
 		  List<MsgDto> getAllReceiveMessageList = messageMapper.getAllReceiveMessageList(userId);
 		  return getAllReceiveMessageList;
 	  }
+	// 메시지 읽기 
+	  public MsgDto getAllSendMessageInfo(String msgCode) {
+		  MsgDto getAllSendMessageInfo = messageMapper.getAllSendMessageInfo(msgCode);
+		  return getAllSendMessageInfo;
+	  }
+	  //메시지 읽음 처리
+	  public String getAllMessageReadPro(String msgCode) {
+		  String result ="";
+		  int getAllMessageReadPro = messageMapper.getAllMessageReadPro(msgCode);
+		  
+		  if(getAllMessageReadPro >0) {
+			  result = "성공";
+		  }else {
+			  result = "실패";
+		  }
+		return result;  
+	  }
+	  
+	  //나에게 온메시지 안읽은거(전체)
+	  public List<MsgDto> getAllNoReadMessage(String userId) {
+		  List<MsgDto> getAllNoReadMessage = messageMapper.getAllNoReadMessage(userId);
+		  return getAllNoReadMessage;
+		  
+	  }
 }

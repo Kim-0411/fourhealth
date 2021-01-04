@@ -8,10 +8,10 @@
    <h1>메시지읽기</h1>
     <div>
 		<div class="msg_header">
-			<p id="sender_title">받는사람 :<span>dsd</span></p>
-			<p id="date_title">보낸시각 :<span>21-01-03 [21:58]</span></p>
+			<p id="sender_title">받는사람 :<span th:text="${msgInfo.receiveId}"></span></p>
+			<p id="date_title">보낸날짜 :<span th:text="${msgInfo.msgSendDate}"></span></p>
 		</div>
-		<div id="readbody" class="msg_contents">dd</div>
+		<div id="readbody" class="msg_contents" th:text="${msgInfo.msgContents}"></div>
 	</div>
   </th:block>
 </html>
