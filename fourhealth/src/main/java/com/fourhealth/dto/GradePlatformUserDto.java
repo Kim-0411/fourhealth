@@ -2,10 +2,11 @@ package com.fourhealth.dto;
 
 public class GradePlatformUserDto {
 
-	private String userPlatformGradeCode;
-	private String userPlatformGradeName;
+	private String userPlatformGradeCode;				//사용자레벨체크
+	private String userPlatformGradeName;			
 	private String userPlatformGradeRegDate;
 	public String getUserPlatformGradeCode() {
+		
 		return userPlatformGradeCode;
 	}
 	public void setUserPlatformGradeCode(String userPlatformGradeCode) {
