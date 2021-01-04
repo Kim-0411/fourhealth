@@ -10,10 +10,21 @@ import com.fourhealth.dto.Food;
 import com.fourhealth.mapper.FoodMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service
+@Transactional
 public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;
+
+	//Food List Service
+	public List<Food> getFoodList(){
+		System.out.println("foodList service call test");
+		//System.out.println(foodMapper.getFoodList());
+		return foodMapper.getFoodList();
+	}
 
 	// Food Input Service
 	public String addFood(Food food) {
@@ -32,7 +43,6 @@ public class FoodService {
 
 	//insert food information <List>
 	//later, have to choose using service or not
-
 	public String addFood1(List<Map<String, Object>> data) {
 		//System.out.println("받아온 데이터 표시");
 		String resultStr = null;

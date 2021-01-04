@@ -7,18 +7,18 @@ public class Food {
 	 * 
 	 **/
 
-	private String foodName;							//식품 이름
-	private String foodCode;							//식품 코드
-	private String foodGroup;							//식품 군(종류)
-	private float foodTotalGram;						//식품 그람
-	private float foodCal;								//식품 칼로리
-	private float foodCarbo;							//식품 탄수화물
-	private float foodProtein;							//식품 단백질
-	private float foodFat;								//식품 지방
-	private float foodChole;							//식품 콜레스테롤
-	private float foodSodium;							//식품 나트륨
-	private float foodSugar;							//식품 당
-	private String foodMakerName;						//식품 제조사 명
+	private String foodName;							//1. 식품 이름
+	private String foodCode;							//2. 식품 코드
+	private String foodGroup;							//3. 식품 군(종류)
+	private String foodTotalGram;						//4. 식품 그람
+	private String foodCal;								//5. 식품 칼로리
+	private String foodCarbo;							//6. 식품 탄수화물
+	private String foodProtein;							//7. 식품 단백질
+	private String foodFat;								//8. 식품 지방
+	private String foodChole;							//9. 식품 콜레스테롤
+	private String foodSugar;							//11. 식품 당
+	private String foodSodium;							//10. 식품 나트륨
+	private String foodMakerName;						//12. 식품 제조사 명
 
 	public String getFoodName() {
 		return foodName;
@@ -26,78 +26,6 @@ public class Food {
 
 	public void setFoodName(String foodName) {
 		this.foodName = foodName;
-	}
-
-	public float getFoodCal() {
-		return foodCal;
-	}
-
-	public void setFoodCal(float foodCal) {
-		this.foodCal = foodCal;
-	}
-
-	public float getFoodCarbo() {
-		return foodCarbo;
-	}
-
-	public void setFoodCarbo(float foodCarbo) {
-		this.foodCarbo = foodCarbo;
-	}
-
-	public float getFoodProtein() {
-		return foodProtein;
-	}
-
-	public void setFoodProtein(float foodProtein) {
-		this.foodProtein = foodProtein;
-	}
-
-	public float getFoodFat() {
-		return foodFat;
-	}
-
-	public void setFoodFat(float foodFat) {
-		this.foodFat = foodFat;
-	}
-
-	public String getFoodGroup() {
-		return foodGroup;
-	}
-
-	public void setFoodGroup(String foodGroup) {
-		this.foodGroup = foodGroup;
-	}
-
-	public String getFoodMakerName() {
-		return foodMakerName;
-	}
-
-	public void setFoodMakerName(String foodMakerName) {
-		this.foodMakerName = foodMakerName;
-	}
-
-	public float getFoodSugar() {
-		return foodSugar;
-	}
-
-	public void setFoodSugar(float foodSugar) {
-		this.foodSugar = foodSugar;
-	}
-
-	public float getFoodSodium() {
-		return foodSodium;
-	}
-
-	public void setFoodSodium(float foodSodium) {
-		this.foodSodium = foodSodium;
-	}
-
-	public float getFoodChole() {
-		return foodChole;
-	}
-
-	public void setFoodChole(float foodChole) {
-		this.foodChole = foodChole;
 	}
 
 	public String getFoodCode() {
@@ -108,12 +36,84 @@ public class Food {
 		this.foodCode = foodCode;
 	}
 
-	public float getFoodTotalGram() {
+	public String getFoodGroup() {
+		return foodGroup;
+	}
+
+	public void setFoodGroup(String foodGroup) {
+		this.foodGroup = foodGroup;
+	}
+
+	public String getFoodTotalGram() {
 		return foodTotalGram;
 	}
 
-	public void setFoodTotalGram(float foodTotalGram) {
+	public void setFoodTotalGram(String foodTotalGram) {
 		this.foodTotalGram = foodTotalGram;
+	}
+
+	public String getFoodCal() {
+		return foodCal;
+	}
+
+	public void setFoodCal(String foodCal) {
+		this.foodCal = foodCal;
+	}
+
+	public String getFoodCarbo() {
+		return foodCarbo;
+	}
+
+	public void setFoodCarbo(String foodCarbo) {
+		this.foodCarbo = foodCarbo;
+	}
+
+	public String getFoodProtein() {
+		return foodProtein;
+	}
+
+	public void setFoodProtein(String foodProtein) {
+		this.foodProtein = foodProtein;
+	}
+
+	public String getFoodFat() {
+		return foodFat;
+	}
+
+	public void setFoodFat(String foodFat) {
+		this.foodFat = foodFat;
+	}
+
+	public String getFoodChole() {
+		return foodChole;
+	}
+
+	public void setFoodChole(String foodChole) {
+		this.foodChole = foodChole;
+	}
+
+	public String getFoodSodium() {
+		return foodSodium;
+	}
+
+	public void setFoodSodium(String foodSodium) {
+		this.foodSodium = foodSodium;
+	}
+
+	public String getFoodSugar() {
+		return foodSugar;
+	}
+
+	public void setFoodSugar(String foodSugar) {
+		this.foodSugar = foodSugar;
+	}
+
+	public String getFoodMakerName() {
+		return foodMakerName;
+	}
+
+	public void setFoodMakerName(String foodMakerName) {
+		this.foodMakerName = foodMakerName;
 	}
 
 	@Override
@@ -123,9 +123,5 @@ public class Food {
 				+ ", foodName=" + foodName + ", foodProtein=" + foodProtein + ", foodSodium=" + foodSodium
 				+ ", foodSugar=" + foodSugar + ", foodTotalGram=" + foodTotalGram + "]";
 	}
-
-
-
-
-
+	
 }

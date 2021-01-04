@@ -5,8 +5,6 @@
   <!-- Food test table name : tb_food_test -->
   <!-- Food wokring table name : tb_food -->
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
-
-
   <!-- 관리자 FOOD -->
   <insert id="insertFoodListInformation" parameterType="java.util.List">
     INSERT IGNORE INTO tb_food_backup(
@@ -41,7 +39,24 @@
          NOW()
       )   
     </foreach>
-    
   </insert>
+
+  <select id="getFoodList" resultType="Food">
+        SELECT 
+          food_code           AS foodCode,
+          food_name           AS foodName,
+          food_group          AS foodGroup,
+          food_gram           AS foodTotalGram,
+          food_calorie        AS foodCal,
+          food_carbo          AS foodCarbo,
+          food_protein        AS foodProtein,
+          food_fat            AS foodFat,
+          food_cholesterol    AS foodChole,
+          food_sugar          AS foodSugar,
+          food_sodium         AS foodSodium,
+          food_makerName      AS foodMakerName
+        FROM
+        	tb_food
+  </select>
 
 </mapper>
