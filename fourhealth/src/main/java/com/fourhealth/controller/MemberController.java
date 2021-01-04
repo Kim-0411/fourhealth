@@ -1,8 +1,9 @@
 package com.fourhealth.controller;
 
 
-import java.util.List;
-
+import java.io.IOException;
+import java.io.PrintWriter;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,13 +15,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
-
-import com.fatsecret.platform.services.Request;
+//import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
 import com.fourhealth.dto.MemberDto;
-import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.UserService;
 
@@ -31,12 +28,18 @@ public class MemberController {
 	@Autowired
 	private UserService userService;
 	
+	
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
 	
+	
+	// [회원 공통]로그인 체크
+	
+	
+	
 
-	//로그인 화면(공통)
+	// [회원 공통]로그인 화면
 	@GetMapping("/login")
 	public String commonLoginPage(Model model
 			,@RequestParam(name="result", required = false) String result) {
@@ -47,12 +50,15 @@ public class MemberController {
 		return "login/login";
 	}
 	
-	
+	// [회원 공통]로그인 화면에서 입력받은 값 처리 매핑 
+	// [회원 공통]로그인 후 각 권한(관리자, 트레이너, 사용자) 레벨 체크 후 한글로 치환 
+	// [회원 공통]로그인 후 플렛폼 권한 체크하여 치환 작업
 	@PostMapping("/login")
-	public String Login(@RequestParam(name = "userId", required = false) String userId,
+	public String commonLoginPage(@RequestParam(name = "userId", required = false) String userId,
 						@RequestParam(name = "userPassword", required = false) String userPassword, 
 						HttpSession session,
-						RedirectAttributes rAttr) {
+						//RedirectAttributes rAttr,
+						HttpServletResponse response) throws IOException {
 		
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
@@ -81,16 +87,23 @@ public class MemberController {
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+				//사용자 플렛폼 권한 체크 하여 치환 작업
 				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
 			System.out.println(userId + " : 로그인 성공");
-			
-			
-			
+
 			
 		} else {
-			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
+			response.setContentType("text/html; charset=UTF-8");
+	         PrintWriter out = response.getWriter();
+	         out.println("<script>alert('아이디 혹은 비밀번호가 일치하지 않습니다.'); location.href='/login';</script>");
+	         out.flush();
+//			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
 			System.out.println(userId + " : 로그인 실패");
+			
+		
+			
+			
 			return "redirect:/login";
 		}
 		return "redirect:/";
@@ -98,7 +111,7 @@ public class MemberController {
 
 	
 
-	//로그아웃(공통)
+	// [회원 공통]로그아웃
 	@GetMapping("/logout")
 	public String commonLogoutPro(HttpSession session) {
 
@@ -119,7 +132,7 @@ public class MemberController {
 	@GetMapping("/levelSelect")
 	public String commonLevelSelect() {
 		
-		return "member/level_select";
+		return "master/member/level_select";
 	}
 	
 	//사용자,트레이너 권한 선택후 회원가입 입력하는 화면 
@@ -128,16 +141,17 @@ public class MemberController {
 						Model model) {
 		
 		model.addAttribute("level", level); //누른거 래밸 사용자,트레이너
-		return "member/member_insert";
+		return "master/member/member_insert";
 	}
 	
+	//회원 가입 후 로그인 화면으로 이동
 	@PostMapping("/mInsert")
 	public String addMember(MemberDto member){
 		
 		String result = memberService.addMember(member); 
 		System.out.println(result);
-		//임시로 그냥 메인화면으로 가기
-		return "index";
+	
+		return "redirect:/login";
 	}
 	
 	

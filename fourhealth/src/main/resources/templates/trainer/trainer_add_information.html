@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    
+    <title>트레이너 추가 정보 등록</title> <!-- 매칭시 입력  -->
+    <!-- Custom fonts for this template-->
+     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet">
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin-2.min.css" rel="stylesheet">
+    <style type="text/css">
+    input{
+       margin:  10px;
+    }
+    </style>
+
+</head>
+
+<body class="bg-gradient-primary">
+    <div class="container">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+            <div class="card-body p-0">
+                <!-- Nested Row within Card Body -->
+                <div class="row">
+                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
+                    <div class="col-lg-7">
+                        <div class="p-5">
+                            <div class="text-center">
+                                <h1 class="h4 text-gray-900 mb-4">트레이너 추가 정보</h1>
+                            </div>
+                             <form th:action="@{/trainerAddInformation}" method="post" id="trainer_add_information_form">
+                                <div class="form-group row">
+                      
+                                    <div class="col-sm-12">
+                          		    <!-- <input type="hidden" name="trainerLevel" th:value="${trainerlevel}">   -->                   
+                                       <input type="text" class="form-control form-control-trainer" placeholder="트레이너 소속 GYM" id="trainerAffiliationGYM" name="trainerAffiliationGYM"/>
+                                    </div>
+                                    <div class="col-sm-12"> <!-- 트레이너 소속 GYM 주소  -->    
+                                       <input type="text" class="form-control form-control-trainer" placeholder="트레이너 소속 GYM 주소" id="trainerAffiliationGYMAddr" name="trainerAffiliationGYMAddr"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                    <input type="number" class="form-control form-control-trainer" placeholder="트레이너 자격증 번호" id="traineCrertiNum" name="traineCrertiNum"/>
+                                    </div>
+                                     <div class="col-sm-12">
+                                          <input type="date" class="form-control form-control-user" placeholder="트레이너 자격증 취득일자" id="trainerCertiAcquisitionDate" name="trainerCertiAcquisitionDate" />
+                                    </div>
+                                     <div class="col-sm-12">
+                                       <input type="date" class="form-control form-control-user" placeholder="트레이너 자격증 등록일자" id="trainerCertiRegistrationDate" name="trainerCertiRegistrationDate"/>
+                                    </div>
+                            </form>
+                                <button id="trainer_add_information" disabled="disabled" class="btn btn-primary btn-user btn-block">
+                                       정보등록하기
+                                </button>
+                        </div>
+                   </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+      <script src="vendor/jquery/jquery.min.js"></script>
+   <script type="text/javascript">
+      
+    $('#trainer_add_information').click(function(){
+       if($("#trainerAffiliationGYM").val()==""){
+         alert("트레이너 소속 GYM을 입력해주세요.");
+         $("#trainerAffiliationGYM").focus();
+         return false;
+      }
+       if($("#trainerAffiliationGYMAddr").val()==""){
+         alert("트레이너 소속 GYM 주소 입력해주세요.");
+         $("#trainerAffiliationGYMAddr").focus();
+         return false;
+      }
+      if($("#traineCrertiNum").val()==""){
+         alert("트레이너 자격증 번호 입력해주세요.");
+         $("#traineCrertiNum").focus();
+         return false;
+      }
+      if($("#trainerCertiAcquisitionDate").val()==""){
+         alert("트레이너 자격증 취득일자 입력해주세요.");
+         $("#trainerCertiAcquisitionDate").focus();
+         return false;
+      }
+      if($("#trainerCertiRegistrationDate").val()==""){
+         alert("트레이너 자격증 등록일자 입력해주세요.");
+         $("#trainerCertiRegistrationDate").focus();
+         return false;
+      }
+      else{
+         $("#trainer_add_information").submit();
+      }
+      });
+ 
+    
+      
+    </script>
+   <!-- Bootstrap core JavaScript-->
+    <script type="text/javascript">
+    
+    </script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin-2.min.js"></script>
+
+</body>
+</html>
+

@@ -23,8 +23,8 @@
                <a th:href="@{/login}" th:if="${session.SID eq null}">Sign in</a>
             </div>
             </div>
-            <div class="register">
-              <a th:href="@{/register}" th:if="${session.SID eq null}">Sing up</a>
+            <div class="Sing up">
+              <a th:href="@{/levelSelect}" th:if="${session.SID eq null}">Sing up</a>
             </div>
                <th:block th:unless="${session.SID eq null}">
 		           <label style="color:white"> [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp; [[${session.SNICKNAME}]] 

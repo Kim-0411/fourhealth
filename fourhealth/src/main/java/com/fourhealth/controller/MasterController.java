@@ -19,9 +19,6 @@ public class MasterController {
 	private MemberService memberService;
 	
 	
-	
-	
-	
 	//관리자 회원 삭제  
 	@GetMapping("/removeMasterMember")
 	public String removeMasterMember( Model model
@@ -60,7 +57,6 @@ public class MasterController {
 		MemberDto memberDto = memberService.getMemberById(memberId);		
 		System.out.println("db에서 검색한 회원정보-->" + memberDto);
 		model.addAttribute("title", "회원 수정화면");
-		
 		// db에서 검색한 회원정보
 		model.addAttribute("memberDto", memberDto);
 		System.out.println("dto 값 확인" + memberDto);

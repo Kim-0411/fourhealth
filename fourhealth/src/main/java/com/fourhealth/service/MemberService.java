@@ -5,10 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-
-import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.MemberDto;
-import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
@@ -48,8 +45,8 @@ public class MemberService {
 			//if(removeCheck > 0) result = "회원 삭제 성공";
 			
 		}
-		return null;
-//		return result;
+	//	return null;
+		return result;
 	}
 	
 	//전체회원조회 후 수정처리
