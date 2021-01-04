@@ -128,14 +128,5 @@ public class MemberService {
 	 * return getMatchingUserList; }
 	 */
 
-	// 내회원 조회 페이지에서 특정 회원 클릭하여 접근시 그 회원 정보(트레이너)
-	public UserDto trainerGetMatchingUserInfo(String userId) {
-
-		UserDto userInfo = memberMapper.trainerGetMatchingUserInfo(userId);
-		return userInfo;
-	}
-
-
-	
 
 }

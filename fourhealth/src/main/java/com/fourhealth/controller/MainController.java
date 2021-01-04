@@ -37,10 +37,4 @@ public class MainController {
 		return "main_layout/about";
 	}
 
-    @GetMapping("/index")
-    public String index() {
-
-        return "main";
-    }
-
 }
