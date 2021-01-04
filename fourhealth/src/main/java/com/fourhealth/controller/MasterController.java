@@ -42,21 +42,21 @@ public class MasterController {
 		
 		//서비스계층에서 권한 별 삭제 처리 후 결과 
 		String result = memberService.removeMasterMember(memberId, memberPw, memberLevel);
-		
 		System.out.println(result + "삭제 처리 후 결과");
 		redirectAttr.addAttribute("result", result);
 		return "redirect:/member_all_list";
 	}
 
 	
-	//관리자 전체 회원 리스트에서 수정 후 
+	//관리자 전체 회원 리스트에서 수정 
 	@GetMapping("/modifyMasterMember")
 	public String modifyMasterMember( Model model
-							   ,@RequestParam(name="memberId", required = false) String memberId) {
+							   		,@RequestParam(name="memberId", required = false) String memberId) {
 		System.out.println("회원 수정 폼에 보여질 회원아이디" + memberId);
 		MemberDto memberDto = memberService.getMemberById(memberId);		
 		System.out.println("db에서 검색한 회원정보-->" + memberDto);
 		model.addAttribute("title", "회원 수정화면");
+	
 		// db에서 검색한 회원정보
 		model.addAttribute("memberDto", memberDto);
 		System.out.println("dto 값 확인" + memberDto);
@@ -87,7 +87,7 @@ public class MasterController {
 		model.addAttribute("title", "회원 목록");
 		model.addAttribute("memberList", memberList);
 		System.out.println("전체회원 조회" + memberList);
-		
+		// 관리자 전체 리스트
 		return "master/member/member_all_list";
 	}
 

@@ -18,6 +18,7 @@ public class UserService {
 	@Autowired
 	private UserMapper userMapper;
 	
+	////사용자 플렛폼 권한 체크 하여 치환 작업
 	public GradePlatformUserDto getUserGrade(String memberId) {
 		GradePlatformUserDto gradePlatformUserDto = userMapper.getUserGrade(memberId);
 		System.out.println(gradePlatformUserDto.getUserPlatformGradeName());

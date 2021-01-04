@@ -1,6 +1,6 @@
 package com.fourhealth.dto;
 
-//테이블명 : tb_common_user
+//테이블명 : tb_common_user 회원 공통 관
 public class MemberDto {
 
     private String memberId;			//회원 공통 관리 아이디

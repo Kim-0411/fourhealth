@@ -9,8 +9,6 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
-
-
 @Service
 @Transactional
 
@@ -18,15 +16,13 @@ public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
 	
-	//삭제처리
+	//회원 삭제처리
 	public String removeMasterMember(String memberId, String memberPw, String memberLevel) {
 		String result = "회원 삭제 실패";
-		
-		
+
 		
 		//id member테이블 조회하고 조회한 결과 값 중 비밀번호와 화면에서 입력받은 비밀번호가 일치하면 삭제 처리
 		MemberDto memberDto = memberMapper.getMemberById(memberId);
-		
 		
 		if(memberDto != null && memberDto.getMemberPw() != null && memberPw.equals(memberDto.getMemberPw())) {
 			

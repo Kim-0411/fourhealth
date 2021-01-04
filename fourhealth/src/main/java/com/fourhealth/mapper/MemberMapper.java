@@ -11,13 +11,13 @@ import com.fourhealth.dto.UserDto;
 @Mapper
 public interface MemberMapper {
 
-	//관리자 회원 리스트에 삭제 (메세지)
+	//관리자 단 회원 리스트에서 삭제 (메세지-외래키)
 	int removeMasterMsg(String membeId);
 	
-	//관리자 회원 리스트에서 삭제
+	//관리자 단 회원 리스트에서 삭제
 	int removeMasterMember(String memberId);
 	
-	//관리자 회원 리스트에서 삭제
+	//관리자 단 회원 리스트에서 삭제
 	int removeMemberById(String memberId);
 	
 	//관리자 단에서 전체 회원리스트에서 수정

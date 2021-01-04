@@ -1,5 +1,6 @@
 package com.fourhealth.dto;
 
+//테이블명 : tb_user
 public class UserDto {
 	
 	private String userId; 				//사용자아이디

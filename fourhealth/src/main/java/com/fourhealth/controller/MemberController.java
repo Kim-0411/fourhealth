@@ -33,7 +33,6 @@ public class MemberController {
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
 	
-	
 	// [회원 공통]로그인 체크
 	
 	
@@ -42,9 +41,8 @@ public class MemberController {
 	// [회원 공통]로그인 화면
 	@GetMapping("/login")
 	public String commonLoginPage(Model model
-			,@RequestParam(name="result", required = false) String result) {
+									,@RequestParam(name="result", required = false) String result) {
 		model.addAttribute("title", "로그인 화면");
-
 		if(result != null) model.addAttribute("result", result);
 
 		return "login/login";
@@ -55,11 +53,10 @@ public class MemberController {
 	// [회원 공통]로그인 후 플렛폼 권한 체크하여 치환 작업
 	@PostMapping("/login")
 	public String commonLoginPage(@RequestParam(name = "userId", required = false) String userId,
-						@RequestParam(name = "userPassword", required = false) String userPassword, 
-						HttpSession session,
-						//RedirectAttributes rAttr,
-						HttpServletResponse response) throws IOException {
-		
+									@RequestParam(name = "userPassword", required = false) String userPassword, 
+									HttpSession session,
+									//RedirectAttributes rAttr,
+									HttpServletResponse response) throws IOException {
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
@@ -82,7 +79,6 @@ public class MemberController {
 				
 				//로그인 후 사용자 플랫폼 권한 체크하여 치환
 				GradePlatformUserDto gradePlatformUserDto = userService.getUserGrade(userId);
-				
 				session.setAttribute("SID", memberDto.getMemberId());
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
@@ -91,8 +87,6 @@ public class MemberController {
 				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
 			System.out.println(userId + " : 로그인 성공");
-
-			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 	         PrintWriter out = response.getWriter();
@@ -101,20 +95,15 @@ public class MemberController {
 //			rAttr.addAttribute("result", "입력하신 정보는 없습니다.");
 			System.out.println(userId + " : 로그인 실패");
 			
-		
-			
-			
 			return "redirect:/login";
 		}
 		return "redirect:/";
 	}
 
-	
 
 	// [회원 공통]로그아웃
 	@GetMapping("/logout")
 	public String commonLogoutPro(HttpSession session) {
-
 		session.invalidate();
 
 		return "redirect:/login";
@@ -138,7 +127,7 @@ public class MemberController {
 	//사용자,트레이너 권한 선택후 회원가입 입력하는 화면 
 	@GetMapping("/mInsertPage")
 	public String commonMInsert(@RequestParam(value = "user_level_code", required = false) String level,
-						Model model) {
+								Model model) {
 		
 		model.addAttribute("level", level); //누른거 래밸 사용자,트레이너
 		return "master/member/member_insert";
@@ -147,7 +136,6 @@ public class MemberController {
 	//회원 가입 후 로그인 화면으로 이동
 	@PostMapping("/mInsert")
 	public String addMember(MemberDto member){
-		
 		String result = memberService.addMember(member); 
 		System.out.println(result);
 	
@@ -165,8 +153,6 @@ public class MemberController {
 	}
 	
 	/********************************************************************************************/
-	
-	
 	
 	
 			//트레이너 화면 에 붙여될내용
