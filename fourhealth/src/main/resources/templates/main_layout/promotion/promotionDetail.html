@@ -61,20 +61,16 @@
         </tr>
       </table>
 
-      <form th:action="@{/proPayment}" method="Post">
+      <form th:action="@{/promotionPaymentCheck}" method="Post">
         <input
           type="hidden"
-          name="proCode"
+          name="promotionNoticeCode"
           th:value="${proDetail.trainerPromotionNoticeCode}"
         />
-        <input type="hidden" name="proId" th:value="${proDetail.userId}" />
-        <input
-          type="hidden"
-          name="proPrice"
-          th:value="${proDetailtrainerPromotionPrice}"
-        />
         <input type="hidden" name="userId" th:value="${session.USERID}" />
-        <button type="submit">모집신청하기</button>
+        <button type="submit" id="promotionPaymentCheckBtn">
+          모집신청하기
+        </button>
       </form>
     </div>
   </th:block>
