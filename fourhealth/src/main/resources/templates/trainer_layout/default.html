@@ -4,11 +4,12 @@
 <head th:replace="fragments/trainer/head :: headFragment"></head>
 <body id="page-top">
 	<div id="wrapper">
-		<div th:replace="fragments/trainer/left :: leftMenuFragment"></div>
+		<aside th:replace="fragments/trainer/left :: leftMenuFragment"></aside>
 		<div id="content-wrapper" class="d-flex flex-column">
-			<div th:replace="fragments/trainer/header :: headerFragment"></div>
+			<div th:replace="fragments/trainer/nav :: navFragment"></div>
 			<div id="content">
 				<div th:block layout:fragment="customContent"></div>
+				<div ></div>
 			</div>
 			<div th:replace="fragments/trainer/footer :: footerFragment"></div>
 		</div>
