@@ -16,13 +16,6 @@ public class MainController {
 		return "index";
 	}
 
-	// Sns page
-	@GetMapping("/sns")
-	public String matching(Model model) {
-		model.addAttribute("title", "Fourhealth matching");
-		return "main_layout/sns";
-	}
-
 	// Contact page
 	@GetMapping("/contact")
 	public String contact(Model model) {

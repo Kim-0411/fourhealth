@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import com.fourhealth.dto.Sns;
+import com.fourhealth.dto.SnsUserDto;
 import com.fourhealth.mapper.SnsMapper;
 
 @Service
@@ -16,18 +16,24 @@ public class SnsService {
 	@Autowired
 	private SnsMapper snsMapper;
 	
-	public String addSns(Sns sns) {
-		String insertCheck = "게시 실패";
-		if(sns != null) {
-			int result = snsMapper.addSns(sns);
-			if(result > 0) insertCheck = "게시 성공";
+	
+	  public String snsInsert(SnsUserDto snsUserDto) { 
+			String insertCheck = "게시 실패";
+			if(snsUserDto != null) {
+				int result = snsMapper.snsInsert(snsUserDto);
+				if(result > 0) insertCheck = "게시 성공";
+			}
+			
+			return insertCheck;
 		}
-		
-		return insertCheck;
-	}
-
-	public List<Sns> getSnsList() {
-		List<Sns> snsList = snsMapper.getSnsList();
+	 
+	
+	public List<SnsUserDto> getSnsList() {
+		List<SnsUserDto> snsList = snsMapper.getSnsList();
+		System.out.println("#######################");
+		System.out.println("test file call snsList from snsService");
+		System.out.println(snsList);
 		return snsList;
+		//return snsList;
 	}
 }

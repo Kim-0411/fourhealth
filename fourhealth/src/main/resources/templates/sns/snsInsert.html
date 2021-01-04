@@ -1,30 +1,39 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-	<th:block>
-		<title th:text="${title}"></title>
-	</th:block>
-	<th:block>
-	<form th:action="@{/addSns}" method="post">
-		<table border="1">
-			<tr>
-				<td>Contents</td>
-				<td>
-					<textarea name="userSnsContents" id="" cols="30" rows="10"></textarea>
-				</td>
-			</tr>
-			<tr>
-				<td>attach</td>
-				<td>
-					<input type="file" />
-				</td>
-			</tr>
-			<tr>
-				<td>
-					<button type="submit">게시</button>
-				</td>
-			</tr>
-		</table>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<head th:replace="fragments/head :: headFragment"></head>
+<body>
+   <div id="preloader">
+       <div class="yummy-load"></div>
+   </div>
+   <div th:replace="fragments/TopHeader :: topHeaderFragment"></div>
+   <header class="header_area" th:replace="fragments/header :: headerFragment"></header>
+   <div class="center-block">
+   <form th:action="@{/snsInsert}" method="post">
+	   <div class="container">
+			<table class="table table-bordered">
+					<tr>
+						<tr>
+				          	<td>작성자 아이디 :</td>
+				         	<td>
+				           		<input type="text" name="userId" th:value="${session.USERID}" />
+				          	</td>
+				        </tr>
+						<tr>
+				        	<td>Content</td>
+				        	<td><input type="text" name="userSnsContents" /></td>
+				        </tr>
+				        <tr>
+				         	<td>Image</td>
+				         	<td><input type="file" id="userSnsUploadFile" name="userSnsUploadFile" /></td>
+				        </tr>
+					</tr>
+			</table>
+			<button type="submit" id="snsInsertBtn">작성</button>
+		</div>
 	</form>
-	</th:block>
-	
+	</div>
+    <div th:replace="fragments/Footer_Menu :: FooterMenuFragment"></div>
+    <div th:replace="fragments/Jquery :: jsFragment"></div>
+    
+</body>
 </html>

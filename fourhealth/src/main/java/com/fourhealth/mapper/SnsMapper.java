@@ -8,12 +8,13 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.fourhealth.dto.Sns;
+import com.fourhealth.dto.SnsUserDto;
 
 @Mapper
 public interface SnsMapper {
 
-	public int addSns(Sns sns);
+	List<SnsUserDto> getSnsList();
 
-	public List<Sns> getSnsList();
+	 int snsInsert(SnsUserDto snsUserDto); 
+
 }

@@ -1,14 +1,14 @@
 package com.fourhealth.dto;
 
-import java.sql.Blob;
 
 public class SnsUserDto {
 
 	private String userSnsCode;
 	private String userId;
 	private String userSnsContents;
-	private Blob userSnsUploadFile;
+	private String userSnsUploadFile;
 	private String userSnsRegDate;
+	private String snsCode;
 	public String getUserSnsCode() {
 		return userSnsCode;
 	}
@@ -27,10 +27,10 @@ public class SnsUserDto {
 	public void setUserSnsContents(String userSnsContents) {
 		this.userSnsContents = userSnsContents;
 	}
-	public Blob getUserSnsUploadFile() {
+	public String getUserSnsUploadFile() {
 		return userSnsUploadFile;
 	}
-	public void setUserSnsUploadFile(Blob userSnsUploadFile) {
+	public void setUserSnsUploadFile(String userSnsUploadFile) {
 		this.userSnsUploadFile = userSnsUploadFile;
 	}
 	public String getUserSnsRegDate() {
@@ -39,10 +39,29 @@ public class SnsUserDto {
 	public void setUserSnsRegDate(String userSnsRegDate) {
 		this.userSnsRegDate = userSnsRegDate;
 	}
+	public String getSnsCode() {
+		return snsCode;
+	}
+	public void setSnsCode(String snsCode) {
+		this.snsCode = snsCode;
+	}
 	@Override
 	public String toString() {
-		return "SnsUserDto [userSnsCode=" + userSnsCode + ", userId=" + userId + ", userSnsContents=" + userSnsContents
-				+ ", userSnsUploadFile=" + userSnsUploadFile + ", userSnsRegDate=" + userSnsRegDate + "]";
+		StringBuilder builder = new StringBuilder();
+		builder.append("SnsUserDto [userSnsCode=");
+		builder.append(userSnsCode);
+		builder.append(", userId=");
+		builder.append(userId);
+		builder.append(", userSnsContents=");
+		builder.append(userSnsContents);
+		builder.append(", userSnsUploadFile=");
+		builder.append(userSnsUploadFile);
+		builder.append(", userSnsRegDate=");
+		builder.append(userSnsRegDate);
+		builder.append(", snsCode=");
+		builder.append(snsCode);
+		builder.append("]");
+		return builder.toString();
 	}
-	
+
 }
