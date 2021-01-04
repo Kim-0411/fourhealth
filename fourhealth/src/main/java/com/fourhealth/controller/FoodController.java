@@ -45,16 +45,23 @@ public class FoodController {
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
 
-	// Generate FoodService Object
 
+	@GetMapping("/foodListNumbers")
+	public String foodListNumbers(Model model, 
+									@RequestParam(name = "currentPage", required=false, defaultValue = "1")int currentPage){
 
+		Map<String, Object> resultMap = foodService.getFoosList(currentPage);								
+		return "food/master_food/food_list";
+	}
 	//식품리스트
 	@GetMapping("/foodList")
 	public String foodList(Model model){
 		model.addAttribute("title", "식품리스트");
+		//
 
+		//식품 리스트 Food type의 List
 		List<Food> foodList = foodService.getFoodList();
-		System.out.println(foodList);
+		System.out.println(foodList.size());
 
 		return "food/food_list";
 	}

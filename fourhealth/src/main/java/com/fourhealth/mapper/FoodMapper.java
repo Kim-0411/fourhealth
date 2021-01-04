@@ -11,11 +11,15 @@ import org.apache.ibatis.annotations.Mapper;
 public interface FoodMapper {
 	public int insertFood(Food food);
 
+	public int getFoodListCount();
+
+	public  List<Map<String, Object>> getFoodListBoard(int startRow, int rowPerPage);
+
+
 	//Food List 
 	public List<Food> getFoodList();
 
 	//public int insertFood2(Map<String, String> data);
-	//public int insertFood2(List<Map<String, Object>> data);
 
 	//get Map tpye Object
 	public int insertFoodMapInformation(Map<String, Object> data);

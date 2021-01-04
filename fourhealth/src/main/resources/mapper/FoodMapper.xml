@@ -42,21 +42,47 @@
   </insert>
 
   <select id="getFoodList" resultType="Food">
-        SELECT 
-          food_code           AS foodCode,
-          food_name           AS foodName,
-          food_group          AS foodGroup,
-          food_gram           AS foodTotalGram,
-          food_calorie        AS foodCal,
-          food_carbo          AS foodCarbo,
-          food_protein        AS foodProtein,
-          food_fat            AS foodFat,
-          food_cholesterol    AS foodChole,
-          food_sugar          AS foodSugar,
-          food_sodium         AS foodSodium,
-          food_makerName      AS foodMakerName
-        FROM
-        	tb_food
+    SELECT 
+      food_code           AS foodCode,
+      food_name           AS foodName,
+      food_group          AS foodGroup,  
+      food_gram           AS foodTotalGram,
+      food_calorie        AS foodCal,
+      food_carbo          AS foodCarbo,
+      food_protein        AS foodProtein,
+      food_fat            AS foodFat,     
+      food_cholesterol    AS foodChole,
+      food_sugar          AS foodSugar,
+      food_sodium         AS foodSodium,
+      food_makerName      AS foodMakerName
+    FROM
+     	tb_food
   </select>
+
+  <select id="getFoodListCount" resultType="int">
+    SELECT
+      count(*)
+    FROM
+      tb_food  
+  </select>
+
+  <select id="getFoodListBoard" parameterType="int" resultType="map">
+		SELECT
+			 f.food_code 			  AS foodCode,
+			 f.food_name 			  AS foodName,
+			 f.food_group 			AS foodGroup,
+			 f.food_gram 			  AS foodTotalGram,
+			 f.food_calorie 		AS foodCal,
+			 f.food_carbo 			AS foodCarbo,
+			 f.food_protein 		AS foodProtein,
+			 f.food_fat 			  AS foodFat,
+			 f.food_cholesterol AS foodChole,
+			 f.food_sugar 			AS foodSugar,
+			 f.food_sodium 		  AS foodSodium,
+			 f.food_makerName 	AS foodMakerNamer
+		FROM
+			tb_food AS f
+		LIMIT #{startRow}, #{rowPerPage};
+	</select>
 
 </mapper>

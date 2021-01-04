@@ -1,6 +1,7 @@
 package com.fourhealth.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -19,6 +20,52 @@ public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;
 
+	//Food List on limit table
+	public Map<String, Object> getFoosList(int currentPage){
+		int startRow = 0;
+		int rowPerPage = 5;
+		int startPageNum = 1;
+		int endPageNum = 10;
+
+		//Mapper call area(foodList count)
+		double count = foodMapper.getFoodListCount();
+		int lastPage = (int)Math.ceil(count/rowPerPage);
+		
+
+		startRow = (currentPage - 1)*rowPerPage;
+		
+		System.out.println("#######################################");
+		System.out.println("Test printout total db numbers : "+count);
+		System.out.println("Test printout total startRow : "+startRow);
+		
+
+		//Mapper call area(using foodList number)
+		List<Map<String, Object>> foodList = foodMapper.getFoodListBoard(startRow, rowPerPage);
+
+		System.out.println("Test printout foodList : "+foodList);
+
+
+		if(currentPage > 6){
+			startPageNum = currentPage-5;
+			endPageNum = currentPage+4;
+
+			if(endPageNum >= lastPage) {
+				startPageNum = (lastPage - 9);
+				endPageNum = lastPage;
+			}
+		}
+		
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("loginHistory", foodList);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("endPageNum", endPageNum);
+	
+		// return resultMap;
+		return null;
+	}
+
 	//Food List Service
 	public List<Food> getFoodList(){
 		System.out.println("foodList service call test");
@@ -27,6 +74,7 @@ public class FoodService {
 	}
 
 	// Food Input Service
+	
 	public String addFood(Food food) {
 		String foodChecker = "Insert food data failed!";
 		if (food != null) {
