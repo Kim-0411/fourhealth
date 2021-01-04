@@ -72,4 +72,11 @@ public class MasterController {
         // 관리자 완료된 프로모션 조회 화면
         return "master_layout/promotion/promotion_completion_list";
     }
+
+    @GetMapping("/master_user_schedule")
+    public String masterUserSchedule(Model model) {
+        // 관리자 완료된 프로모션 조회 화면
+        return "master_layout/schedule/user_schedule";
+    }
+
 }

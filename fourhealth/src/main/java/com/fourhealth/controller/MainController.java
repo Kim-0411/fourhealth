@@ -36,4 +36,16 @@ public class MainController {
 		return "main_layout/about";
 	}
 
+	@GetMapping("/food")
+	public String food(Model model) {
+		model.addAttribute("title", "Fourhealth About");
+		return "main_layout/food";
+	}
+
+	@GetMapping("/exercise")
+	public String exercise(Model model) {
+		model.addAttribute("title", "Fourhealth About");
+		return "main_layout/exercise";
+	}
+
 }
