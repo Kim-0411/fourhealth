@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head th:replace="fragments/trainer/head :: headFragment"></head>
+<body id="page-top">
+	<div id="wrapper">
+		<aside th:replace="fragments/trainer/left :: leftMenuFragment"></aside>
+		<div id="content-wrapper" class="d-flex flex-column">
+			<div th:replace="fragments/trainer/nav :: navFragment"></div>
+			<div id="content">
+				<div th:block layout:fragment="customContent"></div>
+				<div ></div>
+			</div>
+			<div th:replace="fragments/trainer/footer :: footerFragment"></div>
+		</div>
+	</div>
+	<div th:replace="fragments/trainer/js :: jsFragment"></div>
+</body>
+</html>

@@ -2,11 +2,16 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{default_layout/trainer/default}"
+  layout:decorate="~{trainer_layout/default}"
 >
-
   <th:block layout:fragment="customContent">
-
-    <h1>트레이너 메인</h1>
+    <h1>ss</h1>
+     <button type="button" id="sexy">fd</button> 
   </th:block>
 </html>
+<script type="text/javascript">
+	console.log("test");
+	$('#sexy').click(function(){
+		console.log('gfg');
+	});
+</script>
