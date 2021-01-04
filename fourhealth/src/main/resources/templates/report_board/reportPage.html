@@ -1,14 +1,12 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
 <body>
-<div class="Header_Area" th:fragment="headerFragment">
-	<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-		id="reportDropdown" role="button" data-toggle="dropdown"
-		aria-haspopup="true" aria-expanded="false">신고 게시판</a>
-		<br>
-		
-		
-	</li><br><br>
+	<div class="Header_Area" th:fragment="headerFragment">
+		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
+			id="reportDropdown" role="button" data-toggle="dropdown"
+			aria-haspopup="true" aria-expanded="false">신고 게시판</a>
+			<br>
+		</li><br><br>
 		<select  name="reportReason">
 			<th:block th:if="${#lists.size(reportReasonList) > 0}" th:each="r : ${reportReasonList}">
 				<option th:text="${r.reportCategoriesContents}" th:value="${r.reportCategoriesCode}"></option>
@@ -19,8 +17,8 @@
 				<option th:text="${rp.trainerPromotionName}" th:value="${rp.trainerUserMatchingCode}"></option>
 			</th:block>
 		</select>   
-		<button type="button">신고 등록하기</button>
-		<button type="button">나의 신고 목록보기</button>
+		<a href="/reportInsert"><button type="button">신고 등록하기</button></a>
+		<a href="/reportList"><button type="button">나의 신고 목록보기</button></a>
 		
 		<!-- Jquery-2.2.4 js start-->
     <div th:replace="fragments/Jquery :: jsFragment"></div>

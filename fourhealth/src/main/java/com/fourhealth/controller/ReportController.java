@@ -20,7 +20,7 @@ public class ReportController {
 	//신고 게시판 등록하기
 	@GetMapping("/reportInsert")
 	public String reportInsert() {
-		return null;
+		return "report_board/reportInsert";
 	}
 	@GetMapping("/reportInsert1")
 	public String reportInsert(Model model) {
