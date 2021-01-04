@@ -7,6 +7,8 @@ import java.io.PrintWriter;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Map;
+
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 
@@ -29,7 +31,7 @@ public class PromotionController {
 	private PromotionService promotionService;
 
 	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
-	@GetMapping("/pro")
+	@GetMapping("/promotionCheck")
 	public String promotionCheck(@RequestParam(name = "proId", required = false) String proId,
 			HttpServletResponse response) throws IOException {
 
@@ -49,7 +51,7 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 등록컨트롤러
-	@PostMapping("/proInsert")
+	@PostMapping("/promotionInsert")
 	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
 			throws ParseException, FileNotFoundException {
 		System.out.println(promotionDto);
@@ -75,7 +77,7 @@ public class PromotionController {
 			} catch (IOException e) {
 				e.printStackTrace();
 			}
-			promotionDto.setProImageUrl(fileName);
+			promotionDto.setProImageUrl(rename);
 		}
 
 		String start = promotionDto.getTrainerPromotionAttendStartDate();
@@ -100,26 +102,40 @@ public class PromotionController {
 
 		promotionService.promotionInsert(promotionDto);
 
-		return "redirect:/login";
+		return "redirect:/promotionList";
 	}
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("/proList")
-	public String commonPromotionList(Model model) {
-		List<NoticePromotionTrainerDto> promotionList = promotionService.promotionList();
-		System.out.println(promotionList);
-		model.addAttribute("promotionList", promotionList);
+	@GetMapping("/promotionList")
+	public String commonPromotionList(Model model,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
+
+		model.addAttribute("title", "프로모션목록");
+
+		Map<String, Object> resultMap = promotionService.getPromotionListPaging(currentPage);
+
+		model.addAttribute("promotionList", resultMap.get("promotionList"));
+		model.addAttribute("lastPage", resultMap.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+
+		// 페이징없이 프로모션 전체화면 보기
+		// List<NoticePromotionTrainerDto> promotionList =
+		// promotionService.promotionList();
+		// System.out.println(promotionList);
+		// model.addAttribute("promotionList", promotionList);
 
 		return "main_layout/promotion/promotionList";
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러
-	@GetMapping("/proDetail")
-	public String commonProDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
+	@GetMapping("/promotionDetail")
+	public String commonPromotionDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
 
 		System.out.println(proCode);
 
-		NoticePromotionTrainerDto promotionDto = promotionService.proDetail(proCode);
+		NoticePromotionTrainerDto promotionDto = promotionService.promotionDetail(proCode);
 		System.out.println(promotionDto);
 		model.addAttribute("proDetail", promotionDto);
 

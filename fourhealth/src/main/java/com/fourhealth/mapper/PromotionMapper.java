@@ -1,6 +1,7 @@
 package com.fourhealth.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -18,6 +19,11 @@ public interface PromotionMapper {
 	public List<NoticePromotionTrainerDto> promotionList();
 
 	// 트레이너 프로모션 상세정보
-	public NoticePromotionTrainerDto proDetail(String proCode);
+	public NoticePromotionTrainerDto promotionDetail(String proCode);
 
+	// 트레이너 프로모션리스트의 게시글 페이징을 위한 전체 게시글 카운트
+	public int getPromotionListCount();
+
+	// 트레이너 프로모션리스트의 게시글 페이징을 위한 스타트페이지및 마지막페이지
+	public List<Map<String, Object>> getPromotionListPaging(int startRow, int rowPerPage);
 }
