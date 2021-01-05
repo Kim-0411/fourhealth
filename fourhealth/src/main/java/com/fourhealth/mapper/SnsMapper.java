@@ -15,6 +15,6 @@ public interface SnsMapper {
 
 	List<SnsUserDto> getSnsList();
 
-	 int snsInsert(SnsUserDto snsUserDto); 
+	int snsInsert(SnsUserDto snsUserDto);
 
 }

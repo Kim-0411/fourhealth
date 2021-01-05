@@ -154,20 +154,19 @@ public class MemberController {
 	 * //로그인됫다고 가정(트레이너)
 	 * 
 	 * @GetMapping("/myPromotion") public String trainerGetMyPromotionList(Model
-	 * model) { //아이디 있다고 가정 결제할때 하나씩 증가시켜줘야하는데 결제 하는거보고 하기로.
-	 * List<NoticePromotionTrainerDto> myPromotionList =
+	 * model) { //아이디 있다고 가정 결제할때 하나씩 증가시켜줘야하는데 결제 하는거보고 하기로. Lis
+	 * 
 	 * memberService.trainerGetMyPromotionList("id002");
 	 * model.addAttribute("myPromotionList",myPromotionList); return
 	 * "trainer/my_promotion_list"; }
 	 * 
 	 * //자신의 프로모션 별 회원에게 운동이나음식 넣어주기위해 프로모션 접근햇을때 등록된회원 조회 (트레이너)
 	 * 
-	 * @GetMapping("/myPromotionMemberList") public String
-	 * trainerGetMyPromotionMemberList(Model model ,@RequestParam(name
-	 * ="promotionCode", required = false) String promotionCode) {
-	 * List<MatchingUserTrainerDto> getMemberList =
+	 * @GetMapping("/myPromotionMemberList") public String ="pomotionCode", required
+	 * = false) String promotionCode) { List<MatchingUserTrainerDto> getMemberList =
 	 * memberService.trainerGetMatchingUserList(promotionCode);
-	 * System.out.println(getMemberList);
+	 * System.out.printlngtMemberList);
+	 * 
 	 * model.addAttribute("memberList",getMemberList); return
 	 * "trainer/my_promotion_member_list"; }
 	 * 
