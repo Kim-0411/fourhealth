@@ -59,7 +59,7 @@ public class MasterController {
 	
 		// db에서 검색한 회원정보
 		model.addAttribute("memberDto", memberDto);
-		System.out.println("dto 값 확인" + memberDto);
+		System.out.println("Dto 값 확인" + memberDto);
 		return "master/member/member_modify";
 	}
 	
