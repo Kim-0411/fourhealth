@@ -1,26 +1,82 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" lang="en">
+<!-- head Start -->
+
+<head th:replace="fragments/head :: headFragment">
+
+
+</head>
+<style>
+img {
+	width : 200px;
+	height: 200px;
+}
+.center-block{
+	text-align: center;
+}
+ table{
+	margin-top : 20px;
+ 	margin-left: auto;
+ 	margin-right: auto;
+ 	text-align: center;
+
+}
+
+</style>
+<!-- head END -->
+
 <body>
-	<div class="Header_Area" th:fragment="headerFragment">
-		<li class="nav-item dropdown"><a class="nav-link dropdown-toggle"
-			id="reportDropdown" role="button" data-toggle="dropdown"
-			aria-haspopup="true" aria-expanded="false">신고 게시판</a>
-			<br>
-		</li><br><br>
-		<select  name="reportReason">
-			<th:block th:if="${#lists.size(reportReasonList) > 0}" th:each="r : ${reportReasonList}">
-				<option th:text="${r.reportCategoriesContents}" th:value="${r.reportCategoriesCode}"></option>
-			</th:block>
-		</select> <br><br><br>
-		<select  name="reportMyPromotion">
-			<th:block th:if="${#lists.size(reportPromotionList) > 0}" th:each="rp : ${reportPromotionList}">
-				<option th:text="${rp.trainerPromotionName}" th:value="${rp.trainerUserMatchingCode}"></option>
-			</th:block>
-		</select>   
+    <!-- Preloader Start -->
+    <div id="preloader">
+        <div class="yummy-load"></div>
+    </div>
+
+    <!-- ****** Top Header Area Start ****** -->
+    <div th:replace="fragments/TopHeader :: topHeaderFragment"></div>
+    <!-- ****** Top Header Area End ****** -->
+
+    <!-- ****** Header Area Start ****** -->
+    <header class="header_area" th:replace="fragments/header :: headerFragment"></header>
+    <!-- ****** Header Area End ****** -->
+	<h2 align="center">신고 게시판</h2>
+		
+		<table class = "table table-bordered">
+				<thead>
+						<tr>
+							<th>신고 상세 사유</th>
+							<th>나의 프로모션 </th>
+							
+						</tr>		
+				</thead>
+				<tbody>
+						<tr>
+							<td>	
+								<select  name="reportReason">
+									<th:block th:if="${#lists.size(reportReasonList) > 0}" th:each="r : ${reportReasonList}">
+										<option th:text="${r.reportCategoriesContents}" th:value="${r.reportCategoriesCode}"></option>
+									</th:block>
+								</select>
+							</td>
+							<td>
+								<select  name="reportMyPromotion">
+									<th:block th:if="${#lists.size(reportPromotionList) > 0}" th:each="rp : ${reportPromotionList}">
+										<option th:text="${rp.trainerPromotionName}" th:value="${rp.trainerUserMatchingCode}"></option>
+									</th:block>
+								</select>   
+							</td>
+						</tr>
+				</tbody>
+		</table>	
+		
+	
 		<a href="/reportInsert"><button type="button">신고 등록하기</button></a>
 		<a href="/reportList"><button type="button">나의 신고 목록보기</button></a>
-		
-		<!-- Jquery-2.2.4 js start-->
+
+    <!-- ****** Footer Menu Area Start ****** -->
+    <div th:replace="fragments/Footer_Menu :: FooterMenuFragment"></div>
+    <!-- ****** Footer Menu Area End ****** -->
+
+    <!-- Jquery-2.2.4 js start-->
     <div th:replace="fragments/Jquery :: jsFragment"></div>
     <!-- Jquery-2.2.4 js END -->
 </body>

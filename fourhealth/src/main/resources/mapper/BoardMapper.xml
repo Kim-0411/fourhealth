@@ -38,6 +38,9 @@
 		<result column="" property=""></result>
 		<result column="" property=""></result>
 	</resultMap> -->
+<!-- 신고 사유내용 가져오기 -->
+
+
 
 <!-- 프로모션 가져오기  -->
  	<select id="reportPromotionList" parameterType="String" resultType="MatchingUserTrainerDto">
