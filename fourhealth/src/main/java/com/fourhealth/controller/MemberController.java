@@ -33,27 +33,11 @@ public class MemberController {
 	@Autowired
 	private UserService userService;
 
-	// 트레이너 메인화면
-	@GetMapping("/mainTrainer")
-	public String mainTrainer(Model model) {
-		return "trainer_layout/trainer_main";
-	}
-
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
 
 	// [회원 공통]로그인 체크
-
-	// [회원 공통]로그인 화면
-	@GetMapping("/login")
-	public String commonLoginPage(Model model, @RequestParam(name = "result", required = false) String result) {
-		model.addAttribute("title", "로그인 화면");
-		if (result != null)
-			model.addAttribute("result", result);
-
-		return "login/login";
-	}
 
 	// [회원 공통]로그인 화면에서 입력받은 값 처리 매핑
 	// [회원 공통]로그인 후 각 권한(관리자, 트레이너, 사용자) 레벨 체크 후 한글로 치환
@@ -242,9 +226,10 @@ public class MemberController {
 	public String mainTrainer(Model model, HttpSession session) {
 		// 아이디 id002(트레이너) 로그인 가정 받은 메시지 메인화면에 메시지 버튼에 보여주기위함.
 		// 트레이너 메인
-		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage("id002");
-		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
-		session.setAttribute("noReadMeg", getAllNoReadMessage);
+		// List<MsgDto> getAllNoReadMessage =
+		// messageService.getAllNoReadMessage("id002");
+		// session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
+		// session.setAttribute("noReadMeg", getAllNoReadMessage);
 		return "trainer_layout/trainer_main";
 	}
 
