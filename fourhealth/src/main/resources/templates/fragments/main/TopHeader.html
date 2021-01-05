@@ -20,23 +20,46 @@
           <div class="login_register_area d-flex">
             <div class="login">
               <div class="login">
-               <a th:href="@{/login}" th:if="${session.SID eq null}">Sign in</a>
-            </div>
+                <a th:href="@{/login}" th:if="${session.SID eq null}"
+                  >Sign in</a
+                >
+              </div>
             </div>
             <div class="Sing up">
-              <a th:href="@{/levelSelect}" th:if="${session.SID eq null}">Sing up</a>
+              <a th:href="@{/levelSelect}" th:if="${session.SID eq null}"
+                >Sing up</a
+              >
             </div>
-               <th:block th:unless="${session.SID eq null}">
-		           <label style="color:white"> [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp; [[${session.SNICKNAME}]] 
-		         <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
+            <th:block th:unless="${session.SID eq null}">
+              <label style="color: white">
+                [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp;
+                [[${session.SNICKNAME}]]
+                <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
 					<span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
-		           </label>
-		      <a th:href="@{/#}" style="text-align: center;"> &nbsp; My page</a>    
-		      <a th:href="@{/logout}" style="text-align: right;"> &nbsp; 로그아웃</a>         
-		       </th:block>
+              </label>
+              <a th:href="@{/#}" style="text-align: center"> &nbsp; My page</a>
+              <a th:href="@{/logout}" style="text-align: right">
+                &nbsp; 로그아웃</a
+              >
+            </th:block>
 
-             <div class="master">
-              <a th:href ="@{/master_main}" th:if="${session.SLEVEL eq '관리자'}" style="margin-left: 10px;">관리자 화면</a>
+            <div class="master">
+              <a
+                th:href="@{/master_main}"
+                th:if="${session.SLEVEL eq '관리자'}"
+                style="margin-left: 10px"
+                >관리자 화면</a
+              >
+            </div>
+            <div class="master">
+              <a th:href="@{/mainTrainer}" style="margin-left: 10px"
+                >관리자 마스터</a
+              >
+            </div>
+            <div class="trainer">
+              <a th:href="@{/mainTrainer}" style="margin-left: 10px"
+                >트레이너 마스터</a
+              >
             </div>
           </div>
           <!-- Search Button Area -->

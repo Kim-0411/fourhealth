@@ -1,6 +1,7 @@
 {
     "configurations": [
         {
+            
             "type": "java",
             "name": "Spring Boot-FourhealthApplication<fourhealth>",
             "request": "launch",

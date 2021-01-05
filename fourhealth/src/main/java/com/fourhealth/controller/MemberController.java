@@ -27,6 +27,12 @@ public class MemberController {
 	@Autowired
 	private UserService userService;
 
+	// 트레이너 메인화면
+	@GetMapping("/mainTrainer")
+	public String mainTrainer(Model model) {
+		return "trainer_layout/trainer_main";
+	}
+
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
