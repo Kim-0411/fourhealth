@@ -17,8 +17,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.fasterxml.jackson.core.sym.Name;
-import com.fourhealth.dto.MetExerciseDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.MatchingService;
 import com.fourhealth.service.MessageService;

@@ -39,19 +39,19 @@
             <a href="#" class="nav-link">
                 	<i class="nav-icon fas fa-edit"></i>
               <p>
-                	 프로필 관리
+                	 #프로필 관리
                 	<i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <p> 프로필 등록</p>
+                <a href="../../trainer/profile/trainer_profile_add.html" class="nav-link">
+                  <p> #프로필 등록</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p> 프로필 수정</p>
+                  <p> #프로필 수정</p>
                 </a>
               </li>
             </ul>
@@ -60,29 +60,29 @@
             <a href="pages/gallery.html" class="nav-link">
               <i class="nav-icon far fa-image"></i>
               <p>
-                	 프로모션 관리
+                	 #프로모션 관리
                 	<i class="fas fa-angle-left right"></i>
               </p>
             </a>
              <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <p> 프로모션 등록</p>
+                  <p> !프로모션 등록</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p> 프로필 조회</p>
+                <a th:href="@{/trainerMyPromotionList}" class="nav-link">
+                  <p> !프로모션 조회</p>
           		</a>
           		</li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p> 프로필 수정</p>
+                  <p> #프로모션 수정</p>
                   </a>
           		</li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p> 프로필 삭제</p>
+                  <p> #프로모션 삭제</p>
                   </a>
           		</li>
           		</ul>
@@ -90,29 +90,29 @@
             <a href="pages/kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
-              	회원 스케줄 관리
+              	#회원 스케줄 관리
               	<i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <p>스케줄등록(음식,운동)</p>
+                  <p>!스케줄등록(음식,운동)</p>
                 </a>
               </li>
                <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>스케줄조회(음식,운동)</p>
+                  <p>#스케줄조회(음식,운동)</p>
                   </a>
           		</li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>스케줄수정(음식,운동)</p>
+                  <p>#스케줄수정(음식,운동)</p>
           		</a>
           		</li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>스케줄삭제(음식,운동)</p>
+                  <p>#스케줄삭제(음식,운동)</p>
                   </a>
           		</li>
              
@@ -122,24 +122,24 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
-               	쪽지관리
+               	!쪽지관리
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <p>쪽지 작성</p>
+                <a th:href="@{/trainerSendMessage}"class="nav-link">
+                  <p>!쪽지 작성</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>받은 쪽지함</p>
+                <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+                  <p>!받은 쪽지함</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <p>보낸 쪽지함</p>
+                <a  th:href="@{/trainerMessageSendManage}" class="nav-link">
+                  <p>!보낸 쪽지함</p>
                 </a>
               </li>
             </ul>
@@ -147,23 +147,23 @@
           <li class="nav-item">
 			 <a href="pages/mailbox/read-mail.html" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
-              <p>계좌관리</p>
+              <p>#정산계좌관리</p>
                   <i class="fas fa-angle-left right"></i>
             </a>
            <ul class="nav nav-treeview">
               <li class="nav-item">
                 <a href="pages/mailbox/mailbox.html" class="nav-link">
-                  <p>쪽지 작성</p>
+                  <p>#정산계좌등록</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>받은 쪽지함</p>
+                  <p>#정산계좌수정</p>
                 </a>
               </li>
               <li class="nav-item">
                 <a href="pages/mailbox/read-mail.html" class="nav-link">
-                  <p>보낸 쪽지함</p>
+                  <p>#정산금액조회</p>
                 </a>
               </li>
             </ul>
