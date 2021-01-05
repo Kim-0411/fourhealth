@@ -1,8 +1,18 @@
 package com.fourhealth.controller;
 
+/*
+ * 트레이너 가입 승인, 회원 공통권한별 레벨, 사용자 플랫폼 공통 관리 코드, 불량 트레이너, 탈퇴, 정산, 환불 승인 등등....
+ */
+
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+
+import com.fourhealth.dto.CommonUserDto;
+import com.fourhealth.service.*;
 
 @Controller
 public class MasterController {

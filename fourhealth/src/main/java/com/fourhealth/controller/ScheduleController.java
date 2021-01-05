@@ -1,5 +1,9 @@
 package com.fourhealth.controller;
 
+/*
+ * 스케쥴, 수행률
+ */
+
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
