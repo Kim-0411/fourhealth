@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{master_layout/default}">
+	
+<th:block layout:fragment="customContent">
+	<h3 style="position: center">전체 사용자 회원정보 삭제</h3>
+	<form th:action="@{/removeMasterMember}" method="post">
+		<table border="1">
+			<tr>
+				<td>회원아이디</td>
+				<td>
+					<input type="text" name="memberId" th:value="${memberId}" readonly="readonly"/>
+				</td>
+			</tr>
+			<tr>
+				<td>회원비밀번호</td>
+				<td>
+					<input type="hidden" name="memberLevel" th:value="${memberLevel}">
+					<input type="text" name="memberPw" placeholder="비밀번호를 입력해주세요"/>
+				</td>
+			</tr>
+			<tr>
+				<td colspan="2" style="text-align: center;">
+					<button type="submit">회원탈퇴</button>
+				</td>
+			</tr>
+		</table>
+	</form>
+</th:block>
+</html>
