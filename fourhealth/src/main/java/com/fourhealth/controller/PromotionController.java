@@ -6,42 +6,39 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 
-import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.service.MatchingService;
 import com.fourhealth.service.PromotionService;
 
 @Controller
 public class PromotionController {
 	@Autowired
 	private PromotionService promotionService;
-	@Autowired
-	private MatchingService matchingService;
 
+	
+	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
+		@GetMapping("/promotionList")
+		public String commonPromotionList(Model model) {
+			return "main_layout/promotion/promotionList";
+		}
+		
+	// 트레이너 프로모션 등록페이지
+		@GetMapping("/myPromotionInsert")
+		public String myPromotionInsert(Model model) {
+			return "trainer_layout/promtion/my_promotion_insert";
+		}
 
-	//로그인 되었을시 세션값을 통해 트레이너가 자기가 등록한 프로모션 목록 조회
-	@GetMapping("/trainerMyPromotionList")
+	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
+	@GetMapping("/myPromotionList")
 	public String trainerMyPromotionList(Model model) { 
 		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService.getTrainerMyPromotionAllList("id002");
 		model.addAttribute("myPromotionList",getTrainerMyPromotionAllList);
-		return "trainer/my_promotion_list";
+		return "trainer_layout/promtion/my_promotion_list";
 	}
-
-
-
-	//트레이너가 자신의 프로모션중 관리할 프로모션에 접근시 등록된 사용자들 목록조회
-	@GetMapping("/trainerMyPromotionMemberList")
-	public String trainerGetMyPromotionMemberList(Model model,
-												  @RequestParam(name = "promotionCode", required = false) String promotionCode) {
-		List<MatchingUserTrainerDto> getMemberList = matchingService.getTrainerMatchingUserList(promotionCode);
-		System.out.println(getMemberList);
-		model.addAttribute("memberList",getMemberList);
-		return "trainer/my_promotion_member_list"; 
-	}
-
-
-
-
+	
+	// 트레이너 프로모션 내 수정페이지
+		@GetMapping("/myPromotionModify")
+		public String myPromotionModify(Model model) {
+			return "trainer_layout/promtion/my_promotion_modify";
+		}
 }

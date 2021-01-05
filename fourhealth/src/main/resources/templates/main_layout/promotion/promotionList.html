@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
+
+  <th:block layout:fragment="mainContent">
+        <div class="container">
+          <table class="table table-bordered">
+            <thead>
+              <tr>
+                <th>프로모션 이름</th>
+                <th>프로모션 사진</th>
+                <th>프로모션 설명</th>
+                <th>트레이너 아이디</th>
+                <th>모집기간시작</th>
+                <th>모집기간 끝</th>
+                <th>모집인원</th>
+                <th>현재모집인원</th>
+                <th>등록일자</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr
+                th:if="${#lists.size(promotionList) > 0}"
+                th:each="p : ${promotionList}"
+              >
+                <td>
+                  <a
+                    th:href="@{/proDetail(proCode=${p.trainerPromotionNoticeCode})}"
+                    ><span th:text="${p.trainerPromotionName}"></span
+                  ></a>
+                </td>
+                <td><img id="promotionListImg" th:src="${p.proImageUrl}" /></td>
+                <td th:text="${p.trainerPromotionShortContents}"></td>
+                <td th:text="${p.userId}"></td>
+                <td th:text="${p.trainerPromotionAttendStartDate}"></td>
+                <td th:text="${p.trainerPromotionRecruitCloseDate}"></td>
+                <td th:text="${p.trainerPromotionRecruitPeople}"></td>
+                <td th:text="${p.trainerPromotionLiveAddPeople}"></td>
+                <td th:text="${p.trainerMatchingSystemAddDate}"></td>
+              </tr>
+            </tbody>
+          </table>
+          <a th:href="@{/pro(proId=${session.SID})}"
+            >트레이너 프로모션 등록하기</a
+          >
+        </div>
+      </div>
+  </th:block>
+</html>

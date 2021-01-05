@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+   layout:decorate="~{/default_layout/trainer/default}"
+>
+  <th:block layout:fragment="customContent">
+   <h1>메시지읽기</h1>
+    <div>
+		<div class="msg_header">
+			<p id="sender_title">보낸사람 :<span th:text="${msgInfo.sendId}"></span></p>
+			<p id="date_title">받는사람 :<span th:text="${msgInfo.receiveId}"></span></p>
+			<p id="sender_title">보낸날짜 :<span th:text="${msgInfo.msgSendDate}"></span></p>
+		</div>
+		<div id="readbody" class="msg_contents" th:text="${msgInfo.msgContents}"></div>
+	</div>
+  </th:block>
+</html>

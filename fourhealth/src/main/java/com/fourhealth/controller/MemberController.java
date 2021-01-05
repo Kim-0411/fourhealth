@@ -24,8 +24,15 @@ public class MemberController {
 		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage("id002");
 		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
 		session.setAttribute("noReadMeg", getAllNoReadMessage);
-		return "trainer/trainer_main";
+		return "trainer_layout/trainer_main";
 	}
+	// 로그인 화면(공통)
+		@GetMapping("/login")
+		public String commonLoginPage(Model model) {
+			model.addAttribute("title", "로그인 화면");
+
+			return "main_layout/login/login";
+		}
 	
 
 }

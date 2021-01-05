@@ -39,7 +39,7 @@ public class EtcController {
 	public String trainerSendMessage(Model model) {
 		//id002트레이너 가정 로그인 프로세스 완료시 바꿔야함 
 		model.addAttribute("trainerId","id002");
-		return "trainer/trainer_massage_send";
+		return "trainer_layout/massage/trainer_massage_send";
 	}
 	
 	//트레이너가 회원에게 쪽지 보내기.
@@ -67,7 +67,7 @@ public class EtcController {
 		//트레이너 로그인 id002가정
 		List<MsgDto> getAllSendMessageList = messageService.getAllSendMessageList("id002");
 		model.addAttribute("sendMsg",getAllSendMessageList);
-		return "trainer/trainer_message_send_management";
+		return "trainer_layout/massage/trainer_message_send_management";
 	}
 	
 	
@@ -87,7 +87,7 @@ public class EtcController {
 		//트레이너 로그인 id002가정
 		List<MsgDto> getAllReceiveMessageList = messageService.getAllReceiveMessageList("id002");
 		model.addAttribute("receiveMsg",getAllReceiveMessageList);
-		return "trainer/trainer_message_receive_management";
+		return "trainer_layout/massage/trainer_message_receive_management";
 	}
 	//보낸메시지 읽기
 	@GetMapping("trainerSendMessageRead")
@@ -95,7 +95,7 @@ public class EtcController {
 									,@RequestParam(name = "msgCode",required = false) String msgCode) {
 		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
 		model.addAttribute("msgInfo" ,getAllSendMessageInfo);
-		return "trainer/trainer_send_message_read";
+		return "trainer_layout/massage/trainer_send_message_read";
 	}
 	//받은메시지 읽기및 읽음처리
 	@GetMapping("trainerReceiveMessageRead")
@@ -105,6 +105,25 @@ public class EtcController {
 		String result = messageService.getAllMessageReadPro(msgCode);
 		System.out.println(result);
 		model.addAttribute("msgInfo" ,getAllSendMessageInfo);
-		return "trainer/trainer_receive_message_read";
+		return "trainer_layout/massage/trainer_receive_message_read";
 	}
+	
+	// 트레이너 프로필 등록페이지
+		@GetMapping("/trainerProfileInsert")
+		public String trainerProfileInsert() {
+			return "trainer_layout/profile/trainer_profile_insert";
+		}
+
+		// 트레이너 프로필 확인페이지
+		@GetMapping("/trainerProfile")
+		public String trainerProfile() {
+			return "trainer_layout/profile/trainer_profile_insert";
+		}
+
+		// 트레이너 프로필 수정페이지
+		@GetMapping("/trainerProfileModify")
+		public String trainerProfileModify() {
+			return "trainer_layout/profile/trainer_profile_Modify";
+		}	
+
 }
