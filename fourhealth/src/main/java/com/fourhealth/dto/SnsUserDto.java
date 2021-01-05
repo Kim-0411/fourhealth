@@ -1,14 +1,17 @@
 package com.fourhealth.dto;
 
+import org.springframework.web.multipart.MultipartFile;
 
 public class SnsUserDto {
 
 	private String userSnsCode;
 	private String userId;
 	private String userSnsContents;
-	private String userSnsUploadFile;
+	private MultipartFile userSnsUploadFile;
 	private String userSnsRegDate;
 	private String snsCode;
+	private String snsImageUrl;
+	
 	public String getUserSnsCode() {
 		return userSnsCode;
 	}
@@ -27,10 +30,10 @@ public class SnsUserDto {
 	public void setUserSnsContents(String userSnsContents) {
 		this.userSnsContents = userSnsContents;
 	}
-	public String getUserSnsUploadFile() {
+	public MultipartFile getUserSnsUploadFile() {
 		return userSnsUploadFile;
 	}
-	public void setUserSnsUploadFile(String userSnsUploadFile) {
+	public void setUserSnsUploadFile(MultipartFile userSnsUploadFile) {
 		this.userSnsUploadFile = userSnsUploadFile;
 	}
 	public String getUserSnsRegDate() {
@@ -44,6 +47,12 @@ public class SnsUserDto {
 	}
 	public void setSnsCode(String snsCode) {
 		this.snsCode = snsCode;
+	}
+	public String getSnsImageUrl() {
+		return snsImageUrl;
+	}
+	public void setSnsImageUrl(String snsImageUrl) {
+		this.snsImageUrl = snsImageUrl;
 	}
 	@Override
 	public String toString() {
@@ -60,6 +69,8 @@ public class SnsUserDto {
 		builder.append(userSnsRegDate);
 		builder.append(", snsCode=");
 		builder.append(snsCode);
+		builder.append(", snsImageUrl=");
+		builder.append(snsImageUrl);
 		builder.append("]");
 		return builder.toString();
 	}

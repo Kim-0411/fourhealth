@@ -31,9 +31,12 @@ public class SnsService {
 	public List<SnsUserDto> getSnsList() {
 		List<SnsUserDto> snsList = snsMapper.getSnsList();
 		System.out.println("#######################");
+		for (int i = 0; i < snsList.size(); i++) {
+			String imgUrl = snsList.get(i).getSnsImageUrl();
+			snsList.get(i).setSnsImageUrl("image/" + imgUrl);
+		}
 		System.out.println("test file call snsList from snsService");
 		System.out.println(snsList);
 		return snsList;
-		//return snsList;
 	}
 }

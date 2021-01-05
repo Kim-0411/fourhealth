@@ -27,7 +27,7 @@
 	        #{snsCode},
 	        #{userId},
 	        #{userSnsContents}, 
-	        #{userSnsUploadFile}, 
+	        #{snsImageUrl}, 
 	        NOW());
 	</insert>
 	
@@ -36,7 +36,7 @@
 			  user_sns_code 		AS userSnsCode
 			, user_id 				AS userId
 			, user_sns_contents 	AS userSnsContents
-			, user_sns_upload_file  AS userSnsUploadFile
+			, user_sns_upload_file  AS snsImageUrl
 			, user_sns_reg_date 	AS userSnsRegDate
 		FROM
 			tb_sns_user
