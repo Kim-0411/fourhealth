@@ -68,7 +68,12 @@
 							</tr>
 							<tbody>
 								<tr th:each="m : ${receiveMsg}">
-									<td><input type="checkbox"></td>
+									<td>
+										<div class="icheck-primary">
+											<input type="checkbox" value="" th:id="${m.msgCode}">
+											<label th:for="${m.msgCode}"></label>
+										</div>
+									</td>
 									<td class="msg_val"><input type="hidden"
 										th:value="${m.msgCode}" id="msg_code"> <a
 										th:text="${m.sendId}"></a></td>
@@ -78,7 +83,8 @@
 									<td th:text="${m.msgSendDate}"></td>
 									<td><span th:if="${m.msgReadDate == null}">읽지않음</span> <span
 										th:unless="${m.msgReadDate == null}"
-										th:text="${m.msgReadDate}"></span></td>
+										th:text="${m.msgReadDate}"></span>
+									</td>
 								</tr>
 							</tbody>
 						</table>
@@ -120,3 +126,37 @@
 	</div>
 </th:block>
 </html>
+<script th:inline="javascript">
+  $(function () {
+    //Enable check and uncheck all functionality
+    $('.checkbox-toggle').click(function () {
+      var clicks = $(this).data('clicks')
+      if (clicks) {
+        //Uncheck all checkboxes
+        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', false)
+        $('.checkbox-toggle .far.fa-check-square').removeClass('fa-check-square').addClass('fa-square')
+      } else {
+        //Check all checkboxes
+        $('.mailbox-messages input[type=\'checkbox\']').prop('checked', true)
+        $('.checkbox-toggle .far.fa-square').removeClass('fa-square').addClass('fa-check-square')
+      }
+      $(this).data('clicks', !clicks)
+    })
+
+    //Handle starring for font awesome
+    $('.mailbox-star').click(function (e) {
+      e.preventDefault()
+      //detect type
+      var $this = $(this).find('a > i')
+      var fa    = $this.hasClass('fa')
+
+      //Switch states
+      if (fa) {
+        $this.toggleClass('fa-star')
+        $this.toggleClass('fa-star-o')
+      }
+    })
+  })
+
+</script>
+

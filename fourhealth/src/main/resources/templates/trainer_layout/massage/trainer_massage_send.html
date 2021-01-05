@@ -1,36 +1,80 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-    layout:decorate="~{/default_layout/trainer/default}"
->
-  <th:block layout:fragment="customContent">
-   <h1>메시지 송신</h1>
-    <div>
-    	<form action="sendTrainerSelectPromotionMember" id="message_send" method="post"> 
-    	<!--로그인 처리 되어있다고 가정  -->
-    	<input type="hidden" th:value="${trainerId}" name="sendId">
-    	<div class="row">
-    		<div class="col-lg-4 col-md-4 col-sm-4 m-2 ">
-    			<label>받을사람(아이디):</label>
-    			<input type="text" class="form-control" name="receiveId" id="receiveId">
-            </div>
-    		<div class="col-lg-8 col-md-8 col-sm-8 m-2"> 
-    			<textarea rows="20" name="msgContents" placeholder="내용" class="form-control" id="text_area"></textarea>
-    		</div>	
-    	</div>
-    	 
-    <div >
-    	<a class="btn btn-primary btn-icon-split" id="submit_btn">
-			<span class="icon text-white-50">
-            <i class="fas fa-check"></i>
-            </span>
-            <span class="text">보내기</span>
-            </a>
-    </div>
-    	</form>
-    </div>
-  </th:block>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="~{/default_layout/trainer/default}">
+<th:block layout:fragment="customContent">
+	<h1>메시지 송신</h1>
+	<div class="row">
+		<div class="col-md-9">
+			<form action="sendTrainerSelectPromotionMember" id="message_send"
+				method="post">
+				<div class="card card-primary card-outline">
+					<div class="card-header">
+						<h3 class="card-title">메시지 작성</h3>
+					</div>
+					<!-- /.card-header -->
+					<input type="hidden" th:value="${trainerId}" name="sendId">
+					<div class="card-body">
+						<div class="form-group">
+							<input type="text" class="form-control" name="receiveId"
+								id="receiveId" placeholder="To:">
+						</div>
+						<textarea rows="20" name="msgContents" placeholder="내용"
+							class="form-control" id="text_area"></textarea>
+					</div>
+					<div class="card-footer">
+						<div class="float-right">
+							<button type="button" class="btn btn-default">
+								<i class="fas fa-pencil-alt"></i> Draft
+							</button>
+							<button type="button" id="submit_btn" class="btn btn-primary">
+								<i class="far fa-envelope"></i> 보내기
+							</button>
+						</div>
+						<button type="reset" class="btn btn-default">
+							<i class="fas fa-times"></i> Discard
+						</button>
+					</div>
+					<!-- /.card-footer -->
+				</div>
+			</form>
+			<!-- /.card -->
+		</div>
+		<!-- /.col -->
+		<div class="col-md-3">
+			<a href="compose.html" class="btn btn-primary btn-block mb-3">쪽지작성</a>
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">쪽지</h3>
+
+					<div class="card-tools">
+						<button type="button" class="btn btn-tool"
+							data-card-widget="collapse">
+							<i class="fas fa-minus"></i>
+						</button>
+					</div>
+				</div>
+				<div class="card-body p-0">
+					<ul class="nav nav-pills flex-column">
+						<li class="nav-item active"><a
+							th:href="@{/trainerMessageReceiveManage}" class="nav-link"> <i
+								class="fas fa-inbox"></i> 받은쪽지함 <span
+								class="badge bg-primary float-right"
+								th:text="${session.noReadMessageCnt}"></span>
+						</a></li>
+						<li class="nav-item"><a
+							th:href="@{/trainerMessageSendManage}" class="nav-link"> <i
+								class="far fa-envelope"></i> 보낸쪽지함
+						</a></li>
+					</ul>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+		<!-- /.col -->
+	</div>
+</th:block>
 </html>
 <script th:inline="javascript">
 	$('#submit_btn').click(function(){
@@ -41,9 +85,7 @@
 		}else if(textArea<10){
 			alert('전송하실 메시지의 길이를 10글자 이상적어주세요.');
 		}else{
-			message_send.submit();
+			$('#message_send').submit();
 		}
-			
-		 
 	});
 </script>

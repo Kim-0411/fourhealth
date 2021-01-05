@@ -47,12 +47,12 @@
       <li class="nav-item dropdown">
         <a class="nav-link" data-toggle="dropdown" href="#">
           <i class="far fa-comments"></i>
-          <span class="badge badge-danger navbar-badge"th:text="${session.noReadMessageCnt}"></span>
+          <span class="badge badge-danger navbar-badge" th:text="${session.noReadMessageCnt}"></span>
         </a>
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
-          <a href="#" class="dropdown-item" th:each="msg : ${session.noReadMeg}">
+          <a class="dropdown-item" th:href="@{/trainerReceiveMessageRead(msgCode=${msg.msgCode})}" th:each="msg : ${session.noReadMeg}">
             <!-- Message Start -->
-            <div class="media" >
+            <div class="media">
               <img src="/img/master_img/user1-128x128.jpg" alt="User Avatar" class="img-size-50 mr-3 img-circle">
               <div class="media-body">
                 <h3 class="dropdown-item-title" th:text="${msg.sendId}">
@@ -66,7 +66,7 @@
             <!-- Message End -->
           </a>
           <div class="dropdown-divider"></div>
-          <a href="#" class="dropdown-item dropdown-footer">더보기</a>
+          <a th:href="@{/trainerMessageReceiveManage}" class="dropdown-item dropdown-footer">더보기</a>
         </div>
       </li>
       <!-- Notifications Dropdown Menu -->
