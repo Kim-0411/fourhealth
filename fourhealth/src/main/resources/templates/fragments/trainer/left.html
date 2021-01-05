@@ -6,7 +6,7 @@
     th:fragment="leftMenuFragment"
   >
     <!-- Brand Logo -->
-    <a href="index3.html" class="brand-link">
+    <a href="/mainTrainer" class="brand-link">
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -76,7 +76,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
+                <a href="/trainerProfileModify" class="nav-link">
                   <p>#프로필 수정</p>
                 </a>
               </li>
@@ -155,17 +155,17 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/trainerSendMessage" class="nav-link">
+                <a th:href="@{/trainerSendMessage}" class="nav-link">
                   <p>!쪽지 작성</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/trainerSendMessageRead" class="nav-link">
+                <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
                   <p>!받은 쪽지함</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/trainerReceiveMessageRead" class="nav-link">
+                <a th:href="@{/trainerMessageSendManage}" class="nav-link">
                   <p>!보낸 쪽지함</p>
                 </a>
               </li>

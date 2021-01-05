@@ -2,11 +2,16 @@
 <html
   xmlns:th="http://www.thymeleaf.org"
   xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="~{/default_layout/trainer/default}"
+   layout:decorate="~{/default_layout/trainer/default}"
 >
   <th:block layout:fragment="customContent">
-    <div class="fuckingcontent">
-      <h1 class="fuckingcss_h1">받은 메세지읽기</h1>
-    </div>
+   <h1>메시지읽기</h1>
+    <div>
+		<div class="msg_header">
+			<p id="sender_title">받는사람 :<span th:text="${msgInfo.receiveId}"></span></p>
+			<p id="date_title">보낸날짜 :<span th:text="${msgInfo.msgSendDate}"></span></p>
+		</div>
+		<div id="readbody" class="msg_contents" th:text="${msgInfo.msgContents}"></div>
+	</div>
   </th:block>
 </html>

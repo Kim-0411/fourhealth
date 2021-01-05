@@ -3,6 +3,8 @@ package com.fourhealth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
+import java.util.List;
+
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,9 +22,13 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.UserService;
 
+import com.fourhealth.dto.MsgDto;
+import com.fourhealth.service.MessageService;
+
 @Controller
 public class MemberController {
 	@Autowired
+
 	private MemberService memberService;
 	@Autowired
 	private UserService userService;
@@ -228,5 +234,26 @@ public class MemberController {
 	// model.addAttribute("level", level); // 누른거 래밸 사용자,트레이너
 	// return "member/m_insert";
 	// }
+
+	private MessageService messageService;
+
+	// 트레이너 메인화면
+	@GetMapping("mainTrainer")
+	public String mainTrainer(Model model, HttpSession session) {
+		// 아이디 id002(트레이너) 로그인 가정 받은 메시지 메인화면에 메시지 버튼에 보여주기위함.
+		// 트레이너 메인
+		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage("id002");
+		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
+		session.setAttribute("noReadMeg", getAllNoReadMessage);
+		return "trainer_layout/trainer_main";
+	}
+
+	// 로그인 화면(공통)
+	@GetMapping("/login")
+	public String commonLoginPage(Model model) {
+		model.addAttribute("title", "로그인 화면");
+
+		return "main_layout/login/login";
+	}
 
 }

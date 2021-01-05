@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.PromotionMapper">
+	<resultMap type="NoticePromotionTrainerDto" id="resultMapNoticePromotionTrainer">
+		<result column="trainer_promotion_notice_code" 				property="trainerPromotionNoticeCode"/>
+		<result column="user_id"									property="userId"/>
+		<result column="trainer_promotion_name" 					property="trainerPromotionName"/>
+		<result column="trainer_promotion_goal" 					property="trainerPromotionGoal"/>
+		<result column="trainer_promotion_short_contents" 			property="trainerPromotionShortContents"/>
+		<result column="trainer_promotion_details_contents" 		property="trainerPromotionDetailsContents"/>
+		<result column="trainer_promotion_recruit_people" 			property="trainerPromotionRecruitPeople"/>
+		<result column="trainer_promotion_live_add_people" 			property="trainerPromotionLiveAddPeople"/>
+		<result column="trainer_promotion_price" 					property="trainerPromotionPrice"/>
+		<result column="trainer_promotion_recruit_start_date" 		property="trainerPromotionRecruitStartDate"/>
+		<result column="trainer_promtion_recruit_end_date" 			property="trainerPromotionRecruitEndDate"/>
+		<result column="trainer_promotion_attend_start_date" 		property="trainerPromotionAttendStartDate"/>
+		<result column="trainer_promotion_recruit_close_date" 		property="trainerPromotionRecruitCloseDate"/>
+		<result column="trainer_promotion_bg_image" 				property="proImageUrl"/>
+		<result column="trainer_promotion_recruit_total_date" 		property="trainerPromotionRecruitTotalDate"/>
+		<result column="trainer_matching_system_add_date" 			property="trainerMatchingSystemRegDate"/>
+	</resultMap>
+
+	<select id="getTrainerMyPromotionAllList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">
+	 <!-- 로그인된 트레이너가 자신의 올린 모든  프로모션 리스트 -->
+		 SELECT
+	 		pt.trainer_promotion_notice_code,
+   			pt.trainer_promotion_name,
+  	 		pt.trainer_promotion_recruit_start_date,
+  			pt.trainer_promtion_recruit_end_date,
+  			pt.trainer_promotion_recruit_people
+		
+		 FROM
+  			tb_notice_promotion_trainer AS pt
+		
+		 WHERE
+  			pt.user_id = #{trainerId}; 
+	</select>
+</mapper>

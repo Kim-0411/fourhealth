@@ -3,4 +3,37 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MatchingMapper">
+	<resultMap type="MatchingUserTrainerDto" id="resultMapMatchingUserTrainer">
+		<result column="trainer_user_matching_code" 				property="trainerUserMatchingCode"/>
+		<result column="trainer_promotion_notice_code"				property="trainerPromotionNoticeCode"/>
+		<result column="user_id" 									property="userId"/>
+		<result column="trainer_id" 								property="trainerId"/>
+		<result column="user_coupon_code" 							property="userCouponCode"/>
+		<result column="payment_method_name" 						property="paymentMethodName"/>
+		<result column="purchase_money" 							property="purchaseMoney"/>
+		<result column="purchase_reg_date" 							property="purchaseRegDate"/>
+		<result column="purchase_finish_date" 						property="purchaseFinishDate"/>
+		<result column="user_reg_date" 								property="userRegDate"/>
+		<result column="trainer_promotion_recruit_start_date" 		property="trainerPromotionRecruitStartDate"/>
+		<result column="trainer_promtion_recruit_end_date" 			property="trainerPromotionRecruitEndDate"/>
+		<result column="trainer_promotion_attend_start_date" 		property="trainerPromotionAttendStartDate"/>
+		<result column="trainer_matching_system_reg_date" 			property="trainerMatchingSystemRegDate"/>
+	</resultMap>
+
+<!--트레이너가 자신의 프로모션중 관리할 프로모션에 접근시 등록된 사용자들 목록조회  -->
+<select id="getTrainerMatchingUserList" parameterType="String" resultMap="resultMapMatchingUserTrainer">
+	SELECT
+		mut.trainer_user_matching_code,
+		mut.trainer_promotion_notice_code,
+		mut.user_id 
+	FROM
+		tb_matching_user_trainer AS mut
+	INNER JOIN
+		tb_notice_promotion_trainer AS npt
+	ON
+		mut.trainer_promotion_notice_code = npt.trainer_promotion_notice_code
+	where 
+		mut.trainer_promotion_notice_code =#{promotionCode};
+	</select>
+
 </mapper>
