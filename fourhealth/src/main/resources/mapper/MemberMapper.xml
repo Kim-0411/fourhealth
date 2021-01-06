@@ -6,21 +6,51 @@
 
 	<!--공통 회원데이터 resultMap  -->
     <resultMap type="MemberDto" 		id="resultMapMember">
-        <result column="user_id" 		property="memberId"/>
-        <result column="user_pw" 		property="memberPw"/>
-        <result column="user_level_code" property="memberLevel"/>
-        <result column="user_name" 		property="memberName"/>
-        <result column="user_addr" 		property="memberAddr"/>
-        <result column="user_email"		property="memberEmail"/>
-        <result column="user_nickname" 	property="memberNickname"/>
-        <result column="user_birth" 	property="memberBirth"/>
-        <result column="user_gender" 	property="memberGender"/>
-        <result column="user_main_bank" property="memberMainBank"/>
-        <result column="user_bank_number" property="memberBankNumber"/>
-        <result column="user_bank_master" property="memberBankMaster"/>
-        <result column="user_reg_date" 	property="memberRegDate"/>
-    </resultMap>
+        <result column="user_id" 				property="memberId"/>
+        <result column="user_pw" 				property="memberPw"/>
+        <result column="user_level_code"		property="memberLevel"/>
+        <result column="user_name" 				property="memberName"/>
+        <result column="user_addr" 				property="memberAddr"/>
+        <result column="user_email"				property="memberEmail"/>
+        <result column="user_nickname" 			property="memberNickname"/>		
+        <result column="user_birth" 			property="memberBirth"/>
+        <result column="user_gender" 			property="memberGender"/>
+        <result column="user_main_bank" 		property="memberMainBank"/>
+        <result column="user_bank_number" 		property="memberBankNumber"/>
+        <result column="user_bank_master" 		property="memberBankMaster"/>
+        <result column="user_reg_date" 			property="memberRegDate"/>
+     </resultMap>
+     
     
+    <!-- 관리자페이지 단에서 검색 처리를 위한 쿼리  -->
+<!--     <sql id="selectMemberColumn">
+		SELECT 
+			  memberId			
+			, memberPw			
+			, memberLevel		
+			, memberName		
+			, memberAddr		
+			, memberEmail
+			, memberNickname		
+			, memberBirth		
+			, memberGender		
+			, memberMainBank
+			, memberBankNumber		
+			, memberBankMaster				
+			, memberRegDate
+	</sql>
+	<select id="getSearchMemberList" parameterType="String" resultMap="resultMapMember">
+		<include refid="selectMemberColumn" />	
+		FROM 
+			tb_common_user
+		WHERE
+			<if test="searchKey != null and searchKey neq ''.toString()">
+				${searchKey} LIKE CONCAT('%', #{searchValue} , '%');
+			</if>
+	</select> -->
+	
+		
+ 
     <!-- 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 -->
     <delete id="removeMasterMember" parameterType="String">
 		DELETE
@@ -45,31 +75,6 @@
 		WHERE
 			user_id = #{memberId};
 	</delete>
-	
-    
-  <!-- 전체회원 단에서 회원 수정 -->
-<!-- 	<update id="modifyMasterMember" parameterType="MemberDto">c
-		UPDATE tb_common_user
-		<trim prefix="SET" suffixOverrides=",">
-			<if test="memberPw != null and memberPw neq ''.toString()">
-				user_pw	= #{memberPw},
-			</if>
-			<if test="memberName != null and memberName neq ''.toString()">
-				user_name	= #{memberName},
-			</if>
-			<if test="memberLevel != null and memberLevel neq ''.toString()">
-				user_level_code= #{memberLevel},
-			</if>
-			<if test="memberEmail != null and memberEmail neq ''.toString()">
-				user_email= #{memberEmail},
-			</if>
-			<if test="memberAddr != null and memberAddr neq ''.toString()">
-				user_addr	= #{memberAddr},
-			</if>
-		</trim>
-		WHERE
-			user_id = #{memberId}
-	</update> -->
 	
 	<!-- 관리자페이지 단에서 회원 수정  -->
 	<update id="modifyMasterMember" parameterType="MemberDto">
@@ -108,7 +113,7 @@
 	<!-- 로그  -->
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
-			user_id, 
+			user_id,
 			user_level_code, 
 			user_pw, 
 			user_name, 
@@ -127,7 +132,6 @@
 		WHERE
 			user_id = #{userId};
 	</select>
-	
 	
 		
 	<!-- 아이디 중복 체크 : 아이디가 있으면 1 count, 없으면 0 -->
@@ -172,6 +176,10 @@
 			null, 
 			NOW());
 	</insert>
+	
+	 
+	
+	
 	
 	<!--  	 일단 생략
 	<select id="trainerGetMatchingUserList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">

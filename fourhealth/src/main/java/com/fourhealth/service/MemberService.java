@@ -9,12 +9,34 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
+
 @Service
 @Transactional
 
 public class MemberService {
 	@Autowired
 	private MemberMapper memberMapper;
+	
+	//관리자 화면단 검색 처리
+//	public List<MemberDto> getSearchMemberList(String searchKey, String searchValue){
+//		List<MemberDto> member_all_list = memberMapper.getSearchMemberList(searchKey, searchValue);
+//		
+//		int listSize = member_all_list.size();
+//		for(int i=0; i<listSize; i++) {
+//			if("1".equals(member_all_list.get(i).getMemberLevel())) {
+//				member_all_list.get(i).setMemberLevel("관리자");
+//			}else if("2".equals(member_all_list.get(i).getMemberLevel())) {
+//				member_all_list.get(i).setMemberLevel("판매자");
+//			}else if("3".equals(member_all_list.get(i).getMemberLevel())) {
+//				member_all_list.get(i).setMemberLevel("구매자");				
+//			}else {
+//				member_all_list.get(i).setMemberLevel("일반회원");
+//			}
+//		}
+//		
+//		return member_all_list;
+//	}
+	
 	
 	//회원 삭제처리
 	public String removeMasterMember(String memberId, String memberPw, String memberLevel) {
@@ -105,24 +127,7 @@ public class MemberService {
 		return count;
 
 	}
-
-	// 트레이너 로그인 햇을때 넣어주자.
-
-	/*
-	 * //로그인된 내 프로모션 전체 조회 (트레이너) public List<NoticePromotionTrainerDto>
-	 * trainerGetMyPromotionList(String trainerId){ List<NoticePromotionTrainerDto>
-	 * myPromotionList = memberMapper.trainerGetMyPromotionList(trainerId); return
-	 * myPromotionList; }
-	 */
-
-	/*
-	 * //자신의 프로모션 별 회원에게 운동이나음식 넣어주기위해 프로모션 접근햇을때 등록된회원 조회 (트레이너) public
-	 * List<MatchingUserTrainerDto> trainerGetMatchingUserList(String
-	 * promotionCode){ List<MatchingUserTrainerDto> getMatchingUserList =
-	 * memberMapper.trainerGetMatchingUserList(promotionCode);
-	 * 
-	 * return getMatchingUserList; }
-	 */
+	
 
 
 }

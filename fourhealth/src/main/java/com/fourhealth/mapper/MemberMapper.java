@@ -1,15 +1,15 @@
 package com.fourhealth.mapper;
 
-
 import java.util.List;
-
 import org.apache.ibatis.annotations.Mapper;
-
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.UserDto;
 
 @Mapper
 public interface MemberMapper {
+	
+	//관리자 단 회원 리스트 검색 처리
+//	public List<MemberDto> getSearchMemberList(String searchKey, String searchValue);
 
 	//관리자 단 회원 리스트에서 삭제 (메세지-외래키)
 	int removeMasterMsg(String membeId);
@@ -34,6 +34,8 @@ public interface MemberMapper {
 
 	//회원가입
 	public int addMember(MemberDto member);
+
+	
 
 
 

@@ -3,38 +3,49 @@
 	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 	layout:decorate="@{master_layout/default}">
 <th:block layout:fragment="customContent">
-
-<h3 style="position: center">전체 사용자 회원정보 목록</h3>
-	<table border="1">
-		<thead>
-			<tr>
-				<th>아이디</th>
-				<th>비밀번호</th>
-				<th>이름</th>
-				<th>권한</th>
-				<th>이메일</th>
-				<th>주소</th>
-				<th>등록날짜</th>
-				<th>수정</th>
-				<th>삭제</th>
-			</tr>
-		</thead>
-		<tbody>
-			<tr th:if="${#lists.size(memberList) > 0}" th:each="l : ${memberList}">
-				<td th:text="${l.memberId}"></td>
-				<td th:text="${l.memberPw}"></td>
-				<td th:text="${l.memberName}"></td>
-				<td th:text="${l.memberLevel}"></td>
-				<td th:text="${l.memberEmail}"></td>
-				<td th:text="${l.memberAddr}"></td>
-				<td th:text="${l.memberRegDate}"></td>
-				<td><a th:href="@{/modifyMasterMember(memberId=${l.memberId})}">수정</a>
-				</td>
-				<td>
-					<a th:href="@{/removeMasterMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
-				</td>
-			</tr>
-		</tbody>
-	</table>
-</th:block>
+	<!-- <form action="/searchMemberAllList" method="post"> 
+		<h3 style="position: center">전체 사용자 회원정보 목록</h3>
+			<select name="m_search_1">
+				<option value="memberId" >아이디</option>
+				<option value="memberPw" >이름</option>
+				<option value="memberLevel">권한</option>
+				<option value="memberEmail">이메일</option>
+			</select>
+			<input type="text" name="m_search_2" placeholder="검색어를 입력해주세요"/>
+			<button type="submit">검색</button> 
+			</form> -->
+			
+			<table border="1">
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>이름</th>
+						<th>권한</th>
+						<th>이메일</th>
+						<th>주소</th>
+						<th>등록날짜</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:if="${#lists.size(memberList) > 0}" th:each="l : ${memberList}">
+					<td th:text="${l.memberId}"></td>
+					<td th:text="${l.memberPw}"></td>
+					<td th:text="${l.memberName}"></td>
+					<td th:text="${l.memberLevel}"></td>
+					<td th:text="${l.memberEmail}"></td>
+					<td th:text="${l.memberAddr}"></td>
+					<td th:text="${l.memberRegDate}"></td>
+					<td>
+						<a th:href="@{/modifyMasterMember(memberId=${l.memberId})}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{/removeMasterMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</th:block>
 </html>

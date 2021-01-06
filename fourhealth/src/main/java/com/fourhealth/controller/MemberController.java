@@ -18,7 +18,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
 import com.fourhealth.dto.MemberDto;
+import com.fourhealth.dto.TrainerDto;
+import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MemberService;
+import com.fourhealth.service.TrainerService;
 import com.fourhealth.service.UserService;
 
 @Controller
@@ -27,7 +30,8 @@ public class MemberController {
 	private MemberService memberService;
 	@Autowired
 	private UserService userService;
-	
+	@Autowired
+	private TrainerService trainerService;
 	
 	/********************************************************************************************
 	 * 로그인/로그아웃
@@ -136,9 +140,35 @@ public class MemberController {
 	//회원 가입 후 로그인 화면으로 이동
 	@PostMapping("/mInsert")
 	public String addMember(MemberDto member){
-		String result = memberService.addMember(member); 
-		System.out.println(result);
-	
+		//공통 회원 가입
+		String userId = member.getMemberId();
+		String memberLevel = member.getMemberLevel();
+		
+			if(memberLevel.equals("user_level_002")) {
+				////트레이너 플렛폼 공통 등급 관리
+				TrainerDto trainerdto = new TrainerDto();
+				trainerdto.setTrainerPlatformGradeCode("trainer_platform_grade_004");
+				trainerdto.setTrainerAccessCode("trainer_access_003");
+				String result = memberService.addMember(member); 
+				String result2 = trainerService.addMemberTrainerPlatFormGradeCode(trainerdto); 
+				System.out.println(result);
+				System.out.println(result2);
+			}else if(memberLevel.equals("user_level_003")){
+				//사용자 플렛폼 공통 등급 관리
+				UserDto userdto = new UserDto();
+				userdto.setUserId(userId);
+				userdto.setUserPlatFormGradeCode("user_platform_grade_001");
+				userdto.setUserStatusLevelCode("user_status_level_001");
+				member.setUserDto(userdto);
+				String result = memberService.addMember(member); 
+				String result2 = userService.addMemberUserPlatFormGradeCode(userdto); 
+				System.out.println(result);
+				System.out.println(result2);
+			} else {
+				//플랫폼 등급이 없을 시 관리자 회원가입 처리
+				String result = memberService.addMember(member); 
+				System.out.println(result);
+			}
 		return "redirect:/login";
 	}
 	

@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.UserMapper">
 	<!--사용자 데이터 resultMap  -->
-    <resultMap type="UserDto" 		id="resultMapUser">
+    <resultMap type="UserDto" 					id="resultMapUser">
         <result column="user_id" 					property="userId"/>
         <result column="user_platform_grade_code" 	property="userPlatFormGradeCode"/>
         <result column="user_status_level_code"		property="userStatusLevelCode"/>
@@ -21,7 +21,7 @@
     </resultMap>
     
     
-	<!-- 로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크  -->
+	<!-- 로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크 (일반회원 ~ 로얄블루) -->
 	<select id="getUserGrade"  parameterType="String" resultMap="resultMapGradePlatformUser"> 
 		SELECT 
 			p.user_platform_grade_name 
@@ -34,6 +34,28 @@
 		WHERE 
 			u.user_id = #{memberId};
 	</select>
-
+	
+	<!-- 회원가입시 사용자 레벨체크  -->
+	<insert id="addMemberUserPlatFormGradeCode" parameterType="UserDto">
+		INSERT INTO tb_user
+ 		  (user_id, 
+ 		  user_platform_grade_code, 
+ 		  user_status_level_code,
+ 		  user_first_height,
+ 		  user_first_weight,
+ 		  user_first_goal,
+ 		  user_first_bmi,
+ 		  user_reg_date
+ 		  )
+   		VALUES (
+   			#{userId}, 
+			#{userPlatFormGradeCode}, 
+			#{userStatusLevelCode},
+			null,
+			null,
+			null,
+			null,
+			null);
+	</insert>
 
 </mapper>

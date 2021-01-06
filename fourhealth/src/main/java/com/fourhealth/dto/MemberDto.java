@@ -1,5 +1,7 @@
 package com.fourhealth.dto;
 
+import java.util.List;
+
 //테이블명 : tb_common_user 회원 공통 관
 public class MemberDto {
 
@@ -16,7 +18,8 @@ public class MemberDto {
     private String memberMainBank;		//회원 계좌 은행
     private String memberBankNumber;	//회원 계좌 번호
     private String memberBankMaster;	//회원 계좌주
-    private String memberRegDate;		//회원 공통 등록 일자
+    private String memberRegDate;       //회원 공통 등록 일자
+    private UserDto userDto;
     
     
     public String getMemberEmail() {
@@ -128,9 +131,17 @@ public class MemberDto {
 
     public void setMemberRegDate(String memberRegDate) {
         this.memberRegDate = memberRegDate;
-    }
+    }   
 
-    @Override
+	public UserDto getUserDto() {
+		return userDto;
+	}
+
+	public void setUserDto(UserDto userDto) {
+		this.userDto = userDto;
+	}
+
+	@Override
     public String toString() {
         return "MemberDTO [memberAddr=" + memberAddr + ", memberBankMaster=" + memberBankMaster + ", memberBankNumber="
                 + memberBankNumber + ", memberBirth=" + memberBirth + ", memberGender=" + memberGender + ", memberId="
