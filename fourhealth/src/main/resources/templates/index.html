@@ -1,10 +1,16 @@
 <!DOCTYPE html>
-<html>
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
 
-</body>
+  <th:block layout:fragment="mainContent">
+    <div th:replace="fragments/main/sliders :: slidersFragment"></div>
+
+    <div th:replace="fragments/main/Categories :: CategoriesFragment"></div>
+    <div th:replace="fragments/main/blog_area2 :: blogareaFragment"></div>
+  </th:block>
 </html>
