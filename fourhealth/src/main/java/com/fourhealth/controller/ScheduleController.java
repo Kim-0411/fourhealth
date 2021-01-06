@@ -1,19 +1,25 @@
 package com.fourhealth.controller;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MemberService;
+import com.fourhealth.service.PromotionService;
 
 @Controller
 public class ScheduleController {
 	
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private PromotionService promotionService;
 
 	// 스케줄 등록해주는 페이지 (일단운동) 필요한거 매칭된 회원의 키 몸무게
 	@GetMapping("/trainerInsertMemberSchedule")
@@ -27,7 +33,10 @@ public class ScheduleController {
 	
 	  // 프로모션 스케줄 등록페이지
     @GetMapping("/trainerScheduleInsert")
-    public String trainerScheduleInsert() {
+    public String trainerScheduleInsert(Model model) {
+    	//로그인된 트레이너 아이디id002 가정
+    	List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService.getTrainerMyPromotionAllList("id002");
+    	model.addAttribute("myPromotionList",getTrainerMyPromotionAllList);
         return "trainer_layout/schedule/trainer_schedule_insert";
     }
 
@@ -48,6 +57,7 @@ public class ScheduleController {
     public String trainerScheduleDelet() {
         return "trainer_layout/schedule/trainer_schedule_delet";
     }
+    
 
 
 
