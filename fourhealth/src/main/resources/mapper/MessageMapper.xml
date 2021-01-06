@@ -47,9 +47,7 @@
 				FROM
 					tb_msg AS m
 				WHERE 
-					m.send_id = #{userId}
-				ORDER by
-					m.msg_send_date DESC;
+					m.send_id = #{userId};
       </select>
       
       <update id="modifyAllcancelMsg" parameterType="String" >
@@ -60,7 +58,7 @@
       </update>
       
       <select id="getAllReceiveMessageList" parameterType="String" resultMap="resultMapMsg">
-    SELECT
+      	SELECT
 			m.msg_code,
 			m.send_id,
 			m.msg_contents,
@@ -71,9 +69,7 @@
 		WHERE
 			m.receive_id = #{userId}
 		AND
-			m.msg_send_cancel IS NULL
-		ORDER by
-			m.msg_read_date IS NULL DESC ,m.msg_send_date DESC;
+			m.msg_send_cancel IS NULL;
       </select>
       
       <select id="getAllSendMessageInfo" parameterType="String" resultMap="resultMapMsg">

@@ -19,22 +19,150 @@
 		<result column="trainer_promotion_recruit_close_date" 		property="trainerPromotionRecruitCloseDate"/>
 		<result column="trainer_promotion_bg_image" 				property="proImageUrl"/>
 		<result column="trainer_promotion_recruit_total_date" 		property="trainerPromotionRecruitTotalDate"/>
-		<result column="trainer_matching_system_add_date" 			property="trainerMatchingSystemRegDate"/>
+		<result column="trainer_matching_system_add_date" 			property="trainerMatchingSystemAddDate"/>
 	</resultMap>
+	<insert id="promotionInsert" parameterType="NoticePromotionTrainerDto">
+		<selectKey keyProperty="trainerPromotionNoticeCode" resultType="String" order="BEFORE">
+			/* 프로모션 리스트에 있으면 하나씩 증가 후 insert 처리 */
+			SELECT
+				CASE
+				WHEN COUNT(1) = 0 THEN 'trainer_promotion_notice_001' 
+				ELSE CONCAT('trainer_promotion_notice_', LPAD(MAX(CAST(right(g.trainer_promotion_notice_code,3) AS DECIMAL)+1), 3, 0))
+				END AS trainerPromotionNoticeCode
+			FROM
+				tb_notice_promotion_trainer AS g;
+		</selectKey>
+			/* 프로모션 리스트에 있으면 하나씩 증가 후 insert 처리 */
+			INSERT INTO tb_notice_promotion_trainer
+			(
+				trainer_promotion_notice_code, 
+				user_id, 
+				trainer_promotion_name, 
+				trainer_promotion_goal, 
+				trainer_promotion_short_contents, 
+				trainer_promotion_details_contents, 
+				trainer_promotion_recruit_people,
+				trainer_promotion_live_add_people, 
+				trainer_promotion_price, 
+				trainer_promotion_recruit_total_date, 
+				trainer_promotion_recruit_start_date, 
+				trainer_promtion_recruit_end_date, 
+				trainer_promotion_attend_start_date, 
+				trainer_promotion_recruit_close_date,
+				trainer_promotion_bg_image, 
+				trainer_matching_system_add_date
+			)
+			VALUES 
+			(
+				#{trainerPromotionNoticeCode},
+				#{userId},
+				#{trainerPromotionName}, 
+				#{trainerPromotionGoal}, 
+				#{trainerPromotionShortContents}, 
+				#{trainerPromotionDetailsContents}, 
+				#{trainerPromotionRecruitPeople},
+				0, 
+				#{trainerPromotionPrice} ,
+				#{trainerPromotionRecruitTotalDate},
+				#{trainerPromotionRecruitStartDate} ,
+				#{trainerPromotionRecruitEndDate}, 
+				#{trainerPromotionAttendStartDate}, 
+				#{trainerPromotionRecruitCloseDate}, 
+				#{proImageUrl},
+				NOW()
+			)
+		</insert>
+  
+		<select id="promotionCheck" resultType="String">
+			/* 프로모션 등록 시도할 경우, 최초 등록데이터 유무 판단(권한 체크) */
+		  SELECT COUNT(*) 
+		  FROM (
+			  SELECT 
+				  user_id
+			FROM 
+			  tb_trainer 
+			WHERE 
+			user_id = #{proId}
+		  )c;
+		</select>  
+		
+		<select id="promotionList" resultMap="resultMapNoticePromotionTrainer">
+			/* 프로모션 전체 리스트 사용자에게 보여주기 */
+		  SELECT 
+			  trainer_promotion_notice_code, 
+			  user_id, trainer_promotion_name, 
+			  trainer_promotion_goal, 
+			  trainer_promotion_short_contents, 
+			  trainer_promotion_details_contents, 
+			  trainer_promotion_recruit_people, 
+			  trainer_promotion_live_add_people, 
+			  trainer_promotion_price, 
+			  trainer_promotion_recruit_start_date,
+			  trainer_promtion_recruit_end_date, 
+			  trainer_promotion_attend_start_date, 
+			  trainer_promotion_recruit_close_date, 
+			  trainer_promotion_bg_image, 
+			  trainer_promotion_recruit_total_date, 
+			  trainer_matching_system_add_date
+			  FROM 
+				  tb_notice_promotion_trainer
+		</select>  
+		
+		<select id="promotionDetail" resultMap="resultMapNoticePromotionTrainer">
+			/* 프로모션 눌렀을 경우 상세 정보 사용자에게 보여주기 */
+		  SELECT 
+			trainer_promotion_notice_code, 
+			user_id, 
+			trainer_promotion_name, 
+			trainer_promotion_goal, 
+			trainer_promotion_short_contents, 
+			trainer_promotion_details_contents, 
+			trainer_promotion_recruit_people, 
+			trainer_promotion_live_add_people, 
+			trainer_promotion_price, 
+			trainer_promotion_recruit_start_date, 
+			trainer_promtion_recruit_end_date, 
+			trainer_promotion_attend_start_date, 
+			trainer_promotion_recruit_close_date, 
+			trainer_promotion_bg_image, 
+			trainer_promotion_recruit_total_date, 
+			trainer_matching_system_add_date
+		  FROM 
+			tb_notice_promotion_trainer 
+			WHERE 
+			trainer_promotion_notice_code = #{proCode}
+		  </select>
+	
+		  <select id="getPromotionListCount" resultType="int">
+			  /* 현재 프로모션 등록 수 페이징 처리 */
+			SELECT
+			  count(*)
+			FROM
+				tb_notice_promotion_trainer;
+		  </select>
+  
+		  <select id="getPromotionListPaging" parameterType="int" resultType="map">
+			/*	페이징 처리  */
+			SELECT
+			*
+			FROM
+			  tb_notice_promotion_trainer
+			LIMIT #{startRow}, #{rowPerPage};
+		  </select>
 
-	<select id="getTrainerMyPromotionAllList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">
-	 <!-- 로그인된 트레이너가 자신의 올린 모든  프로모션 리스트 -->
-		 SELECT
-	 		pt.trainer_promotion_notice_code,
-   			pt.trainer_promotion_name,
-  	 		pt.trainer_promotion_recruit_start_date,
-  			pt.trainer_promtion_recruit_end_date,
-  			pt.trainer_promotion_recruit_people
-		
-		 FROM
-  			tb_notice_promotion_trainer AS pt
-		
-		 WHERE
-  			pt.user_id = #{trainerId}; 
-	</select>
+		<select id="getTrainerMyPromotionAllList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">
+		/*로그인된 트레이너가 자신의 올린 모든  프로모션 리스트*/
+			SELECT
+				pt.trainer_promotion_notice_code,
+				pt.trainer_promotion_name,
+				pt.trainer_promotion_recruit_start_date,
+				pt.trainer_promtion_recruit_end_date,
+				pt.trainer_promotion_recruit_people
+			
+			FROM
+				tb_notice_promotion_trainer AS pt
+			
+			WHERE
+				pt.user_id = #{trainerId}; 
+		</select>
 </mapper>

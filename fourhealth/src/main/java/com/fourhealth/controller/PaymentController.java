@@ -8,17 +8,17 @@ public class PaymentController {
 
     @GetMapping("/adjustmentAccountInsert")
     public String adjustmentAccountInsert() {
-        return "trainer_layout/adjustment/adjustment_account_insert";
+        return "manage_layout/trainer/adjustment/adjustment_account_insert";
     }
 
     @GetMapping("/adjustmentAccountModify")
     public String adjustmentAccountModify() {
-        return "trainer_layout/adjustment/adjustment_account_modify";
+        return "manage_layout/trainer/adjustment/adjustment_account_modify";
     }
 
     @GetMapping("/adjustmentAccount")
     public String adjustmentAccount() {
-        return "trainer_layout/adjustment/adjustment_account";
+        return "manage_layout/trainer/adjustment/adjustment_account";
     }
 
 }

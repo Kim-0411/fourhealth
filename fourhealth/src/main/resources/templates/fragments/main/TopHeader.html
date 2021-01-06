@@ -19,13 +19,51 @@
         >
           <div class="login_register_area d-flex">
             <div class="login">
-              <a href="/login">Sing in</a>
+              <div class="login">
+                <a th:href="@{/login}" th:if="${session.SID eq null}"
+                  >Sign in</a
+                >
+              </div>
             </div>
-            <div class="register">
-              <a href="register.html">Sing up</a>
+            <div class="Sing up">
+              <a th:href="@{/levelSelect}" th:if="${session.SID eq null}"
+                >Sing up</a
+              >
             </div>
-             <div class="master">
-              <a th:href ="@{/masterManagement}" style="margin-left: 10px;">관리자 화면</a>
+            <th:block th:unless="${session.SID eq null}">
+              <label style="color: white">
+                [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp;
+                [[${session.SNICKNAME}]]
+                <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
+					<span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
+              </label>
+              <a th:href="@{/#}" style="text-align: center"> &nbsp; My page</a>
+              <a th:href="@{/logout}" style="text-align: right">
+                &nbsp; 로그아웃</a
+              >
+            </th:block>
+
+            <div class="master">
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL eq '관리자'}"
+                style="margin-left: 10px"
+                >관리자 관리페이지</a
+              >
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL eq '관리자'}"
+                style="margin-left: 10px"
+                >트레이너 관리페이지</a
+              >
+            </div>
+            <div class="master" th:if="${session.SLEVEL == null}">
+              <a th:href="@{/manage}" style="margin-left: 10px"
+                >관리자 마스터</a
+              >
+              <a th:href="@{/manage}" style="margin-left: 10px"
+                >트레이너 마스터</a
+              >
             </div>
           </div>
           <!-- Search Button Area -->

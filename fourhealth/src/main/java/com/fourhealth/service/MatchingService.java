@@ -15,10 +15,11 @@ public class MatchingService {
 
 	@Autowired
 	private MatchingMapper matchingMapper;
-	
-	//트레이너가 자신의 프로모션중 관리할 프로모션에 접근시 등록된 사용자들 목록조회
-	public List<MatchingUserTrainerDto> getTrainerMatchingUserList(String promotionCode){
-		List<MatchingUserTrainerDto> getTrainerMatchingUserList = matchingMapper.getTrainerMatchingUserList(promotionCode);
+
+	// 트레이너가 자신의 프로모션중 관리할 프로모션에 접근시 등록된 사용자들 목록조회
+	public List<MatchingUserTrainerDto> getTrainerMatchingUserList(String promotionCode) {
+		List<MatchingUserTrainerDto> getTrainerMatchingUserList = matchingMapper
+				.getTrainerMatchingUserList(promotionCode);
 		return getTrainerMatchingUserList;
 	}
 
