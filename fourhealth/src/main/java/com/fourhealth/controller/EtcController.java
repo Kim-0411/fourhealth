@@ -36,9 +36,12 @@ public class EtcController {
 
 	//트레이너가 자신의 프로모션 별 메시지 보내주기 위한 화면 
 	@GetMapping("trainerSendMessage")
-	public String trainerSendMessage(Model model) {
+	public String trainerSendMessage(Model model
+									,@RequestParam(name = "receiveId",required = false,defaultValue = "") String receiveId) {
 		//id002트레이너 가정 로그인 프로세스 완료시 바꿔야함 
 		model.addAttribute("trainerId","id002");
+		model.addAttribute("reply",receiveId);
+		System.out.println(receiveId);
 		return "trainer_layout/massage/trainer_massage_send";
 	}
 	

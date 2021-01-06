@@ -20,7 +20,7 @@
 				<div class="card-body p-0">
 					<div class="mailbox-read-info">
 						<h6>
-							보낸사람: : <span th:text="${msgInfo.sendId}"></span> <span
+							보낸사람: : <span th:text="${msgInfo.sendId}" id="send_id" th:value="${msgInfo.sendId}"></span> <span
 								class="mailbox-read-time float-right" th:text="${msgInfo.msgSendDate}"></span>
 						</h6>
 					</div>
@@ -66,8 +66,8 @@
 					<button type="button" class="btn btn-default">
 						<i class="far fa-trash-alt"></i> Delete
 					</button>
-					<button type="button" class="btn btn-default">
-						<i class="fas fa-print"></i> Print
+					<button type="button" class="btn btn-default" id="reply_btn" onclick="location.href='/trainerSendMessage?receiveId='+$('#send_id').text()">
+						<i class="fas fa-print"></i> 답장
 					</button>
 				</div>
 				<!-- /.card-footer -->
@@ -77,7 +77,7 @@
 		<!-- /.col -->
 
 		<div class="col-md-3">
-			<a href="compose.html" class="btn btn-primary btn-block mb-3">쪽지보내기</a>
+			<a th:href="@{/trainerSendMessage}" class="btn btn-primary btn-block mb-3">쪽지 작성</a>
 			<div class="card">
 				<div class="card-header">
 					<h3 class="card-title">쪽지</h3>
@@ -108,3 +108,4 @@
 	</div>
 </th:block>
 </html>
+
