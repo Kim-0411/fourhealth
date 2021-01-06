@@ -45,18 +45,22 @@
 
             <div class="master">
               <a
-                th:href="@{/master_main}"
+                th:href="@{/mainTrainer}"
                 th:if="${session.SLEVEL eq '관리자'}"
                 style="margin-left: 10px"
-                >관리자 화면</a
+                >관리자 관리페이지</a
+              >
+              <a
+                th:href="@{/mainTrainer}"
+                th:if="${session.SLEVEL eq '관리자'}"
+                style="margin-left: 10px"
+                >트레이너 관리페이지</a
               >
             </div>
-            <div class="master">
+            <div class="master" th:if="${session.SLEVEL == null}">
               <a th:href="@{/mainTrainer}" style="margin-left: 10px"
                 >관리자 마스터</a
               >
-            </div>
-            <div class="trainer">
               <a th:href="@{/mainTrainer}" style="margin-left: 10px"
                 >트레이너 마스터</a
               >
