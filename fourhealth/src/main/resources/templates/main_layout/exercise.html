@@ -8,45 +8,45 @@
   <title th:text="${title}"></title>
 
   <th:block layout:fragment="mainContent">
-  	<h1>신체단련</h1>
-	<span>당신에게 맞는 운동을 찾아서 오늘부터 칼로리를 태워보세요!</span>
-	
-
-	<form th:action="@{/serachExercise}" method="post">
-		<h3>활동 및 운동찾기</h3>
-		<input type="text" name="exercise_name">
-		<button type="submit">검색하기</button>
-		<div>
-			<label><input type="radio" name="met_coefficient" value="easy">가벼움</label>
-			<label><input type="radio" name="met_coefficient" value="normal">보통</label>
-			<label><input type="radio" name="met_coefficient" value="hard">격렬함</label>
-			<label><input type="radio" name="met_coefficient" value="all">전체</label>
-		</div>
-	</form>
-	<div class="swiper-container">
+  <div class="container">
+  	<div class="top-level-header">
+  		<h1>신체단련</h1>
+		<span>당신에게 맞는 운동을 찾아서 오늘부터 칼로리를 태워보세요!</span>
+	</div>
+	<div class="search-box">
+		<form th:action="@{/serachExercise}" method="post">
+			<h3>활동 및 운동찾기</h3>
+			<input type="text" name="exercise_name">
+			<button type="submit" class ="btn btn-success">검색하기</button>
+			<div>
+				<label><input type="radio" name="met_coefficient" value="easy">가벼움</label>
+				<label><input type="radio" name="met_coefficient" value="normal">보통</label>
+				<label><input type="radio" name="met_coefficient" value="hard">격렬함</label>
+				<label><input type="radio" name="met_coefficient" value="all">전체</label>
+			</div>
+		</form>
+	</div>
+	<div class="swiper-container col-sm-12 col-xs-12">
 		<div class="swiper-wrapper" >
 			<div class="swiper-slide" th:each="e : ${easy}">
 				<div>
 					<h1 th:text="${e.exerciseName}"></h1>
-					<h3>예상 에너지소비량 (70kg)</h3> 
+					<h3>예상 에너지소비량 (70kg)이신 분에 대한</h3> 
 					<p>5분 : <span th:text=${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*5/1000)*5,0)}></span>kal</p>
 					<p>10분 : <span th:text=${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*10/1000)*5,0)}></span>kal</p>
 					<p>15분 : <span th:text=${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*15/1000)*5,0)}></span>kal</p>
 					<p>30분 : <span th:text=${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*30/1000)*5,0)}></span>kal</p>
-					
 				</div>
-				
-				
 			<div class="swiper-button-prev"></div>
 			<div class="swiper-button-next"></div>
 			</div>
 		</div>
 	</div>
-
-
-
-	<h3>운동 유형별 에너지 소비량</h3>
-<table border="1" style="display: inline-block;">
+	<div class="row">
+		<h3>운동 유형별 에너지 소비량</h3>
+	</div>
+	<div class="row">
+	<table class="table-bordered  col-md-4">
 		<tr>
 			<th colspan="3">가벼운강도</th>
 		</tr>
@@ -61,7 +61,7 @@
 			<td th:text="${e.exerciseMetCoeffcient}"></td>
 		</tr>
 	</table>
-	<table border="1" style="display: inline-block;">
+	<table class="table-bordered  col-md-4">
 		<tr>
 			<th colspan="3" >보통강도</th>
 		</tr>
@@ -76,7 +76,7 @@
 			<td th:text="${e.exerciseMetCoeffcient}"></td>
 		</tr>
 	</table>
-	<table border="1" style="display: inline-block;">
+	<table class="table-bordered  col-md-4">
 		<tr>
 			<th colspan="3">격렬한강도</th>
 		</tr>
@@ -91,7 +91,11 @@
 			<td th:text="${e.exerciseMetCoeffcient}"></td>
 		</tr>
 	</table>
-	<a th:href="@{/allExerciseList}" style="display: block;">전체보기</a>
+	</div>
+	<div class="row">
+		<a th:href="@{/allExerciseList}" style="display: block;">전체보기</a>
+	</div>
+	</div>
   </th:block>
   
 

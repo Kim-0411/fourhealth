@@ -28,7 +28,7 @@ public class ExerciseController {
 	public String allExerciseList(Model model) {
 		List<MetExerciseDto> metExercise = exerciseService.getAllExerciseList();
 		model.addAttribute("MetExercise", metExercise);
-		return "exercise/exercise_all_list";
+		return "main_layout/exercise/exercise_all_list";
 	}
 	//운동검색 (전체 접근가능)
 	@PostMapping("/serachExercise")
@@ -41,7 +41,7 @@ public class ExerciseController {
 		System.out.println(serachList);
 		model.addAttribute("serachList", serachList);
 
-		return "exercise/exercise_serach_list";
+		return "main_layout/exercise/exercise_serach_list";
 	}
 	
 	// 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
