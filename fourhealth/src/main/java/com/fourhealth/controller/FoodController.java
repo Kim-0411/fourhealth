@@ -46,6 +46,15 @@ public class FoodController {
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
 
 
+	@Controller
+	public class CommonController {
+    
+    @GetMapping("/foodSearch")
+	public String foodSearch(){
+		return "food/master_food/food_search";
+	}
+}
+
 	@GetMapping("/foodListNumbers")
 	public String foodListNumbers(Model model, 
 									@RequestParam(name = "currentPage", required=false, defaultValue = "1")int currentPage){
