@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
+
+  <th:block layout:fragment="mainContent">
+    <h1>SNS 페이지 입니다.</h1>
+  </th:block>
+</html>
