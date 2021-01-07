@@ -58,7 +58,7 @@
   - https://blog.naver.com/thsgusdnr123 손현욱
   - https://make-something.tistory.com/ 윤정호
   - https://octoberls.blogspot.com/ 이승재
-  - https://blog.naver.com/internal_정다솔
+  - https://blog.naver.com/internal_c 정다솔
 
   ### 2. About git
   ### 3. Wire Frame
