@@ -33,14 +33,14 @@ public class ExerciseController {
 	//운동검색 (전체 접근가능)
 	@PostMapping("/serachExercise")
 	public String serachExercise(Model model,
-			@RequestParam(name = "exercise_name", required = false) String exerciseName,
-			@RequestParam(name = "met_coefficient", required = false) String metCoefficient) {
+								@RequestParam(name = "exercise_name", required = false) String exerciseName,
+								@RequestParam(name = "met_coefficient", required = false) String metCoefficient) {
 		System.out.println("아이디" + exerciseName);
 		System.out.println("검색조건" + metCoefficient);
 		List<MetExerciseDto> serachList = exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient);
 		System.out.println(serachList);
+		model.addAttribute("title", "Fourhealth serachExercise");
 		model.addAttribute("serachList", serachList);
-
 		return "main_layout/exercise/exercise_serach_list";
 	}
 	
