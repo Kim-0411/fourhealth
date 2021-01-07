@@ -4,25 +4,37 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
 
+	<resultMap type="UserDto" id="resultMapUser">
+		<result column="user_id" 							property="userId"/>
+		<result column="user_platform_grade_code" 			property="userPlatFormGradeCode"/>
+		<result column="user_status_level_code" 			property="userStatusLevelCode"/>
+		<result column="user_first_height" 					property="userFirstHeight"/>
+		<result column="user_first_weight" 					property="userFirstWeight"/>
+		<result column="user_first_goal" 					property="userFirstGoal"/>
+		<result column="user_first_bmi" 					property="userFirstBmi"/>
+		<result column="user_reg_date" 						property="userRegDate"/>
+	</resultMap>
+
 	<!--공통 회원데이터 resultMap  -->
     <resultMap type="MemberDto" 		id="resultMapMember">
-        <result column="user_id" 		property="memberId"/>
-        <result column="user_pw" 		property="memberPw"/>
-        <result column="user_level_code" property="memberLevel"/>
-        <result column="user_name" 		property="memberName"/>
-        <result column="user_addr" 		property="memberAddr"/>
-        <result column="user_email"		property="memberEmail"/>
-        <result column="user_nickname" 	property="memberNickname"/>
-        <result column="user_birth" 	property="memberBirth"/>
-        <result column="user_gender" 	property="memberGender"/>
-        <result column="user_main_bank" property="memberMainBank"/>
-        <result column="user_bank_number" property="memberBankNumber"/>
-        <result column="user_bank_master" property="memberBankMaster"/>
-        <result column="user_reg_date" 	property="memberRegDate"/>
+        <result column="user_id" 							property="memberId"/>
+        <result column="user_pw" 							property="memberPw"/>
+        <result column="user_level_code"					property="memberLevel"/>
+        <result column="user_name" 							property="memberName"/>
+        <result column="user_addr" 							property="memberAddr"/>
+        <result column="user_email"							property="memberEmail"/>
+        <result column="user_nickname" 						property="memberNickname"/>
+        <result column="user_birth" 						property="memberBirth"/>
+        <result column="user_gender" 						property="memberGender"/>
+        <result column="user_main_bank" 					property="memberMainBank"/>
+        <result column="user_bank_number" 					property="memberBankNumber"/>
+        <result column="user_bank_master"					property="memberBankMaster"/>
+        <result column="user_reg_date" 						property="memberRegDate"/>
     </resultMap>
     
     <!-- 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 -->
     <delete id="removeMasterMember" parameterType="String">
+		/* 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 */
 		DELETE
 		FROM
 			tb_common_user
@@ -45,31 +57,6 @@
 		WHERE
 			user_id = #{memberId};
 	</delete>
-	
-    
-  <!-- 전체회원 단에서 회원 수정 -->
-<!-- 	<update id="modifyMasterMember" parameterType="MemberDto">c
-		UPDATE tb_common_user
-		<trim prefix="SET" suffixOverrides=",">
-			<if test="memberPw != null and memberPw neq ''.toString()">
-				user_pw	= #{memberPw},
-			</if>
-			<if test="memberName != null and memberName neq ''.toString()">
-				user_name	= #{memberName},
-			</if>
-			<if test="memberLevel != null and memberLevel neq ''.toString()">
-				user_level_code= #{memberLevel},
-			</if>
-			<if test="memberEmail != null and memberEmail neq ''.toString()">
-				user_email= #{memberEmail},
-			</if>
-			<if test="memberAddr != null and memberAddr neq ''.toString()">
-				user_addr	= #{memberAddr},
-			</if>
-		</trim>
-		WHERE
-			user_id = #{memberId}
-	</update> -->
 	
 	<!-- 관리자페이지 단에서 회원 수정  -->
 	<update id="modifyMasterMember" parameterType="MemberDto">
@@ -132,10 +119,10 @@
 		
 	<!-- 아이디 중복 체크 : 아이디가 있으면 1 count, 없으면 0 -->
 	<select id = "userIdCheck" parameterType="String" resultType="int">
-	SELECT 
-		COUNT(*) 
-	FROM tb_common_user AS u
-		WHERE u.user_id = #{userId};
+		SELECT 
+			COUNT(*) 
+		FROM tb_common_user AS u
+			WHERE u.user_id = #{userId};
 	</select>
 	
 	
@@ -172,6 +159,29 @@
 			null, 
 			NOW());
 	</insert>
+
+	
+	<!--트레이너가 자기 본인의 프로모션에 등록된 회원중 한명의 회원의 정보를 가져올때.  -->
+	<select id="getTrainerMyMatchingUserInfo" parameterType="String" resultMap="resultMapUser">
+		/*트레이너가 자기 본인의 프로모션에 등록된 회원중 한명의 회원의 정보를 가져올때.*/
+		SELECT
+			u.user_id,
+			u.user_first_height,
+			u.user_first_weight,
+			u.user_first_goal 
+		FROM
+			tb_user AS u
+		where
+			u.user_id = #{userId};
+	</select>
+
+	<select id="getAllUserId" resultMap="resultMapMember">
+		SELECT
+			u.user_id
+		FROM
+			tb_common_user AS u;
+		
+	</select>
 	
 	<!--  	 일단 생략
 	<select id="trainerGetMatchingUserList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">

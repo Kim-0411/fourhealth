@@ -34,10 +34,13 @@ public class EtcController {
 
 	// 트레이너가 자신의 프로모션 별 메시지 보내주기 위한 화면
 	@GetMapping("trainerSendMessage")
-	public String trainerSendMessage(Model model) {
+	public String trainerSendMessage(Model model,
+			@RequestParam(name = "receiveId", required = false, defaultValue = "") String receiveId) {
 		// id002트레이너 가정 로그인 프로세스 완료시 바꿔야함
 		model.addAttribute("trainerId", "id002");
-		return "trainer_layout/massage/trainer_massage_send";
+		model.addAttribute("reply", receiveId);
+		System.out.println(receiveId);
+		return "manage_layout/trainer/message/trainer_message_send";
 	}
 
 	// 트레이너가 회원에게 쪽지 보내기.
@@ -50,10 +53,10 @@ public class EtcController {
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
 		if (result.equals("성공")) {
-			out.println("<script>alert('성공적으로 메시지가 전송되었습니다.');location.href='/mainTrainer';</script>");
+			out.println("<script>alert('성공적으로 메시지가 전송되었습니다.');location.href='/manage';</script>");
 			out.flush();
 		} else {
-			out.println("<script>alert('실패.');location.href='/mainTrainer';</script>");
+			out.println("<script>alert('실패.');location.href='/manage';</script>");
 			out.flush();
 		}
 
@@ -66,7 +69,7 @@ public class EtcController {
 		// 트레이너 로그인 id002가정
 		List<MsgDto> getAllSendMessageList = messageService.getAllSendMessageList("id002");
 		model.addAttribute("sendMsg", getAllSendMessageList);
-		return "trainer_layout/massage/trainer_message_send_management";
+		return "manage_layout/trainer/message/trainer_message_send_management";
 	}
 
 	// 트레이너가 메시지 보낸거 발송취소
@@ -85,7 +88,7 @@ public class EtcController {
 		// 트레이너 로그인 id002가정
 		List<MsgDto> getAllReceiveMessageList = messageService.getAllReceiveMessageList("id002");
 		model.addAttribute("receiveMsg", getAllReceiveMessageList);
-		return "trainer_layout/massage/trainer_message_receive_management";
+		return "manage_layout/trainer/message/trainer_message_receive_management";
 	}
 
 	// 보낸메시지 읽기
@@ -94,7 +97,7 @@ public class EtcController {
 			@RequestParam(name = "msgCode", required = false) String msgCode) {
 		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
 		model.addAttribute("msgInfo", getAllSendMessageInfo);
-		return "trainer_layout/massage/trainer_send_message_read";
+		return "manage_layout/trainer/message/trainer_send_message_read";
 	}
 
 	// 받은메시지 읽기및 읽음처리
@@ -105,25 +108,25 @@ public class EtcController {
 		String result = messageService.getAllMessageReadPro(msgCode);
 		System.out.println(result);
 		model.addAttribute("msgInfo", getAllSendMessageInfo);
-		return "trainer_layout/massage/trainer_receive_message_read";
+		return "manage_layout/trainer/message/trainer_receive_message_read";
 	}
 
 	// 트레이너 프로필 등록페이지
 	@GetMapping("/trainerProfileInsert")
 	public String trainerProfileInsert() {
-		return "trainer_layout/profile/trainer_profile_insert";
+		return "manage_layout/trainer/profile/trainer_profile_insert";
 	}
 
 	// 트레이너 프로필 확인페이지
 	@GetMapping("/trainerProfile")
 	public String trainerProfile() {
-		return "trainer_layout/profile/trainer_profile_insert";
+		return "manage_layout/trainer/profile/trainer_profile";
 	}
 
 	// 트레이너 프로필 수정페이지
 	@GetMapping("/trainerProfileModify")
 	public String trainerProfileModify() {
-		return "trainer_layout/profile/trainer_profile_Modify";
+		return "manage_layout/trainer/profile/trainer_profile_Modify";
 	}
 
 }
