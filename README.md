@@ -53,7 +53,12 @@
 ### 1) 2020-00-00 ~ 2020-00-00(5 days)
 # Our All Links
   ### 1. About Our Blog
-
+  - https://blog.naver.com/kjc0411 김재창
+  - https://g-ret.tistory.com/ 문도희
+  - https://blog.naver.com/thsgusdnr123 손현욱
+  - https://make-something.tistory.com/ 윤정호
+  - https://octoberls.blogspot.com/ 이승재
+  - https://blog.naver.com/internal_정다솔
 
   ### 2. About git
   ### 3. Wire Frame
