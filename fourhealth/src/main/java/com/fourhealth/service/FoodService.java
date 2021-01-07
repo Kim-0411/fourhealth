@@ -58,12 +58,13 @@ public class FoodService {
 
 		Map<String, Object> resultMap = new HashMap<String, Object>();
 		resultMap.put("lastPage", lastPage);
-		resultMap.put("loginHistory", foodList);
+		resultMap.put("foodList", foodList);
+		resultMap.put("currentPage", currentPage);
 		resultMap.put("startPageNum", startPageNum);
 		resultMap.put("endPageNum", endPageNum);
 	
 		// return resultMap;
-		return null;
+		return resultMap;
 	}
 
 	//Food List Service

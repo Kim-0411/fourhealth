@@ -59,9 +59,38 @@ public class FoodController {
 	public String foodListNumbers(Model model, 
 									@RequestParam(name = "currentPage", required=false, defaultValue = "1")int currentPage){
 
-		Map<String, Object> resultMap = foodService.getFoosList(currentPage);								
-		return "food/master_food/food_list";
+		Map<String, Object> resultMap = foodService.getFoosList(currentPage);		
+		
+		model.addAttribute("title", "식품리스트 페이징 게시판");
+		
+		
+		System.out.println("#############################");
+	    System.out.println(resultMap.get("lastPage"));
+
+
+		System.out.println(resultMap);
+
+		for(int i=0; i<resultMap.size(); i++){
+			if(resultMap.get(i) == null){
+
+			}
+		}
+						
+
+		// model.addAttribute("lastPage" , resultMap.get("lastPage"));
+		model.addAttribute("foodList", resultMap.get("foodList"));
+		// model.addAttribute("currentPage", resultMap.get("currentPage"));
+		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+
+
+
+
+		//return "redirect:/";
+		return "main_layout/food/foodListNumbers";
 	}
+
+
 	//식품리스트
 	@GetMapping("/foodList")
 	public String foodList(Model model){

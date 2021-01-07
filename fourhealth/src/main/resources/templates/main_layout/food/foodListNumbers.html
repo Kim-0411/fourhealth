@@ -1,13 +1,9 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="@{default_layout/main/default}"
-  lang="en"
->
-  <title th:text="${title}"></title>
-  <h1>#Food 관리자 화면</h1>
-  <!--관리자 식품 관리 리스트 테이블-->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}" lang="en">
+<title th:text="${title}"></title>
+<th:block layout:fragment="mainContent">
+  <h1>food화면입니다.</h1>
   <table class="table foodlist_table">
     <thead>
       <h4>식품 정보는 1인분 기준으로 제공되며 몇몇 정보는 누락되어있음.</h4>
@@ -27,19 +23,22 @@
         <th>삭제</th>
       </tr>
     </thead>
+   
+     
+
     <tbody>
-      <tr>
-        <td>test001</td>
-        <td>test식품</td>
-        <td>150g</td>
-        <td>120Cal</td>
-        <td>126</td>
-        <td>5</td>
-        <td>4</td>
-        <td>3</td>
-        <td>2</td>
-        <td>1</td>
-        <td>test제일미당</td>
+      <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}">
+        <td th:text="${food.get('foodCode')}"></td>
+        <td th:text="${food.get('foodName')}"></td>
+        <td th:text="${food.get('foodTotalGram')}"></td>
+        <td th:text="${food.get('foodCal')}"></td>
+        <td th:text="${food.get('foodProtein')}"></td>
+        <td th:text="${food.get('foodFat')}"></td>
+        <td th:text="${food.get('foodSodium')}"></td>
+        <td th:text="${food.get('foodSugar')}"></td>
+        <td th:text="${food.get('foodChole')}"></td>
+        <td th:text="${food.get('foodTotalGram')}"></td>
+        <td th:text="${food.get('foodMakerNamer')}"></td>
         <td>
           <!-- <a href="#" data-toggle="modal" data-target="#foodDetails">수정</a> -->
           <a href="#" class="foodUpdate" data-toggle="modal" data-target="#foodDetails">수정</a>
@@ -116,7 +115,10 @@
                 <th>식품제조사</th>
               </tr>
             </thead>
-            <tbody></tbody>
+            <tbody>
+             
+
+            </tbody>
 
 
           </table>
@@ -135,11 +137,16 @@
   <style>
     .foodlist_table {
       font-size: small;
-      width: 100%;
+      width: 1170px;
     }
+
 
     .modal-body .table {
       font-size: x-small;
+    }
+
+    .modal-body {
+      z-index: 3;
     }
 
     /* 나중에 화면 작아지면 css로 옵션걸어서 아이콘 으로 표시하기 */
@@ -163,7 +170,7 @@
     
      */
   </style>
-  <th:block layout:fragment="mainContent">
-    <h1>food화면입니다.</h1>
-  </th:block>
+
+</th:block>
+
 </html>
