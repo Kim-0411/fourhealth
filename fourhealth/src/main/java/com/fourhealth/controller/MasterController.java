@@ -138,4 +138,16 @@ public class MasterController {
 	}
 	/* 관리자 음식DB 관리 페이지 맵핑 끝 */
 
+	/* 관리자 플렛폼 등급 관리 페이지 맵핑 시작 */
+	@GetMapping("/userPlatformGrade")
+	public String userPlatformGrade(Model model) {
+		return "manage_layout/master/platform_manage/user_platform_grade";
+	}
+
+	@GetMapping("/trainerPlatformGrade")
+	public String trainerPlatformGrade(Model model) {
+		return "manage_layout/master/platform_manage/trainer_platform_grade";
+	}
+	/* 관리자 플렛폼 등급 관리 페이지 맵핑 끝 */
+
 }
