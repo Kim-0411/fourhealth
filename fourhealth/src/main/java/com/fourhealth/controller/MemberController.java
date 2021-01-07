@@ -109,7 +109,7 @@ public class MemberController {
 	@GetMapping("/levelSelect")
 	public String commonLevelSelect() {
 
-		return "master/member/level_select";
+		return "main_layout/member/level_select";
 	}
 
 	// 사용자,트레이너 권한 선택후 회원가입 입력하는 화면
@@ -117,7 +117,7 @@ public class MemberController {
 	public String commonMInsert(@RequestParam(value = "user_level_code", required = false) String level, Model model) {
 
 		model.addAttribute("level", level); // 누른거 래밸 사용자,트레이너
-		return "master/member/member_insert";
+		return "main_layout/member/m_insert";
 	}
 
 	// 회원 가입 후 로그인 화면으로 이동
@@ -231,4 +231,3 @@ public class MemberController {
 	}
 
 }
-

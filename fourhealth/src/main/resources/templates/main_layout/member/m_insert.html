@@ -1,181 +1,449 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    
-    <title>회원가입</title>
-    <!-- Custom fonts for this template-->
-     <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
-    <link
-        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
-        rel="stylesheet">
-    <!-- Custom styles for this template-->
-    <link href="css/sb-admin-2.min.css" rel="stylesheet">
-    <style type="text/css">
-    input{
-       margin:  10px;
-    }
-    </style>
 
-</head>
+<!-- Main Sidebar Container -->
+<aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="leftMenuFragment">
+  <!-- Brand Logo -->
+  <a href="/manage" class="brand-link">
+    <img src="/img/master_img/AdminLTELogo.png" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+      style="opacity: 0.8" />
+    <span class="brand-text font-weight-light">로고</span>
+  </a>
 
-<body class="bg-gradient-primary">
-    <div class="container">
-        <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-                <!-- Nested Row within Card Body -->
-                <div class="row">
-                    <div class="col-lg-5 d-none d-lg-block bg-register-image"></div>
-                    <div class="col-lg-7">
-                        <div class="p-5">
-                            <div class="text-center">
-                                <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
-                            </div>
-                             <form th:action="@{/mInsert}" method="post" id="sign_form">
-                                <div class="form-group row">
-                                    <div class="col-sm-12 ">
-                                       <input type="text" class="form-control form-control-user" placeholder="userId" id="userId" name="memberId"/>
-                                          <button type="button" class ="btn btn-primary"  id="userIdCheck" name="userIdCheck" style="margin: 7px;" >중복체크</button>
-                                    </div>
-                                    <div class="col-sm-12">
-                          		    <input type="hidden" name="memberLevel" th:value="${level}">                              
-                                       <input type="password" class="form-control form-control-user" placeholder="userPassword" id="userPassword" name="memberPw"/>
-                                    </div>
-                                    <div class="col-sm-12">
-                                       <input type="password" class="form-control form-control-user" placeholder="userPwCheck" id="userPwCheck" name="userPwCheck"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userAddr" id="userAddr" name="memberAddr"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                          <input type="text" class="form-control form-control-user" placeholder="userName" id="userName" name="memberName" />
-                                    </div>
-                                     <div class="col-sm-12">
-                                       <input type="date" class="form-control form-control-user" placeholder="userBirth" id="userBirth" name="memberBirth"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                    <input type="text" class="form-control form-control-user" placeholder="userNickName"  id="userNickName" name="memberNickname"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                     <input type="text" class="form-control form-control-user" placeholder="userPhone" id="userPhone" name="memberPhone"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                      <input type="text" class="form-control form-control-user" placeholder="userEmail" id="userEmail" name="memberEmail"/>
-                                    </div>
-                                     <div class="col-sm-12">
-                                    <input type="radio" name="memberGender" value="man" checked="checked">남 
-                           			<input type="radio" name="memberGender" value="woman" >여
-                                    </div>
-                               		</div>
-                            </form>
-                                <button id="sign_up" disabled="disabled" class="btn btn-primary btn-user btn-block">
-                                       회원가입
-                                </button>
-	                            <hr>
-	                            <div class="text-center">
-	                                <a class="small" href="forgot-password.html">비밀번호 찾기</a>
-	                            </div>
-                            <div class="text-center">
-                                <a class="small" href="/">이미 회원이세요? 로그인하세요.!</a>
-                            </div>
-                        </div>
-                   </div>
-                </div>
-            </div>
-        </div>
-
+  <!-- Sidebar -->
+  <div class="sidebar">
+    <!-- Sidebar user panel (optional) -->
+    <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+      <div class="image">
+        <img src="/img/master_img/user2-160x160.jpg" class="img-circle elevation-2" alt="User Image" />
+      </div>
+      <div class="info">
+        <a href="#" class="d-block">id002(트레이너)</a>
+      </div>
     </div>
-      <script src="vendor/jquery/jquery.min.js"></script>
-   <script type="text/javascript">
-      
-    $('#sign_up').click(function(){
-       if($("#userPassword").val()==""){
-         alert("비밀번호를 입력해주세요.");
-         $("#userPass").focus();
-         return false;
-      }
-       if($("#userPassword").val()!=$("#userPwCheck").val()){
-           alert("비밀번호가 일치하지 않습니다."); 
-            $("#userPwCheck").val("").focus();
-            return false; 
-          } 
-       if($("#userName").val()==""){
-         alert("이름을 입력해주세요.");
-         $("#userName").focus();
-         return false;
-      }
-      if($("#userBirth").val()==""){
-         alert("생년원일을 입력해주세요.");
-         $("#userBirth").focus();
-         return false;
-      }
-      if($("#userNickName").val()==""){
-         alert("닉네임을 입력해주세요.");
-         $("#userNickName").focus();
-         return false;
-      }
-      if($("#userPhone").val()==""){
-         alert("핸드폰번호를 입력해주세요.");
-         $("#userPhone").focus();
-         return false;
-      }
-      if($("#userEmail").val()==""){
-         alert("이메일을 입력해주세요.");
-         $("#userEmail").focus();
-         return false;
-      }
-      else{
-         $("#sign_form").submit();
-      }
-      });
-    
-    $('#userIdCheck').click(function(){
-       
-       var userId = $('#userId').val();
-       console.log(userId);
-       var request = $.ajax({
-            url: "/userIdCheck",
-            method: "POST",
-            data: { userId : userId },
-            dataType: "json"
-          });
-           
-          request.done(function( msg ) {
-             if(msg ==0){
-                if(userId ==''){
-                	alert('아이디를 입력해주세요');
-                }else{
-                alert('사용 가능한 아이디 입니다.');
-                	$('#sign_up').attr('disabled', false);
-                }	
-             }else{
-                alert('중복 되는 아이디가 있습니다.');
-                $('#sign_up').attr('disabled', true);
-             }
-          });
-           
-          request.fail(function( jqXHR, textStatus ) {
-            alert( "Request failed: " + textStatus );
-          });
-    })
-    
-      
-    </script>
-   <!-- Bootstrap core JavaScript-->
-    <script type="text/javascript">
-    
-    </script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- SidebarSearch Form -->
+    <div class="form-inline">
+      <div class="input-group" data-widget="sidebar-search">
+        <input class="form-control form-control-sidebar" type="search" placeholder="Search" aria-label="Search" />
+        <div class="input-group-append">
+          <button class="btn btn-sidebar">
+            <i class="fas fa-search fa-fw"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+    <!-- Sidebar Menu (트레이너 혹은 세션이 없을때)-->
+    <nav class="mt-2">
+      <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+        <li class="nav-item">
+          <a href="#" class="nav-link">
+            <i class="nav-icon fas fa-edit"></i>
+            <p>
+             #프로필 관리
+              <i class="fas fa-angle-left right"></i>
+            </p>
+          </a>
+          <ul class="nav nav-treeview">
+            <li class="nav-item">
+              <a href="/trainerProfileInsert" class="nav-link">
+                <p>#프로필 등록</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/trainerProfile" class="nav-link">
+                <p>#프로필 보기</p>
+              </a>
+            </li>
+            <li class="nav-item">
+              <a href="/trainerProfileModify" class="nav-link">
+                <p>#프로필 수정</p>
+              </a>
+            </li>
+          </ul>
+        </li>
+        <!-- 트레이너 메뉴 시작 -->
+        <div th:if="${session.SLEVEL eq '트레이너' || session.SLEVEL == null}">
 
-</body>
+  <!-- Main Sidebar Container -->
+  
+    
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul
+          class="nav nav-pills nav-sidebar flex-column"
+          data-widget="treeview"
+          role="menu"
+          data-accordion="false"
+        >
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
+              <p>
+                #프로필 관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/trainerProfileInsert" class="nav-link">
+                  <p>#프로필 등록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerProfile" class="nav-link">
+                  <p>#프로필 보기</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerProfileModify" class="nav-link">
+                  <p>#프로필 수정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          
+
+          <li class="nav-item">
+            <a href="pages/kanban.html" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+
+                &nbsp &nbsp #회원 스케줄 관리
+
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/trainerScheduleInsert" class="nav-link">
+                  <p>!스케줄등록(음식,운동)</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerScheduleList" class="nav-link">
+                  <p>#스케줄조회(음식,운동)</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerScheduleModify" class="nav-link">
+                  <p>#스케줄수정(음식,운동)</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+
+                &nbsp &nbsp !쪽지관리
+
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/trainerSendMessage}" class="nav-link">
+                  <p>!쪽지 작성</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+                  <p>!받은 쪽지함</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/trainerMessageSendManage}" class="nav-link">
+                  <p>!보낸 쪽지함</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          
+          <li class="nav-item">
+            <a href="pages/mailbox/read-mail.html" class="nav-link">
+              <i class="nav-icon fas fa-book"></i>
+              <p>&nbsp &nbsp  #정산계좌관리</p>
+
+              <i class="fas fa-angle-left right"></i>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/adjustmentAccountInsert" class="nav-link">
+                  <p>#정산계좌등록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/adjustmentAccountModify" class="nav-link">
+                  <p>#정산계좌수정</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/adjustmentAccount" class="nav-link">
+                  <p>#정산금액조회</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+        </div>
+        <!-- 트레이너 메뉴 끝-->
+        <!-- 세션이 없을때 트레이너 메뉴 관리자 메뉴 구분선 -->
+        <a th:if="${session.SLEVEL == null}">----------------------------------------</a>
+        <!-- 관리자 메뉴 시작-->
+        <div th:if="${session.SLEVEL eq '관리자' || session.SLEVEL == null}">  
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                &nbsp &nbsp #사용자 관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/userList" class="nav-link">
+                  <p>#사용자 회원목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/userLoginList" class="nav-link">
+                  <p>#사용자 로그인 조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dormantUserList" class="nav-link">
+                  <p>#탈퇴된 사용자 조회</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-image"></i>
+              <p>
+                &nbsp &nbsp #트레이너 관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/trainerList" class="nav-link">
+                  <p>!트레이너 회원목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerAccessList" class="nav-link">
+                  <p>#트레이너 비승인목록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/trainerLoginList" class="nav-link">
+                  <p>#트레이너 로그인 조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/dormantTrainerList" class="nav-link">
+                  <p>#탈퇴된 트레이너 조회</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                &nbsp &nbsp #매칭관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/matchingList}" class="nav-link">
+                  <p>전체 매칭목록 조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/matchingRefundList}" class="nav-link">
+                  <p>매칭 파기 신청 조회(환불)</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                &nbsp &nbsp #질병DB관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/diseaseDataInsert" class="nav-link">
+                  <p>#질병DB등록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/diseaseDataList" class="nav-link">
+                  <p>#질병DB조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/diseaseDataModify" class="nav-link">
+                  <p>#질병DB수정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/kanban.html" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                &nbsp &nbsp #운동DB관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/exerciseDataInsert" class="nav-link">
+                  <p>#운동DB등록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/exerciseDataInsert" class="nav-link">
+                  <p>#운동DB조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/exerciseDataInsert" class="nav-link">
+                  <p>#운동DB수정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="pages/kanban.html" class="nav-link">
+              <i class="nav-icon fas fa-columns"></i>
+              <p>
+                &nbsp &nbsp #음식DB관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="/foodDataInsert" class="nav-link">
+                  <p>#음식DB등록</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/foodDataList" class="nav-link">
+                  <p>#음식DB조회</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a href="/foodDataModify" class="nav-link">
+                  <p>#음식DB수정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                &nbsp &nbsp !쪽지관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/trainerSendMessage}" class="nav-link">
+                  <p>!쪽지 작성</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+                  <p>!받은 쪽지함</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/trainerMessageSendManage}" class="nav-link">
+                  <p>!보낸 쪽지함</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="nav-icon far fa-envelope"></i>
+              <p>
+                &nbsp &nbsp #플렛폼 등급관리
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a th:href="@{/userPlatformGrade}" class="nav-link">
+                  <p>#사용자 플렛폼 등급 <br/> &nbsp조회 & 수정</p>
+                </a>
+              </li>
+              <li class="nav-item">
+                <a th:href="@{/trainerPlatformGrade}" class="nav-link">
+                  <p>#트레이너 플렛폼 등급 <br/> &nbsp조회 & 수정</p>
+                </a>
+              </li>
+            </ul>
+          </li>
+
+         
+
+            <li class="nav-item">
+              <a href="pages/mailbox/read-mail.html" class="nav-link">
+                <i class="nav-icon fas fa-book"></i>
+                <p>&nbsp &nbsp #정산계좌관리</p>
+                <i class="fas fa-angle-left right"></i>
+              </a>
+              <ul class="nav nav-treeview">
+                <li class="nav-item">
+                  <a href="/adjustmentAccountInsert" class="nav-link">
+                    <p>#정산계좌등록</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/adjustmentAccountModify" class="nav-link">
+                    <p>#정산계좌수정</p>
+                  </a>
+                </li>
+                <li class="nav-item">
+                  <a href="/adjustmentAccount" class="nav-link">
+                    <p>#정산금액조회</p>
+                  </a>
+                </li>
+              </ul>
+            </li>
+        </div>
+        <!-- 관리자 메뉴 끝-->
+      </ul>
+      </ul>
+    </nav>
+
+    
+
+    <!-- /.sidebar-menu -->
+  </div>
+  <!-- /.sidebar -->
+</aside>
+
 </html>
