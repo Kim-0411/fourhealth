@@ -1,4 +1,3 @@
-
 package com.fourhealth.mapper;
 
 import java.util.List;
@@ -33,4 +32,3 @@ public interface PromotionMapper {
 	public List<Map<String, Object>> getPromotionListPaging(int startRow, int rowPerPage);
 
 }
-

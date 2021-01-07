@@ -9,19 +9,8 @@
             "mainClass": "com.fourhealth.FourhealthApplication",
             "projectName": "fourhealth",
             "args": ""
-
-
-        },
-        {
-            "type": "java",
-            "name": "Spring Boot-Test<fourhealth>",
-            "request": "launch",
-            "cwd": "${workspaceFolder}",
-            "console": "internalConsole",
-            "mainClass": "com.fourhealth.encryption.Test",
-            "projectName": "fourhealth",
-            "args": ""
-
         }
     ]
+
+    
 }
