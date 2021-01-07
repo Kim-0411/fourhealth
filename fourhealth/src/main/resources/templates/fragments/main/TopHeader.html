@@ -52,11 +52,14 @@
               >
               <a
                 th:href="@{/manage}"
+
                 th:if="${session.SLEVEL eq '트레이너'}"
+
                 style="margin-left: 10px"
                 >트레이너 관리페이지</a
               >
             </div>
+
             <div class="master">
               <a
                 th:href="@{/manage}"
@@ -68,6 +71,7 @@
                 th:href="@{/manage}"
                 th:if="${session.SLEVEL == null}"
                 style="margin-left: 10px"
+
                 >트레이너 마스터</a
               >
             </div>

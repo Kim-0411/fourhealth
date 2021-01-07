@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
+
 <!-- Main Sidebar Container -->
 <aside class="main-sidebar sidebar-dark-primary elevation-4" th:fragment="leftMenuFragment">
   <!-- Brand Logo -->
@@ -64,43 +65,99 @@
         </li>
         <!-- 트레이너 메뉴 시작 -->
         <div th:if="${session.SLEVEL eq '트레이너' || session.SLEVEL == null}">
+
+  <!-- Main Sidebar Container -->
+  <aside
+    class="main-sidebar sidebar-dark-primary elevation-4"
+    th:fragment="leftMenuFragment"
+  >
+    <!-- Brand Logo -->
+    <a href="/manage" class="brand-link">
+      <img
+        src="/img/master_img/AdminLTELogo.png"
+        alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        style="opacity: 0.8"
+      />
+      <span class="brand-text font-weight-light">로고</span>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+          <img
+            src="/img/master_img/user2-160x160.jpg"
+            class="img-circle elevation-2"
+            alt="User Image"
+          />
+        </div>
+        <div class="info">
+          <a href="#" class="d-block">id002(트레이너)</a>
+        </div>
+      </div>
+
+      <!-- SidebarSearch Form -->
+      <div class="form-inline">
+        <div class="input-group" data-widget="sidebar-search">
+          <input
+            class="form-control form-control-sidebar"
+            type="search"
+            placeholder="Search"
+            aria-label="Search"
+          />
+          <div class="input-group-append">
+            <button class="btn btn-sidebar">
+              <i class="fas fa-search fa-fw"></i>
+            </button>
+          </div>
+        </div>
+      </div>
+      <!-- Sidebar Menu -->
+      <nav class="mt-2">
+        <ul
+          class="nav nav-pills nav-sidebar flex-column"
+          data-widget="treeview"
+          role="menu"
+          data-accordion="false"
+        >
           <li class="nav-item">
-            <a href="/trainerProfileModify" class="nav-link">
-              <i class="nav-icon far fa-image"></i>
+            <a href="#" class="nav-link">
+              <i class="nav-icon fas fa-edit"></i>
               <p>
-                &nbsp &nbsp #프로모션 관리
+                #프로필 관리
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/myPromotionInsert" class="nav-link">
-                  <p>!프로모션 등록</p>
+                <a href="/trainerProfileInsert" class="nav-link">
+                  <p>#프로필 등록</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/myPromotionList" class="nav-link">
-                  <p>!프로모션 조회</p>
+                <a href="/trainerProfile" class="nav-link">
+                  <p>#프로필 보기</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/myPromotionModify" class="nav-link">
-                  <p>#프로모션 수정</p>
+                <a href="/trainerProfileModify" class="nav-link">
+                  <p>#프로필 수정</p>
                 </a>
               </li>
-              <!-- <li class="nav-item">
-                <a href="pages/mailbox/compose.html" class="nav-link">
-                  <p>#프로모션 삭제</p>
-                </a>
-              </li> -->
             </ul>
           </li>
+
+          
 
           <li class="nav-item">
             <a href="pages/kanban.html" class="nav-link">
               <i class="nav-icon fas fa-columns"></i>
               <p>
+
                 &nbsp &nbsp #회원 스케줄 관리
+
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -126,7 +183,9 @@
             <a href="#" class="nav-link">
               <i class="nav-icon far fa-envelope"></i>
               <p>
+
                 &nbsp &nbsp !쪽지관리
+
                 <i class="fas fa-angle-left right"></i>
               </p>
             </a>
@@ -148,11 +207,13 @@
               </li>
             </ul>
           </li>
+
           
           <li class="nav-item">
             <a href="pages/mailbox/read-mail.html" class="nav-link">
               <i class="nav-icon fas fa-book"></i>
               <p>&nbsp &nbsp  #정산계좌관리</p>
+
               <i class="fas fa-angle-left right"></i>
             </a>
             <ul class="nav nav-treeview">
@@ -173,6 +234,7 @@
               </li>
             </ul>
           </li>
+
         </div>
         <!-- 트레이너 메뉴 끝-->
         <!-- 세션이 없을때 트레이너 메뉴 관리자 메뉴 구분선 -->
@@ -430,3 +492,5 @@
 </aside>
 
 </html>
+
+

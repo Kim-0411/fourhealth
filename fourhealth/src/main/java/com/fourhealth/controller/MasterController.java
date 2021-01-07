@@ -34,6 +34,7 @@ public class MasterController {
 		return "manage_layout/manage_main";
 	}
 
+
 	/* 관리자 사용자 관리 페이지 맵핑 시작 */
 	@GetMapping("/userList")
 	public String userList(Model model) {

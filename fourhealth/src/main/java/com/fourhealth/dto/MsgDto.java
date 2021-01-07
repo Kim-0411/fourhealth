@@ -1,3 +1,4 @@
+
 package com.fourhealth.dto;
 
 
@@ -64,8 +65,3 @@ public class MsgDto {
 				+ ", toString()=" + super.toString() + "]";
 	}
 	
-	
-	
-	
-	
-}
