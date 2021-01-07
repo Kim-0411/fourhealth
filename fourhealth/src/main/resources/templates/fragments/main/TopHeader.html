@@ -52,16 +52,26 @@
               >
               <a
                 th:href="@{/manage}"
-                th:if="${session.SLEVEL eq '관리자'}"
+
+                th:if="${session.SLEVEL eq '트레이너'}"
+
                 style="margin-left: 10px"
                 >트레이너 관리페이지</a
               >
             </div>
-            <div class="master" th:if="${session.SLEVEL == null}">
-              <a th:href="@{/manage}" style="margin-left: 10px"
+
+            <div class="master">
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL == null}"
+                style="margin-left: 10px"
                 >관리자 마스터</a
               >
-              <a th:href="@{/manage}" style="margin-left: 10px"
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL == null}"
+                style="margin-left: 10px"
+
                 >트레이너 마스터</a
               >
             </div>
