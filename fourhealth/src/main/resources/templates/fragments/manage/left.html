@@ -96,7 +96,10 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/myPromotionInsert" class="nav-link">
+                  <a
+                    th:href="@{/promotionCheck(proId=${session.SID})}"
+                    class="nav-link"
+                  >
                     <p>!프로모션 등록</p>
                   </a>
                 </li>
