@@ -64,7 +64,7 @@ public class PaymentController {
                     return null;
                 } else {
                     // 만약 현재 프로모션이 현재인원이 가득 차있지 않다면
-                    return "redirect:/";
+                    return "main_layout/promotion/promotionPayment";
                 }
             } else {
                 // 만약 유저가 최초데이터를 작성 하지 않았다면
