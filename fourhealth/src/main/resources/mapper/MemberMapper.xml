@@ -92,7 +92,7 @@
 		tb_common_user;
 	</select>
 	
-	<!-- 로그  -->
+	<!-- 로그인  -->
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
 			user_id, 
