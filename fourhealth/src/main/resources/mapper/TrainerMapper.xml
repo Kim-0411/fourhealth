@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.TrainerMapper">
+	<!--사용자 데이터 resultMap  -->
+    <resultMap type="TrainerDto" 				id="resultMapTrainer">
+        <result column="user_id" 						property="userId"/>
+        <result column="trainer_platform_grade_code" 	property="trainerPlatformGradeCode"/>
+        <result column="trainer_access_code"			property="trainerAccessCode"/>
+        <result column="trainer_gym" 					property="trainerGym"/>
+        <result column="trainer_gym_address" 			property="trainerGymAddress"/>
+        <result column="trainer_access_reason"			property="trainerAccessReason"/>
+        <result column="trainer_access_reg_date" 		property="trainerAccessRegDate"/>
+        <result column="trainer_reg_date" 				property="trainerRegDate"/>
+    </resultMap>
+     <resultMap type="GradePlatformTrainerDto" 	id="resultMapGradePlatformTrainer">
+        <result column="trainer_platform_grade_code" 		property="trainerPlatformGradeCode"/>
+        <result column="trainer_platform_grade_name" 		property="trainerPlatformGradeName"/>
+		<result column="trainer_platform_grade_duty"		property="trainerPlatformGradeDuty"/>
+		<result column="trainer_platform_grade_reg_date"	property="trainerPlatformGradeRegDate"/>
+    </resultMap>
+   
+	
+	<!-- 로그인 후 메인화면 단에서 사용자 플랫폼 레벨 체크  -->
+	<select id="getTrainerGrade"  parameterType="String" resultMap="resultMapGradePlatformTrainer"> 
+		SELECT 
+			p.trainer_platform_grade_name 
+		FROM 
+			tb_grade_platform_trainer AS p
+		INNER JOIN
+			tb_trainer AS u
+		ON
+			p.trainer_platform_grade_code = u.trainer_platform_grade_code  
+		WHERE 
+			u.user_id = #{memberId};
+	</select>
+	
+	<!-- 회원가입시 트레이너 레벨체크 (금,은,동메달,메달 준비생) -->
+	<insert id="addMemberTrainerPlatFormGradeCode" parameterType="TrainerDto">
+		INSERT INTO tb_trainer
+ 		  (user_id, 
+ 		  trainer_platform_grade_code, 
+ 		  trainer_access_code,
+ 		  trainer_gym,
+ 		  trainer_gym_address,
+ 		  trainer_access_reason,
+ 		  trainer_access_reg_date,
+ 		  trainer_reg_date
+ 		  )
+   		VALUES (
+   			#{userId}, 
+			#{trainerPlatformGradeCode}, 
+			#{trainerAccessCode},
+			null,
+			null,
+			null,
+			null,
+			NOW());
+	</insert>
+	
+
+</mapper>

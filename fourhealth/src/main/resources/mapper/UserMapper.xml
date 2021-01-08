@@ -34,6 +34,29 @@
 		WHERE 
 			u.user_id = #{memberId};
 	</select>
+	
+	<!-- 회원가입시 사용자 레벨체크  -->
+	<insert id="addMemberUserPlatFormGradeCode" parameterType="UserDto">
+		INSERT INTO tb_user
+ 		  (user_id, 
+ 		  user_platform_grade_code, 
+ 		  user_status_level_code,
+ 		  user_first_height,
+ 		  user_first_weight,
+ 		  user_first_goal,
+ 		  user_first_bmi,
+ 		  user_reg_date
+ 		  )
+   		VALUES (
+   			#{userId}, 
+			#{userPlatFormGradeCode}, 
+			#{userStatusLevelCode},
+			null,
+			null,
+			null,
+			null,
+			null);
+	</insert>
 
 
 </mapper>
