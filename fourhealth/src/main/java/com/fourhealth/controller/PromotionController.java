@@ -1,7 +1,12 @@
 
 package com.fourhealth.controller;
 
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.PrintWriter;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
 
@@ -10,11 +15,14 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
@@ -57,10 +65,93 @@ public class PromotionController {
 		return "main_layout/promotion/promotionList";
 	}
 
+	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
+	@GetMapping("/promotionCheck")
+	public String promotionCheck(@RequestParam(name = "proId", required = false) String proId,
+			HttpServletResponse response) throws IOException {
+
+		System.out.println(proId);
+		System.out.println(promotionService.promotionCheck(proId));
+		String re = promotionService.promotionCheck(proId);
+		int i = Integer.parseInt(re);
+		if (proId.equals("")) {
+			response.setContentType("text/html; charset=UTF-8");
+			PrintWriter out = response.getWriter();
+			out.println("<script>alert('로그인을 확인해주세요.'); location.href='/login';</script>");
+			return null;
+		} else {
+			if (i > 0) {
+				return "redirect:/myPromotionInsert";
+			} else {
+				response.setContentType("text/html; charset=UTF-8");
+				PrintWriter out = response.getWriter();
+				out.println("<script>alert('정보를 확인해주세요.'); location.href='/';</script>");
+				out.flush();
+				return null;
+			}
+		}
+	}
+
 	// 트레이너 프로모션 등록페이지
 	@GetMapping("/myPromotionInsert")
 	public String myPromotionInsert(Model model) {
 		return "manage_layout/trainer/promtion/my_promotion_insert";
+	}
+
+	// 트레이너 프로모션 등록컨트롤러
+	@PostMapping("/promotionInsert")
+	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
+			throws ParseException, FileNotFoundException {
+
+		System.out.println(promotionDto);
+
+		String fileName = null;
+
+		if (!promotionDto.getTrainerPromotionBgImage().isEmpty()) {
+			int rdv = (int) (Math.random() * 1000);
+			fileName = promotionDto.getTrainerPromotionBgImage().getOriginalFilename();
+			String rename = rdv + "_" + fileName;
+			// String path =
+			// "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
+
+			String realPath = ResourceUtils.getFile("src/main/resources/static/image/" + rename).getAbsolutePath();
+			// 배포패스
+
+			try {
+				new File(realPath).mkdir();
+				promotionDto.getTrainerPromotionBgImage().transferTo(new File(realPath));
+
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			promotionDto.setProImageUrl(rename);
+		}
+
+		String start = promotionDto.getTrainerPromotionAttendStartDate();
+		String end = promotionDto.getTrainerPromotionRecruitCloseDate();
+
+		System.out.println("proInsert start-------------" + start);
+		System.out.println("proInsert end-------------" + end);
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		java.util.Date stDt = format.parse(start);
+		java.util.Date edDt = format.parse(end);
+
+		long diff = edDt.getTime() - stDt.getTime();
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		String totalDate = Long.toString(diffDays);
+
+		System.out.println(diffDays);
+		promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
+
+		System.out.println(promotionDto);
+
+		promotionService.promotionInsert(promotionDto);
+
+		return "redirect:/myPromotionList";
 	}
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
@@ -109,5 +200,13 @@ public class PromotionController {
 		return "main_layout/promotion/promotionDetail";
 	}
 
-}
+	@PostMapping("/promotionPaymentCheck")
+	public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId, Model model,
+			@RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode) {
 
+		System.out.println(userId);
+		System.out.println(promotionNoticeCode);
+
+		return "/";
+	}
+}
