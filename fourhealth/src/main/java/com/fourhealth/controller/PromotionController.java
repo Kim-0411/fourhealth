@@ -200,13 +200,4 @@ public class PromotionController {
 		return "main_layout/promotion/promotionDetail";
 	}
 
-	@PostMapping("/promotionPaymentCheck")
-	public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId, Model model,
-			@RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode) {
-
-		System.out.println(userId);
-		System.out.println(promotionNoticeCode);
-
-		return "/";
-	}
 }
