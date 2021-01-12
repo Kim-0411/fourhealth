@@ -8,7 +8,6 @@
   <title th:text="${title}"></title>
 
   <th:block layout:fragment="mainContent">
-    <div class="center-block">
       <section>
         <div class="container">
           <form
@@ -31,7 +30,7 @@
                 </tr>
                 <tr>
                   <td>Content</td>
-                  <td><input type="text" name="userSnsContents" /></td>
+                  <td><textarea rows="10" cols="100" name="userSnsContents"></textarea></td>
                 </tr>
                 <tr>
                   <td>Image</td>
@@ -39,10 +38,9 @@
                 </tr>
               </tr>
             </table>
-            <button type="submit" id="snsInsertBtn">작성</button>
+            <button type="submit" id="snsInsertBtn" class="btn btn-default btn-lg btn-block">작성</button>
           </form>
         </div>
       </section>
-    </div>
   </th:block>
 </html>

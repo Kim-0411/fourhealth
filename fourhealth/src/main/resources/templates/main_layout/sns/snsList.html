@@ -7,8 +7,8 @@
 
   <!-- SNS 게시판 -->
   <section class="hero">
-    <div class="container" style="box-shadow: 1px 1px 1px 1px grey;">
-      <div class="row" th:if="${#lists.size(snsList)>0}" th:each="s : ${snsList}">
+    <div class="container" >
+      <div class="row" style="margin-top: 50px;'" th:if="${#lists.size(snsList)>0}" th:each="s : ${snsList}">
         <div class="col-lg-6 offset-lg-3">
           <div class="cardbox shadow-lg bg-white">
             <div class="media m-0">
@@ -57,7 +57,7 @@
 
       </div>
       <!--/ col-lg-6 -->
-      <div class="col-lg-2" id="sidebox" style="box-shadow: 1px 1px 1px 1px grey;">
+      <div class="col-lg-2" id="sidebox" style="box-shadow: 0px 0px 1px 1px grey;">
         <div class="p-2 mb-1 bg-white">
           <div style="text-align: center;"><a th:href="@{/snsInsert(userId=${session.SID})}">New</a></div>
         </div>

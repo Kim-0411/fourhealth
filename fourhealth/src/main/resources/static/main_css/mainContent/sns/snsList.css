@@ -146,6 +146,7 @@
   font-size: 0px;
   text-align: center;
   display: inline-block;
+  margin-top: 200px;
 }
 
 .cardbox-comments .comment-body {
@@ -197,7 +198,7 @@
   font-size: 13px;
   position: absolute;
   width: 120px;
-  top: 300px;
+  top: 350px;
   left: 300px;
   padding: 3px 10px;
 }
