@@ -104,6 +104,19 @@ public class FoodController {
 		return "food/food_list";
 	}
 
+		//식품리스트
+		@GetMapping("/foodList")
+		public String foodList(Model model){
+			model.addAttribute("title", "식품리스트");
+			//
+	
+			//식품 리스트 Food type의 List
+			List<Food> foodList = foodService.getFoodList();
+			System.out.println(foodList.size());
+	
+			return "food/food_list";
+		}
+
 	//식품 리스트
 	// @RequestMapping(value = "/foodList", method = RequestMethod.GET)
 	// public String foodList(Model model){
