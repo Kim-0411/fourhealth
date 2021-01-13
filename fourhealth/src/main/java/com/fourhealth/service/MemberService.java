@@ -128,4 +128,10 @@ public class MemberService {
 		return getTrainerMyPromotionUser;
 	}
 
+	// 회원조회
+	public MemberDto getMemberSelect(String userId) {
+		MemberDto memberSelect = memberMapper.getMemberSelect(userId);
+		return memberSelect;
+	}
+
 }
