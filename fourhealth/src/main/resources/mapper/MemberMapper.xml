@@ -181,9 +181,6 @@
 			user_email, 
 			user_birth, 
 			user_gender, 
-			user_main_bank, 
-			user_bank_number, 
-			user_bank_master, 
 			user_reg_date
 		FROM 
 			tb_common_user AS u 
