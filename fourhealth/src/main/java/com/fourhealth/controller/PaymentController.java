@@ -2,10 +2,14 @@ package com.fourhealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.List;
 
 import javax.servlet.http.HttpServletResponse;
 
+import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
+import com.fourhealth.dto.UserCouponDTO;
+import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PaymentService;
 import com.fourhealth.service.PromotionService;
 
@@ -24,6 +28,9 @@ public class PaymentController {
 
     @Autowired
     PromotionService promotionService;
+
+    @Autowired
+    MemberService memberService;
 
     @PostMapping("/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
@@ -64,7 +71,12 @@ public class PaymentController {
                     return null;
                 } else {
                     // 만약 현재 프로모션이 현재인원이 가득 차있지 않다면
+
+                    List<UserCouponDTO> userCouponList = paymentService.userCouponList(userId);
+                    MemberDto member = memberService.getMemberSelect(userId);
                     model.addAttribute("promotion", promotionDTO);
+                    model.addAttribute("userCouponList", userCouponList);
+                    model.addAttribute("member", member);
                     return "main_layout/promotion/promotionPayment";
                 }
             } else {
