@@ -2,10 +2,30 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="@{default_layout/main/default}" lang="en">
 <title th:text="${title}"></title>
-
 <th:block layout:fragment="mainContent">
   <div class="container">
-    <h1>결제 모듈 테스트</h1>
+    <h1>결제</h1>
+    프로모션 코드 : <input type="text" th:value="${promotion.trainerPromotionNoticeCode}"/> <br/>
+    프로모션 이름 : <input type="text" id ="promotionName" th:value="${promotion.trainerPromotionName}"/>  <br/>
+    트레이너 아이디 : <input type="text" id="trainerId" th:value="${promotion.userId}"/> <br/>
+    프로모션 가격 : <input type="text" id="trainerPromotionPrice" th:value="${promotion.trainerPromotionPrice}"/>  <br/>
+    회원 아이디 : <input type="text" id="userId" th:value="${member.memberId}"/>  <br/>
+    회원 이름 : <input type="text" id="userName" th:value="${member.memberName}"/>  <br/>
+    회원 주소 : <input type="text" id="userAddr" th:value="${member.memberAddr}"/>  <br/>
+    회원 전화번호 : <input type="text" id="userPhone" th:value="${member.memberPhone}"/>  <br/>
+    회원 쿠폰 :  <select id="coupon" name="coupon" th:if="${#lists.size(userCouponList) > 0}" th:each="l : ${userCouponList}" >
+                    <option value="null">===선택하지 않음===</option>
+                    <option
+                      th:if="${#lists.size(l.couponList) > 0}" 
+                      th:each="c : ${l.couponList}"
+                      th:value="${c.userPlatformCouponDetails}"
+                      th:text="${c.userPlatformCouponDetails}">
+                    </option>
+                  </select>
+                  <br/>
+    결제 가격 : <input type="text" id="purchaseMoney" th:value="${promotion.trainerPromotionPrice}"/>
+
+    <br/>
     
     <button id="check_module" type="button">
       아임 서포트 결제 모듈 테스트
@@ -14,8 +34,26 @@
 </th:block>
 
 </html>
+
 <script type="text/javascript" th:inline="javascript">
-  $("#check_module").click(function () {
+  
+  
+  $("#coupon").change(function () {     
+    var coupon = $('#coupon').val();
+  var trainerPromotionPrice = $('#trainerPromotionPrice').val();
+  var sum = null;
+        if(coupon != "null"){
+            sum = trainerPromotionPrice-coupon;
+            $("#purchaseMoney").val(sum);
+        }
+
+        if(sum <0){
+          alert("쿠폰을 사용할수 없습니다.")
+          $("#purchaseMoney").val(trainerPromotionPrice);
+        }
+      });
+
+  $("#check_module").click(function () { 
     var IMP = window.IMP; // 생략가능
     IMP.init("imp52487011");
     // 'iamport' 대신 부여받은 "가맹점 식별코드"를 사용
@@ -44,17 +82,19 @@
         */
         merchant_uid: "merchant_" + new Date().getTime(),
 
-        name: "주문명:결제테스트",
-        //결제창에서 보여질 이름
-        /*<![CDATA[*/
-        amount: "1",
-        /*]]*/
-        //가격
-        buyer_email: "iamport@siot.do",
-        buyer_name: "구매자이름",
-        buyer_tel: "010-1234-5678",
-        buyer_addr: "서울특별시 강남구 삼성동",
-        buyer_postcode: "123-456",
+        //결제창에서 보여질 프로모션 이름       
+        name: $('#promotionName').val(),
+         ///결제창에서 보여질 가격
+        amount:  $('#purchaseMoney').val(),
+      
+        // buyer_email: "iamport@siot.do",
+        //결제창에서 보여질 사는사람이름
+        buyer_name: $('#userName').val(),
+        //결제창에서 보여질 사는 전화번호
+        buyer_tel: $('#userPhone').val(),
+         //결제창에서 보여질 사는 주소
+        buyer_addr: $('#userAddr').val()
+        // buyer_postcode: "123-456",
 
         // m_redirect_url: 'https://www.yourdomain.com/payments/complete'
         /*
