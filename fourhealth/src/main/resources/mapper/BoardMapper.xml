@@ -3,4 +3,33 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.BoardMapper">
+	<!-- 신고 게시판 resultMap -->
+	<resultMap type="UserReportDto" id="resultMapUserReport">
+		<result column="report_user_code" property="reportUserCode" />
+		<result column="trainer_user_matching_code"	property="trainerUserMatchingCode" />
+		<result column="report_categories_code" property="reportCategoriesCode" />
+		<result column="user_id" property="userId" />
+		<result column="report_user_reason_detail" property="reportUserReasonDetail" />
+		<result column="report_user_reg_date" property="reportUserRegDate" />
+	</resultMap>
+	<resultMap type="CategoriesReportDto" id="resultMapReportReason">
+		<result column="report_categories_code" property="reportCategoriesCode" />
+		<result column="report_categories_contents" property="reportCategoriesContents" />
+		<result column="report_categories_reg_date" property="reportCategoriesRegDate" />
+	</resultMap>
+	
+	<!-- 신고 게시판 처음 전체 게시판 -->
+	<select id="">
+	SELECT
+		ur.report_user_code
+		,ur.trainer_user_matching_code
+		,ur.report_categories_code
+		,ur.user_id
+		,ur.report_user_reason_detail
+		,ur.report_user_reg_date
+	FROM
+		tb_user_report AS ur
+	where
+	 user_id = #{userid}
+	</select>
 </mapper>
