@@ -19,13 +19,15 @@
     <resultMap type="MemberDto" 		id="resultMapMember">
         <result column="user_id" 							property="memberId"/>
         <result column="user_pw" 							property="memberPw"/>
-        <result column="user_level_code"					property="memberLevel"/>
+        <result column="user_level_code"			property="memberLevel"/>
         <result column="user_name" 							property="memberName"/>
         <result column="user_addr" 							property="memberAddr"/>
         <result column="user_email"							property="memberEmail"/>
         <result column="user_nickname" 						property="memberNickname"/>
         <result column="user_birth" 						property="memberBirth"/>
         <result column="user_gender" 						property="memberGender"/>
+		    <result column="user_phone"             property="memberPhone"  /> 
+
         <result column="user_reg_date" 						property="memberRegDate"/>
     </resultMap>
     
