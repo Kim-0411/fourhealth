@@ -2,6 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
   layout:decorate="@{/default_layout/manage/default}">
 <th:block layout:fragment="customContent">
+
   <h1>내 프로모션에 등록된 회원 스케줄 등록(id002로그인가정)</h1>
   <div class="row">
     <div class="form-group col-md-4" id="first_schedule">
@@ -16,11 +17,6 @@
       <select multiple="" class="custom-select" id="matching_user">
       </select>
     </div>
-    <!-- <div class="form-group col-md-4">
-      <label>회원선택</label>
-      <select multiple="" class="custom-select" id="matching_user">
-      </select> 
-    </div> -->
     <div class="col-md-5" id="test">
       <div class="card bg-primary">
         <div class="card-header">
@@ -33,13 +29,14 @@
           </div>
           <!-- /.card-tools -->
           <style>
-          #test{
-          	margin-top: 10px;
-          	margin-right: 80px;
-          }
-          #first_schedule{
-          	margin: 0 auto;
-          }
+            #test {
+              margin-top: 10px;
+              margin-right: 80px;
+            }
+
+            #first_schedule {
+              margin: 0 auto;
+            }
           </style>
         </div>
         <!-- /.card-header -->
@@ -150,17 +147,10 @@
           </select>
 
           <input type="text" id="exercise_name">
-          <button type="button" id="exercise">검색하기</button>
+          <button type="button" id="exercise_serach">검색하기</button>
           <table border="1">
-            <!-- <tr>
-              <td>운동명</td>
-              <td>met계수</td>
-              <td>선택된 회원 시간당 칼로리</td>
-            </tr> -->
-            <tbody id="data">
-
-
-            </tbody>
+          	<tbody id="exercise_info">
+          	</tbody>
           </table>
         </div>
         <div class="modal-footer">
