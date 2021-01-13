@@ -1,3 +1,4 @@
+
 package com.fourhealth.dto;
 
 public class MetExerciseDto {
@@ -38,3 +39,4 @@ public class MetExerciseDto {
 				+ ", exerciseMetCoeffcient=" + exerciseMetCoeffcient + ", exerciseRegDate=" + exerciseRegDate + "]";
 	}
 }
+
