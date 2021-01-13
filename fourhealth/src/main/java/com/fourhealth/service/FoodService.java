@@ -23,7 +23,7 @@ public class FoodService {
 	//Food List on limit table
 	public Map<String, Object> getFoosList(int currentPage){
 		int startRow = 0;
-		int rowPerPage = 5;
+		int rowPerPage = 13;
 		int startPageNum = 1;
 		int endPageNum = 10;
 
@@ -45,7 +45,7 @@ public class FoodService {
 		System.out.println("Test printout foodList : "+foodList);
 
 
-		if(currentPage > 6){
+		if(currentPage > 10){
 			startPageNum = currentPage-5;
 			endPageNum = currentPage+4;
 

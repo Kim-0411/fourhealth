@@ -28,21 +28,21 @@
         </tr>
       </thead>
       <tbody>
-        <tr>
-          <td>test001</td>
-          <td>test식품</td>
-          <td>150g</td>
-          <td>120Cal</td>
-          <td>126</td>
-          <td>5</td>
-          <td>4</td>
-          <td>3</td>
-          <td>2</td>
-          <td>1</td>
-          <td>test제일미당</td>
+        <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}">
+          <td th:text="${food.get('foodCode')}"></td>
+          <td th:text="${food.get('foodName')}"></td>
+          <td th:text="${food.get('foodTotalGram')}"></td>
+          <td th:text="${food.get('foodCal')}"></td>
+          <td th:text="${food.get('foodProtein')}"></td>
+          <td th:text="${food.get('foodFat')}"></td>
+          <td th:text="${food.get('foodSodium')}"></td>
+          <td th:text="${food.get('foodSugar')}"></td>
+          <td th:text="${food.get('foodChole')}"></td>
+          <td th:text="${food.get('foodTotalGram')}"></td>
+          <td th:text="${food.get('foodMakerNamer')}"></td>
           <td>
             <!-- <a href="#" data-toggle="modal" data-target="#foodDetails">수정</a> -->
-            <a href="#" class="foodUpdate" data-toggle="modal" data-target="#foodDetails">수정</a>
+            <a href="#" class="foodUpdate">수정</a>
           </td>
           <td>
             <!-- <a href="#" data-toggle="modal" data-target="#foodDelete">삭제</a> -->
@@ -79,7 +79,11 @@
                   <th>식품제조사</th>
                 </tr>
               </thead>
-              <tbody></tbody>
+              <tbody>
+                <tr>
+                  <td></td>
+                </tr>
+              </tbody>
             </table>
           </div>
           <div class="modal-footer">
@@ -88,6 +92,19 @@
         </div>
       </div>
     </div>
+
+    <script>
+      //Food Modal Details js
+      var foodUpdate = $(".foodUpdate");
+      var foodDetails = $("#foodDetails");
+
+
+      foodUpdate.click(function(data){
+        console.log(foodDetails);
+        foodDetails.modal();
+      });
+
+    </script>
   
     <!-- Food Details Delete Page -->
     <!-- Modal -->

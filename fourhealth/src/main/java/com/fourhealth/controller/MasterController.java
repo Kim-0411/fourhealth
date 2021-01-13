@@ -193,22 +193,22 @@ public class MasterController {
 	}
 	/* 관리자 운동DB 관리 페이지 맵핑 끝 */
 
-	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/foodDataInsert")
-	public String foodDataInsert(Model model) {
-		return "manage_layout/master/food_manage/food_data_insert";
-	}
+	// /* 관리자 음식DB 관리 페이지 맵핑 시작 */
+	// @GetMapping("/foodDataInsert")
+	// public String foodDataInsert(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_insert";
+	// }
 
-	@GetMapping("/foodDataList")
-	public String foodDataList(Model model) {
-		return "manage_layout/master/food_manage/food_data_list";
-	}
+	// @GetMapping("/foodDataList")
+	// public String foodDataList(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_list";
+	// }
 
-	@GetMapping("/foodDataModify")
-	public String foodDataModify(Model model) {
-		return "manage_layout/master/food_manage/food_data_modify";
-	}
-	/* 관리자 음식DB 관리 페이지 맵핑 끝 */
+	// @GetMapping("/foodDataModify")
+	// public String foodDataModify(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_modify";
+	// }
+	// /* 관리자 음식DB 관리 페이지 맵핑 끝 */
 
 	/* 관리자 플렛폼 등급 관리 페이지 맵핑 시작 */
 	@GetMapping("/userPlatformGrade")
