@@ -28,7 +28,7 @@ public class PaymentController {
     @PostMapping("/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode,
-            HttpServletResponse response) throws IOException {
+            HttpServletResponse response, Model model) throws IOException {
 
         // html에서 받아온 파라미터 값 확인
         System.out.println(userId + "----------->로그인된 id값 가져오기");
@@ -64,6 +64,7 @@ public class PaymentController {
                     return null;
                 } else {
                     // 만약 현재 프로모션이 현재인원이 가득 차있지 않다면
+                    model.addAttribute("promotion", promotionDTO);
                     return "main_layout/promotion/promotionPayment";
                 }
             } else {
