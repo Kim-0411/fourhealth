@@ -26,55 +26,58 @@ public class ExerciseController {
 	@Autowired
 	private ExerciseService exerciseService;
 
-	//전체 운동보기 (전체 접근가능)
+	// 전체 운동보기 (전체 접근가능)
 	@GetMapping("/allExerciseList")
 	public String allExerciseList(Model model) {
 		List<MetExerciseDto> metExercise = exerciseService.getAllExerciseList();
 		model.addAttribute("MetExercise", metExercise);
 		return "main_layout/exercise/exercise_all_list";
 	}
-	//운동검색 (전체 접근가능)
+
+	// 운동검색 (전체 접근가능)
 	@PostMapping("/serachExercise")
 	public String serachExercise(Model model,
-								@RequestParam(name = "exercise_name", required = false) String exerciseName,
-								@RequestParam(name = "met_coefficient", required = false) String metCoefficient
-								,@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
+			@RequestParam(name = "exercise_name", required = false) String exerciseName,
+			@RequestParam(name = "met_coefficient", required = false) String metCoefficient,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		System.out.println("아이디" + exerciseName);
 		System.out.println("검색조건" + metCoefficient);
-		
-		Map<String, Object> serachList = exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient,currentPage);
+
+		Map<String, Object> serachList = exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient,
+				currentPage);
 		System.out.println(serachList);
-		
+
 		model.addAttribute("title", "Fourhealth serachExercise");
-		
-		model.addAttribute("exerciseName",exerciseName);
-		model.addAttribute("metCoefficient",metCoefficient);
-		
+
+		model.addAttribute("exerciseName", exerciseName);
+		model.addAttribute("metCoefficient", metCoefficient);
+
 		model.addAttribute("exerciseList", serachList.get("exerciseList"));
 		model.addAttribute("lastPage", serachList.get("lastPage"));
 		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPageNum", serachList.get("startPageNum"));
 		model.addAttribute("endPageNum", serachList.get("endPageNum"));
-		
+
 		return "main_layout/exercise/exercise_serach_list";
 	}
-	
-	//검색된 운동 페이지 동작(전체 접근가능)
+
+	// 검색된 운동 페이지 동작(전체 접근가능)
 	@GetMapping("/serachExercise")
 	public String serachExercisePage(Model model,
 			@RequestParam(name = "exercise_name", required = false) String exerciseName,
-			@RequestParam(name = "met_coefficient", required = false) String metCoefficient
-			,@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
+			@RequestParam(name = "met_coefficient", required = false) String metCoefficient,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		System.out.println("아이디" + exerciseName);
 		System.out.println("검색조건" + metCoefficient);
 
-		Map<String, Object> serachList = exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient,currentPage);
+		Map<String, Object> serachList = exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient,
+				currentPage);
 		System.out.println(serachList);
 
 		model.addAttribute("title", "Fourhealth serachExercise");
 
-		model.addAttribute("exerciseName",exerciseName);
-		model.addAttribute("metCoefficient",metCoefficient);
+		model.addAttribute("exerciseName", exerciseName);
+		model.addAttribute("metCoefficient", metCoefficient);
 
 		model.addAttribute("serachList", serachList);
 		model.addAttribute("exerciseList", serachList.get("exerciseList"));
@@ -86,31 +89,17 @@ public class ExerciseController {
 		return "main_layout/exercise/exercise_serach_list";
 	}
 
-	
-	//운동별 상세정보(준비중)
+	// 운동별 상세정보(준비중)
 	@GetMapping("/exerciseInfo")
 	public String exerciseInfo(HttpServletResponse response) throws IOException {
-		
+
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-			out.println("<script>alert('준비중입니다.');location.href='/exercise';</script>");
-			out.flush();
+		out.println("<script>alert('준비중입니다.');location.href='/exercise';</script>");
+		out.flush();
 
 		return null;
 	}
-	
-	/* 
-	 * // 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
-	 * 	이거 바꿔야할듯 페이지 처리?
-	 * @RequestMapping(value = "/serachTrainerExercise", method =
-	 * RequestMethod.POST, produces = "application/json") public @ResponseBody
-	 * List<MetExerciseDto> serachTrainerExercise(@RequestParam Map<String, Object>
-	 * map) { System.out.println(map); String exerciseName = (String)
-	 * map.get("exerciseName"); String metCoefficient = (String)
-	 * map.get("exerciseHow"); System.out.println(exerciseName + metCoefficient);
-	 * List<MetExerciseDto> getExerciseList =
-	 * exerciseService.getAllSearchExerciseList(exerciseName, metCoefficient);
-	 * 
-	 * return getExerciseList; }
-	 */
+
+
 }

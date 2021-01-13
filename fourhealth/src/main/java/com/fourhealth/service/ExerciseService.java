@@ -81,6 +81,7 @@ public class ExerciseService {
 		return getEasyExercise;
 	}
 	
+	
 
 
 
