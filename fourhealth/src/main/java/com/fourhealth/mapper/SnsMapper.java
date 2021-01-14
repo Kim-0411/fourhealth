@@ -13,6 +13,8 @@ import com.fourhealth.dto.SnsUserDto;
 @Mapper
 public interface SnsMapper {
 
+	String insertComment = null;
+
 	List<SnsUserDto> getSnsList();
 
 	int snsInsert(SnsUserDto snsUserDto);

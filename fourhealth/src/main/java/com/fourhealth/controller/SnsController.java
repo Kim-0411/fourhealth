@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 
 /*
  * SNS 관련
  */
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -17,6 +19,10 @@ import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fourhealth.dto.SnsUserDto;
 import com.fourhealth.service.SnsService;
@@ -26,6 +32,11 @@ public class SnsController {
 
 	@Autowired
 	private SnsService snsService;
+	
+	@RequestMapping(value="/commentInsertBtn", produces="application/json", method=RequestMethod.POST)
+	public @ResponseBody String insertComment() {
+		return "main_layout/sns/snsList";
+	}
 
 	@PostMapping("/snsInsert")
 	public String snsInsert(SnsUserDto snsUserDto) throws FileNotFoundException {

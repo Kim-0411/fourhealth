@@ -21,16 +21,10 @@
                 <small><span><i class="icon ion-md-time" th:text="${s.userSnsRegDate}"></i></span></small>
               </div>
             </div>
-            <!--/ media -->
           </div>
-          <!--/ cardbox-heading -->
-
-          <div class="cardbox-item"><img th:src="${s.snsImageUrl}"> <!-- image/207_about-bg.jpg  -->
-            </img></div>
-          <!--/ cardbox-item -->
+          <div class="cardbox-item"><img th:src="${s.snsImageUrl}"> <!-- image/207_about-bg.jpg  --></div>
           <div class="cardbox-item" th:text="${s.userSnsContents}">
           </div>
-          <!--/ cardbox-item -->
           <div class="cardbox-base">
             <ul class="float-right">
               <li><a><i class="far fa-comment-dots"></i></a></li>
@@ -41,33 +35,24 @@
               <li><a><span>242</span></a></li>
             </ul>
           </div>
-          <!--/ cardbox-base -->
+          <form th:action="@{/commentInsertBtn}" method="post">
           <div class="cardbox-comments">
             <div class="search">
-              <input placeholder="Write a comment" type="text" class="form-control">
-              <button><i class="far fa-check-circle fa-fw" style="margin-top: 20px; 
-              "></i></button>
+              <input placeholder="Write a comment" type="text" class="form-control" id="insertSnsComment1" >
+              <button type="submit"><i class="far fa-check-circle fa-fw" id="commentInsertBtn" style="margin-top: 20px;"></i></button>
             </div>
-            <!--/. Search -->
           </div>
-          <!--/ cardbox-like -->
-
+          </form>
         </div>
-        <!--/ cardbox -->
 
       </div>
-      <!--/ col-lg-6 -->
       <div class="col-lg-2" id="sidebox" style="box-shadow: 0px 0px 1px 1px grey;">
         <div class="p-2 mb-1 bg-white">
           <div style="text-align: center;"><a th:href="@{/snsInsert(userId=${session.SID})}">New</a></div>
         </div>
       </div>
-      <!--/ col-lg-3 -->
 
     </div>
-    <!--/ row -->
-    </div>
-    <!--/ container -->
   </section>
 
   <!-- snsList js연결 -->

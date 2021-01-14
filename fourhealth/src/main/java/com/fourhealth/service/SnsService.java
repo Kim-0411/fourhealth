@@ -16,6 +16,11 @@ public class SnsService {
 	@Autowired
 	private SnsMapper snsMapper;
 	
+	public String insertComment() {
+		return snsMapper.insertComment;
+		
+	}
+	
 	
 	  public String snsInsert(SnsUserDto snsUserDto) { 
 			String insertCheck = "게시 실패";
