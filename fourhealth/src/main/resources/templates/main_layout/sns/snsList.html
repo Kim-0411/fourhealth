@@ -35,11 +35,25 @@
               <li><a><span>242</span></a></li>
             </ul>
           </div>
-          <form th:action="@{/commentInsertBtn}" method="post">
+          <form action="">
+          	<div>댓</div>
+          	<div>글</div>
+          	<div>댓</div>
+          	<div>글</div>
+          	<div>댓</div>
+          	<div>글</div>
+          	<div>댓</div>
+          	<div>글</div>
+          	<div>댓</div>
+          	<div>글</div>
+          	<div>댓</div>
+          	<div>글</div>
+          </form>
+          <form th:action="@{/commentsInsertBtn}" method="post">
           <div class="cardbox-comments">
             <div class="search">
-              <input placeholder="Write a comment" type="text" class="form-control" id="insertSnsComment1" >
-              <button type="submit"><i class="far fa-check-circle fa-fw" id="commentInsertBtn" style="margin-top: 20px;"></i></button>
+              <input placeholder="Write a comment" type="text" class="form-control" id="insertSnsComments" >
+              <button type="submit"><i class="far fa-check-circle fa-fw" id="commentsInsertBtn" style="margin-top: 20px;"></i></button>
             </div>
           </div>
           </form>

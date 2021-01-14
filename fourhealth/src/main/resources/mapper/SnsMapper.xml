@@ -59,6 +59,7 @@
 			, user_sns_reg_date 	AS userSnsRegDate
 		FROM
 			tb_sns_user
+		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY userSnsRegDate DESC;
 	</select>	
 	

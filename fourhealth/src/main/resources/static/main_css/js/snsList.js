@@ -4,12 +4,12 @@ $(window).scroll(function() {
   $("#sidebox").stop().animate({"top":position+currentPosition+"px"},1000); 
 });
 $(function(){
-	$('#commentInsertBtn').click(function(){
-		var userSnsCommentContents = $('#insertSnsComment1').val();
+	$('#commentsInsertBtn').click(function(){
+		var userSnsCommentContents = $('#insertSnsComments').val();
 		var request = $.ajax({
-			url:"/commentInsertBtn",
+			url:"/commentsInsertBtn",
 			method:"post",
-			data:{userSnsCommentContents:userSnsCommentContents},
+			data:{'userSnsCommentContents':userSnsCommentContents},
 			contentType: "application/json; charset=UTF-8",
 			dataType:"json"
 				
