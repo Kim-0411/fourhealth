@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+<th:block layout:fragment="mainContent">
+	<div class="container">
+		<div class="top-level-header">
+  			<h1>운동전체정보</h1>
+		</div>
+		<div class="exericse-info">
+			<h3 class="text-left">운동전체정보</h3>
+			<p class="text-left">운동강도에 대한 칼로리 소비량을 예측할 수 있습니다.<br>
+			fourhealth는 당신의 활동량 또는 운동에따라 신진대사를 이용하여 칼로리 사용량을 예측합니다.<br>
+			신체활동은 제마다 다른 MET지수를 가지고 있습니다. 강도가 높은 활동이나 운동은 높은 MET지수를 가지고 있습니다.<br>
+			총 소비칼로리량은 수 많은 요인으로 인해 변동이 있다는 점을 유의하시기 바랍니다.<br> 
+			총 에너지필요량은 성별, 나이, 근륙질량, 신장 및 다른 유전환경 요인에따라 다를 수 있습니다.<br>
+			시간당 예상되는 사용열량과 MET값을<strong>70 kg</strong>인 사람을 기준으로 잡을때:
+			</p>
+		</div>
+			<h3>가벼운강도</h3>
+	 		<table class="table-bordered col-md-12 ">
+				<tr>
+					<th>운동이름</th>
+					<th>cals/시간</th>
+					<th>met계수</th>
+				</tr>
+				<tr th:each="e : ${MetExercise}" th:if="${e.exerciseMetCoeffcient} < 3 ">
+					<td>
+						<a th:text="${e.exerciseName}"  th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+					</td>
+					<td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+					<td th:text="${e.exerciseMetCoeffcient}"></td>
+				</tr>
+			</table>
+			<h3>보통강도</h3>
+	 		<table class="table-bordered col-md-12">
+				<tr>
+					<th>운동이름</th>
+					<th>cals/시간</th>
+					<th>met계수</th>
+				</tr>
+				<tr th:each="e : ${MetExercise}" th:if="${e.exerciseMetCoeffcient} <= 6 and ${e.exerciseMetCoeffcient}>=3">
+					<td>
+						<a th:text="${e.exerciseName}"  th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+					</td>
+					<td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+					<td th:text="${e.exerciseMetCoeffcient}"></td>
+				</tr>
+			</table>
+			<h3>어려운강도</h3>
+			<table class="table-bordered col-md-12">
+				<tr>
+					<th>운동이름</th>
+					<th>cals/시간</th>
+					<th>met계수</th>
+				</tr>
+				<tr th:each="e : ${MetExercise}" th:if="${e.exerciseMetCoeffcient} > 6">
+					<td>
+						<a th:text="${e.exerciseName}"  th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+					</td>
+					<td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+					<td th:text="${e.exerciseMetCoeffcient}"></td>
+				</tr>
+			</table>
+		</div>
+  </th:block>
+</html>

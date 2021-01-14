@@ -21,13 +21,16 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.*;
 
+import com.fourhealth.dto.CommonUserDto;
+import com.fourhealth.dto.MsgDto;
+import com.fourhealth.service.*;
+
 @Controller
 public class MasterController {
 
 	@Autowired
 	private MessageService messageService;
-	@Autowired
-	private MemberService memberService;
+
 
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	@GetMapping("/removeMasterMember")

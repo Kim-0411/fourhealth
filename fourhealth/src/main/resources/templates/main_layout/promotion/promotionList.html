@@ -41,10 +41,15 @@
           </li>
           <!-- 다음 페이지 -->
           <li>
+<<<<<<< HEAD
+            <a th:unless="${currentPage == num}" th:href="@{/promotionList(currentPage = ${num})}"
+              th:text="${ num }"></a>
+=======
             <th:block th:unless="${num <= 0}">
             <a th:unless="${currentPage == num}" th:href="@{/promotionList(currentPage = ${num})}"
               th:text="${ num }"></a>
             </th:block>
+>>>>>>> main
           </li>
         </th:block>
         <li>
