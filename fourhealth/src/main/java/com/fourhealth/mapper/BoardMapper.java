@@ -8,10 +8,15 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
 
-import com.fourhealth.dto.CategoriesReportDto;
+import com.fourhealth.dto.MatchingUserTrainerDto;
+import com.fourhealth.dto.UserReportDto;
+
 
 @Mapper
 public interface BoardMapper {
 
-	List<CategoriesReportDto> selectReportBoardList();
+	public int reportBoardInsert(UserReportDto userReport); 
+	//나의 프로모션 가져오기
+	public List<MatchingUserTrainerDto> reportPromotionList(String userId);
+	
 }

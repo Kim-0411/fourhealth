@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns:th="http://www.thymeleaf.org">
+<head>
+	<title>신고 게시판</title>
+	<link href="main_css/mainContent/boardCss/reportStyle.css" rel="stylesheet" />
+</head>
+<body>
+	<div class="container">
+		<h2>신고 게시판 </h2>
+		<table class="report_list">
+			<colgroup>
+				<col width="15%"/>
+				<col width="*"/>
+				<col width="15%"/>
+				<col width="20%"/>
+			</colgroup>
+			<thead>
+	            <tr>
+	                <th scope="col">신고 번호</th>
+	                <th scope="col">신고 제목</th>
+	                <th scope="col">조회수</th>
+	                <th scope="col">신고 등록일자</th>
+	            </tr>
+	        </thead>
+	         <tbody>
+	        <!-- 	<tr th:if="${#lists.size(list)} > 0" th:each="list : ${list}">
+	        		<td th:text="${list.boardIdx}"></td>
+	        		<td class="title"><a href="/board/openBoardDetail.do?boardIdx=" th:attrappend="href=${list.boardIdx}" th:text="${list.title}"></a></td>
+	        		<td th:text="${list.hitCnt}"></td>
+	        		<td th:text="${list.createdDatetime}"></td>
+	        	</tr> 
+	        	<tr th:unless="${#lists.size(list)} > 0"> -->
+	        		<td colspan="4">조회된 결과가 없습니다.</td>
+	        	</tr>
+	        </tbody>	
+		</table>
+		 <a href="/reportInsert" class="btn">신고 등록하기</a>
+	</div>
+</body>
+
+</html>

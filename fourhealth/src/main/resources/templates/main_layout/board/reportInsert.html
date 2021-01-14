@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
+
+  	<th:block layout:fragment="mainContent">
+	<div class="container">
+	    <h2 align="center">신고글 등록</h2>
+	    <form id="report_insert" name="report_inser" method="post" th:action="@{/reportInsertProc}">
+	    	<table class="report_board_detail" align="center">
+	    		<tr>
+	    			<td>제목</td>
+	    			<td><input type="text" id="reportTitle" name="reportTitle"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td>나의 프로모션</td>
+	    			<td>
+						<select  name="trainerUserMatchingCode">
+								<th:block th:if="${#lists.size(reportPromotionList) > 0}" th:each="rp : ${reportPromotionList}">
+									<option th:text="${rp.trainerPromotionName}" th:value="${rp.trainerUserMatchingCode}"></option>
+								</th:block>
+						</select>   
+					</td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">
+		    			<textarea id="reportContents" name="reportContents"></textarea>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    	<input type="submit" id="submit" value="신고등록" class="btn" >
+	    </form>
+    </div>
+	</th:block>
+</html>
