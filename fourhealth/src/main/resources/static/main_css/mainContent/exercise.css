@@ -1,0 +1,31 @@
+.swiper-container {
+	height:380px;
+	width:800px; 
+	border:5px solid black;
+}
+.swiper-slide {
+	text-align:center;
+	display:flex;
+	align-items:center; 
+	justify-content:center; 
+}
+.top-level-header {
+    border: 4px solid #33B34B;
+    padding: 24px 0px;
+    text-align: center;
+    margin-top: 30px;
+}
+.search-box, .exericse-info{
+	border: 1px dotted #88A8CF;
+    padding: 12px 32px;
+    text-align: center;
+    margin-top: 30px;
+    margin-bottom: 30px;
+}
+
+.table-bordered{
+	margin-bottom: 30px;
+}
+
+
+
