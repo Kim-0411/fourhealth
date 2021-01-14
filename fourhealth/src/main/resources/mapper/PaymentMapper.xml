@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fourhealth.mapper.PaymentMapper">
+  <resultMap type="UserCouponDTO" id="resultMapUserCoupon">
+		<result column="user_coupon_code" 				property="userCouponCode"/>  
+		<result column="user_id"									property="userId"/>
+		<result column="user_platform_coupon_code" 					property="userPlatformCouponCode"/>
+		<result column="user_coupon_validity_start" 					property="userCouponValidityStart"/>
+		<result column="user_coupon_validity_end" 			property="userCouponValidityEnd"/>
+    <result column="user_coupon_reg_date" 		property="userCouponRegDate"/>
+    <result column="user_coupon_use_date" property="userCouponUseDate"/>
+    <collection property="couponList" javaType="java.util.ArrayList" ofType="CouponDTO">
+			<id column="user_platform_coupon_code" property="userPlatformCouponCode"/>
+			<result column="user_platform_grade_code" property="userPlatformGradeCode"/>
+			<result column="user_platform_coupon_details" property="userPlatformCouponDetails"/>
+			<result column="user_platform_coupon_reg_date" property="userPlatformCouponRegDate"/>
+		</collection>
+	</resultMap>
+
+      <select id="checkPromotionPayment" resultType="String">
+        SELECT COUNT(*) 
+        FROM tb_user AS u
+        WHERE 
+        u.user_first_height IS NOT NULL
+        AND 
+        user_first_weight IS NOT NULL
+        AND 
+        user_first_goal IS NOT NULL
+        AND 
+        user_first_bmi IS NOT NULL
+        AND 
+        u.user_id = #{userId}
+      </select> 
+
+      <select id="userCouponList" parameterType="String"  resultMap="resultMapUserCoupon" >
+        SELECT 
+          c.user_coupon_code,
+          c.user_id,
+          c.user_coupon_validity_start,
+          c.user_coupon_validity_end,
+          c.user_coupon_reg_date,
+          c.user_coupon_use_date,
+          a.user_platform_coupon_details
+        FROM 
+          tb_coupon_user AS c 
+        JOIN 
+          tb_coupon_platform_user AS a
+        ON 
+          a.user_platform_coupon_code = c.user_platform_coupon_code
+        WHERE 
+          c.user_id =  #{userId};
+      </select> 
+      
+      
+</mapper>
