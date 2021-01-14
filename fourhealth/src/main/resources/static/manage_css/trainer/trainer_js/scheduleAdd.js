@@ -23,8 +23,7 @@ $('#exercise_serach').click(function () {
 		for (var i = 0; i < data.length; i++) {
 			html += '<tr>';
 			html += "<td id = 'change_time'>";
-			html += "<input type= 'checkbox' class ='add_exerise' value=" + data[i].exerciseName + ">"
-			html += data[i].exerciseName;
+			html += "<label><input type= 'checkbox' class='exercise_info_add' value="+ data[i].exerciseName + ">"+data[i].exerciseName+"</label>"
 			html += "<span class = 'met' style = 'float : right;'>" + data[i].exerciseMetCoeffcient + '</span>'
 			html += "<div class = 'smallText'>"
 			html += "<a href ='#' class ='time'>" + time + "분</a>"
@@ -60,4 +59,21 @@ $(document).on('click', '.change_btn', function () {
 	$(this).parents('.on_off').css('display', 'none');
 
 });
+
+//체크시 안에 있는 정보 
+$(document).on('change','.exercise_info_add',function() {
+	console.log($(this).parents('td').find('label').text()); //운동명
+	console.log($(this).parents('td').find('.met').text()); //met계수
+	console.log($(this).parents('td').find('.time').text()); //시간
+	console.log($(this).parents('td').find('#kal').text()); //칼로리
+	$($(this)).each(function(){
+		if($(this).is(':checked')){
+			
+		}
+	});
+	
+});
+
+
+
 

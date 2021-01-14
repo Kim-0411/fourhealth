@@ -62,23 +62,14 @@
               <div class="card-body">
                 <!-- the events -->
                 <div id="external-events">
-                  <div class="external-event bg-success ui-draggable ui-draggable-handle" style="position: relative;">
-                    Lunch</div>
-                  <div class="external-event bg-warning ui-draggable ui-draggable-handle" style="position: relative;">Go
-                    home</div>
-                  <div class="external-event bg-info ui-draggable ui-draggable-handle" style="position: relative;">Do
-                    homework</div>
-                  <div class="external-event bg-primary ui-draggable ui-draggable-handle" style="position: relative;">
-                    Work on UI design</div>
-                  <div class="external-event bg-danger ui-draggable ui-draggable-handle" style="position: relative;">
-                    Sleep tight</div>
-                  <div class="checkbox">
-                    <label for="drop-remove">
-                      <input type="checkbox" id="drop-remove">
-                      remove after drop
-                    </label>
-                  </div>
+
                 </div>
+              </div>
+              <div class="checkbox">
+                <label for="drop-remove">
+                  <input type="checkbox" id="drop-remove">
+                  remove after drop
+                </label>
               </div>
               <!-- /.card-body -->
             </div>
@@ -139,18 +130,49 @@
         </div>
         <div class="modal-body">
           <h3>활동 및 운동찾기</h3>
-          <select id="serach_how" class="">
-            <option value="easy">가벼움</option>
-            <option value="normal">보통</option>
-            <option value="hard">격렬함</option>
-            <option value="all">전체</option>
-          </select>
+          <div class="input-group">
+            <select id="serach_how" class="">
+              <option value="easy">가벼움</option>
+              <option value="normal">보통</option>
+              <option value="hard">격렬함</option>
+              <option value="all">전체</option>
+            </select>
+            <input type="text" id="exercise_name" class="form-control col-md-4">
+            <button type="button" id="exercise_serach" class="btn-default">
+              <i class="fa fa-search"></i>
+            </button>
+          </div>
+          <table class="table-bordered mt-2 col-md-5">
+            <tbody id="exercise_info">
+            </tbody>
+          </table>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-default" id="schedule-modal-add-btn">Add</button>
+          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+        </div>
+      </div>
 
-          <input type="text" id="exercise_name">
-          <button type="button" id="exercise_serach">검색하기</button>
-          <table border="1">
-          	<tbody id="exercise_info">
-          	</tbody>
+    </div>
+  </div>
+  
+  
+  <!-- 카드(스케줄 넣어준거) 클릭시 뜨게함 -->
+  
+  <div class="modal fade" id="myCardModal" role="dialog">
+    <div class="modal-dialog modal-xl schedule-modal">
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header">
+          <h4 class="modal-title">Add schedule </h4>
+          <button type="button" class="close" data-dismiss="modal">×</button>
+        </div>
+        <div class="modal-body">
+          <h3>넣어준거</h3>
+          
+          <table class="table-bordered mt-2 col-md-5">
+            <tbody id="exercise_info">
+            </tbody>
           </table>
         </div>
         <div class="modal-footer">

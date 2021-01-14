@@ -1,4 +1,7 @@
 // 켈린더(Plugin)
+
+let test = 0;
+
 $(function () {
   /* initialize the external events
      -----------------------------------------------------------------*/
@@ -14,11 +17,11 @@ $(function () {
       $(this).data("eventObject", eventObject);
 
       // make the event draggable using jQuery UI
-      $(this).draggable({
-        zIndex: 1070,
-        revert: true, // will cause the event to go back to its
-        revertDuration: 0, //  original position after the drag
-      });
+      // $(this).draggable({
+      //   zIndex: 1070,
+      //   revert: true, // will cause the event to go back to its
+      //   revertDuration: 0, //  original position after the drag
+      // });
     });
   }
 
@@ -57,7 +60,7 @@ $(function () {
           .getComputedStyle(eventEl, null)
           .getPropertyValue("color"),
       };
-    },
+    }
   });
 
   var calendar = new Calendar(calendarEl, {
@@ -148,10 +151,10 @@ $(function () {
   // 스케쥴 모달페이지
 
   $("#add-new-event").click(function () {
-    var scheduleTitle = $("#new-event").val(); //스케쥴 타이틀
+    var firstScheduleTitle = $("#new-event").val(); //스케쥴 타이틀
     var user_id = $("#select_user_id").text(); //스케쥴 아이디 유무
 
-    if (scheduleTitle == "") {
+    if (firstScheduleTitle == "") {
       alert("스케쥴 타이틀을 정해주세요!");
     } else {
       if (user_id == "") {
@@ -160,27 +163,54 @@ $(function () {
         $("#myModal").modal();
 
         $("#schedule-modal-add-btn").click(function () {
+          var secondScheduleTitle = $("#new-event").val();
+          
           $("#myModal").modal("hide");
-          console.log("ㅅㅂ");
-          if (scheduleTitle.length == 0) {
+          if (secondScheduleTitle.length == 0) {
             return;
           }
-          var event = $("<div/>");
+          var event = $("<div>");
+
+          // for(let i=0; i<){
+
+          // }
           event
             .css({
               "background-color": currColor,
               "border-color": currColor,
               color: "#fff",
             })
-            .addClass("external-event");
-          event.text(scheduleTitle);
+            // .addClass("external-event"+test+" external-event ui-draggable ui-draggable-handle");
+            .addClass("external-event")
+            .attr("id", "external-event" + test);
+          event.text(secondScheduleTitle);
           $("#external-events").prepend(event);
+          test++;
+
           ini_events(event);
+
+          $("#new-event").val("");
+
+  
+
         });
       }
     }
-    console.log("test", scheduleTitle);
-
-    $("#new-event").val("");
   });
+/*  $(document).on('click','.external-event', function () {
+	  console.log($(this).text());
+  });*/
+
 });
+$(document).on('click','.external-event', function () {
+	  console.log($(this).text());
+	  $("#myCardModal").modal();
+});
+
+$(document).on('external-event','click', function () {
+ 
+  console.log($(this).text());
+});
+// $("#myCardModal").click(function () {
+//   $("#myCardModal").modal();
+// });
