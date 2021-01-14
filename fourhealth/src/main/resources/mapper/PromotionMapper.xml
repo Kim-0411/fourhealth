@@ -74,16 +74,19 @@
 		</insert>
   
 		<select id="promotionCheck" resultType="String">
-			/* 프로모션 등록 시도할 경우, 최초 등록데이터 유무 판단(권한 체크) */
-		  SELECT COUNT(*) 
-		  FROM (
-			  SELECT 
-				  user_id
-			FROM 
-			  tb_trainer 
-			WHERE 
-			user_id = #{proId}
-		  )c;
+		/* 프로모션 등록 시도할 경우, 최초 등록데이터 유무 판단(권한 체크) */
+		SELECT COUNT(*) 
+        	FROM tb_trainer AS t
+        WHERE 
+        	t.trainer_gym IS NOT NULL
+        AND 
+        	t.trainer_gym_address IS NOT NULL
+        AND 
+        	t.trainer_access_reason IS NOT NULL
+        AND 
+        	t.trainer_access_reg_date IS NOT NULL
+        AND 
+        	t.user_id = #{proId}
 		</select>  
 		
 		<select id="promotionList" resultMap="resultMapNoticePromotionTrainer">
