@@ -5,7 +5,7 @@
 <th:block layout:fragment="mainContent">
   <div class="container">
     <h1>결제</h1>
-    <form id="formData">
+    <form id="formData" name="formData">
       프로모션 코드 : <input type="text" name="trainerPromotionNoticeCode"
         th:value="${promotion.trainerPromotionNoticeCode}" /> <br />
       프로모션 이름 : <input type="text" id="promotionName" th:value="${promotion.trainerPromotionName}" /> <br />
@@ -45,9 +45,6 @@
       <button id="check_module" type="button">
         결제하기
       </button>
-      <button id="check_module2" type="button">
-        결제하기 테스트 버튼
-      </button>
     </form>
     <br />
   </div>
@@ -71,33 +68,6 @@
       $("#purchaseMoney").val(trainerPromotionPrice);
     }
   });
-  
-  $("#check_module2").click(function () {
-
-    // var formData = $("#formData").serialize();
-    // console.log(formData);
-
-      var formData = $('#formData').children();
-      var jsonParseData = {};
-      $.each(formData, function(index, item){
-          var subName = $(this).attr('name');
-          var subData = $(this).val();
-          jsonParseData[subName] = subData;
-      });
-      console.log(JSON.stringify(jsonParseData));
-    
-    $.ajax({
-      type: "post",
-      url: "/promotionPaymentInsert",
-      data: JSON.stringify(jsonParseData),
-      contentType: "application/json; charset=UTF-8",
-      dataType: 'text',   
-      success: function (response) {
-        alert(response);
-      }
-    });
-  })
-
 
   $("#check_module").click(function () {
     var IMP = window.IMP; // 생략가능
@@ -153,28 +123,20 @@
         console.log(rsp);
         if (rsp.success) {
           
-          var formData = $('#formData').children();
-          var jsonParseData = {};
-        
-          $.each(formData, function(index, item){
-           var subName = $(this).attr('name');
-            var subData = $(this).val();
-            jsonParseData[subName] = subData;
-          });
-
-          console.log(JSON.stringify(jsonParseData));
-
+          var formData = $("#formData").serialize();
+          console.log(formData);
+          console.log("####################");
+          console.log(JSON.stringify(formData));
           $.ajax({
-            type: "post",
-            url: "/promotionPaymentInsert",
-           data: JSON.stringify(jsonParseData),
-           contentType: "application/json; charset=UTF-8",
-           dataType: 'text',   
+            url: "/promotionPaymentInsert", // 요기에
+            type: 'POST',
+            contentType: "application/json; charset=UTF-8",
+            data: formData,
+            success: function(data)
+           {
+               alert(data); // show response from the php script.
+           }
           
-           success: function (response) {
-            alert(response);
-          }
-
           }) .done(function (data) {
             alert(data);
         // 가맹점 서버 결제 API 성공시 로직
