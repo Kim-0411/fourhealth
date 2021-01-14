@@ -18,21 +18,21 @@
 - Kakao oven
 - draw.io
 
-## UI
+## Front
 
 - bootstrap 4(UI Component)
 - CSS
 - HTML
 - JavaScript
 
-## Spring base
+## Back
 
-- Java
+- Java(Spring Framework)
 
-## Server
+## Server 및 배포
 
 - AWS : Tomcat
-
+- cafe24
 ## Database
 
 - MYSQL
@@ -41,6 +41,8 @@
 
 - 식품안전나라음식정보
 - 건강보험심사평가원(질병정보서비스)
+- Kakao 결제
+
 
 # About Team
 
