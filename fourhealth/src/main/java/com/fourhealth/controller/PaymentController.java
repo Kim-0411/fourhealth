@@ -11,6 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserCouponDTO;
+import com.fourhealth.mapper.PaymentMapper;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PaymentService;
 import com.fourhealth.service.PromotionService;
@@ -37,6 +38,9 @@ public class PaymentController {
 
     @Autowired
     MemberService memberService;
+
+    @Autowired
+    PaymentMapper paymentMapper;
 
     @PostMapping("/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
@@ -101,7 +105,9 @@ public class PaymentController {
     public @ResponseBody String promotionTest(@RequestBody Map<String, Object> map) {
 
         System.out.println("From FoodController >> Controller data 표시");
-        System.out.println(map.get("trainerPromotionNoticeCode"));
+        System.out.println(map);
+
+        paymentMapper.promotionPaymentInsert(map);
 
         return "성공";
 
