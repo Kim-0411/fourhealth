@@ -1,6 +1,8 @@
 package com.fourhealth.service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -32,6 +34,33 @@ public class SnsService {
 			return insertCheck;
 		}
 	 
+	 public Map<String, Object> getSnsListPaging(int currentPage) {
+	 	int startRow = 0;
+		int rowPerPage = 12;
+		int startPageNum = 1;
+		double count = snsMapper.getSnsListCount();
+		int lastPage = (int) Math.ceil(count / rowPerPage);
+		int endPageNum = lastPage;
+		startRow = (currentPage - 1) * rowPerPage;
+		List<Map<String, Object>> snsList = snsMapper.getSnsListPaging(startRow, rowPerPage);
+		if (currentPage > 6) {
+			startPageNum = currentPage - 5;
+			endPageNum = currentPage + 4;
+			if (endPageNum >= lastPage) {
+				startPageNum = (lastPage - 9);
+				endPageNum = lastPage;
+			}
+		}
+		System.out.println(lastPage);
+		System.out.println(endPageNum);
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("snsList", snsList);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("endPageNum", endPageNum);
+		System.out.println(resultMap + "--------->getSnsListPaging");
+		return resultMap;
+	}
 	
 	public List<SnsUserDto> getSnsList() {
 		List<SnsUserDto> snsList = snsMapper.getSnsList();

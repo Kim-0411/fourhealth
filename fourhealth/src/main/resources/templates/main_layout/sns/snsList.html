@@ -8,7 +8,7 @@
   <!-- SNS 게시판 -->
   <section class="hero">
     <div class="container" >
-      <div class="row" style="margin-top: 50px;'" th:if="${#lists.size(snsList)>0}" th:each="s : ${snsList}">
+      <div class="row" style="margin-top: 50px;" th:if="${#lists.size(snsList)>0}" th:each="s : ${snsList}">
         <div class="col-lg-6 offset-lg-3">
           <div class="cardbox shadow-lg bg-white">
             <div class="media m-0">
@@ -42,12 +42,6 @@
           	<div>글</div>
           	<div>댓</div>
           	<div>글</div>
-          	<div>댓</div>
-          	<div>글</div>
-          	<div>댓</div>
-          	<div>글</div>
-          	<div>댓</div>
-          	<div>글</div>
           </form>
           <form th:action="@{/commentsInsertBtn}" method="post">
           <div class="cardbox-comments">
@@ -65,7 +59,37 @@
           <div style="text-align: center;"><a th:href="@{/snsInsert(userId=${session.SID})}">New</a></div>
         </div>
       </div>
-
+    <nav aria-label="Page navigation" class="SnsListPaging" style="text-align: center">
+      <ul class="pagination">
+        <li>
+          <a th:href="@{/sns}">first page</a>
+        </li>
+        <li>
+          <a th:if="${currentPage > 1}" th:href="@{/sns(currentPage = ${currentPage - 1 })}"
+            aria-label="Previous">
+            <span aria-hidden="true">«</span>
+          </a>
+        </li>
+        <th:block th:each="num : ${#numbers.sequence(startPageNum,endPageNum)}">
+          <li class="active">
+            <span th:if="${currentPage == num}" th:text="${ num}"></span>
+          </li>
+          <li>
+            <th:block th:unless="${num <= 0}">
+            <a th:unless="${currentPage == num}" th:href="@{/sns(currentPage = ${num})}"
+              th:text="${ num }"></a>
+            </th:block>
+          </li>
+        </th:block>
+        <li>
+          <a th:if="${currentPage < lastPage}" th:href="@{/sns(currentPage = ${currentPage + 1 })}"
+            aria-label="Next">
+            <span aria-hidden="true">»</span>
+          </a>
+          <a th:href="@{/snsList(currentPage = ${lastPage})}">last page</a>
+        </li>
+      </ul>
+    </nav>
     </div>
   </section>
 

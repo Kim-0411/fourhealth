@@ -5,6 +5,7 @@ package com.fourhealth.mapper;
  */
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -19,4 +20,7 @@ public interface SnsMapper {
 
 	int snsInsert(SnsUserDto snsUserDto);
 
+	public int getSnsListCount();
+
+	public List<Map<String, Object>> getSnsListPaging(int startRow, int rowPerPage);
 }

@@ -50,6 +50,21 @@
 	        NOW());
 	</insert>
 	
+	<select id="getSnsListCount" resultType="int">
+		SELECT
+		 	count(*)
+		FROM
+			tb_sns_user;
+	</select>
+	
+	<select id="getSnsListPaging" parameterType="int" resultType="map">
+		SELECT
+			*
+		FROM
+		    tb_sns_user
+		LIMIT #{startRow}, #{rowPerPage};
+	</select>
+	
 	<select id="getSnsList"  resultType="SnsUserDto">
 		SELECT
 			  user_sns_code 		AS userSnsCode
@@ -59,7 +74,6 @@
 			, user_sns_reg_date 	AS userSnsRegDate
 		FROM
 			tb_sns_user
-		WHERE RNUM BETWEEN #{rowStart} AND #{rowEnd}
 		ORDER BY userSnsRegDate DESC;
 	</select>	
 	
