@@ -52,6 +52,53 @@
         WHERE 
           c.user_id =  #{userId};
       </select> 
+
+      <insert id="promotionPaymentInsert" parameterType="java.util.Map">
+        <selectKey keyProperty="trainerUserMatchingCode" resultType="String" order="BEFORE">
+          /* 프로모션 리스트에 있으면 하나씩 증가 후 insert 처리 */
+          SELECT
+            CASE
+            WHEN COUNT(1) = 0 THEN 'trainer_user_matching_001' 
+            ELSE CONCAT('trainer_user_matching_', LPAD(MAX(CAST(right(g.trainer_user_matching_code,3) AS DECIMAL)+1), 3, 0))
+            END AS trainerUserMatchingCode
+          FROM
+          tb_matching_user_trainer AS g;
+        </selectKey>
+        INSERT INTO tb_matching_user_trainer
+          (
+            trainer_user_matching_code, 
+            trainer_promotion_notice_code, 
+            user_id, 
+            trainer_id, 
+            user_coupon_code, 
+            trainer_promotion_name, 
+            payment_method_name, 
+            purchase_money, 
+            purchase_reg_date, 
+            purchase_finish_date, 
+            user_reg_date, 
+            trainer_promotion_recruit_start_date, 
+            trainer_promtion_recruit_end_date, 
+            trainer_promotion_attend_start_date, 
+            trainer_matching_system_reg_date)
+          VALUES 
+          ( 
+          #{trainerUserMatchingCode},
+          #{trainerPromotionNoticeCode}, 
+          #{userId}, 
+            #{trainerId}, 
+            #{userCouponCode jdbcType=VARCHAR}, 
+            #{promotionName}, 
+            #{paymentMethodName}, 
+            #{purchaseMoney}, 
+            NOW(), 
+            NOW(), 
+            NOW(), 
+            #{trainerPromotionRecruitStartDate}, 
+            #{trainerPromotionRecruitEndDate},  
+            #{trainerPromotionAttendStartDate}, 
+            NOW())
+      </insert>
       
       <insert id="promotionPaymentInsert" parameterType="java.util.Map">
         <selectKey keyProperty="trainerUserMatchingCode" resultType="String" order="BEFORE">
