@@ -1,3 +1,4 @@
+<<<<<<< Updated upstream
 <!DOCTYPE html>
 <html lang="ko" xmlns:th="http://www.thymeleaf.org">
 <head>
@@ -38,4 +39,21 @@
 	</div>
 </body>
 
+=======
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{default_layout/main/default}" lang="en">
+<title th:text="${title}"></title>
+
+<th:block layout:fragment="mainContent">
+    <h2>사용자 추가 정보 등록</h2>
+
+    <input type="text" name="height" id="height">
+    <input type="text" name="weight" id="weight">
+    <input type="text" name="goalWeight" id="goalWeight">
+    <input type="text" name="height" id="height">
+
+
+</th:block>
+
+>>>>>>> Stashed changes
 </html>
