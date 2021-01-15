@@ -30,7 +30,8 @@ public class MasterController {
 
 	@Autowired
 	private MessageService messageService;
-
+	@Autowired
+	private MemberService memberService;
 
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	@GetMapping("/removeMasterMember")
