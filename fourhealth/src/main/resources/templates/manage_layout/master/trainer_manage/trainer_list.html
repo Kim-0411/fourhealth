@@ -6,7 +6,39 @@
 >
   <th:block layout:fragment="customContent">
     <div>
-      <h1>트레이너 리스트 화면</h1>
+      <h1>트레이너 회원 목록</h1>
+      <table border="1">
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>이름</th>
+						<th>권한</th>
+						<th>이메일</th>
+						<th>주소</th>
+						<th>등록날짜</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:if="${#lists.size(trainerList) > 0}" th:each="l : ${trainerList}">
+					<td th:text="${l.memberId}"></td>
+					<td th:text="${l.memberPw}"></td>
+					<td th:text="${l.memberName}"></td>
+					<td th:text="${l.memberLevel}"></td>
+					<td th:text="${l.memberEmail}"></td>
+					<td th:text="${l.memberAddr}"></td>
+					<td th:text="${l.memberRegDate}"></td>
+					<td>
+						<a th:href="@{/modifyMasterMember(memberId=${l.memberId})}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{/removeMasterMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
     </div>
   </th:block>
 </html>

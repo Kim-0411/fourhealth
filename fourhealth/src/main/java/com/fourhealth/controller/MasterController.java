@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
-import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.*;
@@ -53,6 +52,30 @@ public class MasterController {
 		System.out.println(result + "삭제 처리 후 결과");
 		redirectAttr.addAttribute("result", result);
 		return "redirect:/member_all_list";
+	}
+
+	// 관리자 단에서 회원 리스트에서 수정페이지로 이동
+	@GetMapping("/modifyMasterUser")
+	public String modifyMasterUser(Model model, @RequestParam(name = "memberId", required = false) String memberId) {
+		System.out.println("회원 수정 폼에 보여질 회원아이디" + memberId);
+		MemberDto memberDto = memberService.getUserById(memberId);
+		System.out.println("db에서 검색한 회원정보-->" + memberDto);
+		model.addAttribute("title", "회원 수정화면");
+		// db에서 검색한 회원정보
+		model.addAttribute("memberDto", memberDto);
+		System.out.println("Dto 값 확인" + memberDto);
+		return "redirect:/main";
+	}
+
+	// 관리자 단내 사용자 리스트에서 수정페이지
+	@PostMapping("/modifyMasterUser")
+	public String modifyMasterUser(MemberDto memberDto) {
+		System.out.println("회원 수정 폼에서 입력 받은 값" + memberDto);
+		// modify 처리
+		String result = memberService.modifyMasterUser(memberDto);
+		// modify 결과
+		System.out.println(result + "회원 수정 폼 결과");
+		return "redirect:/user_list";
 	}
 
 	// 관리자 단에서 전체 회원 리스트에서 수정페이지로 이동
@@ -101,14 +124,23 @@ public class MasterController {
 		return "manage_layout/manage_main";
 	}
 
+	// 세션이 없을 때 관리자 메뉴로 돌아가는 컨트롤러
 	@GetMapping("/manage2")
 	public String mainTrainer2() {
 		return "manage_layout/manage_main";
 	}
 
 	/* 관리자 사용자 관리 페이지 맵핑 시작 */
+	// 관리자 페이지단에서 사용자 전체 조회 리스트
+
+	// 관리자 단에서 사용자 리스트
 	@GetMapping("/userList")
-	public String userList(Model model) {
+	public String masterUserList(Model model) {
+		List<MemberDto> userList = memberService.viewUserList();
+		model.addAttribute("title", "사용자 목록");
+		model.addAttribute("userList", userList);
+		System.out.println("사용자 전체 조회" + userList);
+
 		return "manage_layout/master/user_manage/user_list";
 	}
 
@@ -124,8 +156,14 @@ public class MasterController {
 	/* 관리자 사용자 관리 페이지 맵핑 끝 */
 
 	/* 관리자 트레이너 관리 페이지 맵핑 시작 */
+	// 관리자 단에서 트레이너 리스트
 	@GetMapping("/trainerList")
-	public String trainerList(Model model) {
+	public String masterTrainerList(Model model) {
+		List<MemberDto> trainerList = memberService.viewTrainerList();
+		model.addAttribute("title", "트레이너 목록");
+		model.addAttribute("trainerList", trainerList);
+		System.out.println("트레이너 전체 조회" + trainerList);
+
 		return "manage_layout/master/trainer_manage/trainer_list";
 	}
 

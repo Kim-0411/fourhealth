@@ -46,6 +46,15 @@ public class MemberService {
 		return result;
 	}
 
+	// 사용자 회원조회 후 수정처리
+	public String modifyMasterUser(MemberDto membedto) {
+		String result = "회원 수정 실패";
+		int modifyMemberCheck = memberMapper.modifyMasterUser(membedto);
+		if (modifyMemberCheck > 0)
+			result = "회원 수정 성공";
+		return result;
+	}
+
 	// 전체회원조회 후 수정처리
 	public String modifyMasterMember(MemberDto membedto) {
 		String result = "회원 수정 실패";
@@ -53,6 +62,40 @@ public class MemberService {
 		if (modifyMemberCheck > 0)
 			result = "회원 수정 성공";
 		return result;
+	}
+
+	// 관리자 단에서 트레이너 전체 조회
+	public List<MemberDto> viewTrainerList() {
+		List<MemberDto> memberList = memberMapper.viewTrainerList();
+		System.out.println(memberList);
+
+		int listSize = memberList.size();
+		for (int i = 0; i < listSize; i++) {
+			if ("user_level_002".equals(memberList.get(i).getMemberLevel())) {
+				memberList.get(i).setMemberLevel("트레이너");
+			}
+		}
+
+		System.out.println("전체 트레이너 조회" + memberList);
+
+		return memberList;
+	}
+
+	// 관리자 단에서 사용자 전체 조회
+	public List<MemberDto> viewUserList() {
+		List<MemberDto> memberList = memberMapper.viewUserList();
+		System.out.println(memberList);
+
+		int listSize = memberList.size();
+		for (int i = 0; i < listSize; i++) {
+			if ("user_level_003".equals(memberList.get(i).getMemberLevel())) {
+				memberList.get(i).setMemberLevel("사용자");
+			}
+		}
+
+		System.out.println("전체 사용자 조회" + memberList);
+
+		return memberList;
 	}
 
 	// 전체회원조회 및 관리자, 트레이너, 사용자 변환
