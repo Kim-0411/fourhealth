@@ -40,4 +40,7 @@ public interface MemberMapper {
 	// 쪽지 보낼때 아이디가 있나 없나 유효성 겁사(전체)
 	public List<MemberDto> getAllUserId();
 
+	// 회원조회
+	public MemberDto getMemberSelect(String userId);
+
 }
