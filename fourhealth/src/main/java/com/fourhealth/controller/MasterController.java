@@ -20,6 +20,10 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.*;
 
+import com.fourhealth.dto.CommonUserDto;
+import com.fourhealth.dto.MsgDto;
+import com.fourhealth.service.*;
+
 @Controller
 public class MasterController {
 

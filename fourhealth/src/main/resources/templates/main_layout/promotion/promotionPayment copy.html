@@ -5,10 +5,10 @@
 <th:block layout:fragment="mainContent">
   <div class="container">
     <h1>결제</h1>
-    <form id="formData">
+    <form id="formData" name="formData">
       프로모션 코드 : <input type="text" name="trainerPromotionNoticeCode"
         th:value="${promotion.trainerPromotionNoticeCode}" /> <br />
-      프로모션 이름 : <input type="text" id="promotionName" name="promotionName" th:value="${promotion.trainerPromotionName}" /> <br />
+      프로모션 이름 : <input type="text" id="promotionName" th:value="${promotion.trainerPromotionName}" /> <br />
       트레이너 아이디 : <input type="text" id="trainerId" name="trainerId" th:value="${promotion.userId}" /> <br />
       프로모션 가격 : <input type="text" id="trainerPromotionPrice" th:value="${promotion.trainerPromotionPrice}" /> <br />
       회원 아이디 : <input type="text" id="userId" name="userId" th:value="${member.memberId}" /> <br />
@@ -17,7 +17,7 @@
       회원 전화번호 : <input type="text" id="userPhone" th:value="${member.memberPhone}" /> <br />
       회원 쿠폰 : <select id="coupon" name="userCouponCode" th:if="${#lists.size(userCouponList) > 0}"
         th:each="l : ${userCouponList}">
-        <option value=null>===선택하지 않음===</option>
+        <option value="0">===선택하지 않음===</option>
         <option th:if="${#lists.size(l.couponList) > 0}" th:each="c : ${l.couponList}" th:value="${l.userCouponCode}"
           th:text="${c.userPlatformCouponDetails}">
         </option>
@@ -35,18 +35,15 @@
         <option value="paypal">페이팔</option>
       </select>
       <br>
-      결제 가격 : <input type="text" id="purchaseMoney" name="purchaseMoney" th:value="${promotion.trainerPromotionPrice}" />
-      <!--트레이너 프로모션 모집 시작일  --> 
-      <input type="hidden" name="trainerPromotionRecruitStartDate" th:value="${promotion.trainerPromotionRecruitStartDate}" />
-      <!--트레이너 프로모션 모집 종료일  --> 
-      <input type="hidden" name="trainerPromotionRecruitEndDate" th:value="${promotion.trainerPromotionRecruitEndDate}" />
+      결제 가격 : <input type="text" id="purchaseMoney" th:value="${promotion.trainerPromotionPrice}" />
+      <!--트레이너 프로모션 모집 시작일  --> <input type="hidden" name="trainerPromotionRecruitStartDate"
+        th:value="${promotion.trainerPromotionRecruitStartDate}" />
+      <!--트레이너 프로모션 모집 종료일  --> <input type="hidden" name="trainerPromotionRecruitEndDate"
+        th:value="${promotion.trainerPromotionRecruitEndDate}" />
       <!--트레이너 프로모션 트레이너 프로모션 참여 시작 일자  --> <input type="hidden" name="trainerPromotionAttendStartDate"
         th:value="${promotion.trainerPromotionAttendStartDate}" />
       <button id="check_module" type="button">
         결제하기
-      </button>
-      <button id="check_module2" type="button">
-        결제하기 테스트 버튼
       </button>
     </form>
     <br />
@@ -60,11 +57,10 @@
     var coupon = $("#coupon option:checked").text();
     var trainerPromotionPrice = $('#trainerPromotionPrice').val();
     var sum = null;
-    if (coupon != "===선택하지 않음===") {
+    if (coupon == "===선택하지 않음===") {
+      coupon = 0
       sum = trainerPromotionPrice - coupon;
       $("#purchaseMoney").val(sum);
-    }else {
-      $("#purchaseMoney").val(trainerPromotionPrice);
     }
 
     if (sum < 0) {
@@ -72,33 +68,6 @@
       $("#purchaseMoney").val(trainerPromotionPrice);
     }
   });
-  
-  $("#check_module2").click(function () {
-
-    // var formData = $("#formData").serialize();
-    // console.log(formData);
-
-      var formData = $('#formData').children();
-      var jsonParseData = {};
-      $.each(formData, function(index, item){
-          var subName = $(this).attr('name');
-          var subData = $(this).val();
-          jsonParseData[subName] = subData;
-      });
-      console.log(JSON.stringify(jsonParseData));
-    
-    $.ajax({
-      type: "post",
-      url: "/promotionPaymentInsert",
-      data: JSON.stringify(jsonParseData),
-      contentType: "application/json; charset=UTF-8",
-      dataType: 'text',   
-      success: function (response) {
-        alert(response);
-      }
-    });
-  })
-
 
   $("#check_module").click(function () {
     var IMP = window.IMP; // 생략가능
@@ -154,28 +123,20 @@
         console.log(rsp);
         if (rsp.success) {
           
-          var formData = $('#formData').children();
-          var jsonParseData = {};
-        
-          $.each(formData, function(index, item){
-           var subName = $(this).attr('name');
-            var subData = $(this).val();
-            jsonParseData[subName] = subData;
-          });
-
-          console.log(JSON.stringify(jsonParseData));
-
+          var formData = $("#formData").serialize();
+          console.log(formData);
+          console.log("####################");
+          console.log(JSON.stringify(formData));
           $.ajax({
-            type: "post",
-            url: "/promotionPaymentInsert",
-           data: JSON.stringify(jsonParseData),
-           contentType: "application/json; charset=UTF-8",
-           dataType: 'text',   
+            url: "/promotionPaymentInsert", // 요기에
+            type: 'POST',
+            contentType: "application/json; charset=UTF-8",
+            data: formData,
+            success: function(data)
+           {
+               alert(data); // show response from the php script.
+           }
           
-           success: function (response) {
-            alert(response);
-          }
-
           }) .done(function (data) {
             alert(data);
         // 가맹점 서버 결제 API 성공시 로직

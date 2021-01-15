@@ -1,10 +1,10 @@
 package com.fourhealth.dto;
 
 public class CouponDTO {
-    private String userPlatformCouponCode;
-    private String userPlatformGradeCode;
-    private String userPlatformCouponDetails;
-    private String userPlatformCouponRegDate;
+    private String userPlatformCouponCode; // 사용자 플렛폼 쿠폰 코드
+    private String userPlatformGradeCode; // 사용자 플렛폼 공통 등급관리
+    private String userPlatformCouponDetails; // 사용자 플렛폼 쿠폰 상세내용
+    private String userPlatformCouponRegDate; // 사용자 플렛폼 쿠폰관리 시스템 등록일자
 
     public String getUserPlatformCouponCode() {
         return userPlatformCouponCode;
