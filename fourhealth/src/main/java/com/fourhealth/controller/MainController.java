@@ -1,12 +1,20 @@
 package com.fourhealth.controller;
 
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
+import com.fourhealth.dto.MetExerciseDto;
+import com.fourhealth.service.ExerciseService;
+
 @Controller
 public class MainController {
 
+	@Autowired
+	private ExerciseService exerciseService;
 	/* thymeleaf 페이지 테스트 */
 	// index page(main)
 	@GetMapping("/")
@@ -37,7 +45,14 @@ public class MainController {
 
 	@GetMapping("/exercise")
 	public String exercise(Model model) {
-		model.addAttribute("title", "Fourhealth About");
+		List<MetExerciseDto> easyList = exerciseService.getAllEasyExerciseList();
+		List<MetExerciseDto> NormalList = exerciseService.getAllNormalExerciseList();
+		List<MetExerciseDto> HardList = exerciseService.getAllHardExerciseList();
+		model.addAttribute("title", "Fourhealth exercise");
+		model.addAttribute("easy", easyList);
+		model.addAttribute("normal", NormalList);
+		model.addAttribute("hard", HardList);
+
 		return "main_layout/exercise";
 	}
 

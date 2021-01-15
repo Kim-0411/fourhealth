@@ -1,6 +1,7 @@
 package com.fourhealth.mapper;
 
 import java.util.List;
+import java.util.Map;
 
 import com.fourhealth.dto.UserCouponDTO;
 
@@ -12,5 +13,7 @@ public interface PaymentMapper {
     public String checkPromotionPayment(String userId);
 
     public List<UserCouponDTO> userCouponList(String userId);
+
+    public int promotionPaymentInsert(Map<String, Object> map);
 
 }
