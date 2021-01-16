@@ -32,7 +32,7 @@
 					<td th:text="${l.memberAddr}"></td>
 					<td th:text="${l.memberRegDate}"></td>
 					<td>
-						<a th:href="@{/modifyMasterUser(memberId=${l.memberId})}">수정</a>
+						<a th:href="@{/modifyMasterAll(memberId=${l.memberId})}">수정</a>
 					</td>
 					<td>
 						<a th:href="@{/removeMasterMember(memberId=${l.memberId}, memberLevel=${l.memberLevel})}">삭제</a>

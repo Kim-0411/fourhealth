@@ -81,8 +81,8 @@
 			user_id = #{memberId}
 	</update>
 
-	<!-- 관리자 단에서 트레이너 전체 조회 -->
-	<select id="viewTrainerList" resultMap="resultMapMember" >
+	<!-- 관리자 단에서 사용자, 트레이너 전체 조회 -->
+	<select id="viewUserList" parameterType="String" resultMap="resultMapMember" >
 	SELECT
 			user_id, 
 			user_level_code, 
@@ -98,28 +98,7 @@
 	FROM 
 		tb_common_user AS c
 	WHERE 
-		c.user_level_code = "user_level_002";
-	</select>
-	
-
-	<!-- 관리자 단에서 사용자 전체 조회 -->
-	<select id="viewUserList" resultMap="resultMapMember" >
-	SELECT
-			user_id, 
-			user_level_code, 
-			user_pw, 
-			user_name, 
-			user_addr, 
-			user_nickname, 
-			user_phone, 
-			user_email, 
-			user_birth, 
-			user_gender, 
-			user_reg_date
-	FROM 
-		tb_common_user AS c
-	WHERE 
-		c.user_level_code = "user_level_003";
+		c.user_level_code = #{memberLevel};
 	</select>
 
 	
@@ -141,7 +120,7 @@
 		tb_common_user;
 	</select>
 	
-	<!-- 로그인  -->
+	<!-- 로그인 , 사용자 및 트레이너 수정 페이지 이동 -->
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
 			user_id, 
