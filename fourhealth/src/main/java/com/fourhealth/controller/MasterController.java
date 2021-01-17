@@ -20,6 +20,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
+import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.service.*;
 
 import com.fourhealth.dto.CommonUserDto;
@@ -64,12 +65,21 @@ public class MasterController {
 	// return "redirect:/member_all_list";
 	// }
 
-	// 관리자 단에서 수정처리
-	@PostMapping("/modifyMasterAllMembers")
-	public String modifyMasterAllMembers(MemberDto memberDto) {
+	// 관리자 단에서 수정페이지
+	@PostMapping("/modifyMasterAll")
+	public String modifyMasterAll(MemberDto memberDto) {
+		System.out.println("회원 수정 폼에서 입력 받은 값" + memberDto);
+		// modify 처리
+		String result = memberService.modifyMasterAll(memberDto);
+		// modify 결과
+		if (result.equals("user_level_002")) {
+			System.out.println(result + "사용자 수정 폼 결과");
+			return "manage_layout/master/trainer_manage/trainer_modify";
 
-		System.out.println(memberDto);
-
+		} else if (result.equals("user_level_003")) {
+			System.out.println(result + "트레이너 수정 폼 결과");
+			return "manage_layout/master/user_manage/user_modify";
+		}
 		return "redirect:/";
 	}
 
@@ -94,18 +104,17 @@ public class MasterController {
 	}
 
 	// 관리자 단에서 전체 회원 리스트에서 수정페이지로 이동
-	// @GetMapping("/modifyMasterMember")
-	// public String modifyMasterMember(Model model, @RequestParam(name =
-	// "memberId", required = false) String memberId) {
-	// System.out.println("회원 수정 폼에 보여질 회원아이디" + memberId);
-	// MemberDto memberDto = memberService.getMemberById(memberId);
-	// System.out.println("db에서 검색한 회원정보-->" + memberDto);
-	// model.addAttribute("title", "회원 수정화면");
-	// // db에서 검색한 회원정보
-	// model.addAttribute("memberDto", memberDto);
-	// System.out.println("Dto 값 확인" + memberDto);
-	// return "master/member/member_modify";
-	// }
+	@GetMapping("/modifyMasterMember")
+	public String modifyMasterMember(Model model, @RequestParam(name = "memberId", required = false) String memberId) {
+		System.out.println("회원 수정 폼에 보여질 회원아이디" + memberId);
+		MemberDto memberDto = memberService.getMemberById(memberId);
+		System.out.println("db에서 검색한 회원정보-->" + memberDto);
+		model.addAttribute("title", "회원 수정화면");
+		// db에서 검색한 회원정보
+		model.addAttribute("memberDto", memberDto);
+		System.out.println("Dto 값 확인" + memberDto);
+		return "master/member/member_modify";
+	}
 
 	// 관리자 단에서 전체 회원 수정페이지
 	// @PostMapping("/modifyMasterMember")
@@ -153,14 +162,14 @@ public class MasterController {
 	public String memberAllList(Model model, @RequestParam(name = "user_level", required = false) String memberLevel) {
 		System.out.println(memberLevel);
 		List<MemberDto> userList = memberService.viewUserList(memberLevel);
-		model.addAttribute("title", "사용자 목록");
-		model.addAttribute("userList", userList);
 		System.out.println("사용자 전체 조회" + userList);
 		if (memberLevel.equals("user_level_003")) {
+			model.addAttribute("title", "사용자 목록");
 			model.addAttribute("userList", userList);
 			return "manage_layout/master/user_manage/user_list";
 		} else if (memberLevel.equals("user_level_002")) {
 			model.addAttribute("trainerList", userList);
+			model.addAttribute("title", "트레이너 목록");
 			return "manage_layout/master/trainer_manage/trainer_list";
 		}
 
@@ -180,9 +189,26 @@ public class MasterController {
 
 	/* 관리자 트레이너 관리 페이지 맵핑 시작 */
 
+	// @GetMapping("/trainerAccessList")
+	// public String trainerAccessList(Model model) {
+	// return "manage_layout/master/trainer_manage/trainer_Access_list";
+	// }
+
+	// 트레이너 비승인 리스트
 	@GetMapping("/trainerAccessList")
 	public String trainerAccessList(Model model) {
-		return "manage_layout/master/trainer_manage/trainer_Access_list";
+		List<TrainerDto> trainerList = memberService.viewAccessTrainerList();
+		model.addAttribute("title", "트레이너 비승인 목록");
+		model.addAttribute("trainerList", trainerList);
+		System.out.println("사용자 전체 조회" + trainerList);
+		// if (memberLevel.equals("user_level_003")) {
+		// model.addAttribute("trainerList", trainerList);
+		// return "manage_layout/master/user_manage/user_list";
+		// } else if (memberLevel.equals("user_level_002")) {
+		// model.addAttribute("trainerList", trainerList);
+		// return "manage_layout/master/trainer_manage/trainer_list";
+		// }
+		return "manage_layout/master/trainer_manage/trainer_access_list";
 	}
 
 	@GetMapping("/trainerLoginList")

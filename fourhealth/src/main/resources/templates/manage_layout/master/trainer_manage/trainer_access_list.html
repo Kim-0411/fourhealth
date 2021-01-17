@@ -7,6 +7,39 @@
   <th:block layout:fragment="customContent">
     <div>
       <h1>트레이너 비승인 리스트 화면</h1>
+      <table border="1">
+				<thead>
+					<tr>
+						<th>아이디</th>
+						<th>비밀번호</th>
+						<th>이름</th>
+						<th>권한</th>
+						<th>이메일</th>
+						<th>주소</th>
+						<th>등록날짜</th>
+						<th>수정</th>
+						<th>삭제</th>
+					</tr>
+				</thead>
+				<tbody>
+				<tr th:if="${#lists.size(trainerAccessList) > 0}" th:each="l : ${trainerAccessList}">
+					<td th:text="${l.userId}"></td>
+					<td th:text="${l.trainerPlatformGradeCode}"></td>
+					<td th:text="${l.trainerAccessCode}"></td>
+					<td th:text="${l.trainerGym}"></td>
+					<td th:text="${l.trainerGymAddress}"></td>
+					<td th:text="${l.trainerAccessReason}"></td>
+					<td th:text="${l.trainerAccessRegDate}"></td>
+					<td th:text="${l.trainerRegDate}"></td>
+					<td>
+						<a th:href="@{/modifyMasterAll(userId=${l.userId})}">수정</a>
+					</td>
+					<td>
+						<a th:href="@{/removeMasterMember(userId=${l.userId}, memberLevel=${l.memberLevel})}">삭제</a>
+					</td>
+				</tr>
+			</tbody>
+		</table>
     </div>
   </th:block>
 </html>

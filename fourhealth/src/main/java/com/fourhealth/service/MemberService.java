@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.fourhealth.dto.MemberDto;
+import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
@@ -49,22 +50,22 @@ public class MemberService {
 	// }
 
 	// 트레이너 회원조회 후 수정처리
-	public String modifyMasterTrainer(MemberDto membedto) {
+	public String modifyMasterAll(MemberDto membedto) {
 		String result = "트레이너 수정 실패";
-		int modifyMemberCheck = memberMapper.modifyMasterTrainer(membedto);
+		int modifyMemberCheck = memberMapper.modifyMasterAll(membedto);
 		if (modifyMemberCheck > 0)
 			result = "트레이너 수정 성공";
 		return result;
 	}
 
 	// 사용자 회원조회 후 수정처리
-	public String modifyMasterUser(MemberDto membedto) {
-		String result = "사용자 수정 실패";
-		int modifyMemberCheck = memberMapper.modifyMasterUser(membedto);
-		if (modifyMemberCheck > 0)
-			result = "사용자 수정 성공";
-		return result;
-	}
+	// public String modifyMasterAll(MemberDto membedto) {
+	// String result = "사용자 수정 실패";
+	// int modifyMemberCheck = memberMapper.modifyMasterAll(membedto);
+	// if (modifyMemberCheck > 0)
+	// result = "사용자 수정 성공";
+	// return result;
+	// }
 
 	// 전체회원조회 후 수정처리
 	// public String modifyMasterMember(MemberDto membedto) {
@@ -74,6 +75,14 @@ public class MemberService {
 	// result = "회원 수정 성공";
 	// return result;
 	// }
+
+	// 관리자 단에서 트레이너 비승인 리스트
+	public List<TrainerDto> viewAccessTrainerList() {
+		List<TrainerDto> trainerList = memberMapper.viewAccessTrainerList();
+		System.out.println(trainerList);
+
+		return trainerList;
+	}
 
 	// 관리자 단에서 사용자, 트레이너 전체 조회 및 권한 한글로 치환
 	public List<MemberDto> viewUserList(String memberLevel) {
