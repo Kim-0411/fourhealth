@@ -23,6 +23,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.dto.TrainerDto;
+import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.*;
 
 
@@ -195,9 +196,12 @@ public class MasterController {
 
 		return null;
 	}
-
+	//사용자 로그인 정보 관련 화면
 	@GetMapping("/userLoginList")
 	public String userLoginList(Model model) {
+		List<MemberDto> userList = memberService.viewUserList("user_level_003");
+		model.addAttribute("userList", userList);
+		
 		return "manage_layout/master/user_manage/user_login_list";
 	}
 

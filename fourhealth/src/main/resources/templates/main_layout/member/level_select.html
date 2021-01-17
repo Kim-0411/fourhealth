@@ -1,13 +1,13 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-</head>
-<body>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/login/default}"
+  lang="en"
+>
+<th:block layout:fragment="mainContent">
 <a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a> 
- <a th:href="@{/mInsertPage(user_level_code=user_level_003)}" th:text="사용자"></a>
- <a th:href="@{/mInsertPage(user_level_code=user_level_002)}" th:text="트레이너"></a> 
-
-</body>
+ <a th:href="@{/mInsertPage(user_level_code=user_level_003)}" class="text-white" th:text="사용자"></a>
+ <a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white" th:text="트레이너"></a> 
+ </th:block>
 </html>

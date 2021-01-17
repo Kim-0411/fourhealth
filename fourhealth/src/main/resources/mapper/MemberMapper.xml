@@ -37,6 +37,7 @@
         <result column="user_nickname" 						property="memberNickname"/>
         <result column="user_birth" 						property="memberBirth"/>
         <result column="user_gender" 						property="memberGender"/>
+        <result column="user_last_login_date" 				property="userLastLoginDate"/>
 		<result column="user_phone"            				property="memberPhone" /> 
         <result column="user_reg_date" 						property="memberRegDate"/>
     </resultMap>
@@ -122,6 +123,7 @@
 			user_phone, 
 			user_email, 
 			user_birth, 
+			user_last_login_date,
 			user_gender, 
 			user_reg_date
 	FROM 
@@ -192,7 +194,8 @@
 			user_phone, 
 			user_email, 
 			user_birth, 
-			user_gender, 
+			user_gender,
+			user_last_login_date, 
 			user_reg_date)
 	VALUES (
 			#{memberId}, 
@@ -204,7 +207,8 @@
 			#{memberPhone}, 
 			#{memberEmail}, 
 			#{memberBirth},
-			#{memberGender},  
+			#{memberGender},
+			NOW(),
 			NOW());
 	</insert>
 
