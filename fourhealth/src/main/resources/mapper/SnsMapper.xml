@@ -4,6 +4,20 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.SnsMapper">
 
+ 	<update id="like_check" parameterType="HashMap">
+    	UPDATE tb_like_sns_user
+    	SET user_sns_like_count = user_sns_like_count + 1 
+   		HERE user_id=#{userId} AND user_sns_comment_code=#{userSnsCommentCode}
+  	</update>
+  
+  	<update id="like_check_cancel" parameterType="HashMap">
+    	UPDATE tb_like_sns_user
+    	SET user_sns_like_count = 0
+    	WHERE user_id=#{userId} AND user_sns_comment_code=#{userSnsCommentCode}
+	</update>
+
+
+
 	<insert id="insertComment" parameterType="CommentSnsUserDto">
 		INSERT INTO tb_comment_sns_user
 		(

@@ -23,17 +23,21 @@
             </div>
           </div>
           <div class="cardbox-item"><img th:src="${s.snsImageUrl}"> <!-- image/207_about-bg.jpg  --></div>
-          <div class="cardbox-item" th:text="${s.userSnsContents}">
+          <div class="cardbox-item" th:text="${s.userSnsContents}" style="text-align: center;">
           </div>
           <div class="cardbox-base">
-            <ul class="float-right">
-              <li><a><i class="far fa-comment-dots"></i></a></li>
-              <li><a><em class="mr-5">12</em></a></li>
-            </ul>
-            <ul>
-              <li><a><i class="far fa-heart"></i></a></li>
-              <li><a><span>242</span></a></li>
-            </ul>
+             <ul class="float-right">
+             <button type="button" style="border: 0; background-color: #fff;">
+             		<li><a><i class="fa fa-comment-o"></i></a></li>
+             		<li><a><em class="mr-5">12</em></a></li>
+             </button>
+             </ul>
+             <ul>
+             <button type="button" style="border: 0; background-color: #fff;">
+             		<li><a><i class="far fa-heart" onclick="updateLike(this);"></i></a></li>
+              		<li><a><em class="mr-5">35</em></li>
+             </button>
+             </ul>
           </div>
           <form action="">
           	<div>댓</div>

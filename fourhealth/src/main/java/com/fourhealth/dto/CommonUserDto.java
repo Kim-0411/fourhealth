@@ -17,6 +17,7 @@ public class CommonUserDto {
     private String userBankNumber;
     private String userBankMaster;
     private String userRegDate;
+    
 	public String getUserId() {
 		return userId;
 	}
