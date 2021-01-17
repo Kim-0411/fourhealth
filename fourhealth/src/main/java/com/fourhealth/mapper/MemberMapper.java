@@ -26,7 +26,7 @@ public interface MemberMapper {
 	// 관리자 단에서 전체 회원리스트에서 수정
 	int modifyMasterMember(MemberDto memberDto);
 
-	// 관리자 단에서 트레이너 비승인 리스트 조회
+	// 관리자 승인 되지않은 트레이너 조회
 	public List<TrainerDto> viewAccessTrainerList();
 
 	// 관리자 단에서 사용자, 트레이너 조회

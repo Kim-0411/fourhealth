@@ -24,10 +24,8 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.UserService;
 
-import com.fourhealth.dto.MsgDto;
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
-import com.fourhealth.service.MessageService;
 import com.fourhealth.service.TrainerService;
 
 @Controller
@@ -274,7 +272,6 @@ public class MemberController {
 	// return "member/m_insert";
 	// }
 
-	private MessageService messageService;
 
 	// 로그인 화면(공통)
 	@GetMapping("/login")

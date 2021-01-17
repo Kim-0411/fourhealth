@@ -1,5 +1,7 @@
 package com.fourhealth.controller;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.lang.ProcessBuilder.Redirect;
 
 /*
@@ -8,6 +10,7 @@ import java.lang.ProcessBuilder.Redirect;
 
 import java.util.List;
 
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,16 +19,12 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.service.*;
 
-import com.fourhealth.dto.CommonUserDto;
-import com.fourhealth.dto.MsgDto;
-import com.fourhealth.service.*;
 
 @Controller
 public class MasterController {
@@ -34,6 +33,8 @@ public class MasterController {
 	private MessageService messageService;
 	@Autowired
 	private MemberService memberService;
+	@Autowired
+	private MasterService masterService;
 
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	// @GetMapping("/removeMasterMember")
@@ -64,6 +65,25 @@ public class MasterController {
 	// redirectAttr.addAttribute("result", result);
 	// return "redirect:/member_all_list";
 	// }
+
+	//관리자가 트레이너 승인 처리(프로모션 등록하는 권한줌) 
+	@GetMapping("/mastertrainerAccessPro")
+	public String masterTrainerAccess(@RequestParam(name="userId",required =false) String userId
+									  ,HttpServletResponse response) throws IOException{
+		int result = masterService.masterTrainerAccess(userId);
+		response.setContentType("text/html; charset=UTF-8");
+		PrintWriter out = response.getWriter();
+		if(result == 1) {
+			out.println("<script>alert('성공적으로 처리되었습니다.');location.href='/manage2';</script>");
+			out.flush();
+			
+		}else {
+			out.println("<script>alert('실패.');location.href='/manage2';</script>");
+		}
+		
+		return null;
+	}
+
 
 	// 관리자 단에서 수정페이지
 	@PostMapping("/modifyMasterAll")
@@ -127,10 +147,10 @@ public class MasterController {
 	// return "redirect:/member_all_list";
 	// }
 
-	// 관리자 단에서 전체 회원 리스트
+	// 관리자 단에서 전체 회원 리스트List(Model model) {
+	// List<MemberDto> memberList
 	// @GetMapping("/member_all_list")
-	// public String masterMemberList(Model model) {
-	// List<MemberDto> memberList = memberService.viewMember();
+	// public String masterMember = memberService.viewMember();
 	// model.addAttribute("title", "회원 목록");
 	// model.addAttribute("memberList", memberList);
 	// System.out.println("전체회원 조회" + memberList);
@@ -149,7 +169,7 @@ public class MasterController {
 		return "manage_layout/manage_main";
 	}
 
-	// 세션이 없을 때 관리자 메뉴로 돌아가는 컨트롤러
+	// 기본적인 화면 동작을 보여주기 위한 화면(남들에게 홍보)
 	@GetMapping("/manage2")
 	public String mainTrainer2() {
 		return "manage_layout/manage_main";
@@ -199,15 +219,8 @@ public class MasterController {
 	public String trainerAccessList(Model model) {
 		List<TrainerDto> trainerList = memberService.viewAccessTrainerList();
 		model.addAttribute("title", "트레이너 비승인 목록");
-		model.addAttribute("trainerList", trainerList);
-		System.out.println("사용자 전체 조회" + trainerList);
-		// if (memberLevel.equals("user_level_003")) {
-		// model.addAttribute("trainerList", trainerList);
-		// return "manage_layout/master/user_manage/user_list";
-		// } else if (memberLevel.equals("user_level_002")) {
-		// model.addAttribute("trainerList", trainerList);
-		// return "manage_layout/master/trainer_manage/trainer_list";
-		// }
+		model.addAttribute("trainerList",trainerList);
+		
 		return "manage_layout/master/trainer_manage/trainer_access_list";
 	}
 

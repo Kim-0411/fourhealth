@@ -84,20 +84,11 @@ public class MemberService {
 		return trainerList;
 	}
 
-	// 관리자 단에서 사용자, 트레이너 전체 조회 및 권한 한글로 치환
+	// 관리자 단에서 트레이너 리스트중 승인 처리 안된사람 리스트뽑기
 	public List<MemberDto> viewUserList(String memberLevel) {
 		List<MemberDto> memberList = memberMapper.viewUserList(memberLevel);
 		System.out.println(memberList);
 
-		int listSize = memberList.size();
-		for (int i = 0; i < listSize; i++) {
-			if ("user_level_003".equals(memberList.get(i).getMemberLevel())) {
-				memberList.get(i).setMemberLevel("사용자");
-			} else if ("user_level_002".equals(memberList.get(i).getMemberLevel())) {
-				memberList.get(i).setMemberLevel("트레이너");
-			}
-			System.out.println("전체 회원 조회" + memberList);
-		}
 		return memberList;
 	}
 
