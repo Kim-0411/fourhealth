@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
+import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserReportDto;
 import com.fourhealth.service.*;
 
