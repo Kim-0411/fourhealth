@@ -4,7 +4,18 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.MemberMapper">
 
-	<resultMap type="UserDto" id="resultMapUser">
+	<resultMap type="TrainerDto"	 id="resultMapTrainer">
+		<result column="user_id" 							property="userId"/>
+		<result column="trainer_platform_grade_code" 		property="trainerPlatformGradeCode"/>
+		<result column="trainer_access_code" 				property="trainerAccessCode"/>
+		<result column="trainer_gym" 						property="trainerGym"/>
+		<result column="trainer_gym_address" 				property="trainerGymAddress"/>
+		<result column="trainer_access_reason" 				property="trainerAccessReason"/>
+		<result column="trainer_access_reg_date" 			property="trainerAccessRegDate"/>
+		<result column="trainer_reg_date" 					property="trainerRegDate"/>
+	</resultMap>
+
+	<resultMap type="UserDto" 		id="resultMapUser">
 		<result column="user_id" 							property="userId"/>
 		<result column="user_platform_grade_code" 			property="userPlatFormGradeCode"/>
 		<result column="user_status_level_code" 			property="userStatusLevelCode"/>
@@ -19,20 +30,38 @@
     <resultMap type="MemberDto" 		id="resultMapMember">
         <result column="user_id" 							property="memberId"/>
         <result column="user_pw" 							property="memberPw"/>
-        <result column="user_level_code"			property="memberLevel"/>
+        <result column="user_level_code"					property="memberLevel"/>
         <result column="user_name" 							property="memberName"/>
         <result column="user_addr" 							property="memberAddr"/>
         <result column="user_email"							property="memberEmail"/>
         <result column="user_nickname" 						property="memberNickname"/>
         <result column="user_birth" 						property="memberBirth"/>
         <result column="user_gender" 						property="memberGender"/>
-		    <result column="user_phone"             property="memberPhone"  /> 
-
+        <result column="user_last_login_date" 				property="userLastLoginDate"/>
+		<result column="user_phone"            				property="memberPhone" /> 
         <result column="user_reg_date" 						property="memberRegDate"/>
     </resultMap>
+
+
+	<!-- 관리자 단에서 트레이너 비승인 조회-->
+	 <select id="viewAccessTrainerList"  resultMap="resultMapTrainer" >
+	SELECT 
+		user_id,
+		trainer_platform_grade_code ,
+		trainer_access_code,
+		trainer_gym ,
+		trainer_gym_address ,
+		trainer_access_reason ,
+		trainer_access_reg_date ,
+		trainer_reg_date 
+	FROM
+		tb_trainer
+	WHERE
+		trainer_access_reg_date IS NULL;
+	</select> 
     
     <!-- 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 -->
-    <delete id="removeMasterMember" parameterType="String">
+    <!-- <delete id="removeMasterMember" parameterType="String">
 		/* 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 */
 		DELETE
 		FROM
@@ -55,10 +84,10 @@
 			tb_common_user
 		WHERE
 			user_id = #{memberId};
-	</delete>
-	
-	<!-- 관리자페이지 단에서 회원 수정  -->
-	<update id="modifyMasterMember" parameterType="MemberDto">
+	</delete> -->
+
+	<!-- 관리자페이지 단에서 사용자 수정  -->
+	<update id="modifyMasterUser" parameterType="MemberDto">
 		UPDATE tb_common_user
 		SET 
 			 user_pw		= #{memberPw}
@@ -69,6 +98,40 @@
 			user_id = #{memberId}
 	</update>
 	
+	<!-- 관리자페이지 단에서 전체회원 수정  -->
+	<update id="modifyMasterMember" parameterType="MemberDto">
+		UPDATE tb_common_user
+		SET 
+			user_pw			= #{memberPw}
+			,user_name		= #{memberName}
+			,user_email		= #{memberEmail}
+			,user_addr		= #{memberAddr}
+		WHERE
+			user_id = #{memberId}
+	</update>
+
+	
+	<!-- 관리자 단에서 사용자, 트레이너 전체 조회 -->
+	<select id="viewUserList" parameterType="String" resultMap="resultMapMember" >
+	SELECT
+			user_id, 
+			user_level_code, 
+			user_pw, 
+			user_name, 
+			user_addr, 
+			user_nickname, 
+			user_phone, 
+			user_email, 
+			user_birth, 
+			user_last_login_date,
+			user_gender, 
+			user_reg_date
+	FROM 
+		tb_common_user AS c
+	WHERE 
+		c.user_level_code = #{memberLevel};
+	</select>
+
 	
    <!-- 전체 회원 조회 -->
 	<select id="viewMember" resultMap="resultMapMember" >
@@ -88,7 +151,7 @@
 		tb_common_user;
 	</select>
 	
-	<!-- 로그인  -->
+	<!-- 로그인 , 사용자 및 트레이너 수정 페이지 이동 -->
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
 			user_id, 
@@ -131,7 +194,8 @@
 			user_phone, 
 			user_email, 
 			user_birth, 
-			user_gender, 
+			user_gender,
+			user_last_login_date, 
 			user_reg_date)
 	VALUES (
 			#{memberId}, 
@@ -143,7 +207,8 @@
 			#{memberPhone}, 
 			#{memberEmail}, 
 			#{memberBirth},
-			#{memberGender},  
+			#{memberGender},
+			NOW(),
 			NOW());
 	</insert>
 
