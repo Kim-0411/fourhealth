@@ -5,8 +5,18 @@
     class="main-sidebar sidebar-dark-primary elevation-4"
     th:fragment="leftMenuFragment"
   >
-    <!-- Brand Logo -->
-    <a href="/manage" class="brand-link">
+    <!-- 로그인 없이 보여줄때와 있을시 다르게 -->
+    <a th:if="${session.SLEVEL == null}" th:href="@{/manage2}" class="brand-link">
+      <img
+        src="/img/master_img/AdminLTELogo.png"
+        alt="AdminLTE Logo"
+        class="brand-image img-circle elevation-3"
+        style="opacity: 0.8"
+      />
+      <span class="brand-text font-weight-light">로고</span>
+    </a>
+    <!-- 값이 있을때 경로 다르게  -->
+    <a th:unless="${session.SLEVEL == null}" th:href="@{/manage}" class="brand-link">
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -28,7 +38,9 @@
           />
         </div>
         <div class="info">
-          <a href="#" class="d-block">id002(트레이너)</a>
+          <a th:if="${session.SLEVEL == null}" href="#" class="d-block">미리보기</a>
+          <a th:if="${session.SLEVEL eq '트레이너'}" th:text="${session.SNICKNAME}" href="#" class="d-block"></a>
+          <a th:if="${session.SLEVEL eq '관리자'}" th:text="${session.SNICKNAME}" href="#" class="d-block"></a>
         </div>
       </div>
 
@@ -208,18 +220,18 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>
-                  &nbsp &nbsp #사용자 관리
+                  &nbsp &nbsp !사용자 관리
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item">
-                  <a href="/userList" class="nav-link">
-                    <p>#사용자 회원목록</p>
+                <li class="nav-item"> 
+                  <a href="/memberAllList?user_level=user_level_003" class="nav-link">
+                    <p>사용자 회원목록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/userLoginList" class="nav-link">
+                  <a th:href="@{/userLoginList}" class="nav-link">
                     <p>#사용자 로그인 조회</p>
                   </a>
                 </li>
@@ -235,19 +247,19 @@
               <a href="#" class="nav-link">
                 <i class="nav-icon far fa-image"></i>
                 <p>
-                  &nbsp &nbsp #트레이너 관리
+                  &nbsp &nbsp !트레이너 관리
                   <i class="fas fa-angle-left right"></i>
                 </p>
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/trainerList" class="nav-link">
+                  <a href="/memberAllList?user_level=user_level_002" class="nav-link">
                     <p>!트레이너 회원목록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/trainerAccessList" class="nav-link">
-                    <p>#트레이너 비승인목록</p>
+                  <a th:href="@{/trainerAccessList}" class="nav-link">
+                    <p>!트레이너 비승인목록</p>
                   </a>
                 </li>
                 <li class="nav-item">

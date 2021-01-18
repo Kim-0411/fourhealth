@@ -12,6 +12,8 @@ import com.fourhealth.dto.UserReportDto;
 
 @Mapper
 public interface MasterMapper {
+	// 관리자가 트레이너 승인 처리
+	public int masterTrainerAccess(String userId);
 
 	public List<UserReportDto> reportList();
 	
