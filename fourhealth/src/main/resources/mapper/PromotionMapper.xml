@@ -168,4 +168,15 @@
 			WHERE
 				pt.user_id = #{trainerId}; 
 		</select>
+		
+		<update id="updatePromotionLivePeopl" parameterType="String">
+		/*매칭에 성공하면 현재인원이 올라감*/
+			UPDATE 
+				tb_notice_promotion_trainer AS t 
+			SET 
+				t.trainer_promotion_live_add_people=t.trainer_promotion_live_add_people+1 
+			WHERE 
+				t.trainer_promotion_notice_code = #{trainerPromotionNoticeCode};
+
+		</update>
 </mapper>
