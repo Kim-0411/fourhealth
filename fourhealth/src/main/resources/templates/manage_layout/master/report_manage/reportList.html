@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{/default_layout/manage/default}"
+>
+  <th:block layout:fragment="customContent">
+    <div>
+      <h1 align="center">신고 관리 화면</h1>
+      <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">Responsive Hover Table</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>신고 번호</th>
+                      <th>신고 제목</th>
+                      <th>사용자 id</th>
+                      <th>신고 상세내용</th>
+                      <th>신고 등록일자</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:if="${#lists.size(reportList)>0}" th:each="r : ${reportList}">
+                      <td th:text="${r.reportUserCode}"> </td>
+                      <td th:text="${r.reportTitle}"> </td>
+                      <td th:text="${r.userId}"> </td>
+                      <td th:text="${r.reportUserReasonDetail}"> </td>
+                      <td th:text="${r.reportUserRegDate}"> </td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+    </div>
+  </th:block>
+</html>
