@@ -73,6 +73,9 @@
 @import "mainContent/snsList.css";
 /* @import "../ /mainContent/snsList.css"; */
 
+/* 신고게시판 css */
+@import "mainContent/boardCss/reportStyle.css";
+
 /* --------------------
   exercise Css
 -------------------- */

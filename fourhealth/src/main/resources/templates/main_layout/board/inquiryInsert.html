@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
+
+  	<th:block layout:fragment="mainContent">
+	<div class="container">
+	    <h2 align="center">문의 하기</h2>
+	    <form id="inquiry_insert" name="inquiry_insert" method="post" th:action="@{/inquiryInsertProc}">
+	    	<table class="inquiry_board_detail" align="center">
+	    		<tr>
+	    			<td>제목</td>
+	    			<td><input type="text" id="inquiryTitle" name="inquiryTitle"/></td>
+	    		</tr>
+	    		<tr>
+	    			<td colspan="2">
+		    			<textarea id="inquiryContents" name="inquiryContents"></textarea>
+	    			</td>
+	    		</tr>
+	    	</table>
+	    	<input type="submit" id="submit" value="문의등록" class="btn" >
+	    </form>
+    </div>
+	</th:block>
+</html>
