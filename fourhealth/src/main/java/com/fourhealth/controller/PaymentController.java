@@ -12,6 +12,7 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserCouponDTO;
 import com.fourhealth.mapper.PaymentMapper;
+import com.fourhealth.mapper.PromotionMapper;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PaymentService;
 import com.fourhealth.service.PromotionService;
@@ -41,6 +42,9 @@ public class PaymentController {
 
     @Autowired
     PaymentMapper paymentMapper;
+
+    @Autowired
+    PromotionMapper promotionMapper;
 
     @PostMapping("/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
@@ -107,7 +111,14 @@ public class PaymentController {
         System.out.println("From FoodController >> Controller data 표시");
         System.out.println(map);
 
-        paymentMapper.promotionPaymentInsert(map);
+        String trainerPromotionNoticeCode = (String) map.get("trainerPromotionNoticeCode");
+        int re = paymentMapper.promotionPaymentInsert(map);
+
+        if (re > 0) {
+            promotionMapper.updatePromotionLivePeopl(trainerPromotionNoticeCode);
+        } else {
+            return "매칭결제중 오류가 발생하였습니다.";
+        }
 
         return "성공";
 

@@ -36,4 +36,6 @@
 		mut.trainer_promotion_notice_code =#{promotionCode};
 	</select>
 
+	
+
 </mapper>
