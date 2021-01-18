@@ -1,6 +1,5 @@
 package com.fourhealth.dto;
 
-
 //테이블명 : tb_common_user 회원 공통 관
 public class MemberDto {
 
@@ -15,18 +14,18 @@ public class MemberDto {
     private String memberBirth; // 회원 공통 생년월일
     private String memberGender; // 회원 공통 성별
     private String memberRegDate; // 회원 공통 등록 일자
-    private String userLastLoginDate; //마지막로그인일자.
-	private UserDto userDto; // UserDto 활용
+    private String userLastLoginDate; // 마지막로그인일자.
+    private UserDto userDto; // UserDto 활용
     private TrainerDto trainerDto; // TrainerDto 활용
-    
-    
+
     public String getUserLastLoginDate() {
-    	return userLastLoginDate;
+        return userLastLoginDate;
     }
-    
+
     public void setUserLastLoginDate(String userLastLoginDate) {
-    	this.userLastLoginDate = userLastLoginDate;
+        this.userLastLoginDate = userLastLoginDate;
     }
+
     public String getMemberId() {
         return memberId;
     }
@@ -131,22 +130,21 @@ public class MemberDto {
         this.trainerDto = trainerDto;
     }
 
-	@Override
-	public String toString() {
-		return "MemberDto [memberId=" + memberId + ", memberLevel=" + memberLevel + ", memberPw=" + memberPw
-				+ ", memberName=" + memberName + ", memberAddr=" + memberAddr + ", memberNickname=" + memberNickname
-				+ ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberBirth=" + memberBirth
-				+ ", memberGender=" + memberGender + ", memberRegDate=" + memberRegDate + ", userLastLoginDate="
-				+ userLastLoginDate + ", userDto=" + userDto + ", trainerDto=" + trainerDto
-				+ ", getUserLastLoginDate()=" + getUserLastLoginDate() + ", getMemberId()=" + getMemberId()
-				+ ", getMemberLevel()=" + getMemberLevel() + ", getMemberPw()=" + getMemberPw() + ", getMemberName()="
-				+ getMemberName() + ", getMemberAddr()=" + getMemberAddr() + ", getMemberNickname()="
-				+ getMemberNickname() + ", getMemberPhone()=" + getMemberPhone() + ", getMemberEmail()="
-				+ getMemberEmail() + ", getMemberBirth()=" + getMemberBirth() + ", getMemberGender()="
-				+ getMemberGender() + ", getMemberRegDate()=" + getMemberRegDate() + ", getUserDto()=" + getUserDto()
-				+ ", getTrainerDto()=" + getTrainerDto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
-				+ ", toString()=" + super.toString() + "]";
-	}
-
+    @Override
+    public String toString() {
+        return "MemberDto [memberId=" + memberId + ", memberLevel=" + memberLevel + ", memberPw=" + memberPw
+                + ", memberName=" + memberName + ", memberAddr=" + memberAddr + ", memberNickname=" + memberNickname
+                + ", memberPhone=" + memberPhone + ", memberEmail=" + memberEmail + ", memberBirth=" + memberBirth
+                + ", memberGender=" + memberGender + ", memberRegDate=" + memberRegDate + ", userLastLoginDate="
+                + userLastLoginDate + ", userDto=" + userDto + ", trainerDto=" + trainerDto
+                + ", getUserLastLoginDate()=" + getUserLastLoginDate() + ", getMemberId()=" + getMemberId()
+                + ", getMemberLevel()=" + getMemberLevel() + ", getMemberPw()=" + getMemberPw() + ", getMemberName()="
+                + getMemberName() + ", getMemberAddr()=" + getMemberAddr() + ", getMemberNickname()="
+                + getMemberNickname() + ", getMemberPhone()=" + getMemberPhone() + ", getMemberEmail()="
+                + getMemberEmail() + ", getMemberBirth()=" + getMemberBirth() + ", getMemberGender()="
+                + getMemberGender() + ", getMemberRegDate()=" + getMemberRegDate() + ", getUserDto()=" + getUserDto()
+                + ", getTrainerDto()=" + getTrainerDto() + ", getClass()=" + getClass() + ", hashCode()=" + hashCode()
+                + ", toString()=" + super.toString() + "]";
+    }
 
 }
