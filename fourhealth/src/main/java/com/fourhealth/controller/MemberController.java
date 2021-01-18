@@ -58,7 +58,7 @@ public class MemberController {
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
 		MemberDto memberDto = memberService.getMemberById(userId);
-		System.out.println(memberDto.getMemberId());
+		// System.out.println(memberDto.getMemberId());
 
 		if (userId != null && userPassword != null && memberDto != null && memberDto.getMemberPw() != null
 				&& userPassword.equals(memberDto.getMemberPw())) {
