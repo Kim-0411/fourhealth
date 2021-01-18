@@ -37,9 +37,9 @@
                 <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
                <span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
 
-                <span th:unless="${session.SLEVEL} == 'user_level_003'"
-                  >사용자</span
-                >
+                <span th:if="${session.SLEVEL} == 'user_level_001'">관리자</span>
+                <span th:if="${session.SLEVEL} == 'user_level_002'">트레이너</span>
+                <span th:if="${session.SLEVEL} == 'user_level_003'">사용자</span>
               </label>
               <a th:href="@{/#}" style="text-align: center"> &nbsp; My page</a>
               <a th:href="@{/logout}" style="text-align: right">

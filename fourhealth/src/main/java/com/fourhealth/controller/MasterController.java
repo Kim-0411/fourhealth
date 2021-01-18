@@ -19,6 +19,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.MsgDto;
+import com.fourhealth.dto.UserReportDto;
 import com.fourhealth.service.*;
 
 import com.fourhealth.dto.CommonUserDto;
@@ -32,7 +33,18 @@ public class MasterController {
 	private MessageService messageService;
 	@Autowired
 	private MemberService memberService;
-
+	@Autowired
+	private MasterService masterService;
+	
+	//관리자 단에서 전체 신고 리스트를 보여주기
+	@GetMapping("/reportList")
+	public String reportList(Model model) {
+		List<UserReportDto> reportList = masterService.reportList();
+		model.addAttribute("reportList", reportList);
+		
+		return "manage_layout/master/report_manage/reportList";
+	}
+	
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	@GetMapping("/removeMasterMember")
 	public String removeMasterMember(Model model, @RequestParam(name = "memberId", required = false) String memberId,

@@ -14,7 +14,10 @@
 	    	<table class="report_board_detail" align="center">
 	    		<tr>
 	    			<td>제목</td>
-	    			<td><input type="text" id="reportTitle" name="reportTitle"/></td>
+	    			<td>
+	    				<input type="text" id="reportTitle" name="reportTitle"/>
+	    				<input type="hidden" th:value="${SID}"  id="userId" name="userId"/>
+	    			</td>
 	    		</tr>
 	    		<tr>
 	    			<td>나의 프로모션</td>
@@ -28,7 +31,7 @@
 	    		</tr>
 	    		<tr>
 	    			<td colspan="2">
-		    			<textarea id="reportContents" name="reportContents"></textarea>
+		    			<textarea id="reportUserReasonDetail" name="reportUserReasonDetail"></textarea>
 	    			</td>
 	    		</tr>
 	    	</table>
