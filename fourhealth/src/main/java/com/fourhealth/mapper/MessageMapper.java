@@ -1,4 +1,3 @@
-
 package com.fourhealth.mapper;
 
 
@@ -32,4 +31,3 @@ public interface MessageMapper {
 	public List<MsgDto> getAllNoReadMessage(String userId);
 
 }
-

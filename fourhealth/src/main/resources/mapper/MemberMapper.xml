@@ -19,16 +19,15 @@
     <resultMap type="MemberDto" 		id="resultMapMember">
         <result column="user_id" 							property="memberId"/>
         <result column="user_pw" 							property="memberPw"/>
-        <result column="user_level_code"					property="memberLevel"/>
+        <result column="user_level_code"			property="memberLevel"/>
         <result column="user_name" 							property="memberName"/>
         <result column="user_addr" 							property="memberAddr"/>
         <result column="user_email"							property="memberEmail"/>
         <result column="user_nickname" 						property="memberNickname"/>
         <result column="user_birth" 						property="memberBirth"/>
         <result column="user_gender" 						property="memberGender"/>
-        <result column="user_main_bank" 					property="memberMainBank"/>
-        <result column="user_bank_number" 					property="memberBankNumber"/>
-        <result column="user_bank_master"					property="memberBankMaster"/>
+		    <result column="user_phone"             property="memberPhone"  /> 
+
         <result column="user_reg_date" 						property="memberRegDate"/>
     </resultMap>
     
@@ -84,15 +83,12 @@
 			user_email, 
 			user_birth, 
 			user_gender, 
-			user_main_bank, 
-			user_bank_number, 
-			user_bank_master, 
 			user_reg_date
 	FROM 
 		tb_common_user;
 	</select>
 	
-	<!-- 로그  -->
+	<!-- 로그인  -->
 	<select id="getMemberById" parameterType="String" resultMap="resultMapMember">
 	SELECT
 			user_id, 
@@ -105,9 +101,6 @@
 			user_email, 
 			user_birth, 
 			user_gender, 
-			user_main_bank, 
-			user_bank_number, 
-			user_bank_master, 
 			user_reg_date
 		FROM 
 			tb_common_user
@@ -139,9 +132,6 @@
 			user_email, 
 			user_birth, 
 			user_gender, 
-			user_main_bank, 
-			user_bank_number, 
-			user_bank_master, 
 			user_reg_date)
 	VALUES (
 			#{memberId}, 
@@ -153,10 +143,7 @@
 			#{memberPhone}, 
 			#{memberEmail}, 
 			#{memberBirth},
-			#{memberGender}, 
-			null, 
-			null, 
-			null, 
+			#{memberGender},  
 			NOW());
 	</insert>
 
@@ -181,6 +168,26 @@
 		FROM
 			tb_common_user AS u;
 		
+	</select>
+
+	<!-- 회원 정보 조회-->
+	<select id="getMemberSelect" parameterType="String" resultMap="resultMapMember">
+		SELECT 
+			user_id, 
+			user_level_code, 
+			user_pw, 
+			user_name, 
+			user_addr, 
+			user_nickname, 
+			user_phone, 
+			user_email, 
+			user_birth, 
+			user_gender, 
+			user_reg_date
+		FROM 
+			tb_common_user AS u 
+		WHERE 
+			u.user_id = #{userId};
 	</select>
 	
 	<!--  	 일단 생략
