@@ -4,6 +4,7 @@ public class MatchingUserTrainerDto {
 
 	private String trainerUserMatchingCode; // 트레이너 사용자 매칭 코드
 	private String trainerPromotionNoticeCode; // 트레이너 프로모션 모집 공고 코드
+	private String trainerPromotionName; // 프로모션 이름
 	private String userId; // 사용자 아이디
 	private String trainerId; // 트레이너 아이디
 	private String userCouponCode; // 사용자 보유 쿠폰 코드
@@ -138,17 +139,28 @@ public class MatchingUserTrainerDto {
 		this.trainerPromotionRecruitCloseDate = trainerPromotionRecruitCloseDate;
 	}
 
+	public String getTrainerPromotionName() {
+		return trainerPromotionName;
+	}
+
+	public void setTrainerPromotionName(String trainerPromotionName) {
+		this.trainerPromotionName = trainerPromotionName;
+	}
+
 	@Override
 	public String toString() {
 		return "MatchingUserTrainerDto [paymentMethodName=" + paymentMethodName + ", purchaseFinishDate="
 				+ purchaseFinishDate + ", purchaseMoney=" + purchaseMoney + ", purchaseRegDate=" + purchaseRegDate
 				+ ", trainerId=" + trainerId + ", trainerMatchingSystemRegDate=" + trainerMatchingSystemRegDate
-				+ ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate
-				+ ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode + ", trainerPromotionRecruitCloseDate="
-				+ trainerPromotionRecruitCloseDate + ", trainerPromotionRecruitEndDate="
-				+ trainerPromotionRecruitEndDate + ", trainerPromotionRecruitStartDate="
-				+ trainerPromotionRecruitStartDate + ", trainerUserMatchingCode=" + trainerUserMatchingCode
-				+ ", userCouponCode=" + userCouponCode + ", userId=" + userId + ", userRegDate=" + userRegDate + "]";
+				+ ", trainerPromotionAttendStartDate=" + trainerPromotionAttendStartDate + ", trainerPromotionName="
+				+ trainerPromotionName + ", trainerPromotionNoticeCode=" + trainerPromotionNoticeCode
+				+ ", trainerPromotionRecruitCloseDate=" + trainerPromotionRecruitCloseDate
+				+ ", trainerPromotionRecruitEndDate=" + trainerPromotionRecruitEndDate
+				+ ", trainerPromotionRecruitStartDate=" + trainerPromotionRecruitStartDate
+				+ ", trainerUserMatchingCode=" + trainerUserMatchingCode + ", userCouponCode=" + userCouponCode
+				+ ", userId=" + userId + ", userRegDate=" + userRegDate + "]";
 	}
+
+	
 
 }
