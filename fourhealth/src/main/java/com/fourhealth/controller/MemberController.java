@@ -272,13 +272,25 @@ public class MemberController {
 	// return "member/m_insert";
 	// }
 
-
 	// 로그인 화면(공통)
 	@GetMapping("/login")
 	public String commonLoginPage(Model model) {
 		model.addAttribute("title", "로그인 화면");
 
-		return "/login/login";
+		return "login/login";
+	}
+
+	// 비밀번호 찾기 화면
+	@GetMapping("/pwFind")
+	public String AllPwFind() {
+		return "/login/pw_find";
+	}
+
+	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
+	@GetMapping("/pwEmailChange")
+	public String pwEmailChange() {
+
+		return "/login";
 	}
 
 }

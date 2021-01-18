@@ -26,7 +26,6 @@ import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.*;
 
-
 @Controller
 public class MasterController {
 
@@ -67,24 +66,23 @@ public class MasterController {
 	// return "redirect:/member_all_list";
 	// }
 
-	//관리자가 트레이너 승인 처리(프로모션 등록하는 권한줌) 
+	// 관리자가 트레이너 승인 처리(프로모션 등록하는 권한줌)
 	@GetMapping("/mastertrainerAccessPro")
-	public String masterTrainerAccess(@RequestParam(name="userId",required =false) String userId
-									  ,HttpServletResponse response) throws IOException{
+	public String masterTrainerAccess(@RequestParam(name = "userId", required = false) String userId,
+			HttpServletResponse response) throws IOException {
 		int result = masterService.masterTrainerAccess(userId);
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		if(result == 1) {
+		if (result == 1) {
 			out.println("<script>alert('성공적으로 처리되었습니다.');location.href='/manage2';</script>");
 			out.flush();
-			
-		}else {
+
+		} else {
 			out.println("<script>alert('실패.');location.href='/manage2';</script>");
 		}
-		
+
 		return null;
 	}
-
 
 	// 관리자 단에서 수정페이지
 	@PostMapping("/modifyMasterAll")
@@ -196,12 +194,13 @@ public class MasterController {
 
 		return null;
 	}
-	//사용자 로그인 정보 관련 화면
+
+	// 사용자 로그인 정보 관련 화면
 	@GetMapping("/userLoginList")
 	public String userLoginList(Model model) {
 		List<MemberDto> userList = memberService.viewUserList("user_level_003");
 		model.addAttribute("userList", userList);
-		
+
 		return "manage_layout/master/user_manage/user_login_list";
 	}
 
@@ -223,8 +222,8 @@ public class MasterController {
 	public String trainerAccessList(Model model) {
 		List<TrainerDto> trainerList = memberService.viewAccessTrainerList();
 		model.addAttribute("title", "트레이너 비승인 목록");
-		model.addAttribute("trainerList",trainerList);
-		
+		model.addAttribute("trainerList", trainerList);
+
 		return "manage_layout/master/trainer_manage/trainer_access_list";
 	}
 
