@@ -21,21 +21,6 @@
 		<result column="trainer_promotion_recruit_total_date" 		property="trainerPromotionRecruitTotalDate"/>
 		<result column="trainer_matching_system_add_date" 			property="trainerMatchingSystemAddDate"/>
 	</resultMap>
-		<select id="getTrainerMyPromotionAllList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">
-		/*로그인된 트레이너가 자신의 올린 모든  프로모션 리스트*/
-			SELECT
-				pt.trainer_promotion_notice_code,
-				pt.trainer_promotion_name,
-				pt.trainer_promotion_recruit_start_date,
-				pt.trainer_promtion_recruit_end_date,
-				pt.trainer_promotion_recruit_people
-			
-			FROM
-				tb_notice_promotion_trainer AS pt
-			
-			WHERE
-				pt.user_id = #{trainerId}; 
-		</select>
 	<insert id="promotionInsert" parameterType="NoticePromotionTrainerDto">
 		<selectKey keyProperty="trainerPromotionNoticeCode" resultType="String" order="BEFORE">
 			/* 프로모션 리스트에 있으면 하나씩 증가 후 insert 처리 */
@@ -168,4 +153,30 @@
 			LIMIT #{startRow}, #{rowPerPage};
 		  </select>
 
+		<select id="getTrainerMyPromotionAllList" parameterType="String" resultMap="resultMapNoticePromotionTrainer">
+		/*로그인된 트레이너가 자신의 올린 모든  프로모션 리스트*/
+			SELECT
+				pt.trainer_promotion_notice_code,
+				pt.trainer_promotion_name,
+				pt.trainer_promotion_recruit_start_date,
+				pt.trainer_promtion_recruit_end_date,
+				pt.trainer_promotion_recruit_people
+			
+			FROM
+				tb_notice_promotion_trainer AS pt
+			
+			WHERE
+				pt.user_id = #{trainerId}; 
+		</select>
+		
+		<update id="updatePromotionLivePeopl" parameterType="String">
+		/*매칭에 성공하면 현재인원이 올라감*/
+			UPDATE 
+				tb_notice_promotion_trainer AS t 
+			SET 
+				t.trainer_promotion_live_add_people=t.trainer_promotion_live_add_people+1 
+			WHERE 
+				t.trainer_promotion_notice_code = #{trainerPromotionNoticeCode};
+
+		</update>
 </mapper>
