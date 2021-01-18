@@ -25,9 +25,22 @@ public class PaymentService {
 		return re;
 	}
 
+	// 사용자의 쿠폰 리스트 가져오기
 	public List<UserCouponDTO> userCouponList(String userId) {
 		System.out.println(userId);
 		List<UserCouponDTO> userCouponList = paymentMapper.userCouponList(userId);
 		return userCouponList;
+	}
+
+	public int checkCountPromotionPayment(String userId, String trainerPromotionNoticeCode) {
+		String re = paymentMapper.checkCountPromotionPayment(userId, trainerPromotionNoticeCode);
+		int checkCount = Integer.parseInt(re);
+
+		return checkCount;
+	}
+
+	public String checkMatching(String userId) {
+		String re = paymentMapper.checkMatching(userId);
+		return re;
 	}
 }

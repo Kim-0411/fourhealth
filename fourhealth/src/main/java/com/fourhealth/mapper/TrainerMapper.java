@@ -13,5 +13,6 @@ public interface TrainerMapper {
 	
 	//회원가입 시 공통테이블과 트레이테이블에 데이터 생성
 	public int addMemberTrainerPlatFormGradeCode(TrainerDto trainerdto);
+	
 
 }
