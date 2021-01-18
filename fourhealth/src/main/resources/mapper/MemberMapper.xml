@@ -57,7 +57,7 @@
 	FROM
 		tb_trainer
 	WHERE
-		trainer_access_reg_date IS NULL;
+		trainer_access_code = 'trainer_access_003';
 	</select> 
     
     <!-- 관리자페이지 단에서 삭제를 위한 쿼리 1,2,3 -->

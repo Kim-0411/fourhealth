@@ -19,7 +19,8 @@
     	UPDATE 
     		tb_trainer
 		SET
-			trainer_access_reg_date=NOW()
+			trainer_access_reg_date=NOW(),
+      trainer_access_code="trainer_access_001"
 		WHERE
 			user_id=#{userId};
     </update>
