@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.fourhealth.dto.CommentSnsUserDto;
 import com.fourhealth.dto.SnsUserDto;
 import com.fourhealth.mapper.SnsMapper;
 
@@ -18,9 +19,14 @@ public class SnsService {
 	@Autowired
 	private SnsMapper snsMapper;
 	
-	public String insertComment() {
-		return snsMapper.insertComment;
+	public String insertComment(CommentSnsUserDto commentSnsUserDto) {
+		String insertChk = "게시 실패";
+		if(commentSnsUserDto != null) {
+			int result = snsMapper.insertComment(commentSnsUserDto);
+			if(result > 0) insertChk = "게시 성공";
+		}
 		
+		return insertChk;
 	}
 	
 	
@@ -33,7 +39,7 @@ public class SnsService {
 			
 			return insertCheck;
 		}
-	 
+	  
 	 public Map<String, Object> getSnsListPaging(int currentPage) {
 	 	int startRow = 0;
 		int rowPerPage = 12;

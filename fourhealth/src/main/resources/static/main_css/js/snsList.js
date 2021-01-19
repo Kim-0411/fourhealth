@@ -9,10 +9,12 @@ $(function(){
 		var request = $.ajax({
 			url:"/commentsInsertBtn",
 			method:"post",
-			data:{'userSnsCommentContents':userSnsCommentContents},
-			contentType: "application/json; charset=UTF-8",
+			data:{'userSnsCommentContents':userSnsCommentContents,
+				  'userId':userId},
 			dataType:"json"
-				
+			success:function(data) {
+				alert(success);
+			}
 		});
 	});
 });

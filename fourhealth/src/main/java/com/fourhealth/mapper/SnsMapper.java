@@ -9,13 +9,14 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fourhealth.dto.CommentSnsUserDto;
 import com.fourhealth.dto.SnsUserDto;
 
 @Mapper
 public interface SnsMapper {
 
-	String insertComment = null;
-
+	int insertComment(CommentSnsUserDto commentSnsUserDto);
+	
 	List<SnsUserDto> getSnsList();
 
 	int snsInsert(SnsUserDto snsUserDto);

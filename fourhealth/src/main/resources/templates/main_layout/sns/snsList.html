@@ -13,16 +13,14 @@
           <div class="cardbox shadow-lg bg-white">
             <div class="media m-0">
               <div class="d-flex mr-3">
-                <a href=""><img class="img-fluid rounded-circle"
-                    src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/4.jpg" alt="User"></a>
-              </div>
+                <a href=""><img class="img-fluid rounded-circle" src="http://www.themashabrand.com/templates/bootsnipp/post/assets/img/users/4.jpg" alt="User"></a></div>
               <div class="media-body">
                 <p class="m-0" th:text="${s.userId}"></p>
                 <small><span><i class="icon ion-md-time" th:text="${s.userSnsRegDate}"></i></span></small>
               </div>
             </div>
           </div>
-          <div class="cardbox-item"><img th:src="${s.snsImageUrl}"> <!-- image/207_about-bg.jpg  --></div>
+          <div class="cardbox-item" style="text-align: center;"><img th:src="${s.snsImageUrl}"> <!-- image/207_about-bg.jpg  --></div>
           <div class="cardbox-item" th:text="${s.userSnsContents}" style="text-align: center;">
           </div>
           <div class="cardbox-base">
@@ -40,14 +38,15 @@
              </ul>
           </div>
           <form action="">
-          	<div>댓</div>
-          	<div>글</div>
-          	<div>댓</div>
-          	<div>글</div>
-          	<div>댓</div>
-          	<div>글</div>
+          	<div class="container">
+          		<div class="media col-md-12"><a href=""><image class="mr-3 rounded-circle" alt="image" src="https://i.imgur.com/stD0Q19.jpg"/></a>
+          			<div class="media-body">
+		                <p class="m-3" id="commentsList">댓글 내용</p>
+          			</div>
+          		</div>
+          	</div>
           </form>
-          <form th:action="@{/commentsInsertBtn}" method="post">
+          <form>
           <div class="cardbox-comments">
             <div class="search">
               <input placeholder="Write a comment" type="text" class="form-control" id="insertSnsComments" >
@@ -96,10 +95,6 @@
     </nav>
     </div>
   </section>
-
-  <!-- snsList js연결 -->
-  <!-- <script src="main_css/js/snsList.js"></script> -->
-
 </th:block>
 
 </html>
