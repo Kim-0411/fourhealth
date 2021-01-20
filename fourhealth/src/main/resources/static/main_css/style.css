@@ -75,6 +75,9 @@
 /* sns 등록 게시판 css */
 @import "mainContent/sns/snsInsert.css";
 
+/* 신고게시판 css */
+@import "mainContent/boardCss/reportStyle.css";
+
 /* --------------------
   exercise Css
 -------------------- */

@@ -31,4 +31,7 @@ public interface PromotionMapper {
 	// 트레이너 프로모션리스트의 게시글 페이징을 위한 스타트페이지및 마지막페이지
 	public List<Map<String, Object>> getPromotionListPaging(int startRow, int rowPerPage);
 
+	// 사용자 프로모션 매칭후 현재인원 등록
+	public int updatePromotionLivePeopl(String trainerPromotionNoticeCode);
+
 }
