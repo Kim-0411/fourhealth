@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{default_layout/main/default}" lang="en">
+<title th:text="${title}"></title>
+
+<th:block layout:fragment="mainContent">
+    <div class="container">
+        <table class="table table-bordered m-5">
+            <tr>
+                <td>신고 제목</td>
+                <td th:text="${proDetail.userId}"></td>
+            </tr>
+            <tr>
+                <td>신고 상세 내용</td>
+                <td th:text="${proDetail.trainerPromotionName}"></td>
+            </tr>
+            <tr>
+                <td>신고 등록일자</td>
+                <td th:text="${proDetail.trainerPromotionGoal}"></td>
+            </tr>
+        </table>
+
+
+
+</th:block>
+
+
+
+</html>
