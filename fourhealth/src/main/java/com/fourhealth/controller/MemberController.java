@@ -16,6 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import com.fourhealth.dto.GradePlatformTrainerDto;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
 import com.fourhealth.dto.MemberDto;
@@ -23,15 +25,19 @@ import com.fourhealth.service.MemberService;
 import com.fourhealth.service.UserService;
 
 import com.fourhealth.dto.MsgDto;
+import com.fourhealth.dto.TrainerDto;
+import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MessageService;
+import com.fourhealth.service.TrainerService;
 
 @Controller
 public class MemberController {
 	@Autowired
-
 	private MemberService memberService;
 	@Autowired
 	private UserService userService;
+	@Autowired
+	private TrainerService trainerService;
 
 	/********************************************************************************************
 	 * 로그인/로그아웃
@@ -44,9 +50,12 @@ public class MemberController {
 	// [회원 공통]로그인 후 플렛폼 권한 체크하여 치환 작업
 	@PostMapping("/login")
 	public String commonLoginPage(@RequestParam(name = "userId", required = false) String userId,
-			@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
-			// RedirectAttributes rAttr,
-			HttpServletResponse response) throws IOException {
+								@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
+								// RedirectAttributes rAttr,
+								HttpServletResponse response) throws IOException {
+		GradePlatformUserDto gradePlatformUserDto;
+		GradePlatformTrainerDto gradePlatformTrainerDto;
+		
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
@@ -66,17 +75,36 @@ public class MemberController {
 				memberDto.setMemberLevel("관리자");
 			}
 			System.out.println("로그인 후 레벨 체크" + memberDto);
+				// 로그인 후 사용자 플랫폼 권한 체크하여 치환(닉네임)
+				if(memberDto.getMemberLevel().equals("사용자")) {
+					gradePlatformUserDto = userService.getUserGrade(userId);
+					session.setAttribute("SID", memberDto.getMemberId());
+					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+					session.setAttribute("SNAME", memberDto.getMemberName());
+					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+					// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+					session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
+					System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
+					System.out.println(userId + " : 로그인 성공");
+				}else if(memberDto.getMemberLevel().equals("트레이너")){
+					gradePlatformTrainerDto = trainerService.getTrainerGrade(userId);
+					session.setAttribute("SID", memberDto.getMemberId());
+					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+					session.setAttribute("SNAME", memberDto.getMemberName());
+					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+					// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+					session.setAttribute("SGRADE", gradePlatformTrainerDto.getTrainerPlatformGradeName());
+					System.out.println(gradePlatformTrainerDto.getTrainerPlatformGradeName());
+					System.out.println(userId + " : 로그인 성공");
+				}else {
+					session.setAttribute("SID", memberDto.getMemberId());
+					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+					session.setAttribute("SNAME", memberDto.getMemberName());
+					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+					System.out.println(userId + " : 로그인 성공");
+				}
 
-			// 로그인 후 사용자 플랫폼 권한 체크하여 치환
-			GradePlatformUserDto gradePlatformUserDto = userService.getUserGrade(userId);
-			session.setAttribute("SID", memberDto.getMemberId());
-			session.setAttribute("SLEVEL", memberDto.getMemberLevel());
-			session.setAttribute("SNAME", memberDto.getMemberName());
-			session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-			// 사용자 플렛폼 권한 체크 하여 치환 작업
-			session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
-			System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
-			System.out.println(userId + " : 로그인 성공");
+			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -108,7 +136,7 @@ public class MemberController {
 	@GetMapping("/levelSelect")
 	public String commonLevelSelect() {
 
-		return "master/member/level_select";
+		return "main_layout/member/level_select";
 	}
 
 	// 사용자,트레이너 권한 선택후 회원가입 입력하는 화면
@@ -116,17 +144,45 @@ public class MemberController {
 	public String commonMInsert(@RequestParam(value = "user_level_code", required = false) String level, Model model) {
 
 		model.addAttribute("level", level); // 누른거 래밸 사용자,트레이너
-		return "master/member/member_insert";
+		return "main_layout/member/m_insert";
 	}
 
-	// 회원 가입 후 로그인 화면으로 이동
-	@PostMapping("/mInsert")
-	public String addMember(MemberDto member) {
-		String result = memberService.addMember(member);
-		System.out.println(result);
-
-		return "redirect:/login";
-	}
+	//회원 가입 후 로그인 화면으로 이동
+		@PostMapping("/mInsert")
+		public String addMember(MemberDto member){
+			//공통 회원 가입
+			String userId = member.getMemberId();
+			String memberLevel = member.getMemberLevel();
+			
+				if(memberLevel.equals("user_level_002")) {
+					////트레이너 플렛폼 공통 등급 관리
+					TrainerDto trainerdto = new TrainerDto();
+					trainerdto.setUserId(userId);
+					trainerdto.setTrainerPlatformGradeCode("trainer_platform_grade_004");
+					trainerdto.setTrainerAccessCode("trainer_access_003");
+					member.setTrainerDto(trainerdto);
+					String result = memberService.addMember(member); 
+					String result2 = trainerService.addMemberTrainerPlatFormGradeCode(trainerdto); 
+					System.out.println(result);
+					System.out.println(result2);
+				}else if(memberLevel.equals("user_level_003")){
+					//사용자 플렛폼 공통 등급 관리
+					UserDto userdto = new UserDto();
+					userdto.setUserId(userId);
+					userdto.setUserPlatFormGradeCode("user_platform_grade_001");
+					userdto.setUserStatusLevelCode("user_status_level_001");
+					member.setUserDto(userdto);
+					String result = memberService.addMember(member); 
+					String result2 = userService.addMemberUserPlatFormGradeCode(userdto); 
+					System.out.println(result);
+					System.out.println(result2);
+				} else {
+					//플랫폼 등급이 없을 시 관리자 회원가입 처리
+					String result = memberService.addMember(member); 
+					System.out.println(result);
+				}
+			return "redirect:/login";
+		}
 
 	// 회원가입 화면에서 아이디 중복처리 확인
 	@RequestMapping(value = "/userIdCheck", method = RequestMethod.POST, produces = "application/json")
