@@ -28,7 +28,7 @@ import com.fourhealth.service.UserService;
 
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
-
+import java.util.List;
 import com.fourhealth.service.MessageService;
 import com.fourhealth.service.ProfileService;
 
