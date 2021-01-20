@@ -1,5 +1,6 @@
 package com.fourhealth.mapper;
 
+import java.lang.reflect.Member;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -49,5 +50,7 @@ public interface MemberMapper {
 
 	// 쪽지 보낼때 아이디가 있나 없나 유효성 겁사(전체)
 	public List<MemberDto> getAllUserId();
+
+	public  MemberDto getMemberSelect(String userId);
 
 }

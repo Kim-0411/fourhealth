@@ -42,6 +42,8 @@ public class FoodController {
 	private FoodMapper foodMapper;
 	// log를 찍기위해 최초 선언
 	private static final Logger log = LoggerFactory.getLogger(FoodController.class);
+	private Model model;
+	private String food;
 
 	@Controller
 	public class CommonController {
@@ -94,7 +96,6 @@ public class FoodController {
 		return "food/food_list";
 	}
 
-
 	// 식품 리스트
 	// @RequestMapping(value = "/foodList", method = RequestMethod.GET)
 	// public String foodList(Model model){
@@ -112,9 +113,11 @@ public class FoodController {
 	public String foodDataInsert(Model model) {
 		return "manage_layout/master/food_manage/food_data_insert";
 	}
+
 	// - 관리자 화면 식품 조회
 	@GetMapping("/foodDataList")
-	public String foodDataList(Model model, @RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
+	public String foodDataList(Model model,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		model.addAttribute("title", "관리자 식품 리스트 조회");
 
 		Map<String, Object> resultMap = foodService.getFoosList(currentPage);
@@ -153,29 +156,29 @@ public class FoodController {
 		return "food1";
 	}
 
-		// addMasterFoodInformation
-		@RequestMapping(value = "/foodInsert", produces = "application/json", method = RequestMethod.POST)
-		public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
-			System.out.println("From FoodController >> Controller data 표시");
-			System.out.println(data.toString());
-			// log.info("data", data.toString());
-	
-			for (int i = 0; i < data.size(); i++) {
-				if (data.get(i).get("foodCal") == "") {
-					data.get(i).put("foodGroup", 0);
-	
-				}
+	// addMasterFoodInformation
+	@RequestMapping(value = "/foodInsert", produces = "application/json", method = RequestMethod.POST)
+	public @ResponseBody String foodInsert(@RequestBody List<Map<String, Object>> data) {
+		System.out.println("From FoodController >> Controller data 표시");
+		System.out.println(data.toString());
+		// log.info("data", data.toString());
+
+		for (int i = 0; i < data.size(); i++) {
+			if (data.get(i).get("foodCal") == "") {
+				data.get(i).put("foodGroup", 0);
+
 			}
-	
-			int result = foodMapper.insertFoodListInformation(data);
-	
-			// 성공 여부 판단
-			System.out.println("############ 성공여부판단 ############");
-			System.out.println("result" + result);
-			// //foodService.addFood1(data);
-			return "성공";
-	
 		}
+
+		int result = foodMapper.insertFoodListInformation(data);
+
+		// 성공 여부 판단
+		System.out.println("############ 성공여부판단 ############");
+		System.out.println("result" + result);
+		// //foodService.addFood1(data);
+		return "성공";
+
+	}
 
 	// food 호출을 위한 ajax 호출 경로 설정
 
@@ -185,8 +188,8 @@ public class FoodController {
 	 */
 
 	@GetMapping(value = "/food1ApiTest", produces = "application/json")
-	public @ResponseBody List<Map<String, String>> food1(Model model, 
-			@RequestParam("food") String food) throws Exception {
+	public @ResponseBody List<Map<String, String>> food1(Model model, @RequestParam("food") String food)
+			throws Exception {
 
 		// 인증키 String keyId = "910606a0c65e48fb9339";
 		// url 기본 : String url =
@@ -202,6 +205,8 @@ public class FoodController {
 
 		// @RequestParam 을 통해 화면에서 입력받은 food value 받아와서 api 검색 조회
 
+		this.model = model;
+		this.food = food;
 		// api_key, api_service_id, data_type 변수
 		String keyId = "910606a0c65e48fb9339";
 		String serviceId = "I2790";

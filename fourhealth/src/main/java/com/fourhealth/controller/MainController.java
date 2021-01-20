@@ -15,6 +15,8 @@ public class MainController {
 
 	@Autowired
 	private ExerciseService exerciseService;
+	private Model model;
+
 	/* thymeleaf 페이지 테스트 */
 	// index page(main)
 	@GetMapping("/")
@@ -53,7 +55,7 @@ public class MainController {
 		model.addAttribute("normal", NormalList);
 		model.addAttribute("hard", HardList);
 
+
 		return "main_layout/exercise";
 	}
-
 }
