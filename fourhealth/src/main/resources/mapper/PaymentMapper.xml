@@ -3,7 +3,24 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.PaymentMapper">
+  <resultMap type="UserCouponDTO" id="resultMapUserCoupon">
+		<result column="user_coupon_code" 				property="userCouponCode"/>  
+		<result column="user_id"									property="userId"/>
+		<result column="user_platform_coupon_code" 					property="userPlatformCouponCode"/>
+		<result column="user_coupon_validity_start" 					property="userCouponValidityStart"/>
+		<result column="user_coupon_validity_end" 			property="userCouponValidityEnd"/>
+    <result column="user_coupon_reg_date" 		property="userCouponRegDate"/>
+    <result column="user_coupon_use_date" property="userCouponUseDate"/>
+    <collection property="couponList" javaType="java.util.ArrayList" ofType="CouponDTO">
+			<id column="user_platform_coupon_code" property="userPlatformCouponCode"/>
+			<result column="user_platform_grade_code" property="userPlatformGradeCode"/>
+			<result column="user_platform_coupon_details" property="userPlatformCouponDetails"/>
+			<result column="user_platform_coupon_reg_date" property="userPlatformCouponRegDate"/>
+		</collection>
+	</resultMap>
+
       <select id="checkPromotionPayment" resultType="String">
+        /*프로모션 결제 전 사용자 정보를 등록했는지 체크*/
         SELECT COUNT(*) 
         FROM tb_user AS u
         WHERE 
@@ -16,5 +33,98 @@
         user_first_bmi IS NOT NULL
         AND 
         u.user_id = #{userId}
-      </select>      
+      </select> 
+
+      <select id="checkCountPromotionPayment" parameterType="String" resultType="String">
+        /*같은 프로모션에 결제하였는지 확인*/
+        SELECT COUNT(*) 
+        FROM 
+          tb_matching_user_trainer AS m
+        WHERE 
+          m.user_id = #{userId} 
+        AND 
+          m.trainer_promotion_notice_code = #{trainerPromotionNoticeCode};
+      </select>
+
+      <select id="checkMatching" parameterType="String" resultType="String">
+        /*같은 프로모션에 결제하였는지 확인*/
+        SELECT 
+          MAX(trainer_promotion_recruit_close_date) AS trainer_promotion_recruit_close_date
+        FROM 
+          tb_matching_user_trainer AS m 
+        WHERE
+          m.user_id= #{userId}  
+      </select>
+
+      <select id="userCouponList" parameterType="String"  resultMap="resultMapUserCoupon" >
+        /*쿠폰리스트 목록 가져오기*/
+        SELECT 
+          c.user_coupon_code,
+          c.user_id,
+          c.user_coupon_validity_start,
+          c.user_coupon_validity_end,
+          c.user_coupon_reg_date,
+          c.user_coupon_use_date,
+          a.user_platform_coupon_details
+        FROM 
+          tb_coupon_user AS c 
+        JOIN 
+          tb_coupon_platform_user AS a
+        ON 
+          a.user_platform_coupon_code = c.user_platform_coupon_code
+        WHERE 
+          c.user_id =  #{userId};
+      </select> 
+
+      <insert id="promotionPaymentInsert" parameterType="java.util.Map">
+        <selectKey keyProperty="trainerUserMatchingCode" resultType="String" order="BEFORE">
+          /* 프로모션 리스트에 있으면 하나씩 증가 후 insert 처리 */
+          SELECT
+            CASE
+            WHEN COUNT(1) = 0 THEN 'trainer_user_matching_001' 
+            ELSE CONCAT('trainer_user_matching_', LPAD(MAX(CAST(right(g.trainer_user_matching_code,3) AS DECIMAL)+1), 3, 0))
+            END AS trainerUserMatchingCode
+          FROM
+          tb_matching_user_trainer AS g;
+        </selectKey>
+        /* 프로모션 결제에 성공하면 데이터에 추가 */
+        INSERT INTO tb_matching_user_trainer
+          (
+            trainer_user_matching_code, 
+            trainer_promotion_notice_code, 
+            user_id, 
+            trainer_id, 
+            user_coupon_code, 
+            trainer_promotion_name, 
+            payment_method_name, 
+            purchase_money, 
+            purchase_reg_date, 
+            purchase_finish_date, 
+            user_reg_date, 
+            trainer_promotion_recruit_start_date, 
+            trainer_promtion_recruit_end_date, 
+            trainer_promotion_attend_start_date, 
+            trainer_promotion_recruit_close_date,
+            trainer_matching_system_reg_date)
+          VALUES 
+          ( 
+          #{trainerUserMatchingCode},
+          #{trainerPromotionNoticeCode}, 
+          #{userId}, 
+            #{trainerId}, 
+            #{userCouponCode jdbcType=VARCHAR}, 
+            #{promotionName}, 
+            #{paymentMethodName}, 
+            #{purchaseMoney}, 
+            NOW(), 
+            NOW(), 
+            NOW(), 
+            #{trainerPromotionRecruitStartDate}, 
+            #{trainerPromotionRecruitEndDate},  
+            #{trainerPromotionAttendStartDate},
+            #{trainerPromotionRecruitCloseDate}, 
+            NOW())
+      </insert>
+      
+      
 </mapper>

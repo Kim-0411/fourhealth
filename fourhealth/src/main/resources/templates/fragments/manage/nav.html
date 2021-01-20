@@ -13,7 +13,8 @@
         ></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a th:href="@{/manage}" class="nav-link">Home</a>
+        <a th:href="@{/manage2}" th:if="${session.SLEVEL == null}" class="nav-link">Home</a>
+        <a th:href="@{/manage}" th:unless="${session.SLEVEL == null}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
         <a href="#" class="nav-link">Contact</a>

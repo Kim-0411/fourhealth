@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import com.fourhealth.dto.MemberDto;
+import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
 import com.fourhealth.mapper.MemberMapper;
 
@@ -17,42 +18,78 @@ public class MemberService {
 	private MemberMapper memberMapper;
 
 	// 회원 삭제처리
-	public String removeMasterMember(String memberId, String memberPw, String memberLevel) {
-		String result = "회원 삭제 실패";
+	// public String removeMasterMember(String memberId, String memberPw, String
+	// memberLevel) {
+	// String result = "회원 삭제 실패";
 
-		// id member테이블 조회하고 조회한 결과 값 중 비밀번호와 화면에서 입력받은 비밀번호가 일치하면 삭제 처리
-		MemberDto memberDto = memberMapper.getMemberById(memberId);
+	// // id member테이블 조회하고 조회한 결과 값 중 비밀번호와 화면에서 입력받은 비밀번호가 일치하면 삭제 처리
+	// MemberDto memberDto = memberMapper.getMemberById(memberId);
 
-		if (memberDto != null && memberDto.getMemberPw() != null && memberPw.equals(memberDto.getMemberPw())) {
+	// if (memberDto != null && memberDto.getMemberPw() != null &&
+	// memberPw.equals(memberDto.getMemberPw())) {
 
-			System.out.println("test성공");
+	// System.out.println("test성공");
 
-			int removeCheck = memberMapper.removeMemberById(memberId);
-			/*
-			 * int removeCheck = memberMapper.removeLoginById(memberId);
-			 * 
-			 * if("판매자".equals(memberLevel)) removeCheck +=
-			 * memberMapper.removeGoodsById(memberId);
-			 * 
-			 * if("구매자".equals(memberLevel)) removeCheck +=
-			 * memberMapper.removeOrderById(memberId);
-			 * 
-			 * removeCheck += memberMapper.removeMemberById(memberId);
-			 */
-			// if(removeCheck > 0) result = "회원 삭제 성공";
+	// int removeCheck = memberMapper.removeMemberById(memberId);
+	// /*
+	// * int removeCheck = memberMapper.removeLoginById(memberId);
+	// *
+	// * if("판매자".equals(memberLevel)) removeCheck +=
+	// * memberMapper.removeGoodsById(memberId);
+	// *
+	// * if("구매자".equals(memberLevel)) removeCheck +=
+	// * memberMapper.removeOrderById(memberId);
+	// *
+	// * removeCheck += memberMapper.removeMemberById(memberId);
+	// */
+	// // if(removeCheck > 0) result = "회원 삭제 성공";
 
-		}
-		// return null;
+	// }
+	// // return null;
+	// return result;
+	// }
+
+	// 트레이너 회원조회 후 수정처리
+	public String modifyMasterAll(MemberDto membedto) {
+		String result = "트레이너 수정 실패";
+		int modifyMemberCheck = memberMapper.modifyMasterAll(membedto);
+		if (modifyMemberCheck > 0)
+			result = "트레이너 수정 성공";
 		return result;
 	}
 
+	// 사용자 회원조회 후 수정처리
+	// public String modifyMasterAll(MemberDto membedto) {
+	// String result = "사용자 수정 실패";
+	// int modifyMemberCheck = memberMapper.modifyMasterAll(membedto);
+	// if (modifyMemberCheck > 0)
+	// result = "사용자 수정 성공";
+	// return result;
+	// }
+
 	// 전체회원조회 후 수정처리
-	public String modifyMasterMember(MemberDto membedto) {
-		String result = "회원 수정 실패";
-		int modifyMemberCheck = memberMapper.modifyMasterMember(membedto);
-		if (modifyMemberCheck > 0)
-			result = "회원 수정 성공";
-		return result;
+	// public String modifyMasterMember(MemberDto membedto) {
+	// String result = "회원 수정 실패";
+	// int modifyMemberCheck = memberMapper.modifyMasterMember(membedto);
+	// if (modifyMemberCheck > 0)
+	// result = "회원 수정 성공";
+	// return result;
+	// }
+
+	// 관리자 단에서 트레이너 비승인 리스트
+	public List<TrainerDto> viewAccessTrainerList() {
+		List<TrainerDto> trainerList = memberMapper.viewAccessTrainerList();
+		System.out.println(trainerList);
+
+		return trainerList;
+	}
+
+	// 관리자 단에서 트레이너 리스트중 승인 처리 안된사람 리스트뽑기
+	public List<MemberDto> viewUserList(String memberLevel) {
+		List<MemberDto> memberList = memberMapper.viewUserList(memberLevel);
+		System.out.println(memberList);
+
+		return memberList;
 	}
 
 	// 전체회원조회 및 관리자, 트레이너, 사용자 변환
@@ -76,13 +113,13 @@ public class MemberService {
 		return memberList;
 	}
 
-	// 로그인 (공통)
+	// 로그인 (공통), 사용자 및 트레이너 수정화면 이동
 	public MemberDto getMemberById(String userId) {
 		System.out.println(userId);
 
 		MemberDto member = memberMapper.getMemberById(userId);
 
-		System.out.println("로그인아 성공해" + member);
+		System.out.println("member정보 조회 값" + member);
 		return member;
 	}
 
@@ -126,6 +163,12 @@ public class MemberService {
 	public UserDto getTrainerMyMatchingUserInfo(String userId) {
 		UserDto getTrainerMyPromotionUser = memberMapper.getTrainerMyMatchingUserInfo(userId);
 		return getTrainerMyPromotionUser;
+	}
+
+	// 회원조회
+	public MemberDto getMemberSelect(String userId) {
+		MemberDto memberSelect = memberMapper.getMemberSelect(userId);
+		return memberSelect;
 	}
 
 }
