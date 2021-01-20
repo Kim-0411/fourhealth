@@ -16,6 +16,10 @@ public class CommonUserDto {
     private String userMainBank;
     private String userBankNumber;
     private String userBankMaster;
+
+    private String userRegDate;
+    
+
     private String userLastLoginDate; //마지막로그인일자.
 	private String userRegDate;
 	public String getUserLastLoginDate() {
@@ -24,6 +28,7 @@ public class CommonUserDto {
 	public void setUserLastLoginDate(String userLastLoginDate) {
 		this.userLastLoginDate = userLastLoginDate;
 	}
+
 	public String getUserId() {
 		return userId;
 	}

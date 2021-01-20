@@ -53,7 +53,7 @@ public class PromotionController {
 
 		model.addAttribute("promotionList", resultMap.get("promotionList"));
 		model.addAttribute("lastPage", resultMap.get("lastPage"));
-		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("currentPage", 	 currentPage);
 		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
