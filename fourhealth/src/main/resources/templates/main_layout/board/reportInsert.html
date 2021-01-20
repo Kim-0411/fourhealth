@@ -17,7 +17,7 @@
                 <tr>
                     <td>나의 프로모션</td>
                     <td>
-                        <select name="trainerUserMatchingCode" class="form-control">
+                        <select name="trainerUserMatchingCode" class="form-control" style="height: auto;">
 								<th:block th:if="${#lists.size(reportPromotionList) > 0}" th:each="rp : ${reportPromotionList}">
                                     <option th:text="${rp.trainerPromotionName}" th:value="${rp.trainerUserMatchingCode}"></option>
 								</th:block>
