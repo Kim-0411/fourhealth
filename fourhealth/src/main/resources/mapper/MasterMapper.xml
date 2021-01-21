@@ -15,6 +15,7 @@
         <result column="trainer_reg_date" 				property="trainerRegDate"/>
     </resultMap>
     
+    <!-- 관리자가 트레이너 승인처리 -->
     <update id="masterTrainerAccess" parameterType="String" >
     	UPDATE 
     		tb_trainer

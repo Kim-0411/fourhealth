@@ -80,7 +80,7 @@ public class MemberController {
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+				// 사용자 플렛폼 공통 등급 관리 체크 하여 치환 작업(로얄블루)
 				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(userId + " : 로그인 성공");
@@ -90,7 +90,7 @@ public class MemberController {
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+				// 사용자 플렛폼 공통 등급 관리 체크 하여 치환 작업(로얄블루)
 				session.setAttribute("SGRADE", gradePlatformTrainerDto.getTrainerPlatformGradeName());
 				System.out.println(gradePlatformTrainerDto.getTrainerPlatformGradeName());
 				System.out.println(userId + " : 로그인 성공");

@@ -6,8 +6,15 @@
   lang="en"
 >
 <th:block layout:fragment="mainContent">
-<a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a> 
- <a th:href="@{/mInsertPage(user_level_code=user_level_003)}" class="text-white" th:text="사용자"></a>
- <a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white" th:text="트레이너"></a> 
- </th:block>
+  <div id="singup">
+    <div><a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a></div>
+      <div><a th:href="@{/mInsertPage(user_level_code=user_level_003)}"  class="text-white">
+        <img src="/img/signup-img/user.png" alt="signup"></a>
+        <p>사용자</p>
+      </div>
+      <div><a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white">
+        <img src="/img/signup-img/trainer.png" alt="signup" ></a>
+      </div> 
+  </div> 
+</th:block>
 </html>

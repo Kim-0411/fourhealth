@@ -6,7 +6,7 @@
     th:fragment="leftMenuFragment"
   >
     <!-- 로그인 없이 보여줄때와 있을시 다르게 -->
-    <a th:if="${session.SLEVEL == null}" th:href="@{/manage2}" class="brand-link">
+    <a th:if="${session.SLEVEL eq '트레이너'}" th:href="@{/manage2}" class="brand-link">
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -16,7 +16,7 @@
       <span class="brand-text font-weight-light">로고</span>
     </a>
     <!-- 값이 있을때 경로 다르게  -->
-    <a th:unless="${session.SLEVEL == null}" th:href="@{/manage}" class="brand-link">
+    <a th:unless="${session.SLEVEL eq '트레이너'}" th:href="@{/manage}" class="brand-link">
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
