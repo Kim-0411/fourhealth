@@ -33,20 +33,22 @@ public class BoardController {
 	@GetMapping("/inquiryInsert")
 	public String inquiryInsertForm(String userId, Model model) {
 		
-		return "/index";
+		return "main_layout/board/inquiryInsert";
 	}
 	
 	   //신고 등록 폼으로 가기 위한 매핑
 	   @RequestMapping("/reportInsert")
 	   public String reportBoardInsertForm(HttpSession session, Model model) {
-	      model.addAttribute("title","신고 등록");
+		  model.addAttribute("title","신고 등록");
 	      List<MatchingUserTrainerDto> reportPromotionList = boardService.reportPromotionList((String)session.getAttribute("SID"));
-	      System.out.println(reportPromotionList);
+		  System.out.println(reportPromotionList);
 	      model.addAttribute("reportPromotionList",reportPromotionList);
 	      model.addAttribute("SID",(String)session.getAttribute("SID") );
 	      return "main_layout/board/reportInsert";
 	   }
 	
+
+
 	//신고 등록 처리 매핑 
 	@RequestMapping("/reportInsertProc")
 	public String reportBoardInsert(UserReportDto userReport) {
