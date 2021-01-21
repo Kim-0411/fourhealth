@@ -6,7 +6,11 @@
     th:fragment="leftMenuFragment"
   >
     <!-- 로그인 없이 보여줄때와 있을시 다르게 -->
-    <a th:if="${session.SLEVEL == null}" th:href="@{/manage2}" class="brand-link">
+    <a
+      th:if="${session.SLEVEL == null}"
+      th:href="@{/manage2}"
+      class="brand-link"
+    >
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -16,7 +20,11 @@
       <span class="brand-text font-weight-light">로고</span>
     </a>
     <!-- 값이 있을때 경로 다르게  -->
-    <a th:unless="${session.SLEVEL == null}" th:href="@{/manage}" class="brand-link">
+    <a
+      th:unless="${session.SLEVEL == null}"
+      th:href="@{/manage}"
+      class="brand-link"
+    >
       <img
         src="/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
@@ -38,9 +46,21 @@
           />
         </div>
         <div class="info">
-          <a th:if="${session.SLEVEL == null}" href="#" class="d-block">미리보기</a>
-          <a th:if="${session.SLEVEL eq '트레이너'}" th:text="${session.SNICKNAME}" href="#" class="d-block"></a>
-          <a th:if="${session.SLEVEL eq '관리자'}" th:text="${session.SNICKNAME}" href="#" class="d-block"></a>
+          <a th:if="${session.SLEVEL == null}" href="#" class="d-block"
+            >미리보기</a
+          >
+          <a
+            th:if="${session.SLEVEL eq '트레이너'}"
+            th:text="${session.SNICKNAME}"
+            href="#"
+            class="d-block"
+          ></a>
+          <a
+            th:if="${session.SLEVEL eq '관리자'}"
+            th:text="${session.SNICKNAME}"
+            href="#"
+            class="d-block"
+          ></a>
         </div>
       </div>
 
@@ -225,8 +245,11 @@
                 </p>
               </a>
               <ul class="nav nav-treeview">
-                <li class="nav-item"> 
-                  <a href="/memberAllList?user_level=user_level_003" class="nav-link">
+                <li class="nav-item">
+                  <a
+                    href="/memberAllList?user_level=user_level_003"
+                    class="nav-link"
+                  >
                     <p>사용자 회원목록</p>
                   </a>
                 </li>
@@ -253,7 +276,10 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/memberAllList?user_level=user_level_002" class="nav-link">
+                  <a
+                    href="/memberAllList?user_level=user_level_002"
+                    class="nav-link"
+                  >
                     <p>!트레이너 회원목록</p>
                   </a>
                 </li>
@@ -457,7 +483,7 @@
                 </li>
               </ul>
             </li>
-             <li class="nav-item">
+            <li class="nav-item">
               <a href="pages/mailbox/read-mail.html" class="nav-link">
                 <i class="nav-icon fas fa-book"></i>
                 <p>&nbsp &nbsp #신고 관리</p>
@@ -469,7 +495,7 @@
                     <p>#신고 조회</p>
                   </a>
                 </li>
-             </ul>
+              </ul>
             </li>
           </div>
           <!-- 관리자 메뉴 끝-->
