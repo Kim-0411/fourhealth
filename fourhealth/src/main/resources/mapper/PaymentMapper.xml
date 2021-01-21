@@ -20,6 +20,7 @@
 	</resultMap>
 
       <select id="checkPromotionPayment" resultType="String">
+        /*프로모션 결제 전 사용자 정보를 등록했는지 체크*/
         SELECT COUNT(*) 
         FROM tb_user AS u
         WHERE 
@@ -34,7 +35,29 @@
         u.user_id = #{userId}
       </select> 
 
+      <select id="checkCountPromotionPayment" parameterType="String" resultType="String">
+        /*같은 프로모션에 결제하였는지 확인*/
+        SELECT COUNT(*) 
+        FROM 
+          tb_matching_user_trainer AS m
+        WHERE 
+          m.user_id = #{userId} 
+        AND 
+          m.trainer_promotion_notice_code = #{trainerPromotionNoticeCode};
+      </select>
+
+      <select id="checkMatching" parameterType="String" resultType="String">
+        /*같은 프로모션에 결제하였는지 확인*/
+        SELECT 
+          MAX(trainer_promotion_recruit_close_date) AS trainer_promotion_recruit_close_date
+        FROM 
+          tb_matching_user_trainer AS m 
+        WHERE
+          m.user_id= #{userId}  
+      </select>
+
       <select id="userCouponList" parameterType="String"  resultMap="resultMapUserCoupon" >
+        /*쿠폰리스트 목록 가져오기*/
         SELECT 
           c.user_coupon_code,
           c.user_id,
@@ -64,6 +87,7 @@
           FROM
           tb_matching_user_trainer AS g;
         </selectKey>
+        /* 프로모션 결제에 성공하면 데이터에 추가 */
         INSERT INTO tb_matching_user_trainer
           (
             trainer_user_matching_code, 
@@ -80,6 +104,7 @@
             trainer_promotion_recruit_start_date, 
             trainer_promtion_recruit_end_date, 
             trainer_promotion_attend_start_date, 
+            trainer_promotion_recruit_close_date,
             trainer_matching_system_reg_date)
           VALUES 
           ( 
@@ -96,7 +121,8 @@
             NOW(), 
             #{trainerPromotionRecruitStartDate}, 
             #{trainerPromotionRecruitEndDate},  
-            #{trainerPromotionAttendStartDate}, 
+            #{trainerPromotionAttendStartDate},
+            #{trainerPromotionRecruitCloseDate}, 
             NOW())
       </insert>
       
