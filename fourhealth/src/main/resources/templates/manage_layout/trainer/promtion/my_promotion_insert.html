@@ -47,9 +47,15 @@
                         <input type="date" class="form-control" name="trainerPromotionRecruitCloseDate"   id="trainerPromotionRecruitCloseDate" placeholder="프로모션 날짜를 입력해 주세요">
                       </div>
                     </div>
-                    <label for="trainerPromotionRecruitCloseDate">프로모션 상세내용 </label>
+
+                    <div class="col-mb-3">
+                      <label for="trainerPromotionBgImage">프로모션 이미지 </label>
+                      <input type="file" class="form-control" name="trainerPromotionBgImage"  id="trainerPromotionBgImage">
+                    </div>
+                    
+                    <label for="trainerPromotionRecruitCloseDate">프로모션 상세내용 </label> 
                       <textarea id="summernote" rows="5" name="trainerPromotionDetailsContents">
-                         Place <em>some</em> <u>text</u> <strong>here</strong>
+                        <div class="select_img"><img src="" /></div>
                       </textarea> <br/>
                       <button type="submit" id="proInsertBtn">등록</button>
                   </form>
@@ -63,43 +69,31 @@
         </section>
   
 
-    <script src="manage_css/plugins/summernote/summernote-bs4.min.js"></script>
+    <script src="/static/manage_css/plugins/summernote/summernote-bs4.min.js"></script>
     <script>
-      $(document).ready(function() {
-      $('#summernote').summernote({
-        height: 300,
-        minHeight: null,
-        maxHeight: null,
-        focus: true,
-        callbacks: {
-          onImageUpload: function(files, editor, welEditable) {
-            for (var i = files.length - 1; i >= 0; i--) {
-              sendFile(files[i], this);
-            }
-          }
-        }
+  $(function() {
+
+    $('#summernote').summernote()
+
+var toolbar = [
+      // 글꼴 설정
+      ['fontname', ['fontname']],
+      // 글자 크기 설정
+      ['fontsize', ['fontsize']],
+      // 굵기, 기울임꼴, 밑줄,취소 선, 서식지우기
+      ['style', ['bold', 'italic', 'underline','strikethrough', 'clear']],
+      // 글자색
+      ['color', ['forecolor','color']],
+      // 표만들기
+      ['table', ['table']],
+      // 글머리 기호, 번호매기기, 문단정렬
+      ['para', ['ul', 'ol', 'paragraph']],
+      // 줄간격
+      ['height', ['height']],
+      // 코드보기, 확대해서보기, 도움말
+      ['view', ['codeview','fullscreen', 'help']]];
       });
-    });
     
-    function sendFile(file, el) {
-      var form_data = new FormData();
-      form_data.append('file', file);
-      $.ajax({
-        data: form_data,
-        type: "POST",
-        url: '/image',
-        cache: false,
-        contentType: false,
-        enctype: 'multipart/form-data',
-        processData: false,
-        success: function(url) {
-          $(el).summernote('editor.insertImage', url);
-          $('#imageBoard > ul').append('<li><img src="'+url+'" width="480" height="auto"/></li>');
-        }
-      });
-    }
-    </script>
-    <script>
       $("#trainerPromotionBgImage").change(function () {
         if (this.files && this.files[0]) {
           var reader = new FileReader();

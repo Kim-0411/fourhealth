@@ -51,7 +51,7 @@ public class PromotionController {
 	private MemberService memberService;
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("trainer/promtion/promotionList")
+	@GetMapping("main/promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -61,7 +61,7 @@ public class PromotionController {
 
 		model.addAttribute("promotionList", resultMap.get("promotionList"));
 		model.addAttribute("lastPage", resultMap.get("lastPage"));
-		model.addAttribute("currentPage", 	 currentPage);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
@@ -70,7 +70,7 @@ public class PromotionController {
 		// promotionService.promotionList();
 		// System.out.println(promotionList);
 		// model.addAttribute("promotionList", promotionList);
-		return null;
+		return "main_layout/promotion/promotionList";
 	}
 
 	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
@@ -101,98 +101,66 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 등록페이지
-	@GetMapping("/trainer/promtion/myPromotionInsert")
+	@GetMapping("trainer/promtion/myPromotionInsert")
 	public String myPromotionInsert(Model model) {
 		return "manage_layout/trainer/promtion/my_promotion_insert";
 	}
 
 	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/promotionInsert")
-	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto,
-			@RequestParam("file") MultipartFile multipartFile) throws ParseException, FileNotFoundException {
+	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
+			throws ParseException, FileNotFoundException {
 
 		System.out.println(promotionDto);
-		System.out.println(multipartFile);
+
+		String fileName = null;
+
+		if (!promotionDto.getTrainerPromotionBgImage().isEmpty()) {
+			int rdv = (int) (Math.random() * 1000);
+			fileName = promotionDto.getTrainerPromotionBgImage().getOriginalFilename();
+			String rename = rdv + "_" + fileName;
+			// String path =
+			// "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
+
+			String realPath = ResourceUtils.getFile("src/main/resources/static/image/" + rename).getAbsolutePath();
+			// 배포패스
+
+			try {
+				new File(realPath).mkdir();
+				promotionDto.getTrainerPromotionBgImage().transferTo(new File(realPath));
+
+			} catch (IllegalStateException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+			promotionDto.setProImageUrl(rename);
+		}
+
+		String start = promotionDto.getTrainerPromotionAttendStartDate();
+		String end = promotionDto.getTrainerPromotionRecruitCloseDate();
+
+		System.out.println("proInsert start-------------" + start);
+		System.out.println("proInsert end-------------" + end);
+
+		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
+
+		java.util.Date stDt = format.parse(start);
+		java.util.Date edDt = format.parse(end);
+
+		long diff = edDt.getTime() - stDt.getTime();
+		long diffDays = diff / (24 * 60 * 60 * 1000);
+		String totalDate = Long.toString(diffDays);
+
+		System.out.println(diffDays);
+		promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
+
+		System.out.println(promotionDto);
+
+		promotionService.promotionInsert(promotionDto);
 
 		return "redirect:/myPromotionList";
 	}
-
-	@ResponseBody
-	@PostMapping("/image")
-	public void summer_image(MultipartFile file, HttpServletRequest request, HttpServletResponse response)
-			throws Exception {
-		response.setContentType("text/html;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		String fileName = file.getOriginalFilename();
-		// String server_file_name = fileDBName(file_name, save_folder);
-
-		System.out.println("out : " + out);
-		System.out.println("file_name : " + fileName);
-		// file.transferTo(new File(save_folder + server_file_name));
-
-		// out.println("resources/upload" + server_file_name);
-		// out.close();
-
-	}
-
-	// // 트레이너 프로모션 등록컨트롤러
-	// @PostMapping("/promotionInsert")
-	// public String trainerPromotionInsert(MultipartHttpServletRequest request,
-	// NoticePromotionTrainerDto promotionDto)
-	// throws ParseException, FileNotFoundException {
-
-	// System.out.println(promotionDto);
-
-	// String fileName = null;
-
-	// if (!promotionDto.getTrainerPromotionBgImage().isEmpty()) {
-	// int rdv = (int) (Math.random() * 1000);
-	// fileName = promotionDto.getTrainerPromotionBgImage().getOriginalFilename();
-	// String rename = rdv + "_" + fileName;
-	// // String path =
-	// //
-	// "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
-
-	// String realPath = ResourceUtils.getFile("src/main/resources/static/image/" +
-	// rename).getAbsolutePath();
-	// // 배포패스
-
-	// try {
-	// new File(realPath).mkdir();
-	// promotionDto.getTrainerPromotionBgImage().transferTo(new File(realPath));
-
-	// } catch (IllegalStateException e) {
-	// e.printStackTrace();
-	// } catch (IOException e) {
-	// e.printStackTrace();
-	// }
-	// promotionDto.setProImageUrl(rename);
-	// }
-
-	// String start = promotionDto.getTrainerPromotionAttendStartDate();
-	// String end = promotionDto.getTrainerPromotionRecruitCloseDate();
-
-	// System.out.println("proInsert start-------------" + start);
-	// System.out.println("proInsert end-------------" + end);
-
-	// SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-	// java.util.Date stDt = format.parse(start);
-	// java.util.Date edDt = format.parse(end);
-
-	// long diff = edDt.getTime() - stDt.getTime();
-	// long diffDays = diff / (24 * 60 * 60 * 1000);
-	// String totalDate = Long.toString(diffDays);
-
-	// System.out.println(diffDays);
-	// promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
-
-	// System.out.println(promotionDto);
-
-	// promotionService.promotionInsert(promotionDto);
-
-	// return "redirect:/myPromotionList";
-	// }
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
 	@GetMapping("/myPromotionList")
@@ -228,7 +196,7 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러
-	@GetMapping("trainer/promtion/promotionDetail")
+	@GetMapping("main/promtion/promotionDetail")
 	public String commonPromotionDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
 
 		System.out.println(proCode);

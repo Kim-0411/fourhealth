@@ -10,12 +10,12 @@
       <div class="col-lg-3 col-md-6 promotionList" th:if="${#lists.size(promotionList) > 0}"
         th:each="p : ${promotionList}">
         <div class="card">
-          <img id="promotionListImg" th:src="'image/'+${p.get('trainer_promotion_bg_image')}" class="card-img-top"
+          <img id="promotionListImg" th:src="'/static/image/'+${p.get('trainer_promotion_bg_image')}" class="card-img-top"
             alt="...">
           <div class="card-body">
             <h5 class="card-title" th:text="${p.get('trainer_promotion_name')}"></h5>
             <p class="card-text" th:text="${p.get('trainer_promotion_short_contents')}"></p>
-            <a th:href="@{/promotionDetail(proCode=${p.get('trainer_promotion_notice_code')})}"
+            <a th:href="@{/main/promtion/promotionDetail(proCode=${p.get('trainer_promotion_notice_code')})}"
               class="btn btn-primary">프로모션 상세보기</a>
           </div>
         </div>
@@ -25,11 +25,11 @@
     <nav aria-label="Page navigation" class="PromotionListPaging">
       <ul class="pagination">
         <li>
-          <a th:href="@{trainer/promtion/promotionList}">맨처음</a>
+          <a th:href="@{/main/promtion/promotionList}">맨처음</a>
         </li>
         <!-- disabled가 있으면 마우스 커서가 금지표시로 바뀐다. class=disabled -->
         <li>
-          <a th:if="${currentPage > 1}" th:href="@{/promotionList(currentPage = ${currentPage - 1 })}"
+          <a th:if="${currentPage > 1}" th:href="@{/main/promtion/promotionList(currentPage = ${currentPage - 1 })}"
             aria-label="Previous">
             <span aria-hidden="true">«</span>
           </a>
@@ -42,17 +42,17 @@
           <!-- 다음 페이지 -->
           <li>
             <th:block th:unless="${num <= 0}">
-            <a th:unless="${currentPage == num}" th:href="@{/promotionList(currentPage = ${num})}"
+            <a th:unless="${currentPage == num}" th:href="@{/main/promtion/promotionList(currentPage = ${num})}"
               th:text="${ num }"></a>
             </th:block>
           </li>
         </th:block>
         <li>
-          <a th:if="${currentPage < lastPage}" th:href="@{/promotionList(currentPage = ${currentPage + 1 })}"
+          <a th:if="${currentPage < lastPage}" th:href="@{/main/promtion/promotionList(currentPage = ${currentPage + 1 })}"
             aria-label="Next">
             <span aria-hidden="true">»</span>
           </a>
-          <a th:href="@{trainer/promtion/promotionList(currentPage = ${lastPage})}">맨마지막</a>
+          <a th:href="@{/main/promtion/promotionList(currentPage = ${lastPage})}">맨마지막</a>
         </li>
       </ul>
     </nav>
