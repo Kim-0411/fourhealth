@@ -25,7 +25,7 @@
     <nav aria-label="Page navigation" class="PromotionListPaging">
       <ul class="pagination">
         <li>
-          <a th:href="@{/promotionList}">맨처음</a>
+          <a th:href="@{trainer/promtion/promotionList}">맨처음</a>
         </li>
         <!-- disabled가 있으면 마우스 커서가 금지표시로 바뀐다. class=disabled -->
         <li>
@@ -52,11 +52,11 @@
             aria-label="Next">
             <span aria-hidden="true">»</span>
           </a>
-          <a th:href="@{/promotionList(currentPage = ${lastPage})}">맨마지막</a>
+          <a th:href="@{trainer/promtion/promotionList(currentPage = ${lastPage})}">맨마지막</a>
         </li>
       </ul>
     </nav>
-    <a th:href="@{/promotionCheck(proId=${session.SID})}" class="btn btn-primary center-block" id="promotionInsertBtn"
+    <a th:href="@{trainer/promtion/promotionCheck(proId=${session.SID})}" class="btn btn-primary center-block" id="promotionInsertBtn"
       th:if="${session.SLEVEL eq 'user_level_002'}">트레이너 프로모션 등록하기</a>
   </div>
   </div>

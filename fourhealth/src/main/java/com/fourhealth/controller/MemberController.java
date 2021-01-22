@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fourhealth.dto.CommonProfileDto;
+import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.dto.GradePlatformTrainerDto;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
@@ -26,6 +28,10 @@ import com.fourhealth.service.UserService;
 
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
+import java.util.List;
+import com.fourhealth.service.MessageService;
+import com.fourhealth.service.ProfileService;
+
 import com.fourhealth.service.TrainerService;
 
 @Controller
@@ -36,7 +42,23 @@ public class MemberController {
 	private UserService userService;
 	@Autowired
 	private TrainerService trainerService;
-
+	@Autowired
+	private ProfileService profileService;
+	
+	// 트레이너 프로필 view
+	@GetMapping("/trainerProfile")
+	public String getTrainerProfile(Model model
+								   ,@RequestParam(name="result",required=false)String result) {
+		List<CommonProfileDto> trainerProfile = profileService.getTrainerProfile();
+		List<MemberDto> member = memberService.viewMember();
+		System.out.println(member);
+		System.out.println(trainerProfile);
+		model.addAttribute("title","회원 목록");
+		model.addAttribute("trainerProfile",trainerProfile);
+		model.addAttribute("member",member);
+		return "manage_layout/trainer/profile/trainerProfile";
+	}
+	
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/

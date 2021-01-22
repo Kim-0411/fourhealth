@@ -50,7 +50,7 @@ public class PaymentController {
     @Autowired
     PromotionMapper promotionMapper;
 
-    @PostMapping("/promotionPaymentCheck")
+    @PostMapping("trainer/promtion/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode,
             @RequestParam(name = "trainerPromotionRecruitEndDate", required = false) String trainerPromotionRecruitEndDate,
@@ -164,7 +164,7 @@ public class PaymentController {
 
     }
 
-    @RequestMapping(value = "/promotionPaymentInsert", produces = "application/json", method = RequestMethod.POST)
+    @RequestMapping(value = "trainer/promtion/promotionPaymentInsert", produces = "application/json", method = RequestMethod.POST)
     public @ResponseBody String promotionTest(@RequestBody Map<String, Object> map) {
 
         System.out.println("From FoodController >> Controller data 표시");
