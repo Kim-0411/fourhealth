@@ -115,7 +115,7 @@ public class FoodController {
 	}
 
 	// - 관리자 화면 식품 조회
-	@GetMapping("/foodDataList")
+	@GetMapping("/manage_layout/master/foodDataList")
 	public String foodDataList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		model.addAttribute("title", "관리자 식품 리스트 조회");
