@@ -30,7 +30,7 @@ public class ScheduleController {
     private ScheduleService scheduleService;
 
     // 프로모션 스케줄 등록페이지
-    @GetMapping("/trainerScheduleInsert")
+    @GetMapping("trainer/schedule/trainerScheduleInsert")
     public String trainerScheduleInsert(Model model) {
         // 로그인된 트레이너 아이디id002 가정
         List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService
@@ -40,33 +40,32 @@ public class ScheduleController {
     }
 
     // 프로모션 스케줄 목록페이지
-    @GetMapping("/trainerScheduleList")
+    @GetMapping("trainer/schedule/trainerScheduleList")
     public String trainerScheduleList() {
         return "manage_layout/trainer/schedule/trainer_schedule_list";
     }
 
     // 프로모션 스케줄 수정페이지
-    @GetMapping("/trainerScheduleModify")
+    @GetMapping("trainer/schedule/trainerScheduleModify")
     public String trainerScheduleModify() {
         return "manage_layout/trainer/schedule/trainer_schedule_modify";
     }
 
     // 프로모션 스케줄 삭제페이지
-    @GetMapping("/trainerScheduleDelet")
+    @GetMapping("trainer/schedule/trainerScheduleDelet")
     public String trainerScheduleDelet() {
         return "manage_layout/trainer/schedule/trainer_schedule_delet";
     }
-    
-	// 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
-	@RequestMapping(value = "/serachTrainerExercise", method = RequestMethod.POST, produces = "application/json")
-	public @ResponseBody List<MetExerciseDto> serachTrainerExercise(@RequestParam Map<String, Object> map) {
-		System.out.println(map);
-		String exerciseName = (String) map.get("exerciseName");
-		String metCoefficient = (String) map.get("exerciseHow");
-		System.out.println(exerciseName + metCoefficient);
-		List<MetExerciseDto> getExerciseList = scheduleService.getAllSearchExerciseList(exerciseName, metCoefficient);
-		
 
-		return getExerciseList;
-	}
+    // 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
+    @RequestMapping(value = "/serachTrainerExercise", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody List<MetExerciseDto> serachTrainerExercise(@RequestParam Map<String, Object> map) {
+        System.out.println(map);
+        String exerciseName = (String) map.get("exerciseName");
+        String metCoefficient = (String) map.get("exerciseHow");
+        System.out.println(exerciseName + metCoefficient);
+        List<MetExerciseDto> getExerciseList = scheduleService.getAllSearchExerciseList(exerciseName, metCoefficient);
+
+        return getExerciseList;
+    }
 }
