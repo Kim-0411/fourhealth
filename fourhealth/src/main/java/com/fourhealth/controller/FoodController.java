@@ -140,7 +140,8 @@ public class FoodController {
 		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
-		return "manage_layout/master/food_manage/food_data_list";
+		// return "manage_layout/master/food_manage/food_data_list";
+		return "manage_layout/master/food_manage/food_data_list2";
 	}
 
 	@GetMapping("/foodDataModify")
