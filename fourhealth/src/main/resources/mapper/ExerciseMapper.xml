@@ -20,7 +20,7 @@
 			 e.met_coefficient;
 	</select>
 	
-	<select id="getAllSearchExerciseList" resultMap="resultMapMetExercise" parameterType="String">
+	<select id="getAllSearchExerciseList" resultType="map" parameterType="String">
 		SELECT
 			e.exercise_name,
 			e.met_coefficient
@@ -50,7 +50,8 @@
 
 		</if>
 		ORDER BY
-			e.met_coefficient;
+			e.met_coefficient
+		LIMIT ${startRow},${rowPerPage};
 	</select>
 
 	<select id="getAllEasyExerciseList" resultMap="resultMapMetExercise">
@@ -86,4 +87,43 @@
 		Order by
 			RAND() LIMIT 5;
 	</select>
+	
+ 	<select id="getExerciseListCount" resultType="int" parameterType="String">
+		/* 현재 프로모션 등록 수 페이징 처리 */
+		SELECT
+			count(*)
+		FROM
+			tb_met_exercise AS e
+		where
+			e.exercise_name LIKE CONCAT('%',#{exercise_name},'%')
+		<if test="met_coefficient !=null and exercise_name != null"></if>
+		
+		<if test="met_coefficient =='easy'.toString()">
+			and
+			e.met_coefficient BETWEEN 0.0 AND 3.0
+		</if>
+		
+		<if test="met_coefficient =='normal'.toString()">
+			and
+			e.met_coefficient BETWEEN 3.0 AND 6.0
+		</if>
+		
+		<if test="met_coefficient =='hard'.toString()">
+			and
+			e.met_coefficient >=6.0
+		</if>
+		
+		<if test="met_coefficient =='all'.toString()">
+
+		</if>
+</select>
+
+	<!-- <select id="getExerciseListPaging" parameterType="int" resultType="map">
+		/* 페이징 처리 */
+		SELECT
+			*
+		FROM
+			tb_met_exercise AS e
+			LIMIT #{startRow}, #{rowPerPage};
+	</select>  -->
 </mapper>

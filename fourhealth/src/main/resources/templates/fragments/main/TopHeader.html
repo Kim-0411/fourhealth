@@ -35,7 +35,11 @@
                 [[${session.SGRADE}]] &nbsp;[[${session.SLEVEL}]] &nbsp;
                 [[${session.SNICKNAME}]]
                 <!--   <span th:if="${session.SLEVEL} == 'user_level_002'" th:text="${session.winRnkg}"></span>
+<<<<<<< HEAD
+               <span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
+=======
 					<span th:unless="${session.SLEVEL} == 'user_level_003'">사용자</span> -->
+>>>>>>> main
               </label>
               <a th:href="@{/#}" style="text-align: center"> &nbsp; My page</a>
               <a th:href="@{/logout}" style="text-align: right">
@@ -56,11 +60,27 @@
                 style="margin-left: 10px"
                 >트레이너 관리페이지</a
               >
+<<<<<<< HEAD
+            </div>
+            <div class="master">
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL == null}"
+                style="margin-left: 10px"
+                >관리자 마스터</a
+              >
+              <a
+                th:href="@{/manage}"
+                th:if="${session.SLEVEL == null}"
+                style="margin-left: 10px"
+                >트레이너 마스터</a
+=======
               <a
                 th:href="@{/manage2}"
                 th:if="${session.SLEVEL == null}"
                 style="margin-left: 10px"
                 >관리자&트레이너 관리페이지</a
+>>>>>>> main
               >
             </div>
           </div>
