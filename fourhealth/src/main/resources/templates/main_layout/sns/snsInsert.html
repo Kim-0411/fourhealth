@@ -8,41 +8,30 @@
   <title th:text="${title}"></title>
 
   <th:block layout:fragment="mainContent">
-    <div class="center-block">
       <section>
         <div class="container">
-          <form
-            th:action="@{/snsInsert}"
-            method="post"
-            enctype="multipart/form-data"
-          >
+          <form th:action="@{/snsInsert}" method="post" enctype="multipart/form-data">
             <table class="table table-bordered">
               <tr>
                 <tr>
-                  <td>작성자 아이디 :</td>
+                  <td>(☞ﾟヮﾟ)☞</td>
                   <td>
-                    <input
-                      type="text"
-                      name="userId"
-                      th:value="${session.SID}"
-                      readonly="readonly"
-                    />
+                  	☜(ﾟヮﾟ☜)
+                    <input type="hidden" name="userId" th:value="${session.SID}"/>
                   </td>
                 </tr>
                 <tr>
                   <td>Content</td>
-                  <td><input type="text" name="userSnsContents" /></td>
+                  <td><textarea rows="10" cols="100" name="userSnsContents"></textarea></td>
                 </tr>
                 <tr>
                   <td>Image</td>
                   <td><input type="file" name="userSnsUploadFile" /></td>
                 </tr>
-              </tr>
             </table>
-            <button type="submit" id="snsInsertBtn">작성</button>
+            <button type="submit" id="snsInsertBtn" class="btn btn-default btn-lg btn-block">작성</button>
           </form>
         </div>
       </section>
-    </div>
   </th:block>
 </html>

@@ -24,6 +24,7 @@ public class CommonUserDto {
 	public void setUserLastLoginDate(String userLastLoginDate) {
 		this.userLastLoginDate = userLastLoginDate;
 	}
+
 	public String getUserId() {
 		return userId;
 	}

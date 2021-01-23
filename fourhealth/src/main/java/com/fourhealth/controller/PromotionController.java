@@ -8,10 +8,15 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Map;
+import java.util.UUID;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
+import org.apache.catalina.connector.Response;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -20,9 +25,12 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.RequestPart;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fourhealth.dto.MatchingUserTrainerDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
 import com.fourhealth.dto.UserDto;
@@ -42,7 +50,7 @@ public class PromotionController {
 	private MemberService memberService;
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("/promotionList")
+	@GetMapping("main/promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -65,7 +73,7 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
-	@GetMapping("/promotionCheck")
+	@GetMapping("trainer/promtion/promotionCheck")
 	public String promotionCheck(@RequestParam(name = "proId", required = false) String proId,
 			HttpServletResponse response) throws IOException {
 
@@ -80,7 +88,7 @@ public class PromotionController {
 			return null;
 		} else {
 			if (i > 0) {
-				return "redirect:/myPromotionInsert";
+				return "redirect:/trainer/promtion/myPromotionInsert";
 			} else {
 				response.setContentType("text/html; charset=UTF-8");
 				PrintWriter out = response.getWriter();
@@ -92,7 +100,7 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 등록페이지
-	@GetMapping("/myPromotionInsert")
+	@GetMapping("trainer/promtion/myPromotionInsert")
 	public String myPromotionInsert(Model model) {
 		return "manage_layout/trainer/promtion/my_promotion_insert";
 	}
@@ -181,13 +189,13 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 내 수정페이지
-	@GetMapping("/myPromotionModify")
+	@GetMapping("trainer/promtion/myPromotionModify")
 	public String myPromotionModify(Model model) {
 		return "manage_layout/trainer/promtion/my_promotion_modify";
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러
-	@GetMapping("/promotionDetail")
+	@GetMapping("main/promtion/promotionDetail")
 	public String commonPromotionDetail(@RequestParam(name = "proCode", required = false) String proCode, Model model) {
 
 		System.out.println(proCode);

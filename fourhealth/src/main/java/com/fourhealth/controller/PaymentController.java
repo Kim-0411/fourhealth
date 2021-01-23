@@ -25,7 +25,16 @@ public class PaymentController {
     @Autowired
     PromotionService promotionService;
 
-    @PostMapping("/promotionPaymentCheck")
+    @Autowired
+    MemberService memberService;
+
+    @Autowired
+    PaymentMapper paymentMapper;
+
+    @Autowired
+    PromotionMapper promotionMapper;
+
+    @PostMapping("trainer/promtion/promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode,
             HttpServletResponse response) throws IOException {
@@ -75,6 +84,25 @@ public class PaymentController {
                 return null;
             }
         }
+
+    }
+
+    @RequestMapping(value = "trainer/promtion/promotionPaymentInsert", produces = "application/json", method = RequestMethod.POST)
+    public @ResponseBody String promotionTest(@RequestBody Map<String, Object> map) {
+
+        System.out.println("From FoodController >> Controller data 표시");
+        System.out.println(map);
+
+        String trainerPromotionNoticeCode = (String) map.get("trainerPromotionNoticeCode");
+        int re = paymentMapper.promotionPaymentInsert(map);
+
+        if (re > 0) {
+            promotionMapper.updatePromotionLivePeopl(trainerPromotionNoticeCode);
+        } else {
+            return "매칭결제중 오류가 발생하였습니다.";
+        }
+
+        return "성공";
 
     }
 
