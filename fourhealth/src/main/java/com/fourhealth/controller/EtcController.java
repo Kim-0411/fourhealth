@@ -117,12 +117,6 @@ public class EtcController {
 		return "manage_layout/trainer/profile/trainer_profile_insert";
 	}
 
-	// 트레이너 프로필 확인페이지
-	@GetMapping("/trainerProfile")
-	public String trainerProfile() {
-		return "manage_layout/trainer/profile/trainer_profile";
-	}
-
 	// 트레이너 프로필 수정페이지
 	@GetMapping("/trainerProfileModify")
 	public String trainerProfileModify() {
