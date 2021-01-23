@@ -25,7 +25,7 @@
         </tr>
         <tr>
           <td>프로모션 이미지 :</td>
-          <td><img th:src="${proDetail.proImageUrl}" /></td>
+          <td><img th:src="'/static/'+${proDetail.proImageUrl}" /></td>
         </tr>
         <tr>
           <td>프로모션 간략내용 :</td>
@@ -38,13 +38,10 @@
         <tr>
           <td>프로모션 모집인원 :</td>
           <td th:text="${proDetail.trainerPromotionRecruitPeople}"></td>
-<<<<<<< HEAD
-=======
         </tr>
         <tr>
           <td>프로모션 현재모집인원 :</td>
           <td th:text="${proDetail.trainerPromotionLiveAddPeople}"></td>
->>>>>>> main
         </tr>
         <tr>
           <td>프로모션 가격 :</td>
@@ -52,7 +49,7 @@
         </tr>
         <tr>
           <td>프로모션 모집시작일자 :</td>
-          <td th:text="${proDetail.trainerPromotionAttendStartDate}"></td>
+          <td th:text="${proDetail.trainerPromotionRecruitStartDate}"></td>
         </tr>
         <tr>
           <td>프로모션 모집마감일자 :</td>
@@ -75,6 +72,11 @@
           th:value="${proDetail.trainerPromotionNoticeCode}"
         />
         <input type="hidden" name="userId" th:value="${session.SID}" />
+        <input
+          type="hidden"
+          name="trainerPromotionRecruitEndDate"
+          th:value="${proDetail.trainerPromotionRecruitEndDate}"
+        />
         <button type="submit" id="promotionPaymentCheckBtn">
           모집신청하기
         </button>

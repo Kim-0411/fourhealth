@@ -70,8 +70,13 @@
 @import "mainContent/promotionList.css";
 
 /* sns 게시판 css */
-@import "mainContent/snsList.css";
-/* @import "../ /mainContent/snsList.css"; */
+@import "mainContent/sns/snsList.css";
+
+/* sns 등록 게시판 css */
+@import "mainContent/sns/snsInsert.css";
+
+/* 신고게시판 css */
+@import "mainContent/boardCss/reportStyle.css";
 
 /* --------------------
   exercise Css

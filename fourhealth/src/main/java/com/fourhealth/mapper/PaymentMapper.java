@@ -16,4 +16,8 @@ public interface PaymentMapper {
 
     public int promotionPaymentInsert(Map<String, Object> map);
 
+    public String checkCountPromotionPayment(String userId, String trainerPromotionNoticeCode);
+
+    public String checkMatching(String userId);
+
 }

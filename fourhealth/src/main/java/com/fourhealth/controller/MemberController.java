@@ -4,7 +4,6 @@ package com.fourhealth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import javax.servlet.http.HttpServletResponse;
-import java.util.List;
 
 import javax.servlet.http.HttpSession;
 
@@ -18,6 +17,8 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.fourhealth.dto.CommonProfileDto;
+import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.dto.GradePlatformTrainerDto;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
@@ -25,10 +26,12 @@ import com.fourhealth.dto.MemberDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.UserService;
 
-import com.fourhealth.dto.MsgDto;
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
+import java.util.List;
 import com.fourhealth.service.MessageService;
+import com.fourhealth.service.ProfileService;
+
 import com.fourhealth.service.TrainerService;
 
 @Controller
@@ -39,7 +42,23 @@ public class MemberController {
 	private UserService userService;
 	@Autowired
 	private TrainerService trainerService;
-
+	@Autowired
+	private ProfileService profileService;
+	
+	// 트레이너 프로필 view
+	@GetMapping("/trainerProfile")
+	public String getTrainerProfile(Model model
+								   ,@RequestParam(name="result",required=false)String result) {
+		List<CommonProfileDto> trainerProfile = profileService.getTrainerProfile();
+		List<MemberDto> member = memberService.viewMember();
+		System.out.println(member);
+		System.out.println(trainerProfile);
+		model.addAttribute("title","회원 목록");
+		model.addAttribute("trainerProfile",trainerProfile);
+		model.addAttribute("member",member);
+		return "manage_layout/trainer/profile/trainerProfile";
+	}
+	
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
@@ -51,17 +70,17 @@ public class MemberController {
 	// [회원 공통]로그인 후 플렛폼 권한 체크하여 치환 작업
 	@PostMapping("/login")
 	public String commonLoginPage(@RequestParam(name = "userId", required = false) String userId,
-								@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
-								// RedirectAttributes rAttr,
-								HttpServletResponse response) throws IOException {
+			@RequestParam(name = "userPassword", required = false) String userPassword, HttpSession session,
+			// RedirectAttributes rAttr,
+			HttpServletResponse response) throws IOException {
 		GradePlatformUserDto gradePlatformUserDto;
 		GradePlatformTrainerDto gradePlatformTrainerDto;
-		
+
 		System.out.println("로그인 화면에서 입력받은 값->" + userId);
 		System.out.println("로그인 화면에서 입력받은 값->" + userPassword);
 
 		MemberDto memberDto = memberService.getMemberById(userId);
-		System.out.println(memberDto.getMemberId());
+		// System.out.println(memberDto.getMemberId());
 
 		if (userId != null && userPassword != null && memberDto != null && memberDto.getMemberPw() != null
 				&& userPassword.equals(memberDto.getMemberPw())) {
@@ -76,36 +95,35 @@ public class MemberController {
 				memberDto.setMemberLevel("관리자");
 			}
 			System.out.println("로그인 후 레벨 체크" + memberDto);
-				// 로그인 후 사용자 플랫폼 권한 체크하여 치환(닉네임)
-				if(memberDto.getMemberLevel().equals("사용자")) {
-					gradePlatformUserDto = userService.getUserGrade(userId);
-					session.setAttribute("SID", memberDto.getMemberId());
-					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
-					session.setAttribute("SNAME", memberDto.getMemberName());
-					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-					// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
-					session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
-					System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
-					System.out.println(userId + " : 로그인 성공");
-				}else if(memberDto.getMemberLevel().equals("트레이너")){
-					gradePlatformTrainerDto = trainerService.getTrainerGrade(userId);
-					session.setAttribute("SID", memberDto.getMemberId());
-					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
-					session.setAttribute("SNAME", memberDto.getMemberName());
-					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-					// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
-					session.setAttribute("SGRADE", gradePlatformTrainerDto.getTrainerPlatformGradeName());
-					System.out.println(gradePlatformTrainerDto.getTrainerPlatformGradeName());
-					System.out.println(userId + " : 로그인 성공");
-				}else {
-					session.setAttribute("SID", memberDto.getMemberId());
-					session.setAttribute("SLEVEL", memberDto.getMemberLevel());
-					session.setAttribute("SNAME", memberDto.getMemberName());
-					session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-					System.out.println(userId + " : 로그인 성공");
-				}
+			// 로그인 후 사용자 플랫폼 권한 체크하여 치환(닉네임)
+			if (memberDto.getMemberLevel().equals("사용자")) {
+				gradePlatformUserDto = userService.getUserGrade(userId);
+				session.setAttribute("SID", memberDto.getMemberId());
+				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+				session.setAttribute("SNAME", memberDto.getMemberName());
+				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
+				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
+				System.out.println(userId + " : 로그인 성공");
+			} else if (memberDto.getMemberLevel().equals("트레이너")) {
+				gradePlatformTrainerDto = trainerService.getTrainerGrade(userId);
+				session.setAttribute("SID", memberDto.getMemberId());
+				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+				session.setAttribute("SNAME", memberDto.getMemberName());
+				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
+				session.setAttribute("SGRADE", gradePlatformTrainerDto.getTrainerPlatformGradeName());
+				System.out.println(gradePlatformTrainerDto.getTrainerPlatformGradeName());
+				System.out.println(userId + " : 로그인 성공");
+			} else {
+				session.setAttribute("SID", memberDto.getMemberId());
+				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
+				session.setAttribute("SNAME", memberDto.getMemberName());
+				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
+				System.out.println(userId + " : 로그인 성공");
+			}
 
-			
 		} else {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
@@ -148,42 +166,42 @@ public class MemberController {
 		return "main_layout/member/m_insert";
 	}
 
-	//회원 가입 후 로그인 화면으로 이동
-		@PostMapping("/mInsert")
-		public String addMember(MemberDto member){
-			//공통 회원 가입
-			String userId = member.getMemberId();
-			String memberLevel = member.getMemberLevel();
-			
-				if(memberLevel.equals("user_level_002")) {
-					////트레이너 플렛폼 공통 등급 관리
-					TrainerDto trainerdto = new TrainerDto();
-					trainerdto.setUserId(userId);
-					trainerdto.setTrainerPlatformGradeCode("trainer_platform_grade_004");
-					trainerdto.setTrainerAccessCode("trainer_access_003");
-					member.setTrainerDto(trainerdto);
-					String result = memberService.addMember(member); 
-					String result2 = trainerService.addMemberTrainerPlatFormGradeCode(trainerdto); 
-					System.out.println(result);
-					System.out.println(result2);
-				}else if(memberLevel.equals("user_level_003")){
-					//사용자 플렛폼 공통 등급 관리
-					UserDto userdto = new UserDto();
-					userdto.setUserId(userId);
-					userdto.setUserPlatFormGradeCode("user_platform_grade_001");
-					userdto.setUserStatusLevelCode("user_status_level_001");
-					member.setUserDto(userdto);
-					String result = memberService.addMember(member); 
-					String result2 = userService.addMemberUserPlatFormGradeCode(userdto); 
-					System.out.println(result);
-					System.out.println(result2);
-				} else {
-					//플랫폼 등급이 없을 시 관리자 회원가입 처리
-					String result = memberService.addMember(member); 
-					System.out.println(result);
-				}
-			return "redirect:/login";
+	// 회원 가입 후 로그인 화면으로 이동
+	@PostMapping("/mInsert")
+	public String addMember(MemberDto member) {
+		// 공통 회원 가입
+		String userId = member.getMemberId();
+		String memberLevel = member.getMemberLevel();
+
+		if (memberLevel.equals("user_level_002")) {
+			//// 트레이너 플렛폼 공통 등급 관리
+			TrainerDto trainerdto = new TrainerDto();
+			trainerdto.setUserId(userId);
+			trainerdto.setTrainerPlatformGradeCode("trainer_platform_grade_004");
+			trainerdto.setTrainerAccessCode("trainer_access_003");
+			member.setTrainerDto(trainerdto);
+			String result = memberService.addMember(member);
+			String result2 = trainerService.addMemberTrainerPlatFormGradeCode(trainerdto);
+			System.out.println(result);
+			System.out.println(result2);
+		} else if (memberLevel.equals("user_level_003")) {
+			// 사용자 플렛폼 공통 등급 관리
+			UserDto userdto = new UserDto();
+			userdto.setUserId(userId);
+			userdto.setUserPlatFormGradeCode("user_platform_grade_001");
+			userdto.setUserStatusLevelCode("user_status_level_001");
+			member.setUserDto(userdto);
+			String result = memberService.addMember(member);
+			String result2 = userService.addMemberUserPlatFormGradeCode(userdto);
+			System.out.println(result);
+			System.out.println(result2);
+		} else {
+			// 플랫폼 등급이 없을 시 관리자 회원가입 처리
+			String result = memberService.addMember(member);
+			System.out.println(result);
 		}
+		return "redirect:/login";
+	}
 
 	// 회원가입 화면에서 아이디 중복처리 확인
 	@RequestMapping(value = "/userIdCheck", method = RequestMethod.POST, produces = "application/json")
@@ -276,14 +294,25 @@ public class MemberController {
 	// return "member/m_insert";
 	// }
 
-	private MessageService messageService;
-
 	// 로그인 화면(공통)
 	@GetMapping("/login")
 	public String commonLoginPage(Model model) {
 		model.addAttribute("title", "로그인 화면");
 
-		return "/login/login";
+		return "login/login";
+	}
+
+	// 비밀번호 찾기 화면
+	@GetMapping("/pwFind")
+	public String AllPwFind() {
+		return "/login/pw_find";
+	}
+
+	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
+	@GetMapping("/pwEmailChange")
+	public String pwEmailChange() {
+
+		return "/login";
 	}
 
 }
