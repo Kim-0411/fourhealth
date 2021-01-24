@@ -170,12 +170,10 @@ public class MasterController {
 	// return "master/member/member_all_list";
 	// }
 
-	// 트레이너 / 관리자 메인화면
+	// 트레이너 / 관리자 메인화면 로그인 없을시 관리자 root로 처리
 	@GetMapping("/manage")
 	public String mainTrainer(Model model, HttpSession session) {
-		// 아이디 id002(트레이너) 로그인 가정 받은 메시지 메인화면에 메시지 버튼에 보여주기위함.
-		// 트레이너 메인
-		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage("id002");
+		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage((String)session.getAttribute("SID"));
 		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
 		session.setAttribute("noReadMeg", getAllNoReadMessage);
 		return "manage_layout/manage_main";
@@ -183,7 +181,15 @@ public class MasterController {
 
 	// 기본적인 화면 동작을 보여주기 위한 화면(남들에게 홍보)
 	@GetMapping("/manage2")
-	public String mainTrainer2() {
+	public String mainTrainer2(Model model, HttpSession session) {
+		List<MsgDto> getAllNoReadMessage;
+		if(session.getAttribute("SID") == null) {
+			 getAllNoReadMessage = messageService.getAllNoReadMessage("root");
+		}else {
+			 getAllNoReadMessage = messageService.getAllNoReadMessage((String)session.getAttribute("SID"));
+		}
+		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
+		session.setAttribute("noReadMeg", getAllNoReadMessage);
 		return "manage_layout/manage_main";
 	}
 

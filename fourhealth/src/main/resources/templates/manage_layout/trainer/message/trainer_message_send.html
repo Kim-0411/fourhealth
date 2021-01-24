@@ -15,7 +15,7 @@
 						<h3 class="card-title">쪽지 작성</h3>
 					</div>
 					<!-- /.card-header -->
-					<input type="hidden" th:value="${trainerId}" name="sendId">
+					<input type="hidden" th:value="${memberId}" name="sendId">
 					<div class="card-body">
 						<div class="form-group">
 							<input type="text" th:if="${reply == ''}" class="form-control" name="receiveId" id="receiveId" placeholder="To:">
