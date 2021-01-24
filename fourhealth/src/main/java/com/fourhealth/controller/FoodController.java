@@ -134,11 +134,12 @@ public class FoodController {
 
 			}
 		}
-		// model.addAttribute("lastPage" , resultMap.get("lastPage"));
+	
 		model.addAttribute("foodList", resultMap.get("foodList"));
-		// model.addAttribute("currentPage", resultMap.get("currentPage"));
-		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
-		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+		model.addAttribute("lastPage" , resultMap.get("lastPage"));
+		model.addAttribute("currentPage", resultMap.get("currentPage"));
+		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
 		// return "manage_layout/master/food_manage/food_data_list";
 		return "manage_layout/master/food_manage/food_data_list2";

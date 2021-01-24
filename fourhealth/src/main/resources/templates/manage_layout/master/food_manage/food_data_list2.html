@@ -2,7 +2,7 @@
 <html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
     layout:decorate="@{/default_layout/manage/default}">
 <th:block layout:fragment="customContent">
-     <!--관리자 식품 관리 리스트 테이블-->
+    <!--관리자 식품 관리 리스트 테이블-->
     <div class="content">
         <div class="container-fluid">
             <div class="row">
@@ -11,19 +11,19 @@
                         <h1 class="card-title">관리자 식품 정보 현황</h1>
                     </div>
                     <style>
-                        .card-title{
-                            font-size:30px;
+                        .card-title {
+                            font-size: 30px;
                             font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
                         }
-
                     </style>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped">
-                            <div class="dataTables_length" id="example1_length">
+                        <table id="example1" class="table table-bordered table-striped dt-bootstrap4">
+                            <!-- <div class="dataTables_length" id="example1_length">
                                 <label>
-                                    Shows 
-                                    <select name="example1_length" aria-controls="example1" class="cusotm-select custom-select-sm form-control form-control-sm">
+                                    Shows
+                                    <select name="example1_length" aria-controls="example1"
+                                        class="cusotm-select custom-select-sm form-control form-control-sm">
                                         <option value="10">10</option>
                                         <option value="25">25</option>
                                         <option value="50">50</option>
@@ -31,7 +31,7 @@
                                     </select>
                                     entries
                                 </label>
-                            </div>
+                            </div> -->
                             <thead>
                                 <tr>
                                     <th>식품코드</th>
@@ -77,58 +77,40 @@
                                 </tr>
                             </tbody>
                         </table>
+                        <div class="foodtableFooter">
+                            <tr>
+                                <td colspan="10">
+                                    <a th:href="@{/manage_layout/master/foodDataList}"
+                                        class="btn-xs btn-primary">처음으로</a>
 
-                        <script>
-                            //Food Modal Details js
-                            var foodUpdate = $(".foodUpdate");
-                            var foodDetails = $("#foodDetails");
-                            var foodUpdateBtn = $(".foodUpdateBtn");
-                      
-                            
-                            foodUpdate.click(function () {
-                                console.log("test");
-                              // foodDetails.modal('show');
-                              $("#foodDetails").modal();
-                              $("#closeUpdateFoodBtn").click(function(){
-                                $("#foodDetails").modal("hide");
-                              })
-
-                            })
-
-                            foodUpdateBtn.click(function(){
-                              console.log("test");
-                              // foodDetails.modal('show');
-                              $("#foodDetails").modal();
-                              $("#closeUpdateFoodBtn").click(function(){
-                                $("#foodDetails").modal("hide");
-                              })
-                            });
-                      
-                          </script>
-                          <script>
-                            $(function () {
-                              $("#example1").DataTable({
-                                "responsive": true,
-                                "autoWidth": false,
-                              });
-                              $('#example2').DataTable({
-                                "paging": true,
-                                "lengthChange": false,
-                                "searching": false,
-                                "ordering": true,
-                                "info": true,
-                                "autoWidth": false,
-                                "responsive": true,
-                              });
-                            });
-                          </script>
-
+                                    <a th:if="${currentPage > 1}"
+                                        th:href="@{/manage_layout/master/foodDataList(currentPage = ${currentPage - 1 })}">
+                                        <i class="fas fa-arrow-left"></i></a>
+                                    <th:block th:each="number : ${#numbers.sequence(startPageNum,endPageNum)}">
+                                        <a th:unless="${currentPage ==number}"
+                                            th:href="@{/manage_layout/master/foodDataList(currentPage = ${number})}"
+                                            th:text="${'['+number+']'}"></a>
+                                        <span th:if="${currentPage == number}" th:text="${'[' + number + ']'}"></span>
+                                    </th:block>
+                                    <a th:if="${currentPage < lastPage}"
+                                        th:href="@{/manage_layout/master/foodDataList(currentPage = ${currentPage - 1 })}"><i
+                                            class="fas fa-arrow-right"></i></a>
+                                    <a class="btn-xs btn-primary"
+                                        th:href="@{/manage_layout/master/foodDataList(currentPage = ${lastPage})}">마지막</a>
+                                </td>
+                            </tr>
+                        </div>
+                        <style>
+                            .foodtableFooter {
+                                margin-top: 30px;
+                            }
+                        </style>
 
                         <!-- Food Details Modal Page -->
                         <!-- Modal -->
                         <div class="modal fade" id="foodDetails" tabindex="-1" role="dialog"
                             aria-labelledby="myModalLabel">
-                            <div class="modal-dialog modal-lg" role="table">
+                            <div class="modal-dialog modal-xl" role="table">
                                 <div class="modal-content">
                                     <div class="modal-header">
                                         <h4 class="modal-title" id="myModalLabel">식품 정보 수정</h4>
@@ -139,7 +121,6 @@
                                         <table class="table table-bordered table-hover">
                                             <thead>
                                                 <tr>
-                                                    <th>식품코드</th>
                                                     <th>식품이름</th>
                                                     <th>총량(1인분)</th>
                                                     <th>칼로리</th>
@@ -153,8 +134,18 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td></td>
+                                                <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}">
+                                                    <td th:text="${food.get('foodName')}"></td>
+                                                    <td th:text="${food.get('foodTotalGram')}"></td>
+                                                    <td th:text="${food.get('foodCal')}"></td>
+                                                    <td th:text="${food.get('foodProtein')}"></td>
+                                                    <td th:text="${food.get('foodFat')}"></td>
+                                                    <td th:text="${food.get('foodSodium')}"></td>
+                                                    <td th:text="${food.get('foodSugar')}"></td>
+                                                    <td th:text="${food.get('foodChole')}"></td>
+                                                    <td th:text="${food.get('foodTotalGram')}"></td>
+                                                    <td th:text="${food.get('foodMakerNamer')}"></td>
+
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -177,3 +168,48 @@
 </th:block>
 
 </html>
+
+<script>
+    //Food Modal Details js
+    var foodUpdate = $(".foodUpdate");
+    var foodDetails = $("#foodDetails");
+    var foodUpdateBtn = $(".foodUpdateBtn");
+
+
+    foodUpdate.click(function () {
+        console.log("test");
+        // foodDetails.modal('show');
+        $("#foodDetails").modal();
+        $("#closeUpdateFoodBtn").click(function () {
+            $("#foodDetails").modal("hide");
+        })
+
+    })
+
+    foodUpdateBtn.click(function () {
+        console.log("test");
+        // foodDetails.modal('show');
+        $("#foodDetails").modal();
+        $("#closeUpdateFoodBtn").click(function () {
+            $("#foodDetails").modal("hide");
+        })
+    });
+
+</script>
+<script>
+    $(function () {
+        $("#example1").DataTable({
+            "responsive": true,
+            "autoWidth": false,
+        });
+        $('#example2').DataTable({
+            "paging": true,
+            "lengthChange": false,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+        });
+    });
+</script>
