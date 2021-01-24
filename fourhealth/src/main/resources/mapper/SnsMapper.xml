@@ -4,6 +4,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.SnsMapper">
 
+ 	<update id="like_check" parameterType="HashMap">
+    	UPDATE tb_like_sns_user
+    	SET user_sns_like_count = user_sns_like_count + 1 
+   		HERE user_id=#{userId} AND user_sns_comment_code=#{userSnsCommentCode}
+  	</update>
+  
+  	<update id="like_check_cancel" parameterType="HashMap">
+    	UPDATE tb_like_sns_user
+    	SET user_sns_like_count = 0
+    	WHERE user_id=#{userId} AND user_sns_comment_code=#{userSnsCommentCode}
+	</update>
+
+
+
+	<insert id="insertComment" parameterType="CommentSnsUserDto">
+		INSERT INTO tb_comment_sns_user
+		(
+			  user_sns_comment_code
+			, user_sns_code
+			, user_id
+			, user_sns_comment_contents
+			, user_sns_comment_reg_date
+		)
+		VALUES 
+		(
+			  #{userSnsCommentCode}
+			, #{userSnsCode}
+			, #{userId}
+			, #{userSnsCommentContents}
+			, NOW()
+		)
+	</insert>
+
  	<insert id="snsInsert" parameterType="SnsUserDto">
     	<selectKey keyProperty="snsCode" resultType="String" order="BEFORE">
 	        SELECT
@@ -31,6 +64,21 @@
 	        NOW());
 	</insert>
 	
+	<select id="getSnsListCount" resultType="int">
+		SELECT
+		 	count(*)
+		FROM
+			tb_sns_user;
+	</select>
+	
+	<select id="getSnsListPaging" parameterType="int" resultType="map">
+		SELECT
+			*
+		FROM
+		    tb_sns_user
+		LIMIT #{startRow}, #{rowPerPage};
+	</select>
+	
 	<select id="getSnsList"  resultType="SnsUserDto">
 		SELECT
 			  user_sns_code 		AS userSnsCode
@@ -40,6 +88,7 @@
 			, user_sns_reg_date 	AS userSnsRegDate
 		FROM
 			tb_sns_user
+		ORDER BY userSnsRegDate DESC;
 	</select>	
 	
 </mapper>
