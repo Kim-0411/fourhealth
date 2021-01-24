@@ -26,10 +26,6 @@ import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserReportDto;
 import com.fourhealth.service.*;
 
-import com.fourhealth.dto.CommonUserDto;
-import com.fourhealth.dto.MsgDto;
-import com.fourhealth.service.*;
-
 @Controller
 public class MasterController {
 
@@ -39,16 +35,16 @@ public class MasterController {
 	private MemberService memberService;
 	@Autowired
 	private MasterService masterService;
-	
-	//관리자 단에서 전체 신고 리스트를 보여주기
+
+	// 관리자 단에서 전체 신고 리스트를 보여주기
 	@GetMapping("/reportList")
 	public String reportList(Model model) {
 		List<UserReportDto> reportList = masterService.reportList();
 		model.addAttribute("reportList", reportList);
-		
+
 		return "manage_layout/master/report_manage/reportList";
 	}
-	
+
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	// @GetMapping("/removeMasterMember")
 	// public String removeMasterMember(Model model, @RequestParam(name =
@@ -217,6 +213,7 @@ public class MasterController {
 		return "manage_layout/master/user_manage/user_login_list";
 	}
 
+	// 휴면 사용자 리스트
 	@GetMapping("/dormantUserList")
 	public String dormantUserList(Model model) {
 		return "manage_layout/master/user_manage/dormant_user_list";
@@ -240,11 +237,13 @@ public class MasterController {
 		return "manage_layout/master/trainer_manage/trainer_access_list";
 	}
 
+	// 트레이너 로그인 리스트
 	@GetMapping("/trainerLoginList")
 	public String trainerLoginList(Model model) {
 		return "manage_layout/master/trainer_manage/trainer_login_list";
 	}
 
+	// 휴면 트레이너 리스트
 	@GetMapping("/dormantTrainerList")
 	public String dormantTrainerList(Model model) {
 		return "manage_layout/master/trainer_manage/dormant_trainer_list";
