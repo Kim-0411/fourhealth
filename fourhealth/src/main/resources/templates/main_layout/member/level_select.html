@@ -6,15 +6,27 @@
   lang="en"
 >
 <th:block layout:fragment="mainContent">
-  <div id="singup">
+  <div id="signup" class="col-lg-6" style="margin-top:10rem;height:500px; display:flex; flex-direction:column; align-items: center;">
+    <p> * 해당하는 유형을 선택해주세요</p>
+    
     <div><a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a></div>
-      <div><a th:href="@{/mInsertPage(user_level_code=user_level_003)}"  class="text-white">
-        <img src="/img/signup-img/user.png" alt="signup"></a>
-        <p>사용자</p>
+      <div class="select-box"><a th:href="@{/mInsertPage(user_level_code=user_level_003)}"  class="text-white">
+        <input type="checkbox" value="user">사용자</a>
       </div>
-      <div><a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white">
-        <img src="/img/signup-img/trainer.png" alt="signup" ></a>
+      <div class="select-box mt-2"><a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white">
+        <input type="checkbox" value="trainer">트레이너</a>
       </div> 
+
+      <div class="select-box mt-5">
+        <a th:href="@{/mInsertPage(user_level_code=user_level_002)}" th:if="${session.SLEVEL =='user_level_002'}"
+        class="text-white"></a>
+        <a th:href="@{/mInsertPage(user_level_code=user_level_003)}" th:unless="${session.SLEVEL =='user_level_003'}"
+        class="text-white" ></a>
+       다음
+      </a></div>
+    </div>
   </div> 
 </th:block>
 </html>
+
+<

@@ -311,6 +311,14 @@ public class MemberController {
 		return "login/login";
 	}
 
+	// 페이스북으로 로그인 (api)
+	@GetMapping("/facebookLogin")
+	public String facebookLoginPage(Model model) {
+		System.out.println("페이스북 로그인 화면");
+
+		return "/login/facebook_login";
+	}
+
 	// 비밀번호 찾기 화면
 	@GetMapping("/pwFind")
 	public String AllPwFind() {
