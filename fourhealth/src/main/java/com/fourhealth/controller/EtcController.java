@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -33,32 +32,22 @@ public class EtcController {
 	@Autowired
 	MessageService messageService;
 
-	//로그인 없이 봣을시 root처리
-	@GetMapping("trainerSendMessage")
+	// 트레이너가 자신의 프로모션 별 메시지 보내주기 위한 화면
+	@GetMapping("trainer/message/trainerSendMessage")
 	public String trainerSendMessage(Model model,
-									@RequestParam(name = "receiveId", required = false, defaultValue = "") String receiveId
-									,HttpSession session) {
-		if(session.getAttribute("SID") == null) {
-			model.addAttribute("memberId","root");
-		}else {
-			//로그인됫을시 수정함.
-			model.addAttribute("memberId",(String)session.getAttribute("SID"));
-		}
+			@RequestParam(name = "receiveId", required = false, defaultValue = "") String receiveId) {
+		// id002트레이너 가정 로그인 프로세스 완료시 바꿔야함
+		model.addAttribute("trainerId", "id002");
 		model.addAttribute("reply", receiveId);
 		System.out.println(receiveId);
 		return "manage_layout/trainer/message/trainer_message_send";
 	}
 
-	//로그인 없이 쪽지 보낼시 id002 아니면 세션값
+	// 트레이너가 회원에게 쪽지 보내기.
 	@PostMapping("sendTrainerSelectPromotionMember")
 	public String sendTrainerSelectPromotionMember(MsgDto msg, HttpServletResponse response) throws IOException {
-		String result = null;
-		if(msg.getSendId()==null) {
-			msg.setSendId("root");
-			result = messageService.sendTrainerToUser(msg);
-		}else {
-			 result = messageService.sendTrainerToUser(msg);
-		}
+
+		String result = messageService.sendTrainerToUser(msg);
 		System.out.println(result);
 
 		response.setContentType("text/html; charset=UTF-8");
@@ -74,15 +63,11 @@ public class EtcController {
 		return null;
 	}
 
-	//보낸 메시지 관리
-	@GetMapping("trainerMessageSendManage")
-	public String trainerMessageSendMange(Model model,HttpSession session) {
-		List<MsgDto> getAllSendMessageList = null;
-		if(session.getAttribute("SID") == null) {
-		 getAllSendMessageList = messageService.getAllSendMessageList("root");
-		}else {
-			 getAllSendMessageList = messageService.getAllSendMessageList((String)session.getAttribute("SID"));
-		}
+	// 보낸 메시지 관리
+	@GetMapping("trainer/message/trainerMessageSendManage")
+	public String trainerMessageSendMange(Model model) {
+		// 트레이너 로그인 id002가정
+		List<MsgDto> getAllSendMessageList = messageService.getAllSendMessageList("id002");
 		model.addAttribute("sendMsg", getAllSendMessageList);
 		return "manage_layout/trainer/message/trainer_message_send_management";
 	}
@@ -98,15 +83,10 @@ public class EtcController {
 	}
 
 	// 트레이너 받은 메시지 관리
-	@GetMapping("trainerMessageReceiveManage")
-	public String trainerReceiveMessage(Model model, HttpSession session) {
-		List<MsgDto> getAllReceiveMessageList = null;
-		if(session.getAttribute("SID") == null) {
-			 getAllReceiveMessageList = messageService.getAllReceiveMessageList("root");
-		}else {
-			getAllReceiveMessageList = messageService.getAllReceiveMessageList((String)session.getAttribute("SID"));
-			
-		}
+	@GetMapping("trainer/message/trainerMessageReceiveManage")
+	public String trainerReceiveMessage(Model model) {
+		// 트레이너 로그인 id002가정
+		List<MsgDto> getAllReceiveMessageList = messageService.getAllReceiveMessageList("id002");
 		model.addAttribute("receiveMsg", getAllReceiveMessageList);
 		return "manage_layout/trainer/message/trainer_message_receive_management";
 	}
@@ -132,13 +112,13 @@ public class EtcController {
 	}
 
 	// 트레이너 프로필 등록페이지
-	@GetMapping("/trainerProfileInsert")
+	@GetMapping("trainer/profile/trainerProfileInsert")
 	public String trainerProfileInsert() {
 		return "manage_layout/trainer/profile/trainer_profile_insert";
 	}
 
 	// 트레이너 프로필 수정페이지
-	@GetMapping("/trainerProfileModify")
+	@GetMapping("trainer/profile/trainerProfileModify")
 	public String trainerProfileModify() {
 		return "manage_layout/trainer/profile/trainer_profile_Modify";
 	}

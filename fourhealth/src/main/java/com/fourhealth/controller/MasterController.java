@@ -39,16 +39,16 @@ public class MasterController {
 	private MemberService memberService;
 	@Autowired
 	private MasterService masterService;
-	
-	//관리자 단에서 전체 신고 리스트를 보여주기
-	@GetMapping("/reportList")
+
+	// 관리자 단에서 전체 신고 리스트를 보여주기
+	@GetMapping("master/reportManage/reportList")
 	public String reportList(Model model) {
 		List<UserReportDto> reportList = masterService.reportList();
 		model.addAttribute("reportList", reportList);
-		
+
 		return "manage_layout/master/report_manage/reportList";
 	}
-	
+
 	// 관리자 단에서 전체 회원 리스트에서 회원 삭제
 	// @GetMapping("/removeMasterMember")
 	// public String removeMasterMember(Model model, @RequestParam(name =
@@ -80,7 +80,7 @@ public class MasterController {
 	// }
 
 	// 관리자가 트레이너 승인 처리(프로모션 등록하는 권한줌)
-	@GetMapping("/mastertrainerAccessPro")
+	@GetMapping("/master/trainerManage/mastertrainerAccessPro")
 	public String masterTrainerAccess(@RequestParam(name = "userId", required = false) String userId,
 			HttpServletResponse response) throws IOException {
 		int result = masterService.masterTrainerAccess(userId);
@@ -188,7 +188,7 @@ public class MasterController {
 	/* 관리자 사용자 관리 페이지 맵핑 시작 */
 
 	// 관리자 단에서 사용자, 트레이너 리스트
-	@GetMapping("/memberAllList")
+	@GetMapping("master/user_manage/memberAllList")
 	public String memberAllList(Model model, @RequestParam(name = "user_level", required = false) String memberLevel) {
 		System.out.println(memberLevel);
 		List<MemberDto> userList = memberService.viewUserList(memberLevel);
@@ -207,7 +207,7 @@ public class MasterController {
 	}
 
 	// 사용자 로그인 정보 관련 화면
-	@GetMapping("/userLoginList")
+	@GetMapping("master/user_manage/userLoginList")
 	public String userLoginList(Model model) {
 		List<MemberDto> userList = memberService.viewUserList("user_level_003");
 		model.addAttribute("userList", userList);
@@ -215,7 +215,7 @@ public class MasterController {
 		return "manage_layout/master/user_manage/user_login_list";
 	}
 
-	@GetMapping("/dormantUserList")
+	@GetMapping("master/user_manage/dormantUserList")
 	public String dormantUserList(Model model) {
 		return "manage_layout/master/user_manage/dormant_user_list";
 	}
@@ -229,7 +229,7 @@ public class MasterController {
 	// }
 
 	// 트레이너 비승인 리스트
-	@GetMapping("/trainerAccessList")
+	@GetMapping("master/trainerManage/trainerAccessList")
 	public String trainerAccessList(Model model) {
 		List<TrainerDto> trainerList = memberService.viewAccessTrainerList();
 		model.addAttribute("title", "트레이너 비승인 목록");
@@ -238,12 +238,12 @@ public class MasterController {
 		return "manage_layout/master/trainer_manage/trainer_access_list";
 	}
 
-	@GetMapping("/trainerLoginList")
+	@GetMapping("master/trainerManage/trainerLoginList")
 	public String trainerLoginList(Model model) {
 		return "manage_layout/master/trainer_manage/trainer_login_list";
 	}
 
-	@GetMapping("/dormantTrainerList")
+	@GetMapping("master/trainerManage/dormantTrainerList")
 	public String dormantTrainerList(Model model) {
 		return "manage_layout/master/trainer_manage/dormant_trainer_list";
 	}
@@ -251,12 +251,12 @@ public class MasterController {
 	/* 관리자 트레이너 관리 페이지 맵핑 끝 */
 
 	/* 관리자 매칭 관리 페이지 맵핑 시작 */
-	@GetMapping("/matchingList")
+	@GetMapping("master/matchingManage/matchingList")
 	public String matchingList(Model model) {
 		return "manage_layout/master/matching_manage/matching_list";
 	}
 
-	@GetMapping("/matchingRefundList")
+	@GetMapping("master/matchingManage/matchingRefundList")
 	public String matchingRefundList(Model model) {
 		return "manage_layout/master/matching_manage/matching_refund_list";
 	}
@@ -264,63 +264,63 @@ public class MasterController {
 	/* 관리자 매칭 관리 페이지 맵핑 끝 */
 
 	/* 관리자 질병DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/diseaseDataInsert")
+	@GetMapping("master/diseaseManage/diseaseDataInsert")
 	public String diseaseDataInsert(Model model) {
 		return "manage_layout/master/disease_manage/disease_data_insert";
 	}
 
-	@GetMapping("/diseaseDataList")
+	@GetMapping("master/diseaseManage/diseaseDataList")
 	public String diseaseDataList(Model model) {
 		return "manage_layout/master/disease_manage/disease_data_list";
 	}
 
-	@GetMapping("/diseaseDataModify")
+	@GetMapping("master/diseaseManage/diseaseDataModify")
 	public String diseaseDataModify(Model model) {
 		return "manage_layout/master/disease_manage/disease_data_modify";
 	}
 	/* 관리자 질병DB 관리 페이지 맵핑 끝 */
 
 	/* 관리자 운동DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/exerciseDataInsert")
+	@GetMapping("master/exerciseManage/exerciseDataInsert")
 	public String exerciseDataInsert(Model model) {
 		return "manage_layout/master/exercise_manage/exercise_data_insert";
 	}
 
-	@GetMapping("/exerciseDataList")
+	@GetMapping("master/exerciseManage/exerciseDataList")
 	public String exerciseDataList(Model model) {
 		return "manage_layout/master/exercise_manage/exercise_data_list";
 	}
 
-	@GetMapping("/exerciseDataModify")
+	@GetMapping("master/exerciseManage/exerciseDataModify")
 	public String exerciseDataModify(Model model) {
 		return "manage_layout/master/exercise_manage/exercise_data_modify";
 	}
 	/* 관리자 운동DB 관리 페이지 맵핑 끝 */
 
 	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/foodDataInsert")
+	@GetMapping("master/foodManage/foodDataInsert")
 	public String foodDataInsert(Model model) {
 		return "manage_layout/master/food_manage/food_data_insert";
 	}
 
-	@GetMapping("/foodDataList")
+	@GetMapping("master/foodManage/foodDataList")
 	public String foodDataList(Model model) {
 		return "manage_layout/master/food_manage/food_data_list";
 	}
 
-	@GetMapping("/foodDataModify")
+	@GetMapping("master/foodManage/foodDataModify")
 	public String foodDataModify(Model model) {
 		return "manage_layout/master/food_manage/food_data_modify";
 	}
 	/* 관리자 음식DB 관리 페이지 맵핑 끝 */
 
 	/* 관리자 플렛폼 등급 관리 페이지 맵핑 시작 */
-	@GetMapping("/userPlatformGrade")
+	@GetMapping("master/platformManage/userPlatformGrade")
 	public String userPlatformGrade(Model model) {
 		return "manage_layout/master/platform_manage/user_platform_grade";
 	}
 
-	@GetMapping("/trainerPlatformGrade")
+	@GetMapping("master/platformManage/trainerPlatformGrade")
 	public String trainerPlatformGrade(Model model) {
 		return "manage_layout/master/platform_manage/trainer_platform_grade";
 	}

@@ -26,6 +26,19 @@ public class ExerciseController {
 	@Autowired
 	private ExerciseService exerciseService;
 
+	@GetMapping("exercise/exercise")
+	public String exercise(Model model) {
+		List<MetExerciseDto> easyList = exerciseService.getAllEasyExerciseList();
+		List<MetExerciseDto> NormalList = exerciseService.getAllNormalExerciseList();
+		List<MetExerciseDto> HardList = exerciseService.getAllHardExerciseList();
+		model.addAttribute("title", "Fourhealth exercise");
+		model.addAttribute("easy", easyList);
+		model.addAttribute("normal", NormalList);
+		model.addAttribute("hard", HardList);
+
+		return "main_layout/exercise/exercise";
+	}
+
 	// 전체 운동보기 (전체 접근가능)
 	@GetMapping("/allExerciseList")
 	public String allExerciseList(Model model) {
@@ -100,6 +113,5 @@ public class ExerciseController {
 
 		return null;
 	}
-
 
 }

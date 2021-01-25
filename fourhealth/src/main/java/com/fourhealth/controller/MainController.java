@@ -17,6 +17,7 @@ public class MainController {
 
 	@Autowired
 	private ExerciseService exerciseService;
+
 	/* thymeleaf 페이지 테스트 */
 	// index page(main)
 	@GetMapping("/")
@@ -39,23 +40,10 @@ public class MainController {
 		return "main_layout/about";
 	}
 
-	@GetMapping("/food")
+	@GetMapping("/food/food")
 	public String food(Model model) {
 		model.addAttribute("title", "Fourhealth About");
-		return "main_layout/food";
-	}
-
-	@GetMapping("/exercise")
-	public String exercise(Model model) {
-		List<MetExerciseDto> easyList = exerciseService.getAllEasyExerciseList();
-		List<MetExerciseDto> NormalList = exerciseService.getAllNormalExerciseList();
-		List<MetExerciseDto> HardList = exerciseService.getAllHardExerciseList();
-		model.addAttribute("title", "Fourhealth exercise");
-		model.addAttribute("easy", easyList);
-		model.addAttribute("normal", NormalList);
-		model.addAttribute("hard", HardList);
-
-		return "main_layout/exercise";
+		return "main_layout/food/food";
 	}
 
 }

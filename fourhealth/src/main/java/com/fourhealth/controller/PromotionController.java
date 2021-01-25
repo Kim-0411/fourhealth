@@ -51,7 +51,7 @@ public class PromotionController {
 	private MemberService memberService;
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("main/promtion/promotionList")
+	@GetMapping("promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -163,7 +163,7 @@ public class PromotionController {
 	}
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
-	@GetMapping("/myPromotionList")
+	@GetMapping("trainer/promtion/myPromotionList")
 	public String trainerMyPromotionList(Model model) {
 		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService
 				.getTrainerMyPromotionAllList("id002");
