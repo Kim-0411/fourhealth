@@ -14,7 +14,7 @@ public class MemberDto {
     private String memberBirth; // 회원 공통 생년월일
     private String memberGender; // 회원 공통 성별
     private String memberRegDate; // 회원 공통 등록 일자
-    private String userLastLoginDate; // 마지막로그인일자.
+    private String userLastLoginDate; // 마지막 로그인 일자
     private UserDto userDto; // UserDto 활용
     private TrainerDto trainerDto; // TrainerDto 활용
 

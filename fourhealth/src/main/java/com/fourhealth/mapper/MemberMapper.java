@@ -53,4 +53,10 @@ public interface MemberMapper {
 	// 회원조회
 	public MemberDto getMemberSelect(String userId);
 
+	// 비번 찾기
+	public String find_pw(String email);
+
+	// 비밀번호 메일 보내기전 임시 번호로 변경
+	public int rePw(MemberDto member);
+
 }
