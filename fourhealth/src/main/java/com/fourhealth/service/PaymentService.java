@@ -7,7 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.fourhealth.dto.MatchingUserTrainerDto;
-import com.fourhealth.dto.UserCouponDTO;
+import com.fourhealth.dto.UserCouponDto;
 import com.fourhealth.mapper.MatchingMapper;
 import com.fourhealth.mapper.PaymentMapper;
 
@@ -25,9 +25,9 @@ public class PaymentService {
 		return re;
 	}
 
-	public List<UserCouponDTO> userCouponList(String userId) {
+	public List<UserCouponDto> userCouponList(String userId) {
 		System.out.println(userId);
-		List<UserCouponDTO> userCouponList = paymentMapper.userCouponList(userId);
+		List<UserCouponDto> userCouponList = paymentMapper.userCouponList(userId);
 		return userCouponList;
 	}
 }

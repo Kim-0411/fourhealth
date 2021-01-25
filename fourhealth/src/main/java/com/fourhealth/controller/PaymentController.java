@@ -8,7 +8,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
-import com.fourhealth.dto.UserCouponDTO;
+import com.fourhealth.dto.UserCouponDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PaymentService;
 import com.fourhealth.service.PromotionService;
@@ -72,7 +72,7 @@ public class PaymentController {
                 } else {
                     // 만약 현재 프로모션이 현재인원이 가득 차있지 않다면
 
-                    List<UserCouponDTO> userCouponList = paymentService.userCouponList(userId);
+                    List<UserCouponDto> userCouponList = paymentService.userCouponList(userId);
                     MemberDto member = memberService.getMemberSelect(userId);
                     model.addAttribute("promotion", promotionDTO);
                     model.addAttribute("userCouponList", userCouponList);

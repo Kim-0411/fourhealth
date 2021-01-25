@@ -2,7 +2,7 @@ package com.fourhealth.dto;
 
 import java.util.List;
 
-public class UserCouponDTO {
+public class UserCouponDto {
     private String userCouponCode;
     private String userId;
     private String userPlatformCouponCode;
@@ -10,7 +10,7 @@ public class UserCouponDTO {
     private String userCouponValidityEnd;
     private String userCouponRegDate;
     private String userCouponUseDate;
-    private List<CouponDTO> CouponList;
+    private List<CouponDto> CouponList;
 
     public String getUserCouponCode() {
         return userCouponCode;
@@ -68,11 +68,11 @@ public class UserCouponDTO {
         this.userCouponUseDate = userCouponUseDate;
     }
 
-    public List<CouponDTO> getCouponList() {
+    public List<CouponDto> getCouponList() {
         return CouponList;
     }
 
-    public void setCouponList(List<CouponDTO> couponList) {
+    public void setCouponList(List<CouponDto> couponList) {
         CouponList = couponList;
     }
 

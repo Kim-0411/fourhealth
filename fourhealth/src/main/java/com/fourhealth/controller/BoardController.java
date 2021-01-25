@@ -37,6 +37,7 @@ public class BoardController {
 	@RequestMapping("/reportInsert")
 	public String reportBoardInsertForm(String userId, Model model) {
 		model.addAttribute("title","신고 등록");
+		System.out.println("제발 좀 떠봐라 슈바꺼"+userId);
 		List<MatchingUserTrainerDto> reportPromotionList = boardService.reportPromotionList(userId);
 		model.addAttribute("reportPromotionList",reportPromotionList);
 		return "/main_layout/board/reportInsert";
@@ -49,5 +50,12 @@ public class BoardController {
 		
 		return "redirect:/reportBoardMain";
 	}
-	
+	//문의 게시판으로 가기 위한 매핑
+	@GetMapping("inquiryInsert")
+	public String inquiryInsertForm(String userId, Model model) {
+		model.addAttribute("title","문의 등록");
+		System.out.println("제발 떠랏 " + userId);
+		
+		return "/main_layout/board/inquiryInsert";
+	}
 }

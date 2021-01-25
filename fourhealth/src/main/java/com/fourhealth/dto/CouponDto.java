@@ -1,6 +1,6 @@
 package com.fourhealth.dto;
 
-public class CouponDTO {
+public class CouponDto {
     private String userPlatformCouponCode;
     private String userPlatformGradeCode;
     private String userPlatformCouponDetails;
