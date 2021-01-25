@@ -181,15 +181,7 @@ public class MasterController {
 
 	// 기본적인 화면 동작을 보여주기 위한 화면(남들에게 홍보)
 	@GetMapping("/manage2")
-	public String mainTrainer2(Model model, HttpSession session) {
-		List<MsgDto> getAllNoReadMessage;
-		if(session.getAttribute("SID") == null) {
-			 getAllNoReadMessage = messageService.getAllNoReadMessage("root");
-		}else {
-			 getAllNoReadMessage = messageService.getAllNoReadMessage((String)session.getAttribute("SID"));
-		}
-		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
-		session.setAttribute("noReadMeg", getAllNoReadMessage);
+	public String mainTrainer2(Model model) {
 		return "manage_layout/manage_main";
 	}
 
