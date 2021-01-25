@@ -33,7 +33,7 @@ public class EtcController {
 	MessageService messageService;
 
 	// 트레이너가 자신의 프로모션 별 메시지 보내주기 위한 화면
-	@GetMapping("trainerSendMessage")
+	@GetMapping("trainer/message/trainerSendMessage")
 	public String trainerSendMessage(Model model,
 			@RequestParam(name = "receiveId", required = false, defaultValue = "") String receiveId) {
 		// id002트레이너 가정 로그인 프로세스 완료시 바꿔야함
@@ -64,7 +64,7 @@ public class EtcController {
 	}
 
 	// 보낸 메시지 관리
-	@GetMapping("trainerMessageSendManage")
+	@GetMapping("trainer/message/trainerMessageSendManage")
 	public String trainerMessageSendMange(Model model) {
 		// 트레이너 로그인 id002가정
 		List<MsgDto> getAllSendMessageList = messageService.getAllSendMessageList("id002");
@@ -83,7 +83,7 @@ public class EtcController {
 	}
 
 	// 트레이너 받은 메시지 관리
-	@GetMapping("trainerMessageReceiveManage")
+	@GetMapping("trainer/message/trainerMessageReceiveManage")
 	public String trainerReceiveMessage(Model model) {
 		// 트레이너 로그인 id002가정
 		List<MsgDto> getAllReceiveMessageList = messageService.getAllReceiveMessageList("id002");
@@ -112,13 +112,13 @@ public class EtcController {
 	}
 
 	// 트레이너 프로필 등록페이지
-	@GetMapping("/trainerProfileInsert")
+	@GetMapping("trainer/profile/trainerProfileInsert")
 	public String trainerProfileInsert() {
 		return "manage_layout/trainer/profile/trainer_profile_insert";
 	}
 
 	// 트레이너 프로필 수정페이지
-	@GetMapping("/trainerProfileModify")
+	@GetMapping("trainer/profile/trainerProfileModify")
 	public String trainerProfileModify() {
 		return "manage_layout/trainer/profile/trainer_profile_Modify";
 	}

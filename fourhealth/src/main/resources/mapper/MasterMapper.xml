@@ -33,11 +33,13 @@
 	FROM tb_user_report
 	</select>
     
+    <!-- 관리자가 트레이너 승인처리 -->
     <update id="masterTrainerAccess" parameterType="String" >
     	UPDATE 
     		tb_trainer
 		SET
-			trainer_access_reg_date=NOW()
+			trainer_access_reg_date=NOW(),
+      trainer_access_code="trainer_access_001"
 		WHERE
 			user_id=#{userId};
     </update>

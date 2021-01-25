@@ -270,6 +270,28 @@
 		mut.trainer_promotion_notice_code =#{promotionCode};
 	</select>
 	 -->
-	
+	 
+	 <!-- 이메일 값을 확인하여 아이디 이메일 존재 여부 확인 limit 1 걸어놓은 이유는 지금 회원가입할때 이메일 중복체크도없고 혹여나 2개가 나오면 에러뜨기때문.-->
+	 <select id="find_pw" parameterType="String" resultType="String">
+	 	SELECT
+			u.user_email
+		FROM
+			tb_common_user AS u
+		WHERE
+			u.user_email =#{email}
+			LIMIT 1
+	 	
+	 
+	 </select>
+	 <!-- 이메일 보내기전 비밀번호값 변경후에 임시 비밀번호 전송해주기위해.  -->
+	 <update id="rePw" parameterType="MemberDto">
+	 	UPDATE
+			tb_common_user
+		SET
+		user_pw = #{memberPw}
+		WHERE 
+		user_email =  #{memberEmail};
+	 </update>
+
 	
 </mapper>

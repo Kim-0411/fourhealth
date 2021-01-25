@@ -84,7 +84,7 @@ public class MemberService {
 		return trainerList;
 	}
 
-	// 관리자 단에서 트레이너 리스트중 승인 처리 안된사람 리스트뽑기
+	// 관리자 단에서 트레이너 리스트 중 승인 처리 안된사람 리스트 출력
 	public List<MemberDto> viewUserList(String memberLevel) {
 		List<MemberDto> memberList = memberMapper.viewUserList(memberLevel);
 		System.out.println(memberList);

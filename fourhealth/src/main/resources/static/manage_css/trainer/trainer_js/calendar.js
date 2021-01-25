@@ -45,7 +45,7 @@ $(function () {
   // initialize the external events
   // -----------------------------------------------------------------
 
-  new Draggable(containerEl, {
+ /* new Draggable(containerEl, {
     itemSelector: ".external-event",
     eventData: function (eventEl) {
       return {
@@ -61,7 +61,7 @@ $(function () {
           .getPropertyValue("color"),
       };
     }
-  });
+  });*/
 
   var calendar = new Calendar(calendarEl, {
     headerToolbar: {
@@ -69,9 +69,10 @@ $(function () {
       center: "title",
       right: "dayGridMonth,timeGridWeek,timeGridDay",
     },
+    locale : 'ko', 
     themeSystem: "bootstrap",
     //Random default events
-    events: [
+  /*  events: [
       {
         title: "All Day Event",
         start: new Date(y, m, 1),
@@ -117,8 +118,8 @@ $(function () {
         backgroundColor: "#3c8dbc", //Primary (light-blue)
         borderColor: "#3c8dbc", //Primary (light-blue)
       },
-    ],
-    editable: true,
+    ],*/
+ /*   editable: true,
     droppable: true, // this allows things to be dropped onto the calendar !!!
     drop: function (info) {
       // is the "remove after drop" checkbox checked?
@@ -126,6 +127,15 @@ $(function () {
         // if so, remove the element from the "Draggable Events" list
         info.draggedEl.parentNode.removeChild(info.draggedEl);
       }
+    },*/
+//클릭시 동작 이벤트 
+    dateClick: function() {	
+    	var user_id = $("#select_user_id").text(); //스케쥴 아이디 유무
+    	if(user_id == ''){
+    		alert('프로모션및 회원을 선택해주세요.');
+    	}else{
+    		$("#myModal").modal();
+    	}
     },
   });
 
@@ -171,9 +181,6 @@ $(function () {
           }
           var event = $("<div>");
 
-          // for(let i=0; i<){
-
-          // }
           event
             .css({
               "background-color": currColor,
@@ -197,11 +204,9 @@ $(function () {
       }
     }
   });
-/*  $(document).on('click','.external-event', function () {
-	  console.log($(this).text());
-  });*/
-
 });
+
+
 $(document).on('click','.external-event', function () {
 	  console.log($(this).text());
 	  $("#myCardModal").modal();
@@ -211,6 +216,3 @@ $(document).on('external-event','click', function () {
  
   console.log($(this).text());
 });
-// $("#myCardModal").click(function () {
-//   $("#myCardModal").modal();
-// });
