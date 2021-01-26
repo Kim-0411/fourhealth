@@ -43,5 +43,36 @@
 		WHERE
 			user_id=#{userId};
     </update>
-
+    <!-- 프로모션 수  -->
+    <select id="allpromotionCount" resultType="int">
+    	SELECT
+			COUNT(*)
+		FROM
+			tb_notice_promotion_trainer;
+    </select>
+    
+	<!--전체 회원 수 -->
+	<select id="allMemberCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_common_user;
+	</select>
+	
+	<!--전체 트레이너 수  -->
+	<select id="allTrainerCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_trainer;
+		
+	
+	</select>
+	<!--전체 고객 수  -->
+	<select id="alluserCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_user;
+	</select>
 </mapper>
