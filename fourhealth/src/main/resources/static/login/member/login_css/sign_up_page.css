@@ -1,3 +1,24 @@
-      input {
-        margin: 10px;
-      }
+input {
+  margin: 10px;
+}
+
+div#signup.col-lg-6 {
+  margin-top: 10rem;
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #fff;
+  padding: 3rem 1rem;
+  justify-content: center;
+  justify-content: center;
+}
+
+#sign_up_lay {
+  width: 85%;
+  margin: 0 auto;
+}
+
+#sign_up {
+  margin: 0 auto;
+}
