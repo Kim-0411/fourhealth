@@ -5,12 +5,12 @@
   layout:decorate="@{default_layout/login/default}"
   lang="en"
 >
-<th:block layout:fragment="mainContent">
+<th:block layout:fragment="mainContent" id="sign_up">
     <div class="container">
-      <div class="card o-hidden border-0 shadow-lg my-5">
+      <div class="card o-hidden border-0 shadow-lg my-5" id="sign_up_lay">
         <div class="card-body p-0">
           <!-- Nested Row within Card Body -->
-            <div class="col-lg-7">
+            <div class="col-lg-7"  id="sign_up">
               <div class="p-5">
                 <div class="text-center">
                   <h1 class="h4 text-gray-900 mb-4">회원가입</h1>
@@ -24,6 +24,7 @@
                         placeholder="userId"
                         id="userId"
                         name="memberId"
+                      
                       />
                       <button
                         type="button"
@@ -35,7 +36,7 @@
                         중복체크
                       </button>
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 col-md-12">
                       <input
                         type="hidden"
                         name="memberLevel"
@@ -132,10 +133,10 @@
                 </button>
                 <hr />
                 <div class="text-center">
-                  <a class="small" href="forgot-password.html">비밀번호 찾기</a>
+                  <a class="small" th:href="@{/pwFind}">비밀번호 찾기</a> 
                 </div>
                 <div class="text-center">
-                  <a class="small" href="/">이미 회원이세요? 로그인하세요.!</a>
+                  <a class="small" th:href="@{/login}">이미 회원이세요? 로그인하세요.!</a> 
                 </div>
               </div>
             </div>
