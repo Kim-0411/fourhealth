@@ -1,4 +1,3 @@
-
 package com.fourhealth.controller;
 
 import java.io.IOException;
@@ -55,8 +54,9 @@ public class MemberController {
 	@Autowired
 	private pwService pwService;
 
+
 	// 트레이너 프로필 view
-	@GetMapping("/trainerProfile")
+	@GetMapping("/trainer/profile/trainerProfile")
 	public String getTrainerProfile(Model model, @RequestParam(name = "result", required = false) String result) {
 		List<CommonProfileDto> trainerProfile = profileService.getTrainerProfile();
 		List<MemberDto> member = memberService.viewMember();
@@ -111,7 +111,7 @@ public class MemberController {
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-				// 사용자 플렛폼 공통 등급 관리 체크 하여 치환 작업(로얄블루)
+				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
 				session.setAttribute("SGRADE", gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(gradePlatformUserDto.getUserPlatformGradeName());
 				System.out.println(userId + " : 로그인 성공");
@@ -121,7 +121,7 @@ public class MemberController {
 				session.setAttribute("SLEVEL", memberDto.getMemberLevel());
 				session.setAttribute("SNAME", memberDto.getMemberName());
 				session.setAttribute("SNICKNAME", memberDto.getMemberNickname());
-				// 사용자 플렛폼 공통 등급 관리 체크 하여 치환 작업(로얄블루)
+				// 사용자 플렛폼 권한 체크 하여 치환 작업(로얄블루)
 				session.setAttribute("SGRADE", gradePlatformTrainerDto.getTrainerPlatformGradeName());
 				System.out.println(gradePlatformTrainerDto.getTrainerPlatformGradeName());
 				System.out.println(userId + " : 로그인 성공");
@@ -311,35 +311,25 @@ public class MemberController {
 		return "login/login";
 	}
 
-	// 페이스북으로 로그인 (api)
-	@GetMapping("/facebookLogin")
-	public String facebookLoginPage(Model model) {
-		System.out.println("페이스북 로그인 화면");
-
-		return "/login/facebook_login";
-	}
-
 	// 비밀번호 찾기 화면
 	@GetMapping("/pwFind")
 	public String AllPwFind() {
-		System.out.println("비밀번호 찾기 화면 : 됨");
 		return "/login/pw_find";
 	}
-
 	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
-	@GetMapping("/pwEmailChange")
-	public String pwEmailChange(@RequestParam(name = "exampleInputEmail", required = false) String email)
-			throws AddressException, MessagingException {
-		System.out.println("이메일 출력 확인" + email);
+		@GetMapping("/pwEmailChange")
+		public String pwEmailChange(@RequestParam(name = "exampleInputEmail", required = false) String email)
+				throws AddressException, MessagingException {
+			System.out.println("이메일 출력 확인" + email);
 
-		String userEmail = pwService.userEmail(email);
-		if (userEmail == null) {
-			System.out.println("없음");
-		} else {
-			pwService.emailSend(email);
+			String userEmail = pwService.userEmail(email);
+			if (userEmail == null) {
+				System.out.println("없음");
+			} else {
+				pwService.emailSend(email);
+			}
+			System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
+			return "redirect:/login";
 		}
-		System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
-		return "redirect:/login";
-	}
 
 }

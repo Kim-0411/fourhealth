@@ -33,14 +33,14 @@ public class SnsController {
 
 	@Autowired
 	private SnsService snsService;
-	
-	@RequestMapping(value = "/commentsInsertBtn", method=RequestMethod.POST, produces="application/json")
+
+	@RequestMapping(value = "/commentsInsertBtn", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String commentsInsertBtn(@RequestParam Map<String, Object> map) {
 		System.out.println(map);
 		return "redirect:/main_layout/sns/snsList";
-		
+
 	}
-	
+
 	@PostMapping("/snsInsert")
 	public String snsInsert(SnsUserDto snsUserDto) throws FileNotFoundException {
 		System.out.println("폼에서 입력받은 값" + snsUserDto);
@@ -75,17 +75,17 @@ public class SnsController {
 		return "main_layout/sns/snsInsert";
 	}
 
-	@GetMapping("/sns")
-	public String snsList(Model model
-						 ,@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
+	@GetMapping("sns/snsList")
+	public String snsList(Model model,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		snsService.getSnsList();
 		List<SnsUserDto> snsList = snsService.getSnsList();
 		System.out.println(snsList.toString());
 		model.addAttribute("snsList", snsList);
-		
-		Map<String,Object>resultMap=snsService.getSnsListPaging(currentPage);
+
+		Map<String, Object> resultMap = snsService.getSnsListPaging(currentPage);
 		model.addAttribute("lastPage", resultMap.get("lastPage"));
-		model.addAttribute("currentPage", 	 currentPage);
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 		return "main_layout/sns/snsList";

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
+  <title th:text="${title}"></title>
+
+  <th:block layout:fragment="mainContent">
+
+    <h1>질병 리스트</h1>
+    <table border="1">
+      <tr>
+        <td>질병 코드</td>
+        <td>질병 이름</td>
+        <td>질병 상세</td>
+        <td>질병 등록일</td>
+      </tr>
+      <!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
+      <tr th:each="m : ${myPromotionList}">
+        <td>
+          <a th:text="${m.trainerPromotionName}"></a>
+        </td>
+        <td th:text="${m.trainerPromotionRecruitStartDate}"></td>
+        <td th:text="${m.trainerPromotionRecruitEndDate}"></td>
+        <td th:text="${m.trainerPromotionRecruitPeople}"></td>
+      </tr>
+    </table>
+  </th:block>
+</html>
+

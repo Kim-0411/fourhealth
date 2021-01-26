@@ -183,17 +183,17 @@ public class PaymentController {
 
     }
 
-    @GetMapping("/adjustmentAccountInsert")
+    @GetMapping("trainer/adjustment/adjustmentAccountInsert")
     public String adjustmentAccountInsert() {
         return "manage_layout/trainer/adjustment/adjustment_account_insert";
     }
 
-    @GetMapping("/adjustmentAccountModify")
+    @GetMapping("trainer/adjustment/adjustmentAccountModify")
     public String adjustmentAccountModify() {
         return "manage_layout/trainer/adjustment/adjustment_account_modify";
     }
 
-    @GetMapping("/adjustmentAccount")
+    @GetMapping("trainer/adjustment/adjustmentAccount")
     public String adjustmentAccount() {
         return "manage_layout/trainer/adjustment/adjustment_account";
     }
