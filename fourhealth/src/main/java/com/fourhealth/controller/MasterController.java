@@ -189,6 +189,9 @@ public class MasterController {
 		System.out.println(count.get("allMemberCount"));
 		System.out.println(count.get("allTrainerCount"));
 		System.out.println(count.get("alluserCount"));
+		
+		int allDBCount = count.get("allFoodDBCount")+count.get("allExerciseDBCount")+count.get("allDiseaseDBCount");
+		
 		model.addAttribute("allpromotionCount", count.get("allpromotionCount"));
 		model.addAttribute("allMemberCount", count.get("allMemberCount"));
 		model.addAttribute("allTrainerCount", count.get("allTrainerCount"));
@@ -196,6 +199,7 @@ public class MasterController {
 		model.addAttribute("allFoodDBCount",count.get("allFoodDBCount"));
 		model.addAttribute("allExerciseDBCount",count.get("allExerciseDBCount"));
 		model.addAttribute("allDiseaseDBCount",count.get("allDiseaseDBCount"));
+		model.addAttribute("allDBCount", allDBCount);
 		
 		return "manage_layout/manage_main";
 	}
