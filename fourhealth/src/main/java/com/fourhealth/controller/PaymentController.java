@@ -50,7 +50,7 @@ public class PaymentController {
     @Autowired
     PromotionMapper promotionMapper;
 
-    @PostMapping("trainer/promtion/promotionPaymentCheck")
+    @PostMapping("promotionPaymentCheck")
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode,
             @RequestParam(name = "trainerPromotionRecruitEndDate", required = false) String trainerPromotionRecruitEndDate,
@@ -74,6 +74,9 @@ public class PaymentController {
 
         // 유저가 프로모션에 참여중인가에 대한 체크
         String promotionCheck = paymentService.checkMatching(userId);
+        if (promotionCheck == null) {
+            promotionCheck = "0000-00-00";
+        }
         System.out.println(promotionCheck);
 
         Date today = new Date();
@@ -96,14 +99,12 @@ public class PaymentController {
         System.out.println(compare2);
 
         if (userId.equals("")) {
-            // 만약 유저가 로그인을 하지 않았다면
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
             out.println("<script>alert('로그인을 해주세요.'); location.href='/login';</script>");
             out.flush();
             return null;
         } else {
-            // 만약 유저가 로그인 하였다면
             if (a == 0) {
                 // 만약 유저가 최초데이터를 작성 하지 않았다면
                 response.setContentType("text/html; charset=UTF-8");
