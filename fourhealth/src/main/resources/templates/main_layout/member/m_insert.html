@@ -16,7 +16,7 @@
                 </div>
                 <form th:action="@{/mInsert}" method="post" id="sign_form">
                   <div class="form-group row">
-                    <div class="col-sm-12">
+                    <div class="col-sm-9">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -24,17 +24,23 @@
                         id="userId"
                         name="memberId"
                       />
-                      <button
-                        type="button"
-                        class="btn btn-primary"
-                        id="userIdCheck"
-                        name="userIdCheck"
-                        style="margin: 7px"
-                      >
-                        중복체크
-                      </button>
                     </div>
-                    <div class="col-sm-12">
+                    <button
+                      type="button"
+                      class="btn btn-primary col-sm-3 test"
+                      id="userIdCheck"
+                      name="userIdCheck"
+                      
+                    >
+                      중복체크
+                    </button>
+                    <style>
+                      #userIdCheck{
+                        
+                        
+                      }
+                    </style>
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="hidden"
                         name="memberLevel"
@@ -48,7 +54,7 @@
                         name="memberPw"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form" >
                       <input
                         type="password"
                         class="form-control form-control-user"
@@ -57,7 +63,7 @@
                         name="userPwCheck"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -66,7 +72,7 @@
                         name="memberAddr"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -75,7 +81,7 @@
                         name="memberName"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="date"
                         class="form-control form-control-user"
@@ -84,7 +90,7 @@
                         name="memberBirth"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -93,7 +99,7 @@
                         name="memberNickname"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -102,7 +108,7 @@
                         name="memberPhone"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="text"
                         class="form-control form-control-user"
@@ -111,7 +117,7 @@
                         name="memberEmail"
                       />
                     </div>
-                    <div class="col-sm-12">
+                    <div class="col-sm-12 sgin_up_form">
                       <input
                         type="radio"
                         name="memberGender"

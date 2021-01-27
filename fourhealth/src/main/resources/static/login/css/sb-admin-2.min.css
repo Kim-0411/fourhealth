@@ -1,5 +1,3 @@
-
-  
 /*!
  * Start Bootstrap - SB Admin 2 v4.1.3 (https://startbootstrap.com/theme/sb-admin-2)
  * Copyright 2013-2020 Start Bootstrap
@@ -304,13 +302,15 @@ input {
 }
 
 input#userId.form-control.form-control-user {
-  width: 100%;
+  margin-top: 12px;
+  /* width: 100%; */
 }
 
-button#userIdCheck.btn btn-primary {
+button#userIdCheck.btn.btn-primary {
   /* margin: 7px */
   height: 38px;
   white-space: nowrap;
+  margin-top: 12px;
 }
 
 button,
@@ -695,8 +695,6 @@ pre code {
 .col-xl-auto {
   position: relative;
   width: 100%;
-  padding-right: 0.75rem;
-  padding-left: 0.75rem;
 }
 .col {
   flex-basis: 0;
