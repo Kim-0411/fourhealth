@@ -9,78 +9,67 @@
   <title th:text="${title}"></title>
 
   <th:block layout:fragment="mainContent">
+  
+    <!-- Page Content -->
     <div class="container">
-      <table class="table table-bordered m-5">
-        <tr>
-          <td>프로모션 작성자 아이디</td>
-          <td th:text="${proDetail.userId}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 이름 :</td>
-          <td th:text="${proDetail.trainerPromotionName}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 목표 :</td>
-          <td th:text="${proDetail.trainerPromotionGoal}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 이미지 :</td>
-          <td><img th:src="'/static/'+${proDetail.proImageUrl}" /></td>
-        </tr>
-        <tr>
-          <td>프로모션 간략내용 :</td>
-          <td th:text="${proDetail.trainerPromotionShortContents}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 상세내용 :</td>
-          <td th:text="${proDetail.trainerPromotionDetailsContents}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집인원 :</td>
-          <td th:text="${proDetail.trainerPromotionRecruitPeople}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 현재모집인원 :</td>
-          <td th:text="${proDetail.trainerPromotionLiveAddPeople}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 가격 :</td>
-          <td th:text="${proDetail.trainerPromotionPrice}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집시작일자 :</td>
-          <td th:text="${proDetail.trainerPromotionRecruitStartDate}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집마감일자 :</td>
-          <td th:text="${proDetail.trainerPromotionRecruitEndDate}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집참여시작일자 :</td>
-          <td th:text="${proDetail.trainerPromotionAttendStartDate}"></td>
-        </tr>
-        <tr>
-          <td>프로모션 모집참여종료일자 :</td>
-          <td th:text="${proDetail.trainerPromotionRecruitCloseDate}"></td>
-        </tr>
-      </table>
+  
+      <!-- Heading Row -->
+      <div class="row align-items-center my-5">
+        <div class="col-lg-7">
+          <img class="img-fluid rounded mb-4 mb-lg-0" src="http://placehold.it/900x400" alt="">
+        </div>
+        <!-- /.col-lg-8 -->
+        <div class="col-lg-5">
+          <h1 class="font-weight-light"><a th:text ="${proDetail.trainerPromotionName}"></a></h1>
+          <p th:text="${proDetail.userId}"></p>
+           프로모션 모집인원 : <a th:text="${proDetail.trainerPromotionRecruitPeople}"></a>
+           <br>
+           프로모션 현재모집인원 : <a th:text="${proDetail.trainerPromotionLiveAddPeople}"></a>
+           <br>
+           프로모션 가격 : <a th:text="${proDetail.trainerPromotionPrice}"></a>
+           <br>
+           프로모션 모집시작일자 : <a th:text="${proDetail.trainerPromotionRecruitStartDate}"></a>
+           <br>
+           프로모션 모집마감일자 : <a th:text="${proDetail.trainerPromotionRecruitEndDate}"></a>
+           <br>
+           프로모션 모집참여시작일자 : <a th:text="${proDetail.trainerPromotionAttendStartDate}"></a>
+           <br>
+           프로모션 모집참여종료일자 : <a th:text="${proDetail.trainerPromotionRecruitCloseDate}"></a>
 
-      <form th:action="@{/promotionPaymentCheck}" method="Post">
-        <input
-          type="hidden"
-          name="promotionNoticeCode"
-          th:value="${proDetail.trainerPromotionNoticeCode}"
-        />
-        <input type="hidden" name="userId" th:value="${session.SID}" />
-        <input
-          type="hidden"
-          name="trainerPromotionRecruitEndDate"
-          th:value="${proDetail.trainerPromotionRecruitEndDate}"
-        />
-        <button type="submit" id="promotionPaymentCheckBtn">
-          모집신청하기
-        </button>
-      </form>
+           <form th:action="@{/promotionPaymentCheck}" method="Post">
+            <input
+              type="hidden"
+              name="promotionNoticeCode"
+              th:value="${proDetail.trainerPromotionNoticeCode}"
+            />
+            <input type="hidden" name="userId" th:value="${session.SID}" />
+            <input
+              type="hidden"
+              name="trainerPromotionRecruitEndDate"
+              th:value="${proDetail.trainerPromotionRecruitEndDate}"
+            />
+            <button class="btn btn-primary" type="submit" id="promotionPaymentCheckBtn">
+              모집신청하기
+            </button>
+          
+        </div>
+        <!-- /.col-md-4 -->
+      </div>
+      <!-- /.row -->
+  
+      <!-- Call to Action Well -->
+      <div class="card text-white bg-secondary my-5 py-4 text-center">
+        <div class="card-body">
+          <p class="text-white m-0">프로모션 상세내용</p>
+        </div>
+      </div>
+  
+      <!-- Content Row -->
+      <img th:src="'/static/'+${proDetail.proImageUrl}" />
+      <br>
+      <a th:text="${proDetail.trainerPromotionDetailsContents}"></a>
+      <!-- /.row -->
+  
     </div>
   </th:block>
 </html>
