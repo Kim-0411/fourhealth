@@ -159,7 +159,7 @@ public class PromotionController {
 
 		promotionService.promotionInsert(promotionDto);
 
-		return "redirect:/myPromotionList";
+		return "redirect:/trainer/promtion/myPromotionList";
 	}
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
@@ -191,7 +191,13 @@ public class PromotionController {
 
 	// 트레이너 프로모션 내 수정페이지
 	@GetMapping("trainer/promtion/myPromotionModify")
-	public String myPromotionModify(Model model) {
+	public String myPromotionModify(Model model,
+			@RequestParam(name = "trainerPromotionNoticeCode", required = false) String trainerPromotionNoticeCode) {
+
+		NoticePromotionTrainerDto promotionDto = promotionService.promotionDetail(trainerPromotionNoticeCode);
+		System.out.println(promotionDto);
+		model.addAttribute("promotionUpdate", promotionDto);
+
 		return "manage_layout/trainer/promtion/my_promotion_modify";
 	}
 

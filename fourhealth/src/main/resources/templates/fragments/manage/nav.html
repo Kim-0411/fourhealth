@@ -13,14 +13,11 @@
         ></a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a th:href="@{/manage2}" th:if="${session.SLEVEL == null}" class="nav-link">Home</a>
-        <a th:href="@{/manage}" th:unless="${session.SLEVEL == null}" class="nav-link">Home</a>
+        <a th:href="@{/}" th:if="${session.SLEVEL == null}" class="nav-link">Home</a>
+        <a th:href="@{/}" th:unless="${session.SLEVEL == null}" class="nav-link">Home</a>
       </li>
       <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">Contact</a>
-      </li>
-      <li class="nav-item d-none d-sm-inline-block">
-        <a href="#" class="nav-link">레이아웃 경량화작업필요</a>
+        <a href="#" class="nav-link">배포일자 2021/01/27</a>
       </li>
     </ul>
 

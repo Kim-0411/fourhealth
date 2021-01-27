@@ -3,12 +3,14 @@ package com.fourhealth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.lang.ProcessBuilder.Redirect;
+import java.util.HashMap;
 
 /*
  * 트레이너 가입 승인, 회원 공통권한별 레벨, 사용자 플랫폼 공통 관리 코드, 불량 트레이너, 탈퇴, 정산, 환불 승인 등등....
  */
 
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -182,6 +184,23 @@ public class MasterController {
 	// 기본적인 화면 동작을 보여주기 위한 화면(남들에게 홍보)
 	@GetMapping("/manage2")
 	public String mainTrainer2(Model model) {
+		Map<String, Integer> count = masterService.countNum();
+		System.out.println(count.get("allpromotionCount"));
+		System.out.println(count.get("allMemberCount"));
+		System.out.println(count.get("allTrainerCount"));
+		System.out.println(count.get("alluserCount"));
+		
+		int allDBCount = count.get("allFoodDBCount")+count.get("allExerciseDBCount")+count.get("allDiseaseDBCount");
+		
+		model.addAttribute("allpromotionCount", count.get("allpromotionCount"));
+		model.addAttribute("allMemberCount", count.get("allMemberCount"));
+		model.addAttribute("allTrainerCount", count.get("allTrainerCount"));
+		model.addAttribute("alluserCount", count.get("alluserCount"));
+		model.addAttribute("allFoodDBCount",count.get("allFoodDBCount"));
+		model.addAttribute("allExerciseDBCount",count.get("allExerciseDBCount"));
+		model.addAttribute("allDiseaseDBCount",count.get("allDiseaseDBCount"));
+		model.addAttribute("allDBCount", allDBCount);
+		
 		return "manage_layout/manage_main";
 	}
 
@@ -251,12 +270,12 @@ public class MasterController {
 	/* 관리자 트레이너 관리 페이지 맵핑 끝 */
 
 	/* 관리자 매칭 관리 페이지 맵핑 시작 */
-	@GetMapping("master/matchingManage/matchingList")
+	@GetMapping("master/reportManage/master/matchingManage/matchingList")
 	public String matchingList(Model model) {
 		return "manage_layout/master/matching_manage/matching_list";
 	}
 
-	@GetMapping("master/matchingManage/matchingRefundList")
+	@GetMapping("master/reportManage/master/matchingManage/matchingRefundList")
 	public String matchingRefundList(Model model) {
 		return "manage_layout/master/matching_manage/matching_refund_list";
 	}
