@@ -12,14 +12,14 @@
         <div class="row justify-content-center">
 
             <div class="col-xl-10 col-lg-12 col-md-9">
-
-                <div class="card o-hidden border-0 shadow-lg my-5">
-                    <div class="card-body p-0">
+            <div class="row">
+                <div id="main_login" class="card o-hidden border-0 shadow-lg my-5"> 
+                    <!-- <div class="card-body p-0" id="pw_find"></div> -->
+                        
                         <!-- Nested Row within Card Body -->
-                        <div class="row">
-                            <div class="col-lg-6 d-none d-lg-block bg-password-image"></div>
-                            <div class="col-lg-6">
-                                <div class="p-5">
+                       
+                            <!-- <div class="row col-lg-6"> -->
+                                <div class="p-5" id="pw">
                                     <div class="text-center">
                                         <h1 class="h4 text-gray-900 mb-2">Forgot Your Password?</h1>
                                         <p class="mb-4">We get it, stuff happens. Just enter your email address below
@@ -35,10 +35,10 @@
                                     </form>
                                     <hr>
                                     <div class="text-center">
-                                        <a class="small" href="register.html">Create an Account!</a>
+                                        <a class="small" th:href="@{/levelSelect}">Create an Account!</a>
                                     </div>
                                     <div class="text-center">
-                                        <a class="small" href="login.html">Already have an account? Login!</a>
+                                        <a class="small" href="login">Already have an account? Login!</a>
                                     </div>
                                 </div>
                             </div>
