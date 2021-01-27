@@ -23,7 +23,7 @@ public class FoodService {
 	//Food List on limit table
 	public Map<String, Object> getFoosList(int currentPage){
 		int startRow = 0;
-		int rowPerPage = 13;
+		int rowPerPage = 20;
 		int startPageNum = 1;
 		int endPageNum = 10;
 
