@@ -9,22 +9,23 @@
 
   <th:block layout:fragment="mainContent">
 
-    <h1>질병 리스트</h1>
-    <table border="1">
+    <h1 align="center">질병 리스트</h1>
+    <table class="col-sm-12 border" >
       <tr>
+        <td>질병 순서</td>
         <td>질병 코드</td>
         <td>질병 이름</td>
         <td>질병 상세</td>
         <td>질병 등록일</td>
       </tr>
       <!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-      <tr th:each="m : ${myPromotionList}">
+      <tr th:each="d : ${disease}">
         <td>
-          <a th:text="${m.trainerPromotionName}"></a>
+          <a th:text="${d.diseaseCode}"></a>
         </td>
-        <td th:text="${m.trainerPromotionRecruitStartDate}"></td>
-        <td th:text="${m.trainerPromotionRecruitEndDate}"></td>
-        <td th:text="${m.trainerPromotionRecruitPeople}"></td>
+        <td th:text="${d.diseaseName}"></td>
+        <td th:text="${d.diseaseDetails}"></td>
+        <td th:text="${d.diseaseRegDate}"></td>
       </tr>
     </table>
   </th:block>

@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import com.fourhealth.dto.DiseaseDto;
@@ -16,8 +17,9 @@ public class DiseaseController {
 	private DiseaseService diseaseService;
 	
 	@GetMapping("/disease")
-	public String diseasePage(){
-		
-		return "main_layout/disease/diseaseList";
+	public String diseasePage(Model model){
+		List<DiseaseDto> diseaseAllList = diseaseService.diseaseAllList();
+		model.addAttribute("disease", diseaseAllList);
+		return "main_layout/disease/DiseaseList";
 	}
 }

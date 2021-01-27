@@ -3,4 +3,18 @@
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.fourhealth.mapper.DiseaseMapper">
+	<resultMap type="DiseaseDto" id="resultMapDisease">
+		<result column="disease_code" 		property="diseaseCode"/>
+		<result column="disease_name" 			property="diseaseName"/>
+		<result column="disease_details" 		property="diseaseDetails"/>
+		<result column="disease_reg_date" 		property="diseaseRegDate"/>
+	</resultMap>
+	<select id="getDiseaseAllList" resultMap="resultMapDisease">
+		SELECT 
+			disease_code, 
+			disease_name, 
+			disease_details,
+			disease_reg_date
+		FROM tb_disease;
+	</select>
 </mapper>
