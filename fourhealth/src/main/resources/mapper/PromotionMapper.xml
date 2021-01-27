@@ -160,8 +160,9 @@
 				pt.trainer_promotion_name,
 				pt.trainer_promotion_recruit_start_date,
 				pt.trainer_promtion_recruit_end_date,
-				pt.trainer_promotion_recruit_people
-			
+				pt.trainer_promotion_recruit_people,
+				pt.trainer_matching_system_add_date,
+				pt.trainer_promotion_live_add_people			
 			FROM
 				tb_notice_promotion_trainer AS pt
 			
