@@ -50,61 +50,7 @@ $(function () {
   /* jQueryKnob */
   $('.knob').knob()
 
-  // jvectormap data
-  var visitorsData = {
-    US: 398, // USA
-    SA: 400, // Saudi Arabia
-    CA: 1000, // Canada
-    DE: 500, // Germany
-    FR: 760, // France
-    CN: 300, // China
-    AU: 700, // Australia
-    BR: 600, // Brazil
-    IN: 800, // India
-    GB: 320, // Great Britain
-    RU: 3000 // Russia
-  }
-  // World map by jvectormap
-  $('#world-map').vectorMap({
-    map: 'usa_en',
-    backgroundColor: 'transparent',
-    regionStyle: {
-      initial: {
-        fill: 'rgba(255, 255, 255, 0.7)',
-        'fill-opacity': 1,
-        stroke: 'rgba(0,0,0,.2)',
-        'stroke-width': 1,
-        'stroke-opacity': 1
-      }
-    },
-    series: {
-      regions: [{
-        values: visitorsData,
-        scale: ['#ffffff', '#0154ad'],
-        normalizeFunction: 'polynomial'
-      }]
-    },
-    onRegionLabelShow: function (e, el, code) {
-      if (typeof visitorsData[code] !== 'undefined') {
-        el.html(el.html() + ': ' + visitorsData[code] + ' new visitors')
-      }
-    }
-  })
 
-  // Sparkline charts
-  var sparkline1 = new Sparkline($('#sparkline-1')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-  var sparkline2 = new Sparkline($('#sparkline-2')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-  var sparkline3 = new Sparkline($('#sparkline-3')[0], { width: 80, height: 50, lineColor: '#92c1dc', endColor: '#ebf4f9' })
-
-  sparkline1.draw([1000, 1200, 920, 927, 931, 1027, 819, 930, 1021])
-  sparkline2.draw([515, 519, 520, 522, 652, 810, 370, 627, 319, 630, 921])
-  sparkline3.draw([15, 19, 20, 22, 33, 27, 31, 27, 19, 30, 21])
-
-  // The Calender
-  $('#calendar').datetimepicker({
-    format: 'L',
-    inline: true
-  })
 
   // SLIMSCROLL FOR CHAT WIDGET
   $('#chat-box').overlayScrollbars({
@@ -114,7 +60,7 @@ $(function () {
   /* Chart.js Charts */
   // Sales chart
   var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
-  // $('#revenue-chart').get(0).getContext('2d');
+  // $('#revenue-chart').get(0).getContext('2d');	
 
   var salesChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -174,15 +120,17 @@ $(function () {
 
   // Donut Chart
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+
   var pieData = {
+	  
     labels: [
-      'Instore Sales',
-      'Download Sales',
-      'Mail-Order Sales'
+      '음식 DB',
+      '운동 DB',
+      '질병 DB'
     ],
     datasets: [
       {
-        data: [30, 12, 20],
+        data: [allFoodDBCount, allExerciseDBCount, allDiseaseDBCount],
         backgroundColor: ['#f56954', '#00a65a', '#f39c12']
       }
     ]
