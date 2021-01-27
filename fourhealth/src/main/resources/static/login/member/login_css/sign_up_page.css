@@ -1,7 +1,3 @@
-input {
-  margin: 10px;
-}
-
 div#signup.col-lg-6 {
   margin-top: 10rem;
   height: 400px;
@@ -11,9 +7,10 @@ div#signup.col-lg-6 {
   background: #fff;
   padding: 3rem 1rem;
   justify-content: center;
-  justify-content: center;
 }
-
+#sign_form_input {
+  margin-top: 12px;
+}
 #sign_up_lay {
   width: 85%;
   margin: 0 auto;
@@ -21,4 +18,7 @@ div#signup.col-lg-6 {
 
 #sign_up {
   margin: 0 auto;
+}
+.sgin_up_form {
+  margin-top: 20px;
 }

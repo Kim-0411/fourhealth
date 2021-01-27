@@ -270,12 +270,12 @@ public class MasterController {
 	/* 관리자 트레이너 관리 페이지 맵핑 끝 */
 
 	/* 관리자 매칭 관리 페이지 맵핑 시작 */
-	@GetMapping("master/matchingManage/matchingList")
+	@GetMapping("master/reportManage/master/matchingManage/matchingList")
 	public String matchingList(Model model) {
 		return "manage_layout/master/matching_manage/matching_list";
 	}
 
-	@GetMapping("master/matchingManage/matchingRefundList")
+	@GetMapping("master/reportManage/master/matchingManage/matchingRefundList")
 	public String matchingRefundList(Model model) {
 		return "manage_layout/master/matching_manage/matching_refund_list";
 	}
