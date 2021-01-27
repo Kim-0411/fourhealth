@@ -26,6 +26,12 @@ public interface MasterMapper {
 	public int allTrainerCount();
 	//전체 고객 수 
 	public int alluserCount();
+	//전체 음식dB수
+	public int allFoodDBCount();
+	//전체 운동db수
+	public int allExerciseDBCount();
+	//전체  질병dB수
+	public int allDiseaseDBCount();
 	
 	
 }

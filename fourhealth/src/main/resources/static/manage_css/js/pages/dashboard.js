@@ -114,7 +114,7 @@ $(function () {
   /* Chart.js Charts */
   // Sales chart
   var salesChartCanvas = document.getElementById('revenue-chart-canvas').getContext('2d')
-  // $('#revenue-chart').get(0).getContext('2d');
+  // $('#revenue-chart').get(0).getContext('2d');	
 
   var salesChartData = {
     labels: ['January', 'February', 'March', 'April', 'May', 'June', 'July'],
@@ -174,16 +174,17 @@ $(function () {
 
   // Donut Chart
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+
   var pieData = {
 	  
     labels: [
-      'Instore Sales',
-      'Download Sales',
-      'Mail-Order Sales'
+      '음식 DB',
+      '운동 DB',
+      '질병 DB'
     ],
     datasets: [
       {
-        data: [30, 12, 20],
+        data: [allFoodDBCount, allExerciseDBCount, allDiseaseDBCount],
         backgroundColor: ['#f56954', '#00a65a', '#f39c12']
       }
     ]

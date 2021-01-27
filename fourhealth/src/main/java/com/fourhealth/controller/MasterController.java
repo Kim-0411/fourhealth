@@ -193,6 +193,9 @@ public class MasterController {
 		model.addAttribute("allMemberCount", count.get("allMemberCount"));
 		model.addAttribute("allTrainerCount", count.get("allTrainerCount"));
 		model.addAttribute("alluserCount", count.get("alluserCount"));
+		model.addAttribute("allFoodDBCount",count.get("allFoodDBCount"));
+		model.addAttribute("allExerciseDBCount",count.get("allExerciseDBCount"));
+		model.addAttribute("allDiseaseDBCount",count.get("allDiseaseDBCount"));
 		
 		return "manage_layout/manage_main";
 	}
