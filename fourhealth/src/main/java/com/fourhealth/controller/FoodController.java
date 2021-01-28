@@ -140,13 +140,13 @@ public class FoodController {
 
 		//All food Information
 
-		model.addAttribute("foodAllList", foodMapper.getFoodList());
+		// model.addAttribute("foodAllList", foodMapper.getFoodList());
 	
-		// model.addAttribute("foodList", resultMap.get("foodList"));
-		// model.addAttribute("lastPage" , resultMap.get("lastPage"));
-		// model.addAttribute("currentPage", resultMap.get("currentPage"));
-		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
-		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+		model.addAttribute("foodList", resultMap.get("foodList"));
+		model.addAttribute("lastPage" , resultMap.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
 		return "manage_layout/master/food_manage/food_data_list";
 		// return "manage_layout/master/food_manage/food_data_list2";

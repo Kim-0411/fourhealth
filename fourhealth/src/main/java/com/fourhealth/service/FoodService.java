@@ -23,9 +23,9 @@ public class FoodService {
 	//Food List on limit table
 	public Map<String, Object> getFoosList(int currentPage){
 		int startRow = 0;
-		int rowPerPage = 20;
+		int rowPerPage = 40;
 		int startPageNum = 1;
-		int endPageNum = 10;
+		int endPageNum = 15;
 
 		//Mapper call area(foodList count)
 		double count = foodMapper.getFoodListCount();

@@ -3,174 +3,168 @@
     layout:decorate="@{/default_layout/manage/default}">
 <th:block layout:fragment="customContent">
     <!--관리자 식품 관리 리스트 테이블-->
-    <div class="content">
+    <section class="content">
         <div class="container-fluid">
             <div class="row">
-                <div class="card col-12">
-                    <div class="card-header">
-                        <h1 class="card-title">관리자 식품 정보 현황</h1>
-                    </div>
-                    <style>
-                        .card-title {
-                            font-size: 30px;
-                            font-family: Impact, Haettenschweiler, 'Arial Narrow Bold', sans-serif;
-                        }
-                    </style>
-                    <!-- /.card-header -->
-                    <div class="card-body">
-                        <table style="font-size: small;" id="foodTable" class="table table-bordered table-striped dt-bootstrap4">
-                            <!-- <div class="dataTables_length" id="example1_length">
-                                <label>
-                                    Shows
-                                    <select name="example1_length" aria-controls="example1"
-                                        class="cusotm-select custom-select-sm form-control form-control-sm">
-                                        <option value="10">10</option>
-                                        <option value="25">25</option>
-                                        <option value="50">50</option>
-                                        <option value="100">100</option>
-                                    </select>
-                                    entries
-                                </label>
-                            </div> -->
-                            <thead>
-                                <tr>
-                                    <th>식품코드</th>
-                                    <th>식품이름</th>
-                                    <th>총량(1인분)</th>
-                                    <th>칼로리</th>
-                                    <th>탄수화물</th>
-                                    <th>단백질</th>
-                                    <th>지방</th>
-                                    <th>나트륨</th>
-                                    <th>당</th>
-                                    <th>콜레스테롤</th>
-                                    <th>식품제조사</th>
-                                    <th>수정</th>
-                                    <th>삭제</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr th:if="${#lists.size(foodAllList)}>0" th:each="food : ${foodAllList}">
-                                    <td th:text="${food.foodCode}"></td>
-                                    <td th:text="${food.foodName}"></td>
-                                    <td th:text="${food.foodTotalGram}"></td>
-                                    <td th:text="${food.foodCal}"></td>
-                                    <td th:text="${food.foodProtein}"></td>
-                                    <td th:text="${food.foodFat}"></td>
-                                    <td th:text="${food.foodSodium}"></td>
-                                    <td th:text="${food.foodSugar}"></td>
-                                    <td th:text="${food.foodChole}"></td>
-                                    <td th:text="${food.foodTotalGram}"></td>
-                                    <td th:text="${food.foodMakerName}"></td>
-                                    <td>
-                                        <!-- <a href="#" data-toggle="modal" data-target="#foodDetails">수정</a> -->
-                                        <a href="#" class="foodUpdate">수정</a>
-                                        <!-- <button type="button" class="foodUpdateBtn">
-                                            수정
-                                        </button> -->
-                                    </td>
-                                    <td>
-                                        <!-- <a href="#" data-toggle="modal" data-target="#foodDelete">삭제</a> -->
-                                        <a href="#" class="foodDelete" data-toggle="modal"
-                                            data-target="#foodDelete">삭제</a>
-                                    </td>
-                                </tr>
-                            </tbody>
-                            <!-- <div class="foodtableFooter">
-                                <tr>
-                                    <td colspan="14" class="center">
-                                        <a th:href="@{/master/foodManage/foodDataList}"
-                                            class="btn-xs btn-primary">처음으로</a>
+                <div class="col-12">
+                    <div class="card">
+                        <div class="card-header">
+                            <h3 class="card-title">관리자 질병 정보 현황</h3>
+                        </div>
+                        <!-- /.card-header -->
+                        <div class="card-body">
+                            <div id="disease_wrapper" class="dataTables_wrapper dt-bootstrap4">
 
-                                        <a th:if="${currentPage > 1}"
-                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage - 1 })}">
-                                            <i class="fas fa-arrow-left"></i></a>
-                                        <th:block th:each="number : ${#numbers.sequence(startPageNum,endPageNum)}">
-                                            <a th:unless="${currentPage ==number}"
-                                                th:href="@{/master/foodManage/foodDataList(currentPage = ${number})}"
-                                                th:text="${'['+number+']'}"></a>
-                                            <span th:if="${currentPage == number}"
-                                                th:text="${'[' + number + ']'}"></span>
-                                        </th:block>
-                                        <a th:if="${currentPage < lastPage}"
-                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage - 1 })}"><i
-                                                class="fas fa-arrow-right"></i></a>
-                                        <a class="btn-xs btn-primary"
-                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${lastPage})}">마지막</a>
-                                    </td>
-                                </tr>
-                            </div> -->
-                        </table>
-
-                        <style>
-                            .foodtableFooter {
-                                margin-top: 30px;
-                                margin-left: 400px;
-                                text-align: center;
-                            }
-                            .center{
-                                align-content: center;
-                            }
-                        </style>
-
-                        <!-- Food Details Modal Page -->
-                        <!-- Modal -->
-                        <div class="modal fade" id="foodDetails" tabindex="-1" role="dialog"
-                            aria-labelledby="myModalLabel">
-                            <div class="modal-dialog modal-xl" role="table">
-                                <div class="modal-content">
-                                    <div class="modal-header">
-                                        <h4 class="modal-title" id="myModalLabel">식품 정보 수정</h4>
-                                        <button type="button" class="close" data-dismiss="modal"
-                                            aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                    </div>
-                                    <div class="modal-body">
-                                        <table class="table table-bordered table-hover">
+                                <div class="row">
+                                    <div class="col-sm-12">
+                                        <table id="foodTable"
+                                            class="table table-bordered table-striped dataTable dtr-inline" role="grid"
+                                            aria-describedby="example1_info" style="font-size: small;">
                                             <thead>
-                                                <tr>
-                                                    <th>식품이름</th>
-                                                    <th>총량(1인분)</th>
-                                                    <th>칼로리</th>
-                                                    <th>탄수화물</th>
-                                                    <th>단백질</th>
-                                                    <th>지방</th>
-                                                    <th>나트륨</th>
-                                                    <th>당</th>
-                                                    <th>콜레스테롤</th>
-                                                    <th>식품제조사</th>
+                                                <tr role="row">
+                                                    <th class="sorting_asc" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1" aria-sort="ascending"
+                                                        aria-label="Rendering engine: activate to sort column descending">
+                                                        식품코드</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Browser: activate to sort column ascending">식품이름
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Platform(s): activate to sort column ascending">
+                                                        총량(1인분)
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="Engine version: activate to sort column ascending">
+                                                        칼로리</th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending">탄수화물
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">단백질
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">지방
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending">나트륨
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending">당
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1"
+                                                        aria-label="CSS grade: activate to sort column ascending">콜레스테롤
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">제조사
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">수정
+                                                    </th>
+                                                    <th class="sorting" tabindex="0" aria-controls="example1"
+                                                        rowspan="1" colspan="1">삭제
+                                                    </th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <!-- <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}">
-                                                    <td th:text="${food.get('foodName')}"></td>
-                                                    <td th:text="${food.get('foodTotalGram')}"></td>
-                                                    <td th:text="${food.get('foodCal')}"></td>
-                                                    <td th:text="${food.get('foodProtein')}"></td>
-                                                    <td th:text="${food.get('foodFat')}"></td>
-                                                    <td th:text="${food.get('foodSodium')}"></td>
-                                                    <td th:text="${food.get('foodSugar')}"></td>
-                                                    <td th:text="${food.get('foodChole')}"></td>
-                                                    <td th:text="${food.get('foodTotalGram')}"></td>
-                                                    <td th:text="${food.get('foodMakerNamer')}"></td>
+                                                <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}"
+                                                    role="row" class="odd">
+                                                    <td th:text="${food.foodCode}"></td>
+                                                    <td th:text="${food.foodName}"></td>
+                                                    <td th:text="${food.foodTotalGram}"></td>
+                                                    <td th:text="${food.foodCal}"></td>
+                                                    <td th:text="${food.foodProtein}"></td>
+                                                    <td th:text="${food.foodFat}"></td>
+                                                    <td th:text="${food.foodSodium}"></td>
+                                                    <td th:text="${food.foodSugar}"></td>
+                                                    <td th:text="${food.foodChole}"></td>
+                                                    <td th:text="${food.foodTotalGram}"></td>
+                                                    <td th:text="${food.foodMakerName}"></td>
+                                                    <td>
+                                                        <!-- <a href="#" data-toggle="modal" data-target="#foodDetails">수정</a> -->
+                                                        <a href="#" class="foodUpdate">수정</a>
+                                                        <!-- <button type="button" class="foodUpdateBtn">
+                                            수정
+                                        </button> -->
+                                                    </td>
+                                                    <td>
+                                                        <!-- <a href="#" data-toggle="modal" data-target="#foodDelete">삭제</a> -->
+                                                        <a href="#" class="foodDelete" data-toggle="modal"
+                                                            data-target="#foodDelete">삭제</a>
+                                                    </td>
 
-                                                </tr> -->
+                                                </tr>
                                             </tbody>
                                         </table>
                                     </div>
-                                    <div class="modal-footer">
-                                        <button type="button" class="btn btn-default"
-                                            id="closeUpdateFoodBtn">닫기</button>
+                                </div>
+                                <div class="row">
+                                    <!-- <div class="col-sm-12 col-md-5">
+                        <div class="dataTables_info" id="example1_info" role="status" aria-live="polite">Showing 1 to 10 of
+                          57 entries</div>
+                      </div> -->
+                                    <div class="col-sm-12 col-md-12">
+                                        <div class="dataTables_paginate paging_simple_numbers" id="example1_paginate">
+
+                                            <ul class="pagination">
+                                                <li class="paginate_button page-item" id="example1_next">
+                                                    <a th:href="@{/master/foodManage/foodDataList}"
+                                                        aria-controls="example1" data-dt-idx="7" tabindex="0"
+                                                        class="page-link">처음으로</a>
+                                                </li>
+
+                                                <li class="paginate_button page-item previous" id="example1_previous"><a
+                                                        th:if="${currentPage > 1}"
+                                                        th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage - 1 })}"
+                                                        aria-controls="example1" data-dt-idx="0" tabindex="0"
+                                                        class="page-link">Previous</a></li>
+                                                <th:block
+                                                    th:each="number : ${#numbers.sequence(startPageNum,endPageNum)}">
+                                                    <li class="paginate_button page-item">
+                                                        <a th:unless="${currentPage ==number}"
+                                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${number})}"
+                                                            aria-controls="example1" class="page-link"
+                                                            th:text="${number}"></a>
+                                                        <span class="page-link page-item active"
+                                                            th:if="${currentPage == number}" th:text="${number}"></span>
+
+                                                    </li>
+
+                                                </th:block>
+
+                                                <li class="paginate_button page-item next" id="example1_next">
+                                                    <a th:if="${currentPage < lastPage}"
+                                                        th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage + 1 })}"
+                                                        aria-controls="example1" data-dt-idx="7" tabindex="0"
+                                                        class="page-link">Next</a>
+                                                </li>
+                                                <li class="paginate_button page-item" id="example1_next">
+                                                    <a th:href="@{/master/foodManage/foodDataList(currentPage = ${lastPage})}"
+                                                        aria-controls="example1" data-dt-idx="7" tabindex="0"
+                                                        class="page-link">마지막으로</a>
+                                                </li>
+                                            </ul>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
                         </div>
+                        <!-- /.card-body -->
                     </div>
-                    <!-- /.card-body -->
+                    <!-- /.card -->
                 </div>
+                <!-- /.col -->
             </div>
+            <!-- /.row -->
         </div>
-
-    </div>
+        <!-- /.container-fluid -->
+    </section>
 
 </th:block>
 
@@ -207,7 +201,7 @@
     $(function () {
         $("#foodTable").DataTable({
             "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
-            "paging": true,
+            "paging": false,
             "lengthChange": true,
             "searching": true,
             "ordering": true,
