@@ -117,7 +117,7 @@ public class FoodController {
 	}
 
 	// - 관리자 화면 식품 조회
-	@GetMapping("/manage_layout/master/foodDataList")
+	@GetMapping("/master/foodManage/foodDataList")
 	public String foodDataList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		model.addAttribute("title", "관리자 식품 리스트 조회");
@@ -140,13 +140,13 @@ public class FoodController {
 
 		//All food Information
 
-		// model.addAttribute("foodAllList", foodMapper.getFoodList());
+		model.addAttribute("foodAllList", foodMapper.getFoodList());
 	
-		model.addAttribute("foodList", resultMap.get("foodList"));
-		model.addAttribute("lastPage" , resultMap.get("lastPage"));
-		model.addAttribute("currentPage", resultMap.get("currentPage"));
-		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
-		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
+		// model.addAttribute("foodList", resultMap.get("foodList"));
+		// model.addAttribute("lastPage" , resultMap.get("lastPage"));
+		// model.addAttribute("currentPage", resultMap.get("currentPage"));
+		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
+		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
 		return "manage_layout/master/food_manage/food_data_list";
 		// return "manage_layout/master/food_manage/food_data_list2";

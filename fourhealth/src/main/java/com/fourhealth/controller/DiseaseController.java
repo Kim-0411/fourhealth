@@ -9,7 +9,7 @@ import java.util.Map;
 
 import com.fourhealth.mapper.FoodMapper;
 import com.fourhealth.service.DiseaseService;
-import com.fourhealth.dto.Disease;
+import com.fourhealth.dto.DiseaseDto;
 import com.fourhealth.mapper.DiseaseMapper;
 
 import org.apache.ibatis.logging.Log;
@@ -172,13 +172,21 @@ public class DiseaseController {
         return "manage_layout/master/disease_manage/disease_data_insert";
     }
 
-    @GetMapping("/manage_layout/master/diseaseDataList")
+    @GetMapping("/master/diseaseManage/diseaseDataList")
     public String diseaseDataList(Model model) {
-        List<Disease> diseaseList = diseaseService.getDiseaseList();
+        List<DiseaseDto> diseaseList = diseaseService.getDiseaseList();
 
         System.out.println("##################################");
-        System.out.println(diseaseList.size()+" <<< Disease List Numbers Test");
         System.out.println("##################################");
+
+        for(int i=0; i<10; i++){
+            System.out.println(diseaseList.get(i).getDiseaseName());
+        }
+
+        model.addAttribute("title", "master 질병 리스트");
+        model.addAttribute("diseaseList", diseaseList);
+
+
 
         return "manage_layout/master/disease_manage/disease_data_list";
     }

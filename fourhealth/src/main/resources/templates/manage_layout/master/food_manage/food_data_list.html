@@ -18,7 +18,7 @@
                     </style>
                     <!-- /.card-header -->
                     <div class="card-body">
-                        <table id="example1" class="table table-bordered table-striped dt-bootstrap4">
+                        <table style="font-size: small;" id="foodTable" class="table table-bordered table-striped dt-bootstrap4">
                             <!-- <div class="dataTables_length" id="example1_length">
                                 <label>
                                     Shows
@@ -50,18 +50,18 @@
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr th:if="${#lists.size(foodList)}>0" th:each="food : ${foodList}">
-                                    <td th:text="${food.get('foodCode')}"></td>
-                                    <td th:text="${food.get('foodName')}"></td>
-                                    <td th:text="${food.get('foodTotalGram')}"></td>
-                                    <td th:text="${food.get('foodCal')}"></td>
-                                    <td th:text="${food.get('foodProtein')}"></td>
-                                    <td th:text="${food.get('foodFat')}"></td>
-                                    <td th:text="${food.get('foodSodium')}"></td>
-                                    <td th:text="${food.get('foodSugar')}"></td>
-                                    <td th:text="${food.get('foodChole')}"></td>
-                                    <td th:text="${food.get('foodTotalGram')}"></td>
-                                    <td th:text="${food.get('foodMakerNamer')}"></td>
+                                <tr th:if="${#lists.size(foodAllList)}>0" th:each="food : ${foodAllList}">
+                                    <td th:text="${food.foodCode}"></td>
+                                    <td th:text="${food.foodName}"></td>
+                                    <td th:text="${food.foodTotalGram}"></td>
+                                    <td th:text="${food.foodCal}"></td>
+                                    <td th:text="${food.foodProtein}"></td>
+                                    <td th:text="${food.foodFat}"></td>
+                                    <td th:text="${food.foodSodium}"></td>
+                                    <td th:text="${food.foodSugar}"></td>
+                                    <td th:text="${food.foodChole}"></td>
+                                    <td th:text="${food.foodTotalGram}"></td>
+                                    <td th:text="${food.foodMakerName}"></td>
                                     <td>
                                         <!-- <a href="#" data-toggle="modal" data-target="#foodDetails">수정</a> -->
                                         <a href="#" class="foodUpdate">수정</a>
@@ -76,30 +76,30 @@
                                     </td>
                                 </tr>
                             </tbody>
-                            <div class="foodtableFooter">
+                            <!-- <div class="foodtableFooter">
                                 <tr>
                                     <td colspan="14" class="center">
-                                        <a th:href="@{/manage_layout/master/foodDataList}"
+                                        <a th:href="@{/master/foodManage/foodDataList}"
                                             class="btn-xs btn-primary">처음으로</a>
 
                                         <a th:if="${currentPage > 1}"
-                                            th:href="@{/manage_layout/master/foodDataList(currentPage = ${currentPage - 1 })}">
+                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage - 1 })}">
                                             <i class="fas fa-arrow-left"></i></a>
                                         <th:block th:each="number : ${#numbers.sequence(startPageNum,endPageNum)}">
                                             <a th:unless="${currentPage ==number}"
-                                                th:href="@{/manage_layout/master/foodDataList(currentPage = ${number})}"
+                                                th:href="@{/master/foodManage/foodDataList(currentPage = ${number})}"
                                                 th:text="${'['+number+']'}"></a>
                                             <span th:if="${currentPage == number}"
                                                 th:text="${'[' + number + ']'}"></span>
                                         </th:block>
                                         <a th:if="${currentPage < lastPage}"
-                                            th:href="@{/manage_layout/master/foodDataList(currentPage = ${currentPage - 1 })}"><i
+                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${currentPage - 1 })}"><i
                                                 class="fas fa-arrow-right"></i></a>
                                         <a class="btn-xs btn-primary"
-                                            th:href="@{/manage_layout/master/foodDataList(currentPage = ${lastPage})}">마지막</a>
+                                            th:href="@{/master/foodManage/foodDataList(currentPage = ${lastPage})}">마지막</a>
                                     </td>
                                 </tr>
-                            </div>
+                            </div> -->
                         </table>
 
                         <style>
@@ -205,13 +205,15 @@
 </script>
 <script>
     $(function () {
-        $("#example1").DataTable({
-            "responsive": true,
-            "autoWidth": false,
-            "searching:": true,
+        $("#foodTable").DataTable({
+            "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"],
+            "paging": true,
+            "lengthChange": true,
+            "searching": true,
+            "ordering": true,
             "info": true,
-            "searching": false,
-            "paging": false,
-        });
+            "autoWidth": true,
+            "responsive": true,
+        }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
     });
 </script>

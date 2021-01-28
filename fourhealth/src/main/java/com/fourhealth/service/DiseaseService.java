@@ -2,7 +2,7 @@ package com.fourhealth.service;
 
 import java.util.List;
 
-import com.fourhealth.dto.Disease;
+import com.fourhealth.dto.DiseaseDto;
 import com.fourhealth.mapper.DiseaseMapper;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,7 +14,7 @@ import org.springframework.transaction.annotation.Transactional;
 public class DiseaseService {
     @Autowired DiseaseMapper diseaseMapper;
 
-    public List<Disease> getDiseaseList(){
+    public List<DiseaseDto> getDiseaseList(){
 
         return diseaseMapper.getDiseaseList();
     }
