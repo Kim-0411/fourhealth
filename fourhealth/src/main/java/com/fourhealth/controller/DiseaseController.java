@@ -18,6 +18,6 @@ public class DiseaseController {
 	@GetMapping("/disease/disease")
 	public String diseasePage(){
 		
-		return "main_layout/disease/diseaseList";
+		return "main_layout/disease/DiseaseList";
 	}
 }

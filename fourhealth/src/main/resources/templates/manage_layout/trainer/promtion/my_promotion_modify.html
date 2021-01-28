@@ -19,8 +19,9 @@
                 </div>
                 <!-- /.card-header -->
                 <div class="card-body">
-                  <form th:action="@{/promotionInsert}" method="post" enctype="multipart/form-data">
+                  <form th:action="@{/promotionModify}" method="post" enctype="multipart/form-data">
                       <input type="text" class="form-control" name="userId" id="userId" th:value="${session.SID}"> <br/>
+                      <input type="hidden" class="form-control" name="trainerPromotionNoticeCode" id="trainerPromotionNoticeCode" th:value="${promotionUpdate.trainerPromotionNoticeCode}"> <br/>
                       <input type="text" class="form-control" name="trainerPromotionName" id="trainerPromotionName" th:value="${promotionUpdate.trainerPromotionName}"><br/>
                       <input type="text" class="form-control" name="trainerPromotionGoal" id="trainerPromotionGoal" th:value="${promotionUpdate.trainerPromotionGoal}"><br/>
                       <input type="text" class="form-control" name="trainerPromotionShortContents" id="trainerPromotionShortContents"  th:value="${promotionUpdate.trainerPromotionShortContents}"><br/>

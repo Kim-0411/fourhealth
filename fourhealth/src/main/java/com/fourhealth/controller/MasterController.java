@@ -175,7 +175,7 @@ public class MasterController {
 	// 트레이너 / 관리자 메인화면 로그인 없을시 관리자 root로 처리
 	@GetMapping("/manage")
 	public String mainTrainer(Model model, HttpSession session) {
-		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage((String)session.getAttribute("SID"));
+		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage((String) session.getAttribute("SID"));
 		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
 		session.setAttribute("noReadMeg", getAllNoReadMessage);
 		return "manage_layout/manage_main";
@@ -189,18 +189,18 @@ public class MasterController {
 		System.out.println(count.get("allMemberCount"));
 		System.out.println(count.get("allTrainerCount"));
 		System.out.println(count.get("alluserCount"));
-		
-		int allDBCount = count.get("allFoodDBCount")+count.get("allExerciseDBCount")+count.get("allDiseaseDBCount");
-		
+
+		int allDBCount = count.get("allFoodDBCount") + count.get("allExerciseDBCount") + count.get("allDiseaseDBCount");
+
 		model.addAttribute("allpromotionCount", count.get("allpromotionCount"));
 		model.addAttribute("allMemberCount", count.get("allMemberCount"));
 		model.addAttribute("allTrainerCount", count.get("allTrainerCount"));
 		model.addAttribute("alluserCount", count.get("alluserCount"));
-		model.addAttribute("allFoodDBCount",count.get("allFoodDBCount"));
-		model.addAttribute("allExerciseDBCount",count.get("allExerciseDBCount"));
-		model.addAttribute("allDiseaseDBCount",count.get("allDiseaseDBCount"));
+		model.addAttribute("allFoodDBCount", count.get("allFoodDBCount"));
+		model.addAttribute("allExerciseDBCount", count.get("allExerciseDBCount"));
+		model.addAttribute("allDiseaseDBCount", count.get("allDiseaseDBCount"));
 		model.addAttribute("allDBCount", allDBCount);
-		
+
 		return "manage_layout/manage_main";
 	}
 

@@ -109,4 +109,18 @@ public class PromotionService {
 		return resultMap;
 	}
 
+	public String modifyUpdateMyPromotion(NoticePromotionTrainerDto promotionDto) {
+
+		int a = promotionMapper.modifyUpdateMyPromotion(promotionDto);
+
+		String re = null;
+		if (a > 0) {
+			re = "업데이트 성공";
+		} else {
+			re = "업데이트 실패";
+		}
+
+		return re;
+	}
+
 }
