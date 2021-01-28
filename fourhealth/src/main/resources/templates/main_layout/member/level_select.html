@@ -6,8 +6,22 @@
   lang="en"
 >
 <th:block layout:fragment="mainContent">
-<a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a> 
- <a th:href="@{/mInsertPage(user_level_code=user_level_003)}" class="text-white" th:text="사용자"></a>
- <a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white" th:text="트레이너"></a> 
- </th:block>
+  <div id="signup" class="col-lg-6" style="margin-top:10rem;height:400px; display:flex; flex-direction:column; align-items: center;">
+    <p> * 해당하는 유형을 선택해주세요</p>
+    
+    <div><a th:href="@{/mInsertPage(user_level_code=user_level_001)}" th:text="관리자" style="display: none"></a></div>
+      <div class="select-box"> <a th:href="@{/mInsertPage(user_level_code=user_level_003)}"  class="text-white">
+        사용자</a>
+      </div>
+      <div class="select-box mt-2"><a th:href="@{/mInsertPage(user_level_code=user_level_002)}" class="text-white">
+        트레이너</a>
+      </div> 
+
+      
+    </div>
+  </div> 
+</th:block>
+
+
+
 </html>

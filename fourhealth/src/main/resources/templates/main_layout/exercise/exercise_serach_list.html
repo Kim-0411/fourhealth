@@ -8,7 +8,7 @@
 <th:block layout:fragment="mainContent">
 	<div class="container">
 		<div class="search-box">
-			<form th:action="@{/serachExercise}" method="post">
+			<form th:action="@{/exercise/serachExercise}" method="post">
 				<h1>운동 검색</h1>
 				<select name="met_coefficient" >
 					<option value="all">전체</option>
@@ -25,7 +25,7 @@
 			<tbody>
 				<tr valign="top" class="text-left" th:each="s : ${exerciseList}">
 					<td class="borderBottom">
-						<a class="prominent" th:href="@{/exerciseInfo(exerciseName=${s.get('exercise_name')})}">
+						<a class="prominent" th:href="@{/exercise/exerciseInfo(exerciseName=${s.get('exercise_name')})}">
 						<b th:text="${s.get('exercise_name')}"></b>
 						</a>
 						<div class="smallText greyText">
@@ -38,7 +38,7 @@
 							</p>
 						</div> 
 						<div class="smallText" align="right">
-							<a th:href="@{/exerciseInfo}">더보기</a>
+							<a th:href="@{/exercise/exerciseInfo}">더보기</a>
 						</div>
 					</td>
 				</tr>
@@ -48,11 +48,11 @@
 		<nav aria-label="Page navigation" class="nav justify-content-center bg-light">
 			<ul class="pagination">
        		 	<li>
-          			<a th:href="@{/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient})}">맨처음</a>
+          			<a th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient})}">맨처음</a>
         		</li>
         		<!-- disabled가 있으면 마우스 커서가 금지표시로 바뀐다. class=disabled -->
         		<li>
-        			<a th:if="${currentPage > 1}" th:href="@{/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage - 1 })}"
+        			<a th:if="${currentPage > 1}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage - 1 })}"
            			 aria-label="Previous">
           			<span aria-hidden="true">«</span>
           			</a>
@@ -65,18 +65,18 @@
           				<!-- 다음 페이지 -->
           				<li>
           				<th:block th:unless="${num <= 0 }">
-							<a th:unless="${currentPage == num}" th:href="@{/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${num})}"
+							<a th:unless="${currentPage == num}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${num})}"
               				th:text="${ num }">
               				</a>
               			</th:block>
      					</li>
         		</th:block>
 				<li>
-          			<a th:if="${currentPage < lastPage}" th:href="@{/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage + 1 })}"
+          			<a th:if="${currentPage < lastPage}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage + 1 })}"
             		aria-label="Next">
             			<span aria-hidden="true">»</span>
           			</a>
-          			<a th:href="@{/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${lastPage})}">맨마지막</a>
+          			<a th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${lastPage})}">맨마지막</a>
 				</li>
      		 </ul>
    		 </nav>

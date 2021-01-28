@@ -41,7 +41,6 @@
                 <span th:if="${session.SLEVEL} == 'user_level_002'">트레이너</span>
                 <span th:if="${session.SLEVEL} == 'user_level_003'">사용자</span>
               </label>
-              <a th:href="@{/#}" style="text-align: center"> &nbsp; My page</a>
               <a th:href="@{/logout}" style="text-align: right">
                 &nbsp; 로그아웃</a
               >
@@ -53,6 +52,12 @@
                 th:if="${session.SLEVEL eq '관리자'}"
                 style="margin-left: 10px"
                 >관리자 관리페이지</a
+              >
+              <a
+                th:href="@{#}"
+                th:if="${session.SLEVEL eq '사용자'}"
+                style="margin-left: 10px"
+                >마이페이지</a
               >
               <a
                 th:href="@{/manage}"

@@ -5,7 +5,7 @@
    layout:decorate="@{/default_layout/manage/default}"
  >
  	<th:block layout:fragment="customContent">
- 	<h1>보낸 쪽지함(로그인 됫다고 가정 id002)</h1>
+ 	<h1>보낸 쪽지함</h1>
 
 	<div class="row">
 		<div class="col-md-9">
@@ -78,7 +78,7 @@
 												for="check1"></label>
 										</div>
 									</td>
-									<td class="mailbox-name"><a href="read-mail.html"
+									<td class="mailbox-name"><a th:href="@{/trainerSendMessageRead(msgCode = ${m.msgCode})}"
 										th:text="${m.receiveId}"></a></td>
 									<td class="mailbox-subject"
 										th:text="${#strings.substring(m.msgContents,0,7)}+..."></td>

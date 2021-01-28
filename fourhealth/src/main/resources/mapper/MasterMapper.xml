@@ -33,13 +33,67 @@
 	FROM tb_user_report
 	</select>
     
+    <!-- 관리자가 트레이너 승인처리 -->
     <update id="masterTrainerAccess" parameterType="String" >
     	UPDATE 
     		tb_trainer
 		SET
-			trainer_access_reg_date=NOW()
+			trainer_access_reg_date=NOW(),
+      trainer_access_code="trainer_access_001"
 		WHERE
 			user_id=#{userId};
     </update>
-
+    <!-- 프로모션 수  -->
+    <select id="allpromotionCount" resultType="int">
+    	SELECT
+			COUNT(*)
+		FROM
+			tb_notice_promotion_trainer;
+    </select>
+    
+	<!--전체 회원 수 -->
+	<select id="allMemberCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_common_user;
+	</select>
+	
+	<!--전체 트레이너 수  -->
+	<select id="allTrainerCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_trainer;
+		
+	
+	</select>
+	<!--전체 고객 수  -->
+	<select id="alluserCount" resultType="int">
+		SELECT
+			COUNT(*)
+		FROM
+			tb_user;
+	</select>
+	<!-- 음식 db수 -->
+	<select id="allFoodDBCount" resultType="int">
+	SELECT
+		COUNT(*)
+	FROM
+		tb_food
+	</select>
+	<!-- 운동db수 -->
+	<select id="allExerciseDBCount" resultType="int">
+	SELECT
+		COUNT(*)
+	FROM
+		tb_met_exercise
+	</select>
+	<!-- 질병 db수 -->
+	<select id="allDiseaseDBCount" resultType="int">
+	SELECT
+		COUNT(*)
+	FROM
+		tb_disease
+	</select>
 </mapper>

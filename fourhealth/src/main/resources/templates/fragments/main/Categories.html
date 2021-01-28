@@ -1,29 +1,117 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <div class="categories_area" th:fragment="CategoriesFragment">
   <div class="container">
-    <div class="owl-carousel owl-theme">
-      <div class="item" data-wow-delay=".3s">
-          <div>금메달 리스트</div>
-          <img src="/static/img/catagory-img/1.jpg" alt="" />
+  <div class="sub_copy_box">
+            <p class="sub_copy_body">
+                🏠<br>
+                당신이 편안한 집에서<br>
+                검증된 코치를 통해 관리해보세요.
+            </p>
         </div>
-        <div class="item">내용2</div>
-        <div class="item">내용3</div>
-        <div class="item">내용4</div>
-        <div class="item">내용5</div>
+    <div class="slider owl-carousel">
+      <div class="card">
+        <div class="img">
+          <img src="/static/img/trainer-img/trainer2.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="title">
+            OOO강사님</div>
+          <div class="sub-title">
+            금메달리스트 평점 :4.5</div>
+          <p>
+           웨이트트레이닝은 자기 체중을 이용하여 하는 운동을 비롯하여 익스팬더, 아령, 바벨 또는 모래 주머니처럼 간단하게 만들 수 있는 중량물 등 스프링이나 중량으로 저항 부하(負荷)를 걸어서 하는 훈련 방법을 가리킨다.</p>
+          <div class="btn">
+            <button>알아보기</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img">
+          <img src="/static/img/trainer-img/trainer1.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="title">
+            OOO강사님</div>
+          <div class="sub-title">
+            	금메달리스트 평점 4.6</div>
+          <p>
+            웨이트트레이닝은 자기 체중을 이용하여 하는 운동을 비롯하여 익스팬더, 아령, 바벨 또는 모래 주머니처럼 간단하게 만들 수 있는 중량물 등 스프링이나 중량으로 저항 부하(負荷)를 걸어서 하는 훈련 방법을 가리킨다.</p>
+          <div class="btn">
+            <button>알아보기</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img">
+          <img src="/static/img/trainer-img/trainer3.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="title">
+            OOO강사님</div>
+          <div class="sub-title">
+          	 금메달리스트 평점 4.1</div>
+          <p>
+           웨이트트레이닝은 자기 체중을 이용하여 하는 운동을 비롯하여 익스팬더, 아령, 바벨 또는 모래 주머니처럼 간단하게 만들 수 있는 중량물 등 스프링이나 중량으로 저항 부하(負荷)를 걸어서 하는 훈련 방법을 가리킨다.</p>
+          <div class="btn">
+            <button>알아보기</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img">
+          <img src="/static/img/trainer-img/trainer1.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="title">
+            OOO강사님</div>
+          <div class="sub-title">
+          	 금메달리스트 평점 4.1</div>
+          <p>
+           웨이트트레이닝은 자기 체중을 이용하여 하는 운동을 비롯하여 익스팬더, 아령, 바벨 또는 모래 주머니처럼 간단하게 만들 수 있는 중량물 등 스프링이나 중량으로 저항 부하(負荷)를 걸어서 하는 훈련 방법을 가리킨다.</p>
+          <div class="btn">
+            <button>알아보기</button>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="img">
+          <img src="/static/img/trainer-img/trainer2.jpg" alt="">
+        </div>
+        <div class="content">
+          <div class="title">
+            OOO강사님</div>
+          <div class="sub-title">
+          	 금메달리스트 평점 4.1</div>
+          <p>
+           웨이트트레이닝은 자기 체중을 이용하여 하는 운동을 비롯하여 익스팬더, 아령, 바벨 또는 모래 주머니처럼 간단하게 만들 수 있는 중량물 등 스프링이나 중량으로 저항 부하(負荷)를 걸어서 하는 훈련 방법을 가리킨다.</p>
+          <div class="btn">
+            <button>알아보기</button>
+          </div>
+        </div>
       </div>
     </div>
+
     <script>
-       $(document).ready(function () {
+      $(document).ready(function () {
         $('.owl-carousel').owlCarousel({
-          loop:true,
-          margin:10,
-         nav:true ,
-         navText :['<','>']
-        
-})
+          nav: true,
+          loop: true,
+          dots: true,
+          autoplay: true,
+          rewind: true,
+          autoplayTimeout: 2000,
+          margin: 10,
+          responsiveClass: true,
+          responsive: {
+            0: { items: 1, nav: false	 },
+            600: { items: 2, nav: false },
+            1000: { items: 3, nav: false, loop: false }
+          }
+        });
       });
-      
+
     </script>
   </div>
 </div>
+
 </html>

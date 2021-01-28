@@ -50,7 +50,7 @@ public class PromotionController {
 	private MemberService memberService;
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("main/promtion/promotionList")
+	@GetMapping("promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -158,11 +158,11 @@ public class PromotionController {
 
 		promotionService.promotionInsert(promotionDto);
 
-		return "redirect:/myPromotionList";
+		return "redirect:/trainer/promtion/myPromotionList";
 	}
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
-	@GetMapping("/myPromotionList")
+	@GetMapping("trainer/promtion/myPromotionList")
 	public String trainerMyPromotionList(Model model) {
 		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService
 				.getTrainerMyPromotionAllList("id002");
@@ -190,7 +190,13 @@ public class PromotionController {
 
 	// 트레이너 프로모션 내 수정페이지
 	@GetMapping("trainer/promtion/myPromotionModify")
-	public String myPromotionModify(Model model) {
+	public String myPromotionModify(Model model,
+			@RequestParam(name = "trainerPromotionNoticeCode", required = false) String trainerPromotionNoticeCode) {
+
+		NoticePromotionTrainerDto promotionDto = promotionService.promotionDetail(trainerPromotionNoticeCode);
+		System.out.println(promotionDto);
+		model.addAttribute("promotionUpdate", promotionDto);
+
 		return "manage_layout/trainer/promtion/my_promotion_modify";
 	}
 

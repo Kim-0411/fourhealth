@@ -26,7 +26,7 @@
       class="brand-link"
     >
       <img
-        src="/img/master_img/AdminLTELogo.png"
+        src="/static/img/master_img/AdminLTELogo.png"
         alt="AdminLTE Logo"
         class="brand-image img-circle elevation-3"
         style="opacity: 0.8"
@@ -98,17 +98,23 @@
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="/trainerProfileInsert" class="nav-link">
+                <a
+                  href="/trainer/profile/trainerProfileInsert"
+                  class="nav-link"
+                >
                   <p>#프로필 등록</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/trainerProfile" class="nav-link">
+                <a href="/trainer/profile/trainerProfile" class="nav-link">
                   <p>#프로필 보기</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="/trainerProfileModify" class="nav-link">
+                <a
+                  href="/trainer/profile/trainerProfileModify"
+                  class="nav-link"
+                >
                   <p>#프로필 수정</p>
                 </a>
               </li>
@@ -136,12 +142,15 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/myPromotionList" class="nav-link">
+                  <a href="/trainer/promtion/myPromotionList" class="nav-link">
                     <p>!프로모션 조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/myPromotionModify" class="nav-link">
+                  <a
+                    href="/trainer/promtion/myPromotionModify"
+                    class="nav-link"
+                  >
                     <p>#프로모션 수정</p>
                   </a>
                 </li>
@@ -163,17 +172,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/trainerScheduleInsert" class="nav-link">
+                  <a
+                    href="/trainer/schedule/trainerScheduleInsert"
+                    class="nav-link"
+                  >
                     <p>!스케줄등록(음식,운동)</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/trainerScheduleList" class="nav-link">
+                  <a
+                    href="/trainer/schedule/trainerScheduleList"
+                    class="nav-link"
+                  >
                     <p>#스케줄조회(음식,운동)</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/trainerScheduleModify" class="nav-link">
+                  <a
+                    href="/trainer/schedule/trainerScheduleModify"
+                    class="nav-link"
+                  >
                     <p>#스케줄수정(음식,운동)</p>
                   </a>
                 </li>
@@ -189,17 +207,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a th:href="@{/trainerSendMessage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerSendMessage}"
+                    class="nav-link"
+                  >
                     <p>!쪽지 작성</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerMessageReceiveManage}"
+                    class="nav-link"
+                  >
                     <p>!받은 쪽지함</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerMessageSendManage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerMessageSendManage}"
+                    class="nav-link"
+                  >
                     <p>!보낸 쪽지함</p>
                   </a>
                 </li>
@@ -213,17 +240,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/adjustmentAccountInsert" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccountInsert"
+                    class="nav-link"
+                  >
                     <p>#정산계좌등록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/adjustmentAccountModify" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccountModify"
+                    class="nav-link"
+                  >
                     <p>#정산계좌수정</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/adjustmentAccount" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccount"
+                    class="nav-link"
+                  >
                     <p>#정산금액조회</p>
                   </a>
                 </li>
@@ -247,19 +283,25 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a
-                    href="/memberAllList?user_level=user_level_003"
+                    href="/master/user_manage/memberAllList?user_level=user_level_003"
                     class="nav-link"
                   >
                     <p>사용자 회원목록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/userLoginList}" class="nav-link">
+                  <a
+                    th:href="@{/master/user_manage/userLoginList}"
+                    class="nav-link"
+                  >
                     <p>#사용자 로그인 조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/dormantUserList" class="nav-link">
+                  <a
+                    href="/master/user_manage/dormantUserList"
+                    class="nav-link"
+                  >
                     <p>#탈퇴된 사용자 조회</p>
                   </a>
                 </li>
@@ -277,24 +319,33 @@
               <ul class="nav nav-treeview">
                 <li class="nav-item">
                   <a
-                    href="/memberAllList?user_level=user_level_002"
+                    href="/master/user_manage/memberAllList?user_level=user_level_002"
                     class="nav-link"
                   >
                     <p>!트레이너 회원목록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerAccessList}" class="nav-link">
+                  <a
+                    th:href="@{/master/trainerManage/trainerAccessList}"
+                    class="nav-link"
+                  >
                     <p>!트레이너 비승인목록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/trainerLoginList" class="nav-link">
+                  <a
+                    href="/master/trainerManage/trainerLoginList"
+                    class="nav-link"
+                  >
                     <p>#트레이너 로그인 조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/dormantTrainerList" class="nav-link">
+                  <a
+                    href="/master/trainerManage/dormantTrainerList"
+                    class="nav-link"
+                  >
                     <p>#탈퇴된 트레이너 조회</p>
                   </a>
                 </li>
@@ -311,12 +362,18 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a th:href="@{/matchingList}" class="nav-link">
+                  <a
+                    th:href="@{/master/reportManage/master/matchingManage/matchingList}"
+                    class="nav-link"
+                  >
                     <p>전체 매칭목록 조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/matchingRefundList}" class="nav-link">
+                  <a
+                    th:href="@{/master/reportManage/master/matchingManage/matchingRefundList}"
+                    class="nav-link"
+                  >
                     <p>매칭 파기 신청 조회(환불)</p>
                   </a>
                 </li>
@@ -333,17 +390,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/diseaseDataInsert" class="nav-link">
+                  <a
+                    href="/master/diseaseManage/diseaseDataInsert"
+                    class="nav-link"
+                  >
                     <p>#질병DB등록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/manage_layout/master/diseaseDataList" class="nav-link">
+                  <a
+                    href="/master/diseaseManage/diseaseDataList"
+                    class="nav-link"
+                  >
                     <p>#질병DB조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/diseaseDataModify" class="nav-link">
+                  <a
+                    href="/master/diseaseManage/diseaseDataModify"
+                    class="nav-link"
+                  >
                     <p>#질병DB수정</p>
                   </a>
                 </li>
@@ -360,17 +426,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/exerciseDataInsert" class="nav-link">
+                  <a
+                    href="/master/exerciseManage/exerciseDataInsert"
+                    class="nav-link"
+                  >
                     <p>#운동DB등록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/exerciseDataInsert" class="nav-link">
+                  <a
+                    href="/master/exerciseManage/exerciseDataInsert"
+                    class="nav-link"
+                  >
                     <p>#운동DB조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/exerciseDataInsert" class="nav-link">
+                  <a
+                    href="/master/exerciseManage/exerciseDataInsert"
+                    class="nav-link"
+                  >
                     <p>#운동DB수정</p>
                   </a>
                 </li>
@@ -387,17 +462,17 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/foodDataInsert" class="nav-link">
+                  <a href="/master/foodManage/foodDataInsert" class="nav-link">
                     <p>#음식DB등록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/manage_layout/master/foodDataList" class="nav-link">
+                  <a href="/master/foodManage/foodDataList" class="nav-link">
                     <p>#음식DB조회</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/foodDataModify" class="nav-link">
+                  <a href="/master/foodManage/foodDataModify" class="nav-link">
                     <p>#음식DB수정</p>
                   </a>
                 </li>
@@ -414,17 +489,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a th:href="@{/trainerSendMessage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerSendMessage}"
+                    class="nav-link"
+                  >
                     <p>!쪽지 작성</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerMessageReceiveManage}"
+                    class="nav-link"
+                  >
                     <p>!받은 쪽지함</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerMessageSendManage}" class="nav-link">
+                  <a
+                    th:href="@{/trainer/message/trainerMessageSendManage}"
+                    class="nav-link"
+                  >
                     <p>!보낸 쪽지함</p>
                   </a>
                 </li>
@@ -441,7 +525,10 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a th:href="@{/userPlatformGrade}" class="nav-link">
+                  <a
+                    href="#"
+                    class="nav-link"
+                  >
                     <p>
                       #사용자 플렛폼 등급 <br />
                       &nbsp조회 & 수정
@@ -449,7 +536,10 @@
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a th:href="@{/trainerPlatformGrade}" class="nav-link">
+                  <a
+                    href="#"
+                    class="nav-link"
+                  >
                     <p>
                       #트레이너 플렛폼 등급 <br />
                       &nbsp조회 & 수정
@@ -467,17 +557,26 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/adjustmentAccountInsert" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccountInsert"
+                    class="nav-link"
+                  >
                     <p>#정산계좌등록</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/adjustmentAccountModify" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccountModify"
+                    class="nav-link"
+                  >
                     <p>#정산계좌수정</p>
                   </a>
                 </li>
                 <li class="nav-item">
-                  <a href="/adjustmentAccount" class="nav-link">
+                  <a
+                    href="/trainer/adjustment/adjustmentAccount"
+                    class="nav-link"
+                  >
                     <p>#정산금액조회</p>
                   </a>
                 </li>
@@ -491,7 +590,7 @@
               </a>
               <ul class="nav nav-treeview">
                 <li class="nav-item">
-                  <a href="/reportList" class="nav-link">
+                  <a href="/master/reportManage/reportList" class="nav-link">
                     <p>#신고 조회</p>
                   </a>
                 </li>

@@ -26,8 +26,21 @@ public class ExerciseController {
 	@Autowired
 	private ExerciseService exerciseService;
 
+	@GetMapping("exercise/exercise")
+	public String exercise(Model model) {
+		List<MetExerciseDto> easyList = exerciseService.getAllEasyExerciseList();
+		List<MetExerciseDto> NormalList = exerciseService.getAllNormalExerciseList();
+		List<MetExerciseDto> HardList = exerciseService.getAllHardExerciseList();
+		model.addAttribute("title", "Fourhealth exercise");
+		model.addAttribute("easy", easyList);
+		model.addAttribute("normal", NormalList);
+		model.addAttribute("hard", HardList);
+
+		return "main_layout/exercise/exercise";
+	}
+
 	// 전체 운동보기 (전체 접근가능)
-	@GetMapping("/allExerciseList")
+	@GetMapping("/exercise/allExerciseList")
 	public String allExerciseList(Model model) {
 		List<MetExerciseDto> metExercise = exerciseService.getAllExerciseList();
 		model.addAttribute("MetExercise", metExercise);
@@ -35,7 +48,7 @@ public class ExerciseController {
 	}
 
 	// 운동검색 (전체 접근가능)
-	@PostMapping("/serachExercise")
+	@PostMapping("/exercise/serachExercise")
 	public String serachExercise(Model model,
 			@RequestParam(name = "exercise_name", required = false) String exerciseName,
 			@RequestParam(name = "met_coefficient", required = false) String metCoefficient,
@@ -62,7 +75,7 @@ public class ExerciseController {
 	}
 
 	// 검색된 운동 페이지 동작(전체 접근가능)
-	@GetMapping("/serachExercise")
+	@GetMapping("/exercise/serachExercise")
 	public String serachExercisePage(Model model,
 			@RequestParam(name = "exercise_name", required = false) String exerciseName,
 			@RequestParam(name = "met_coefficient", required = false) String metCoefficient,
@@ -90,16 +103,15 @@ public class ExerciseController {
 	}
 
 	// 운동별 상세정보(준비중)
-	@GetMapping("/exerciseInfo")
+	@GetMapping("/exercise/exerciseInfo")
 	public String exerciseInfo(HttpServletResponse response) throws IOException {
 
 		response.setContentType("text/html; charset=UTF-8");
 		PrintWriter out = response.getWriter();
-		out.println("<script>alert('준비중입니다.');location.href='/exercise';</script>");
+		out.println("<script>alert('준비중입니다.');location.href='/exercise/exercise';</script>");
 		out.flush();
 
 		return null;
 	}
-
 
 }

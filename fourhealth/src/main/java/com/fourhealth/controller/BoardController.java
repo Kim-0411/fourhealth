@@ -25,36 +25,35 @@ import com.fourhealth.service.BoardService;
 
 @Controller
 public class BoardController {
-	
+
 	@Autowired
 	private BoardService boardService;
-	
-	//문의 등록화면으로 가는 겟매핑
-	@GetMapping("/inquiryInsert")
+
+	// 문의 등록화면으로 가는 겟매핑
+	@GetMapping("board/inquiryInsert")
 	public String inquiryInsertForm(String userId, Model model) {
-		
+
 		return "main_layout/board/inquiryInsert";
 	}
-	
-	   //신고 등록 폼으로 가기 위한 매핑
-	   @RequestMapping("/reportInsert")
-	   public String reportBoardInsertForm(HttpSession session, Model model) {
-		  model.addAttribute("title","신고 등록");
-	      List<MatchingUserTrainerDto> reportPromotionList = boardService.reportPromotionList((String)session.getAttribute("SID"));
-		  System.out.println(reportPromotionList);
-	      model.addAttribute("reportPromotionList",reportPromotionList);
-	      model.addAttribute("SID",(String)session.getAttribute("SID") );
-	      return "main_layout/board/reportInsert";
-	   }
-	
 
+	// 신고 등록 폼으로 가기 위한 매핑
+	@RequestMapping("board/reportInsert")
+	public String reportBoardInsertForm(HttpSession session, Model model) {
+		List<MatchingUserTrainerDto> reportPromotionList;
+		model.addAttribute("title", "신고 등록");
+			reportPromotionList = boardService
+					.reportPromotionList("id001");
+			model.addAttribute("reportPromotionList", reportPromotionList);
+			model.addAttribute("SID", "id001");
+		return "main_layout/board/reportInsert";
+	}
 
-	//신고 등록 처리 매핑 
+	// 신고 등록 처리 매핑
 	@RequestMapping("/reportInsertProc")
 	public String reportBoardInsert(UserReportDto userReport) {
 		String result = boardService.reportBoardInsert(userReport);
-		
+
 		return "/index";
 	}
-	
+
 }
