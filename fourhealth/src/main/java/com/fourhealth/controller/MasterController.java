@@ -29,6 +29,7 @@ import com.fourhealth.dto.UserReportDto;
 import com.fourhealth.service.*;
 
 import com.fourhealth.dto.CommonUserDto;
+import com.fourhealth.dto.GradePlatformTrainerDto;
 import com.fourhealth.dto.MsgDto;
 import com.fourhealth.service.*;
 
@@ -341,7 +342,39 @@ public class MasterController {
 
 	@GetMapping("master/platformManage/trainerPlatformGrade")
 	public String trainerPlatformGrade(Model model) {
+		 List<GradePlatformTrainerDto> gradePlatformTrainerList = masterService.trainerPlatfromList();
+		 model.addAttribute("gradePlatformTrainerList", gradePlatformTrainerList);
 		return "manage_layout/master/platform_manage/trainer_platform_grade";
+	}
+	//관리자 플랫폼 등급관리 수정처리 화면으로
+	@GetMapping("/modifyTrainerGrade")
+	public String modifyTrainerGrade(Model model, @RequestParam(name = "trainerPlatformGradeCode", required = false) String trainerPlatformGradeCode) {
+		System.out.println("회원 수정 폼에 보여질 회원아이디" + trainerPlatformGradeCode);
+		GradePlatformTrainerDto gradePlatformTrainerDto = masterService.getTrainerPlatformGradeCode(trainerPlatformGradeCode);
+		System.out.println("db에서 검색한 트레이너 공통 등급-->" + gradePlatformTrainerDto);
+		model.addAttribute("title", "트레이너 공통 등급 수정화면");
+		// db에서 검색한 트레이너 공통 등급
+		System.out.println("트레이너 공통 등급 Dto 값 확인" + gradePlatformTrainerDto);
+		return null;
+	}
+
+	
+	//관리자  플랫폼 등급관리 수정 처리
+	@PostMapping("/modifyTrainerGrade")
+	public String modifyTrainerGrade(GradePlatformTrainerDto gradePlatformTrainerDto) {
+		System.out.println("공통 등급 수정 폼에서 입력 받은 값" + gradePlatformTrainerDto);
+		// modify 처리
+		String result = masterService.modifyTrainerGrade(gradePlatformTrainerDto);
+		// modify 결과
+		if (result.equals("user_level_002")) {
+			System.out.println(result + "사용자 수정 폼 결과");
+			return "manage_layout/master/trainer_manage/trainer_modify";
+
+		} else if (result.equals("user_level_003")) {
+			System.out.println(result + "트레이너 수정 폼 결과");
+			return "manage_layout/master/user_manage/user_modify";
+		}
+		return "redirect:/";
 	}
 	/* 관리자 플렛폼 등급 관리 페이지 맵핑 끝 */
 

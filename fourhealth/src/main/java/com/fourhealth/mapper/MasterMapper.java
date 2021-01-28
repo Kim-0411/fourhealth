@@ -9,6 +9,7 @@ import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
+import com.fourhealth.dto.GradePlatformTrainerDto;
 import com.fourhealth.dto.UserReportDto;
 
 @Mapper
@@ -32,6 +33,11 @@ public interface MasterMapper {
 	public int allExerciseDBCount();
 	//전체  질병dB수
 	public int allDiseaseDBCount();
-	
+	//트레이너 공통 등급 리스트
+	public List<GradePlatformTrainerDto> trainerPlatformGradeList();
+	//트레이너 공통 등급 수정처리
+	int modifyTrainerGrade(GradePlatformTrainerDto gradePlatformTrainerDto);
+	//트레이너 공통 등급 수정 페이지 이동
+	public GradePlatformTrainerDto getTrainerPlatformGradeCode(String trainerPlatformGradeCode);
 	
 }

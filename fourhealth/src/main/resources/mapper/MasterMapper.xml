@@ -22,7 +22,13 @@
         <result column="trainer_access_reg_date" 		property="trainerAccessRegDate"/>
         <result column="trainer_reg_date" 				property="trainerRegDate"/>
     </resultMap>
-
+	<!-- 트레이너플랫폼등급 resultMap -->
+	<resultMap type="GradePlatformTrainerDto" id="resultMapGradePlatformTrainer">
+		<result column="trainer_platform_grade_code" property="trainerPlatformGradeCode" />
+		<result column="trainer_platform_grade_name" property="trainerPlatformGradeName" />
+		<result column="trainer_platform_grade_duty" property="trainerPlatformGradeDuty" />
+		<result column="trainer_platform_grade_reg_date" property="trainerPlatformGradeRegDate" />
+	</resultMap>
 	<!-- 관리자 단에서 신고 목록 리스트 보여주기 -->
 	<select id="reportList" resultMap="resultMapReport">
 	SELECT report_user_code
@@ -95,5 +101,36 @@
 		COUNT(*)
 	FROM
 		tb_disease
+	</select>
+	
+	<!-- 트레이너플랫폼 공통 등급리스트 보여주기  -->
+	<select id="trainerPlatformGradeList" resultMap="resultMapGradePlatformTrainer">
+	SELECT 
+		trainer_platform_grade_code,
+		trainer_platform_grade_name,
+		trainer_platform_grade_duty,
+		trainer_platform_grade_reg_date
+	FROM tb_grade_platform_trainer
+	</select>
+	<!-- 관리자페이지 트레이너 플랫폼 공통 등급 수정 -->
+	<update id="modifyTrainerGrade" parameterType="GradePlatformTrainerDto">
+	UPDATE tb_grade_platform_trainer
+	SET
+		trainer_platform_grade_code=#{trainerPlatformGradeCode},
+		trainer_platform_grade_name=#{trainerPlatformGradeName},
+		trainer_platform_grade_duty=0,
+		trainer_platform_grade_reg_date=NOW()
+	WHERE trainer_platform_grade_code=#{trainerPlatformGradeCode}
+	</update>
+	<!-- 트레이너 공통 등급 수정 페이지 이동 -->
+	<select id="getTrainerPlatformGradeCode" parameterType="String" resultMap="resultMapGradePlatformTrainer">
+	SELECT 
+		trainer_platform_grade_code,
+ 		trainer_platform_grade_name,
+  		trainer_platform_grade_duty,
+   		trainer_platform_grade_reg_date
+	FROM tb_grade_platform_trainer
+		WHERE
+			trainer_platform_grade_code = #{trainerPlatformGradeCode};
 	</select>
 </mapper>

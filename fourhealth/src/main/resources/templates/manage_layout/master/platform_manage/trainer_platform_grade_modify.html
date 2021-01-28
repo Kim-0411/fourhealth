@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{/default_layout/manage/default}"
+>
+  <th:block layout:fragment="customContent">
+    <form th:action="@{/modifyMasterAll}" method="post">
+        <h3>트레이너 공통 등급 수정</h3>
+            <table border="1">
+                <tr>
+                    <td>트레이너 플랫폼 공통 등급 관리 코드</td>
+                    <td>
+                        <input type="text" name="trainerPlatformGradeCode" th:value="${GradePlatformTrainerDto.trainerPlatformGradeCode}" readonly="readonly"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>트레이너 플랫폼 공통 등급 관리</td>
+                    <td>
+                        <input type="text" name="trainerPlatformGradeName" th:value="${GradePlatformTrainerDto.trainerPlatformGradeName}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>트레이너 플랫폼 공통 등급 관리</td>
+                    <td>
+                        <input type="text" name="trainerPlatformGradeDuty" th:value="${GradePlatformTrainerDto.trainerPlatformGradeDuty}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td>트레이너 플랫폼 공통 등급 등록일자</td>
+                    <td>
+                        <input type="text" name="trainerPlatformGradeRegDate" th:value="${GradePlatformTrainerDto.trainerPlatformGradeRegDate}"/>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="2" style="text-align: center;">
+                        <button type="submit">트레이너등급수정</button>
+                    </td>
+                </tr>
+            </table>
+            </form>
+  </th:block>
+</html>

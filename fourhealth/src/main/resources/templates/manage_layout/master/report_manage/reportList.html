@@ -35,6 +35,8 @@
                       <th>사용자 id</th>
                       <th>신고 상세내용</th>
                       <th>신고 등록일자</th>
+                      <th>수정</th>
+                      <th>삭제</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -44,6 +46,10 @@
                       <td th:text="${r.userId}"> </td>
                       <td th:text="${r.reportUserReasonDetail}"> </td>
                       <td th:text="${r.reportUserRegDate}"> </td>
+                      <td>
+						<a th:href="#">수정</a>	</td>
+					  <td>
+					  	<a th:href="#">삭제</a></td>
                     </tr>
                   </tbody>
                 </table>

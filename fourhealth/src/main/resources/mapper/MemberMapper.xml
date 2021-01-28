@@ -97,6 +97,7 @@
 		WHERE
 			user_id = #{memberId}
 	</update>
+	<!-- 관리자페이지 트레이너 플랫폼 공통 등급 수정 -->
 	
 	<!-- 관리자페이지 단에서 전체회원 수정  -->
 	<update id="modifyMasterMember" parameterType="MemberDto">
