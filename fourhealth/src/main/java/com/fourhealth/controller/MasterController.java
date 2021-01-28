@@ -265,23 +265,6 @@ public class MasterController {
 
 	/* 관리자 매칭 관리 페이지 맵핑 끝 */
 
-	/* 관리자 질병DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/diseaseDataInsert")
-	public String diseaseDataInsert(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_insert";
-	}
-
-	@GetMapping("/diseaseDataList")
-	public String diseaseDataList(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_list";
-	}
-
-	@GetMapping("/diseaseDataModify")
-	public String diseaseDataModify(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_modify";
-	}
-	/* 관리자 질병DB 관리 페이지 맵핑 끝 */
-
 	/* 관리자 운동DB 관리 페이지 맵핑 시작 */
 	@GetMapping("/exerciseDataInsert")
 	public String exerciseDataInsert(Model model) {
