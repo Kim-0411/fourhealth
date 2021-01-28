@@ -305,10 +305,8 @@ input#userId.form-control.form-control-user {
   width: 100%;
 }
 
-button#userIdCheck.btn btn-primary {
-  /* margin: 7px */
-  height: 38px;
-  white-space: nowrap;
+button#userIdCheck.btn.btn-primary {
+  /* white-space: nowrap; */
 }
 
 button,
