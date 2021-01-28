@@ -125,6 +125,24 @@
             #{trainerPromotionRecruitCloseDate}, 
             NOW())
       </insert>
-      
+
+      <!-- <select id="">
+        SELECT 
+          (t.trainer_promotion_live_add_people*t.trainer_promotion_price)*
+          (g.trainer_platform_grade_duty/100) AS 'calculate'
+        FROM 
+          tb_notice_promotion_trainer AS t
+        INNER JOIN 
+          tb_trainer AS p
+        ON 
+          t.user_id = p.user_id
+        INNER JOIN 
+          tb_grade_platform_trainer AS g
+        ON 
+          g.trainer_platform_grade_code = p.trainer_platform_grade_code
+        WHERE 
+          t.trainer_promotion_notice_code='trainer_promotion_notice_001';
+      </select>
+       -->
       
 </mapper>
