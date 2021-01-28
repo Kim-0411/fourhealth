@@ -201,7 +201,7 @@ public class PromotionController {
 
 		System.out.println("수정된 값 ----->" + promotionDto);
 		promotionService.modifyUpdateMyPromotion(promotionDto);
-		return "redirect:/trainer/promtion/myPromotionModify";
+		return "redirect:/trainer/promtion/myPromotionList";
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러
