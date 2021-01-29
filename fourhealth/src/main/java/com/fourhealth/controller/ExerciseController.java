@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fourhealth.dto.MetExerciseDto;
+import com.fourhealth.mapper.ExerciseMapper;
 import com.fourhealth.service.ExerciseService;
 
 @Controller
@@ -25,6 +26,28 @@ public class ExerciseController {
 
 	@Autowired
 	private ExerciseService exerciseService;
+	@Autowired
+	private ExerciseMapper exerciseMapper;
+
+	/* 관리자 운동DB 관리 페이지 맵핑 시작 */
+	@GetMapping("master/exerciseManage/exerciseDataInsert")
+	public String exerciseDataInsert(Model model) {
+		return "manage_layout/master/exercise_manage/exercise_data_insert";
+	}
+
+	@GetMapping("master/exerciseManage/exerciseDataList")
+	public String exerciseDataList(Model model) {
+
+		model.addAttribute("exerciseList", exerciseMapper.getAllExerciseList2());
+
+		return "manage_layout/master/exercise_manage/exercise_data_list";
+	}
+
+	@GetMapping("master/exerciseManage/exerciseDataModify")
+	public String exerciseDataModify(Model model) {
+		return "manage_layout/master/exercise_manage/exercise_data_modify";
+	}
+	/* 관리자 운동DB 관리 페이지 맵핑 끝 */
 
 	@GetMapping("exercise/exercise")
 	public String exercise(Model model) {
