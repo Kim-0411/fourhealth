@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  <!-- Food test table name : tb_food_test -->
+  <!-- Food wokring table name : tb_food -->
+<mapper namespace="com.fourhealth.mapper.FoodMapper">
+  <resultMap id="resultMapFood" type="Food">
+    <result column="food_code" 		property="foodCode"/>
+		<result column="food_name" 		property="foodName"/>
+    <result column="food_group" 		property="foodGroup"/>
+    <result column="food_gram" 		property="foodTotalGram"/>
+    <result column="food_calorie" 		property="foodCal"/>
+    <result column="food_protein" 		property="foodProtein"/>
+    <result column="food_fat" 		property="foodFat"/>
+    <result column="food_sugar" 		property="foodSugar"/>
+    <result column="food_sodium" 		property="foodSodium"/>
+    <result column="food_makerName" 		property="foodMakerName"/>
+  </resultMap>
+  <!-- 관리자 FOOD -->
+  <insert id="insertFoodListInformation" parameterType="java.util.List">
+    INSERT IGNORE INTO tb_food_backup(
+      food_code, 
+      food_name, 
+      food_group,
+      food_gram,
+      food_calorie,
+      food_carbo,
+      food_protein,
+      food_fat,
+      food_sodium,
+      food_cholesterol,
+      food_sugar,
+      food_makerName,
+      food_reg_date
+      ) 
+    VALUES
+    <foreach collection="list" item="food" separator=" , " >
+        ("${food.foodCode}", 
+         "${food.foodName}", 
+         "${food.foodGroup}",
+         "${food.foodTotalGram}", 
+         "${food.foodCal}",
+         "${food.foodCarbo}",
+         "${food.foodProtein}",
+         "${food.foodFat}",
+         "${food.foodSugar}",
+         "${food.foodSodium}",
+         "${food.foodChole}",
+         "${food.makerName}",
+         NOW()
+      )   
+    </foreach>
+  </insert>
+
+  <select id="getFoodList" resultMap="resultMapFood">
+    SELECT 
+      food_code,           
+      food_name,          
+      food_group,         
+      food_gram,           
+      food_calorie,        
+      food_carbo,          
+      food_protein,        
+      food_fat,            
+      food_cholesterol,    
+      food_sugar,          
+      food_sodium,         
+      food_makerName      
+    FROM
+     	tb_food
+  </select>
+
+  <select id="getFoodListCount" resultType="int">
+    SELECT
+      count(*)
+    FROM
+      tb_food  
+  </select>
+
+  <select id="getFoodListBoard" parameterType="int" resultType="map">
+		SELECT
+			 f.food_code 			  AS foodCode,
+			 f.food_name 			  AS foodName,
+			 f.food_group 			AS foodGroup,
+			 f.food_gram 			  AS foodTotalGram,
+			 f.food_calorie 		AS foodCal,
+			 f.food_carbo 			AS foodCarbo,
+			 f.food_protein 		AS foodProtein,
+			 f.food_fat 			  AS foodFat,
+			 f.food_cholesterol AS foodChole,
+			 f.food_sugar 			AS foodSugar,
+			 f.food_sodium 		  AS foodSodium,
+			 f.food_makerName 	AS foodMakerName
+		FROM
+			tb_food AS f
+		LIMIT #{startRow}, #{rowPerPage};
+	</select>
+
+</mapper>

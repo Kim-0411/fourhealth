@@ -64,13 +64,67 @@ $(function () {
   });*/
 
   var calendar = new Calendar(calendarEl, {
+  
     headerToolbar: {
       left: "prev,next today",
-      center: "title",
+      center: "title addEventButton",
       right: "dayGridMonth,timeGridWeek,timeGridDay",
     },
     locale : 'ko', 
     themeSystem: "bootstrap",
+    defaultView: 'agendaWeek',
+    editable:true,
+    navLinks:true,
+    busindessHours:true,
+    selectable:true,
+
+    dateClick: function(day) {
+      
+
+
+    	var user_id = $("#select_user_id").text(); //스케쥴 아이디 유무
+    	if(user_id == ''){
+    		alert('프로모션 및 회원을 선택해주세요.');
+    	}else{
+         $("#myModal").modal();          
+      }
+    
+      
+      console.log('add btn test', d);
+      calendar.addEvent({
+        title:'test',
+        start:date,
+        allDay:true
+      })
+    },
+
+
+    customButtons: {
+      //title 쪽 addEventButton 일정 이벤트 추가
+      addEventButton:{
+        text:'일정추가',
+        click: function(){
+          console.log('test');
+          var dateStr = prompt('Enter a date in YYYY-MM-DD format');
+          var date = new Date(dateStr + 'T00:00:00'); // will be in local time
+
+          if (!isNaN(date.valueOf())) { // valid?
+            $("#myModal").modal(function(){
+              calendar.addEvent({
+                title: '일정추가됨',
+                start: date,
+                allDay: true
+              });
+
+            }); 
+            
+            alert('Great. Now, update your database...');
+          } else {
+            alert('Invalid date.');
+          }
+        }
+      }
+    },
     //Random default events
   /*  events: [
       {
@@ -128,17 +182,29 @@ $(function () {
         info.draggedEl.parentNode.removeChild(info.draggedEl);
       }
     },*/
-//클릭시 동작 이벤트 
-    dateClick: function() {	
-    	var user_id = $("#select_user_id").text(); //스케쥴 아이디 유무
-    	if(user_id == ''){
-    		alert('프로모션및 회원을 선택해주세요.');
-    	}else{
-    		$("#myModal").modal();
-    	}
-    },
-  });
+  //클릭시 동작 이벤트 
+  //################################################################
+  //################################################################
+    
+    
 
+    
+
+  });
+  $("#schedule-modal-add-btn").click(function(day){
+
+    var dataStr = prompt("");
+
+    var date = new Date();
+    var d = date.getDate(),
+      m = date.getMonth(),
+      y = date.getFullYear();
+    console.log('add btn test', d);
+    console.log(m);
+    console.log(y);
+    
+  })
+  //켈린더 뿌려주는 로직
   calendar.render();
   // $('#calendar').fullCalendar()
 
@@ -160,7 +226,7 @@ $(function () {
 
   // 스케쥴 모달페이지
 
-  $("#add-new-event").click(function () {
+  $("#add-new-event").click(function () {    
     var firstScheduleTitle = $("#new-event").val(); //스케쥴 타이틀
     var user_id = $("#select_user_id").text(); //스케쥴 아이디 유무
 
@@ -176,6 +242,7 @@ $(function () {
           var secondScheduleTitle = $("#new-event").val();
           
           $("#myModal").modal("hide");
+       
           if (secondScheduleTitle.length == 0) {
             return;
           }

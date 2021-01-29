@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h1>음식 비동기 검색 페이지</h1>
+    <!-- 모달로 -->
+    <form action="#" name="searchForm"> 
+        <input type="text" name="searchKeyword" onkeyup="sendKeyoWord();"/>
+        <input type="button" value="검색"/>
+        <div class="suggestionFoodList">
+            <div class="suggestionList"></div>
+        </div>
+    </form>
+</body>
+<script>
+
+    function showSuggest() {
+        
+    }
+
+    //서버에 키워드 보내는 함수
+    function sendKeyword() {
+        
+        var searchKeyword = document.searchForm.searchKeyword.value;
+
+        //검색된 키값이 없으면 null표시;
+        if(searchKeyword == ""){
+            hide();
+            return;
+        }
+        var serachKeyword2 = "searchKeyword"+searchKeyword;
+        // 웹페이지 경로 요청 할당
+        // sendRequest();
+    }
+</script>
+</html>

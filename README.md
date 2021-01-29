@@ -9,6 +9,7 @@
 ## 1. Our Goal
 
 모든 사람은 각자에게 맞는 맞춤형 건강 관리 플랜이 필요하다.
+a
 
 # About Tech
 
@@ -18,20 +19,21 @@
 - Kakao oven
 - draw.io
 
-## UI
+## Front
 
 - bootstrap 4(UI Component)
 - CSS
 - HTML
 - JavaScript
 
-## Spring base
+## Back
 
-- Java
+- Java(Spring Framework)
 
-## Server
+## Server 및 배포
 
 - AWS : Tomcat
+- cafe24
 
 ## Database
 
@@ -41,6 +43,8 @@
 
 - 식품안전나라음식정보
 - 건강보험심사평가원(질병정보서비스)
+- Kakao 결제
+
 
 # About Team
 
@@ -79,3 +83,4 @@
 ### 5. 최종 페이지 시연 동영상
 
 ### 6. 최종 배포 홈페이지
+- https://kjc0411.cafe24.co.kr Fourhealth 바로가기
