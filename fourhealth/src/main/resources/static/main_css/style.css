@@ -90,6 +90,7 @@
   signup Css
 -------------------- */
 @import "/main_layout/signup/signup.css";
+@import "mainContent/aboutCss/about.css";
 
 /* --------------------
 :: 1.0 Base CSS

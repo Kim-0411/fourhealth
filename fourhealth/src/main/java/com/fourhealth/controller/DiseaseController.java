@@ -167,7 +167,7 @@ public class DiseaseController {
     }
     
     /* 관리자 질병DB 관리 페이지 맵핑 시작 */
-    @GetMapping("/diseaseDataInsert")
+    @GetMapping("/master/diseaseManage/diseaseDataInsert")
     public String diseaseDataInsert(Model model) {
         return "manage_layout/master/disease_manage/disease_data_insert";
     }
