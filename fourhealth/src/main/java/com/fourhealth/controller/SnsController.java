@@ -27,13 +27,14 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.fourhealth.dto.SnsUserDto;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.SnsService;
+import com.fourhealth.utility.ImageUpload;
 
 @Controller
 public class SnsController {
 
 	@Autowired
 	private SnsService snsService;
-
+	
 	@RequestMapping(value = "/commentsInsertBtn", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String commentsInsertBtn(@RequestParam Map<String, Object> map) {
 		System.out.println(map);
@@ -67,7 +68,7 @@ public class SnsController {
 		String result = snsService.snsInsert(snsUserDto);
 		System.out.println("폼에서 입력받은 값2" + snsUserDto);
 		System.out.println(result);
-		return "redirect:/sns";
+		return "main_layout/sns/snsList";
 	}
 
 	@GetMapping("/snsInsert")
