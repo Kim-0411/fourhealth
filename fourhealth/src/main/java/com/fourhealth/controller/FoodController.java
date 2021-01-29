@@ -59,6 +59,7 @@ public class FoodController {
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
 		Map<String, Object> resultMap = foodService.getFoosList(currentPage);
+		List<Food> resultMap2 = foodService.getFoodList();
 
 		model.addAttribute("title", "식품리스트 페이징 게시판");
 
@@ -75,6 +76,7 @@ public class FoodController {
 
 		// model.addAttribute("lastPage" , resultMap.get("lastPage"));
 		model.addAttribute("foodList", resultMap.get("foodList"));
+		
 		// model.addAttribute("currentPage", resultMap.get("currentPage"));
 		// model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		// model.addAttribute("endPageNum", resultMap.get("endPageNum"));
@@ -115,34 +117,49 @@ public class FoodController {
 	}
 
 	// - 관리자 화면 식품 조회
-	@GetMapping("/manage_layout/master/foodDataList")
+	@GetMapping("/master/foodManage/foodDataList")
 	public String foodDataList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 		model.addAttribute("title", "관리자 식품 리스트 조회");
 
 		Map<String, Object> resultMap = foodService.getFoosList(currentPage);
+		// Map<String, Object> resultMap = (Map<String, Object>) foodMapper.getFoodList();
 
 		model.addAttribute("title", "식품리스트 페이징 게시판");
 
-		System.out.println("#############################");
-		System.out.println(resultMap.get("lastPage"));
-
-		System.out.println(resultMap);
+		/**Checking values */
+		// System.out.println("#############################");
+		// System.out.println(resultMap.get("lastPage"));
+		// System.out.println(resultMap);
 
 		for (int i = 0; i < resultMap.size(); i++) {
 			if (resultMap.get(i) == null) {
 
 			}
 		}
+
+		//All food Information
+
+		// model.addAttribute("foodAllList", foodMapper.getFoodList());
 	
 		model.addAttribute("foodList", resultMap.get("foodList"));
 		model.addAttribute("lastPage" , resultMap.get("lastPage"));
-		model.addAttribute("currentPage", resultMap.get("currentPage"));
+		model.addAttribute("currentPage", currentPage);
 		model.addAttribute("startPageNum", resultMap.get("startPageNum"));
 		model.addAttribute("endPageNum", resultMap.get("endPageNum"));
 
-		// return "manage_layout/master/food_manage/food_data_list";
-		return "manage_layout/master/food_manage/food_data_list2";
+		return "manage_layout/master/food_manage/food_data_list";
+		// return "manage_layout/master/food_manage/food_data_list2";
+	}
+
+	//음식 정보 조회 화면에서 수정
+	@GetMapping("/manage_layout/master/foodDataModify")
+	public void foodDataListModify(Model model,
+				@RequestParam(name = "foodCode", required = false) String foodCode) {
+		System.out.println("######################");
+		System.out.println(foodCode);
+
+		// return "manage_layout/master/food_manage/food_data_modify";
 	}
 
 	@GetMapping("/foodDataModify")

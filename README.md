@@ -9,6 +9,7 @@
 ## 1. Our Goal
 
 모든 사람은 각자에게 맞는 맞춤형 건강 관리 플랜이 필요하다.
+a
 
 # About Tech
 
@@ -33,6 +34,7 @@
 
 - AWS : Tomcat
 - cafe24
+
 ## Database
 
 - MYSQL
@@ -81,3 +83,4 @@
 ### 5. 최종 페이지 시연 동영상
 
 ### 6. 최종 배포 홈페이지
+- https://kjc0411.cafe24.co.kr Fourhealth 바로가기

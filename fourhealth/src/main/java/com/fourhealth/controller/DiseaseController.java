@@ -8,10 +8,13 @@ import java.util.List;
 import java.util.Map;
 
 import com.fourhealth.mapper.FoodMapper;
+import com.fourhealth.service.DiseaseService;
+import com.fourhealth.dto.DiseaseDto;
 import com.fourhealth.mapper.DiseaseMapper;
 import com.fourhealth.dto.DiseaseDto;
 import com.fourhealth.service.DiseaseService;
 
+import org.apache.ibatis.logging.Log;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
@@ -25,14 +28,13 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 public class DiseaseController {
+    @Autowired
+    private DiseaseService diseaseService;
 
     @Autowired
     private DiseaseMapper diseaseMapper;
-    @Autowired
-	private DiseaseService diseaseService;
 
 
-   
     /**
      * 2020/12/30 Wed 질병API 테스트 메소드 작성 및 테스트
      * 
@@ -46,27 +48,30 @@ public class DiseaseController {
 
     // 질병 api url
     private final String diseaseUrl = "http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList?sickType=1&medTp=2&diseaseType=SICK_NM&numOfRows=11789";
-    //http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=병적 골절을&ServiceKey=서비스키(인증키)
-
+    // http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=병적
+    // 골절을&ServiceKey=서비스키(인증키)
 
     // 비동기 방식 json tpye으로 view에서 입력된 값 diseaseName 변수로 받아오는 작업 및 api 연동 검색
     @GetMapping(value = "/info_disease", produces = "application/json")
-    public @ResponseBody List<Map<String, Object>> infoDisease(@RequestParam(value = "diseaseName", required = false) String diseaseName) {
-        //public @ResponseBody List<Map<String, String>> infoDisease(@RequestParam(value = "diseaseName", required = false) String diseaseName)
-        List<Map<String,Object>> superDiseaseList = new ArrayList<Map<String,Object>>();
+    public @ResponseBody List<Map<String, Object>> infoDisease(
+            @RequestParam(value = "diseaseName", required = false) String diseaseName) {
+        // public @ResponseBody List<Map<String, String>>
+        // infoDisease(@RequestParam(value = "diseaseName", required = false) String
+        // diseaseName)
+        List<Map<String, Object>> superDiseaseList = new ArrayList<Map<String, Object>>();
 
         // # 입력된 값 체크
         System.out.println(diseaseName);
-   
+
         // # 질병정보 service key(xml)
         // :http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=10
 
         // # 질병정보 service key(json)
         // :http://apis.data.go.kr/B551182/hospInfoService/getHospBasisList?pageNo=1&numOfRows=10&_type=json
-        
-        //##################################################
-        //서비스 키 변수
-        //##################################################
+
+        // ##################################################
+        // 서비스 키 변수
+        // ##################################################
 
         // getDissNameCodeList : 질병명칭/코드조회
         String serviceKey1 = "getDissNameCodeList";
@@ -94,32 +99,33 @@ public class DiseaseController {
 
         // 질병 api 검색 url
         // 질병 예제
-        // http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=병적 골절을&ServiceKey=서비스키(인증키)
+        // http://apis.data.go.kr/B551182/diseaseInfoService/getDissNameCodeList?sickType=1&medTp=2&diseaseType=SICK_NM&searchText=병적
+        // 골절을&ServiceKey=서비스키(인증키)
         String searchDiseaseUrlKey;
 
-        if(diseaseName == ""){
+        if (diseaseName == "") {
             searchDiseaseUrlKey = diseaseUrl + apiKey + searchKey;
-        }else{
+        } else {
             searchDiseaseUrlKey = diseaseUrl + apiKey + searchKey + diseaseName;
         }
-       
+
         System.out.println(searchDiseaseUrlKey);
         try {
             Document doc = Jsoup.connect(searchDiseaseUrlKey).get();
 
-            //System.out.println(doc);
+            // System.out.println(doc);
             Elements el = doc.select("items");
-            //System.out.println(el);
+            // System.out.println(el);
 
-            for(int i=0; i<el.size(); i++){
-                     
+            for (int i = 0; i < el.size(); i++) {
+
                 Element position = el.get(i);
                 Elements diseaseData = position.select("item");
 
-                for(int j=0; j<diseaseData.size(); j++){
+                for (int j = 0; j < diseaseData.size(); j++) {
 
                     // # 질병정보를 담기위한 HashMap : diseaseMap declare
-                    Map<String,Object> diseaseMap = new HashMap<String,Object>();
+                    Map<String, Object> diseaseMap = new HashMap<String, Object>();
                     Element data = diseaseData.get(j);
 
                     String sickCode = data.select("sickCd").text();
@@ -127,43 +133,72 @@ public class DiseaseController {
 
                     diseaseMap.put("diseaseCode", sickCode);
                     diseaseMap.put("diseaseName", sickName);
-                    
+
                     superDiseaseList.add(diseaseMap);
                 }
-        
+
             }
-            //System.out.println(superDiseaseList.get(4).get("diseaseName"));
-        }catch (IOException e) {
+            // System.out.println(superDiseaseList.get(4).get("diseaseName"));
+        } catch (IOException e) {
 
             e.printStackTrace();
         }
 
-        //List map 테스트
-       // diseaseMap.put("받아온 값", diseaseName);
-        //diseaseList.add(diseaseMap);
-       
-        //System.out.println(diseaseList.get(0));
-    
-        //Insert disease db test process 
+        // List map 테스트
+        // diseaseMap.put("받아온 값", diseaseName);
+        // diseaseList.add(diseaseMap);
+
+        // System.out.println(diseaseList.get(0));
+
+        // Insert disease db test process
 
         System.out.println("#############################");
         System.out.println(superDiseaseList.toString());
 
         int result = diseaseMapper.insertDiseaseListInformation(superDiseaseList);
         System.out.println("############################");
-        System.out.println("result 결과 확인 "+result);
-
-  
+        System.out.println("result 결과 확인 " + result);
 
         return superDiseaseList;
     }
-    
+
     @GetMapping("disease")
-    public String mainDisease(Model model){
+    public String mainDisease(Model model) {
         model.addAttribute("title", "질병정보테스트");
 
         return "disease/disease_test";
     }
+    
+    /* 관리자 질병DB 관리 페이지 맵핑 시작 */
+    @GetMapping("/diseaseDataInsert")
+    public String diseaseDataInsert(Model model) {
+        return "manage_layout/master/disease_manage/disease_data_insert";
+    }
+
+    @GetMapping("/master/diseaseManage/diseaseDataList")
+    public String diseaseDataList(Model model) {
+        List<DiseaseDto> diseaseList = diseaseService.getDiseaseList();
+
+        System.out.println("##################################");
+        System.out.println("##################################");
+
+        for(int i=0; i<10; i++){
+            System.out.println(diseaseList.get(i).getDiseaseName());
+        }
+
+        model.addAttribute("title", "master 질병 리스트");
+        model.addAttribute("diseaseList", diseaseList);
+
+
+
+        return "manage_layout/master/disease_manage/disease_data_list";
+    }
+
+    @GetMapping("/diseaseDataModify")
+    public String diseaseDataModify(Model model) {
+        return "manage_layout/master/disease_manage/disease_data_modify";
+    }
+    /* 관리자 질병DB 관리 페이지 맵핑 끝 */
     @GetMapping("/disease/disease")
 	public String diseasePage(){
 		

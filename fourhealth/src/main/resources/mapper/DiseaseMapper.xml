@@ -5,6 +5,21 @@
   <!-- Disease test table name : tb_disease_code -->
   <!-- Disease wokring table name : tb_disease_db -->
 <mapper namespace="com.fourhealth.mapper.DiseaseMapper">
+  <resultMap type="DiseaseDto" id="resultMapDisease">
+		<result column="disease_code" 		property="diseaseCode"/>
+		<result column="disease_name" 		property="diseaseName"/>
+		<result column="disease_details" 		property="diseaseDetails"/>
+	</resultMap>
+
+  <select id="getDiseaseList" resultMap="resultMapDisease">
+    SELECT 
+      disease_code, 
+      disease_name,
+      disease_details
+    FROM
+      tb_disease  
+  </select>
+
 
   <insert id="insertDiseaseListInformation" parameterType="java.util.List">
     INSERT INTO tb_disease(

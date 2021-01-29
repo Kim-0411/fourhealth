@@ -2,8 +2,6 @@ package com.fourhealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletResponse;
@@ -62,35 +60,6 @@ public class PaymentController {
         int trainerPromotionLiveAddPeople = promotionDTO.getTrainerPromotionLiveAddPeople();
         int trainerPromotionRecruitPeople = promotionDTO.getTrainerPromotionRecruitPeople();
 
-        // 유저가 동일한 프로모션에 또 결제하는지에 대한 체크
-        int checkCount = paymentService.checkCountPromotionPayment(userId, promotionNoticeCode);
-
-        // 유저가 프로모션에 참여중인가에 대한 체크
-        String promotionCheck = paymentService.checkMatching(userId);
-        if (promotionCheck == null) {
-            promotionCheck = "0000-00-00";
-        }
-        System.out.println(promotionCheck);
-
-        Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-
-        Date a1 = null;
-        Date a2 = null;
-        try {
-            a1 = dateFormat.parse(promotionCheck);
-            a2 = dateFormat.parse(trainerPromotionRecruitEndDate);
-        } catch (ParseException e) {
-
-            e.printStackTrace();
-        }
-
-        int compare = today.compareTo(a1);
-        // 유저가 선택한 프로모션이 기간이 지나지 않았는가에 대한 체크
-        int compare2 = today.compareTo(a2);
-        System.out.println(compare);
-        System.out.println(compare2);
-
         if (userId.equals("")) {
             response.setContentType("text/html; charset=UTF-8");
             PrintWriter out = response.getWriter();
@@ -99,16 +68,11 @@ public class PaymentController {
             return null;
 
         } else {
-            if (a == 0) {
-                // 만약 유저가 최초데이터를 작성 하지 않았다면
-                response.setContentType("text/html; charset=UTF-8");
-                PrintWriter out = response.getWriter();
-                out.println("<script>alert('정보를 확인해 주세요.'); location.href='/';</script>");
-                out.flush();
-                return null;
-            } else {
-                // 만약 현재 모집기간이 끝나버렸다면
-                if (compare2 > 0) {
+            // 만약 유저가 로그인 하였다면
+            if (a > 0) {
+                // 만약 유저가 최초 데이터를 작성했다면
+                if (trainerPromotionLiveAddPeople == trainerPromotionRecruitPeople) {
+                    // 만약 현재 프로모션이 현재인원이 가득 차있다면
                     response.setContentType("text/html; charset=UTF-8");
                     PrintWriter out = response.getWriter();
                     out.println("<script>alert('현재 매칭인원이 꽉 차있습니다.'); location.href='/promotionList';</script>");
@@ -118,7 +82,7 @@ public class PaymentController {
                     // 만약 현재 프로모션이 현재인원이 가득 차있지 않다면
                     return "main_layout/promotion/promotionPayment";
                 }
-            }else {
+            } else {
                 // 만약 유저가 최초데이터를 작성 하지 않았다면
                 response.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = response.getWriter();

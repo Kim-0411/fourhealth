@@ -5,6 +5,18 @@
   <!-- Food test table name : tb_food_test -->
   <!-- Food wokring table name : tb_food -->
 <mapper namespace="com.fourhealth.mapper.FoodMapper">
+  <resultMap id="resultMapFood" type="Food">
+    <result column="food_code" 		property="foodCode"/>
+		<result column="food_name" 		property="foodName"/>
+    <result column="food_group" 		property="foodGroup"/>
+    <result column="food_gram" 		property="foodTotalGram"/>
+    <result column="food_calorie" 		property="foodCal"/>
+    <result column="food_protein" 		property="foodProtein"/>
+    <result column="food_fat" 		property="foodFat"/>
+    <result column="food_sugar" 		property="foodSugar"/>
+    <result column="food_sodium" 		property="foodSodium"/>
+    <result column="food_makerName" 		property="foodMakerName"/>
+  </resultMap>
   <!-- 관리자 FOOD -->
   <insert id="insertFoodListInformation" parameterType="java.util.List">
     INSERT IGNORE INTO tb_food_backup(
@@ -41,20 +53,20 @@
     </foreach>
   </insert>
 
-  <select id="getFoodList" resultType="Food">
+  <select id="getFoodList" resultMap="resultMapFood">
     SELECT 
-      food_code           AS foodCode,
-      food_name           AS foodName,
-      food_group          AS foodGroup,  
-      food_gram           AS foodTotalGram,
-      food_calorie        AS foodCal,
-      food_carbo          AS foodCarbo,
-      food_protein        AS foodProtein,
-      food_fat            AS foodFat,     
-      food_cholesterol    AS foodChole,
-      food_sugar          AS foodSugar,
-      food_sodium         AS foodSodium,
-      food_makerName      AS foodMakerName
+      food_code,           
+      food_name,          
+      food_group,         
+      food_gram,           
+      food_calorie,        
+      food_carbo,          
+      food_protein,        
+      food_fat,            
+      food_cholesterol,    
+      food_sugar,          
+      food_sodium,         
+      food_makerName      
     FROM
      	tb_food
   </select>
@@ -79,7 +91,7 @@
 			 f.food_cholesterol AS foodChole,
 			 f.food_sugar 			AS foodSugar,
 			 f.food_sodium 		  AS foodSodium,
-			 f.food_makerName 	AS foodMakerNamer
+			 f.food_makerName 	AS foodMakerName
 		FROM
 			tb_food AS f
 		LIMIT #{startRow}, #{rowPerPage};
