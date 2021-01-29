@@ -34,4 +34,7 @@ public interface PromotionMapper {
 	// 사용자 프로모션 매칭후 현재인원 등록
 	public int updatePromotionLivePeopl(String trainerPromotionNoticeCode);
 
+	// 트레이터 프로모션 수정 기능
+	public int modifyUpdateMyPromotion(NoticePromotionTrainerDto promotionDto);
+
 }

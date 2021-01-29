@@ -175,7 +175,7 @@ public class MasterController {
 	// 트레이너 / 관리자 메인화면 로그인 없을시 관리자 root로 처리
 	@GetMapping("/manage")
 	public String mainTrainer(Model model, HttpSession session) {
-		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage((String)session.getAttribute("SID"));
+		List<MsgDto> getAllNoReadMessage = messageService.getAllNoReadMessage((String) session.getAttribute("SID"));
 		session.setAttribute("noReadMessageCnt", getAllNoReadMessage.size());
 		session.setAttribute("noReadMeg", getAllNoReadMessage);
 		return "manage_layout/manage_main";
@@ -189,18 +189,18 @@ public class MasterController {
 		System.out.println(count.get("allMemberCount"));
 		System.out.println(count.get("allTrainerCount"));
 		System.out.println(count.get("alluserCount"));
-		
-		int allDBCount = count.get("allFoodDBCount")+count.get("allExerciseDBCount")+count.get("allDiseaseDBCount");
-		
+
+		int allDBCount = count.get("allFoodDBCount") + count.get("allExerciseDBCount") + count.get("allDiseaseDBCount");
+
 		model.addAttribute("allpromotionCount", count.get("allpromotionCount"));
 		model.addAttribute("allMemberCount", count.get("allMemberCount"));
 		model.addAttribute("allTrainerCount", count.get("allTrainerCount"));
 		model.addAttribute("alluserCount", count.get("alluserCount"));
-		model.addAttribute("allFoodDBCount",count.get("allFoodDBCount"));
-		model.addAttribute("allExerciseDBCount",count.get("allExerciseDBCount"));
-		model.addAttribute("allDiseaseDBCount",count.get("allDiseaseDBCount"));
+		model.addAttribute("allFoodDBCount", count.get("allFoodDBCount"));
+		model.addAttribute("allExerciseDBCount", count.get("allExerciseDBCount"));
+		model.addAttribute("allDiseaseDBCount", count.get("allDiseaseDBCount"));
 		model.addAttribute("allDBCount", allDBCount);
-		
+
 		return "manage_layout/manage_main";
 	}
 
@@ -282,56 +282,24 @@ public class MasterController {
 
 	/* 관리자 매칭 관리 페이지 맵핑 끝 */
 
-	/* 관리자 질병DB 관리 페이지 맵핑 시작 */
-	@GetMapping("master/diseaseManage/diseaseDataInsert")
-	public String diseaseDataInsert(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_insert";
-	}
 
-	@GetMapping("master/diseaseManage/diseaseDataList")
-	public String diseaseDataList(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_list";
-	}
 
-	@GetMapping("master/diseaseManage/diseaseDataModify")
-	public String diseaseDataModify(Model model) {
-		return "manage_layout/master/disease_manage/disease_data_modify";
-	}
-	/* 관리자 질병DB 관리 페이지 맵핑 끝 */
+	// /* 관리자 음식DB 관리 페이지 맵핑 시작 */
+	// @GetMapping("/foodDataInsert")
+	// public String foodDataInsert(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_insert";
+	// }
 
-	/* 관리자 운동DB 관리 페이지 맵핑 시작 */
-	@GetMapping("master/exerciseManage/exerciseDataInsert")
-	public String exerciseDataInsert(Model model) {
-		return "manage_layout/master/exercise_manage/exercise_data_insert";
-	}
+	// @GetMapping("/foodDataList")
+	// public String foodDataList(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_list";
+	// }
 
-	@GetMapping("master/exerciseManage/exerciseDataList")
-	public String exerciseDataList(Model model) {
-		return "manage_layout/master/exercise_manage/exercise_data_list";
-	}
-
-	@GetMapping("master/exerciseManage/exerciseDataModify")
-	public String exerciseDataModify(Model model) {
-		return "manage_layout/master/exercise_manage/exercise_data_modify";
-	}
-	/* 관리자 운동DB 관리 페이지 맵핑 끝 */
-
-	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
-	@GetMapping("master/foodManage/foodDataInsert")
-	public String foodDataInsert(Model model) {
-		return "manage_layout/master/food_manage/food_data_insert";
-	}
-
-	@GetMapping("master/foodManage/foodDataList")
-	public String foodDataList(Model model) {
-		return "manage_layout/master/food_manage/food_data_list";
-	}
-
-	@GetMapping("master/foodManage/foodDataModify")
-	public String foodDataModify(Model model) {
-		return "manage_layout/master/food_manage/food_data_modify";
-	}
-	/* 관리자 음식DB 관리 페이지 맵핑 끝 */
+	// @GetMapping("/foodDataModify")
+	// public String foodDataModify(Model model) {
+	// 	return "manage_layout/master/food_manage/food_data_modify";
+	// }
+	// /* 관리자 음식DB 관리 페이지 맵핑 끝 */
 
 	/* 관리자 플렛폼 등급 관리 페이지 맵핑 시작 */
 	@GetMapping("master/platformManage/userPlatformGrade")
