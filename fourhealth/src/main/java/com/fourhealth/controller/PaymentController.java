@@ -14,6 +14,7 @@ import javax.xml.crypto.Data;
 
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.dto.NoticePromotionTrainerDto;
+import com.fourhealth.dto.SettlementAmountDto;
 import com.fourhealth.dto.UserCouponDTO;
 import com.fourhealth.mapper.PaymentMapper;
 import com.fourhealth.mapper.PromotionMapper;
@@ -182,6 +183,19 @@ public class PaymentController {
 
         return "성공";
 
+    }
+
+    // 트레이너가 회원에게 운동 정보를 넣어주기 위해 사용되는 운동 데이터 검색 및 넣음.
+    @RequestMapping(value = "/settlementAmount", method = RequestMethod.POST, produces = "application/json")
+    public @ResponseBody String settlementAmount(@RequestParam Map<String, Object> map) {
+        System.out.println(map);
+        List<SettlementAmountDto> settlementAmount = paymentMapper.settlementAmount(map);
+        System.out.println(settlementAmount);
+
+        String settlementAmountPay = settlementAmount.get(0).getSettlementAmountPay();
+        System.out.println(settlementAmountPay);
+
+        return settlementAmountPay;
     }
 
     @GetMapping("trainer/adjustment/adjustmentAccountInsert")

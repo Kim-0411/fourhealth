@@ -17,7 +17,15 @@
 			<result column="user_platform_coupon_details" property="userPlatformCouponDetails"/>
 			<result column="user_platform_coupon_reg_date" property="userPlatformCouponRegDate"/>
 		</collection>
-	</resultMap>
+  </resultMap>
+  
+  <resultMap type="SettlementAmountDto" id="resultMapSettlementAmount">
+    <result column="settlement_amount_code" 				property="settlementAmountCode"/>  
+		<result column="user_id"									property="userId"/>
+		<result column="trainer_promotion_notice_code" 					property="trainerPromotionNoticeCode"/>
+		<result column="settlement_amount_pay" 					property="settlementAmountPay"/>
+		<result column="settlement amount_day" 			property="settlementAmountDay"/>
+    </resultMap>
 
       <select id="checkPromotionPayment" resultType="String">
         /*프로모션 결제 전 사용자 정보를 등록했는지 체크*/
@@ -126,10 +134,12 @@
             NOW())
       </insert>
 
-      <!-- <select id="">
-        SELECT 
-          (t.trainer_promotion_live_add_people*t.trainer_promotion_price)*
-          (g.trainer_platform_grade_duty/100) AS 'calculate'
+      <select id="settlementAmount" parameterType="java.util.Map" resultMap="resultMapSettlementAmount">
+         SELECT 
+          t.user_id,
+          t.trainer_promotion_notice_code,
+          ROUND((t.trainer_promotion_live_add_people*t.trainer_promotion_price)*
+          g.trainer_platform_grade_duty/100,0) AS settlement_amount_pay
         FROM 
           tb_notice_promotion_trainer AS t
         INNER JOIN 
@@ -140,9 +150,9 @@
           tb_grade_platform_trainer AS g
         ON 
           g.trainer_platform_grade_code = p.trainer_platform_grade_code
-        WHERE 
-          t.trainer_promotion_notice_code='trainer_promotion_notice_001';
+      	WHERE 
+          t.trainer_promotion_notice_code= #{trainerPromotionNoticeCode};
       </select>
-       -->
+      
       
 </mapper>
