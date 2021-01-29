@@ -54,20 +54,6 @@ public class MemberController {
 	@Autowired
 	private pwService pwService;
 
-
-	// 트레이너 프로필 view
-	@GetMapping("/trainer/profile/trainerProfile")
-	public String getTrainerProfile(Model model, @RequestParam(name = "result", required = false) String result) {
-		List<CommonProfileDto> trainerProfile = profileService.getTrainerProfile();
-		List<MemberDto> member = memberService.viewMember();
-		System.out.println(member);
-		System.out.println(trainerProfile);
-		model.addAttribute("title", "회원 목록");
-		model.addAttribute("trainerProfile", trainerProfile);
-		model.addAttribute("member", member);
-		return "manage_layout/trainer/profile/trainerProfile";
-	}
-
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/

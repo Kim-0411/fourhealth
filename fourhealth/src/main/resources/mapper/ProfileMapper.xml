@@ -13,7 +13,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		<result column="profile_reg_date" 			property="profileRegDate"/>
 	</resultMap>
 	
-	<select id="getTrainerProfile" resultMap="resultMapProfile">
+	<select id="getProfile" resultMap="resultMapProfile">
 		SELECT 
 			  profile_common_code
 			, profile_common_image_code
@@ -22,6 +22,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, profile_common_introduce
 			, user_level_name
 			, profile_reg_date
-	FROM tb_common_profile
+		FROM 
+			tb_common_profile
 	</select>
 </mapper>
