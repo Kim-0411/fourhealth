@@ -54,7 +54,6 @@ public class MemberController {
 	@Autowired
 	private pwService pwService;
 
-
 	// 트레이너 프로필 view
 	@GetMapping("/trainer/profile/trainerProfile")
 	public String getTrainerProfile(Model model, @RequestParam(name = "result", required = false) String result) {
@@ -288,20 +287,6 @@ public class MemberController {
 	//
 	// return mav;
 	// }
-	//
-
-	// @GetMapping("/levelSelect")
-	// public String levelCheck() {
-
-	// return "member/level_select";
-	// }
-
-	// @GetMapping("/signUp")
-	// public String main2(@RequestParam(value = "user_level_code", required =
-	// false) String level, Model model) {
-	// model.addAttribute("level", level); // 누른거 래밸 사용자,트레이너
-	// return "member/m_insert";
-	// }
 
 	// 로그인 화면(공통)
 	@GetMapping("/login")
@@ -316,20 +301,29 @@ public class MemberController {
 	public String AllPwFind() {
 		return "/login/pw_find";
 	}
-	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
-		@GetMapping("/pwEmailChange")
-		public String pwEmailChange(@RequestParam(name = "exampleInputEmail", required = false) String email)
-				throws AddressException, MessagingException {
-			System.out.println("이메일 출력 확인" + email);
 
-			String userEmail = pwService.userEmail(email);
-			if (userEmail == null) {
-				System.out.println("없음");
-			} else {
-				pwService.emailSend(email);
-			}
-			System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
-			return "redirect:/login";
+	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
+	@GetMapping("/pwEmailChange")
+	public String pwEmailChange(@RequestParam(name = "exampleInputEmail", required = false) String email)
+			throws AddressException, MessagingException {
+		System.out.println("이메일 출력 확인" + email);
+
+		String userEmail = pwService.userEmail(email);
+		if (userEmail == null) {
+			System.out.println("없음");
+		} else {
+			pwService.emailSend(email);
 		}
+		System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
+		return "redirect:/login";
+	}
+
+	// 페이스북으로 로그인 (api)
+	// @GetMapping("/facebookLogin")
+	// public String facebookLoginPage(Model model) {
+	// System.out.println("페이스북 로그인 화면");
+
+	// return "/login/f";
+	// }
 
 }
