@@ -35,19 +35,26 @@
                       <th>총모집인원</th>
                       <th>현재모집된 인원</th>
                       <th>프로모션 등록일자</th>
+                      <th style="visibility:hidden;position:absolute;">프로모션 코드</th>
                       <th>수정</th>
-                      <th>삭제</th>
+                      <th>정산</th>
+                      
                     </tr>
                   </thead>
-                  <tbody>
-                    <tr th:if="${#lists.size(myPromotionList)>0}" th:each="m : ${myPromotionList}">
+                  <tbody id="tbodyChange">
+                    <tr th:if="${#lists.size(myPromotionList)>0}" th:each="m : ${myPromotionList}">             
                       <td th:text="${m.trainerPromotionName}"> </td>
                       <td th:text="${m.trainerPromotionRecruitStartDate}"> </td>
                       <td th:text="${m.trainerPromotionRecruitEndDate}"> </td>
                       <td th:text="${m.trainerPromotionRecruitPeople}"> </td>
                       <td th:text="${m.trainerPromotionLiveAddPeople}"> </td>
                       <td th:text="${m.trainerMatchingSystemAddDate}"> </td>
-                      <td><a th:href="@{/trainer/promtion/myPromotionModify(trainerPromotionNoticeCode=${m.trainerPromotionNoticeCode})}">수정</a></td>
+                      <td class="noticeCode" th:text="${m.trainerPromotionNoticeCode}">
+                      </td>
+                      <td><a class="change" th:href="@{/trainer/promtion/myPromotionModify(trainerPromotionNoticeCode=${m.trainerPromotionNoticeCode})}">수정</a></td>
+                      <td><a class="result" href="javascript:a();" >정산</a></td>
+                      
+
                     </tr>
                   </tbody>
                 </table>
@@ -59,5 +66,52 @@
         </div>
     </div>
   
+    <div class="modal fade" id="myModal" role="dialog">
+      <div class="modal-dialog modal-xl schedule-modal">
+        <!-- Modal content-->
+        <div class="modal-content">
+          <div class="modal-header">
+            <h4 class="modal-title">정산하기 </h4>
+            <button type="button" class="close" data-dismiss="modal">×</button>
+          </div>
+          <div class="modal-body">
+            
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-default" id="schedule-modal-add-btn">Add</button>
+            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          </div>
+        </div>
+  
+      </div>
+    </div>
+    <script>
+      $('.result').click(function(){
+        var tr = $(this).parent().parent().find('td:eq(6)');
+        var td = tr.children();
+        var noticeCode = tr.text();
+
+        console.log(noticeCode);
+
+        var request =  $.ajax({
+          type: "POST",
+          url: "/settlementAmount",
+          data: { "trainerPromotionNoticeCode": noticeCode},
+          dataType: 'text',
+          success: function (response) {
+            console.log(response);
+            var html = '';
+            html += "정산금액 :<input type='text' id='trainerPromotionNoticeCode' value="+response+">"
+            $('.modal-body').html(html);
+
+            $("#myModal").modal();
+          }
+        });
+      });
+   </script>
+  
   </th:block>
+
+
+  
 </html>
