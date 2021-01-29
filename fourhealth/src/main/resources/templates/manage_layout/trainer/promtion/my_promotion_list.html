@@ -6,22 +6,58 @@
 >
   <th:block layout:fragment="customContent">
     <h1>내 프로모션 관리(로그인 됫다고 가정)</h1>
-    <table border="1">
-      <tr>
-        <td>프로모션 명</td>
-        <td>프로모션 모집일자</td>
-        <td>프로모션 마감일자</td>
-        <td>총모집인원</td>
-      </tr>
-      <!-- <a th:href="@{/modifyMember(memberId=${l.memberId})}">수정</a> -->
-      <tr th:each="m : ${myPromotionList}">
-        <td>
-          <a th:text="${m.trainerPromotionName}"></a>
-        </td>
-        <td th:text="${m.trainerPromotionRecruitStartDate}"></td>
-        <td th:text="${m.trainerPromotionRecruitEndDate}"></td>
-        <td th:text="${m.trainerPromotionRecruitPeople}"></td>
-      </tr>
-    </table>
+      <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-header">
+                <h3 class="card-title">프로모션 검색</h3>
+
+                <div class="card-tools">
+                  <div class="input-group input-group-sm" style="width: 150px;">
+                    <input type="text" name="table_search" class="form-control float-right" placeholder="Search">
+
+                    <div class="input-group-append">
+                      <button type="submit" class="btn btn-default">
+                        <i class="fas fa-search"></i>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-hover text-nowrap">
+                  <thead>
+                    <tr>
+                      <th>프로모션 명</th>
+                      <th>프로모션 모집일자</th>
+                      <th>프로모션 마감일자</th>
+                      <th>총모집인원</th>
+                      <th>현재모집된 인원</th>
+                      <th>프로모션 등록일자</th>
+                      <th>수정</th>
+                      <th>삭제</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <tr th:if="${#lists.size(myPromotionList)>0}" th:each="m : ${myPromotionList}">
+                      <td th:text="${m.trainerPromotionName}"> </td>
+                      <td th:text="${m.trainerPromotionRecruitStartDate}"> </td>
+                      <td th:text="${m.trainerPromotionRecruitEndDate}"> </td>
+                      <td th:text="${m.trainerPromotionRecruitPeople}"> </td>
+                      <td th:text="${m.trainerPromotionLiveAddPeople}"> </td>
+                      <td th:text="${m.trainerMatchingSystemAddDate}"> </td>
+                      <td><a th:href="@{/trainer/promtion/myPromotionModify(trainerPromotionNoticeCode=${m.trainerPromotionNoticeCode})}">수정</a></td>
+                    </tr>
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+            </div>
+            <!-- /.card -->
+          </div>
+        </div>
+    </div>
+  
   </th:block>
 </html>

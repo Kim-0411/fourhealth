@@ -47,13 +47,16 @@
             ></a>
             <div class="dropdown-menu" aria-labelledby="yummyDropdown">
               <a class="dropdown-item" th:href="@{/}">Home</a>
-              <a class="dropdown-item" th:href="@{main/promtion/promotionList}"
+              <a class="dropdown-item" th:href="@{/promtion/promotionList}"
                 >#matching</a
               >
-              <a class="dropdown-item" href="/sns">#SNS</a>
-              <a class="dropdown-item" href="/food">#Food</a>
-              <a class="dropdown-item" th:href="@{/exercise}">#Exercise</a>
-              <a class="dropdown-item" href="/contact">#contact</a>
+              <a class="dropdown-item" href="/sns/snsList">#SNS</a>
+              <a class="dropdown-item" href="/food/food">#Food</a>
+              <a class="dropdown-item" th:href="@{/exercise/exercise}"
+                >#Exercise</a
+              >
+              <a class="dropdown-item" href="/board/inquiryInsert">#문의하기</a>
+              <a class="dropdown-item" href="/board/reportInsert">#신고하기</a>
               <a class="dropdown-item" href="/about">#About</a>
             </div>
           </li>
@@ -67,13 +70,13 @@
 
             <li class="nav-item">
               <!-- MATHCING -->
-              <a class="nav-link" th:href="@{main/promtion/promotionList}"
+              <a class="nav-link" th:href="@{/promtion/promotionList}"
                 >#matching</a
               >
             </li>
             <li class="nav-item">
               <!-- SNS -->
-              <a class="nav-link" href="/sns">!SNS</a>
+              <a class="nav-link" href="/sns/snsList">!SNS</a>
             </li>
             <li class="nav-item dropdown">
               <!-- INFORMATION -->
@@ -89,9 +92,9 @@
                 >Information</a
               >
               <div class="dropdown-menu" aria-labelledby="informationDropdown">
-                <a class="dropdown-item" href="/foodListNumbers">#Food</a>
-                <a class="dropdown-item" href="/exercise">#Exercise</a>
-                <a class="dropdown-item" href="/disease">#Disease</a>
+                <a class="dropdown-item" href="/food/food">#Food</a>
+                <a class="dropdown-item" href="/exercise/exercise">#Exercise</a>
+                <a class="dropdown-item" href="/disease/disease">#Disease</a>
               </div>
             </li>
             <li class="nav-item dropdown">
@@ -110,8 +113,12 @@
               >
               <!-- INFORMATION 하위 리스트 정보 (식품, 운동 정보 리스트) -->
               <div class="dropdown-menu" aria-labelledby="informationDropdown">
-                <a class="dropdown-item" href="/inquiryInsert">#문의하기</a>
-                <a class="dropdown-item" href="/reportInsert">#신고하기</a>
+                <a class="dropdown-item" href="/board/inquiryInsert"
+                  >#문의하기</a
+                >
+                <a class="dropdown-item" href="/board/reportInsert"
+                  >#신고하기</a
+                >
               </div>
             </li>
 

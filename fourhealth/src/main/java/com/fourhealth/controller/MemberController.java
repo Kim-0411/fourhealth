@@ -2,6 +2,18 @@ package com.fourhealth.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.security.Provider.Service;
+import java.util.List;
+import java.util.Properties;
+
+import javax.mail.Message;
+import javax.mail.MessagingException;
+import javax.mail.PasswordAuthentication;
+import javax.mail.Session;
+import javax.mail.Transport;
+import javax.mail.internet.AddressException;
+import javax.mail.internet.InternetAddress;
+import javax.mail.internet.MimeMessage;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
@@ -17,20 +29,16 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.fourhealth.dto.CommonProfileDto;
-import com.fourhealth.dto.CommonUserDto;
 import com.fourhealth.dto.GradePlatformTrainerDto;
 //import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import com.fourhealth.dto.GradePlatformUserDto;
 import com.fourhealth.dto.MemberDto;
 import com.fourhealth.service.MemberService;
+import com.fourhealth.service.ProfileService;
 import com.fourhealth.service.UserService;
-
+import com.fourhealth.service.pwService;
 import com.fourhealth.dto.TrainerDto;
 import com.fourhealth.dto.UserDto;
-import java.util.List;
-import com.fourhealth.service.MessageService;
-import com.fourhealth.service.ProfileService;
-
 import com.fourhealth.service.TrainerService;
 
 @Controller
@@ -43,21 +51,23 @@ public class MemberController {
 	private TrainerService trainerService;
 	@Autowired
 	private ProfileService profileService;
-	
+	@Autowired
+	private pwService pwService;
+
+
 	// 트레이너 프로필 view
-	@GetMapping("/trainerProfile")
-	public String getTrainerProfile(Model model
-								   ,@RequestParam(name="result",required=false)String result) {
+	@GetMapping("/trainer/profile/trainerProfile")
+	public String getTrainerProfile(Model model, @RequestParam(name = "result", required = false) String result) {
 		List<CommonProfileDto> trainerProfile = profileService.getTrainerProfile();
 		List<MemberDto> member = memberService.viewMember();
 		System.out.println(member);
 		System.out.println(trainerProfile);
-		model.addAttribute("title","회원 목록");
-		model.addAttribute("trainerProfile",trainerProfile);
-		model.addAttribute("member",member);
+		model.addAttribute("title", "회원 목록");
+		model.addAttribute("trainerProfile", trainerProfile);
+		model.addAttribute("member", member);
 		return "manage_layout/trainer/profile/trainerProfile";
 	}
-	
+
 	/********************************************************************************************
 	 * 로그인/로그아웃
 	 ********************************************************************************************/
@@ -306,12 +316,20 @@ public class MemberController {
 	public String AllPwFind() {
 		return "/login/pw_find";
 	}
-
 	// 이메일 확인후 비밀번호 바꿔주며 메일 전송
-	@GetMapping("/pwEmailChange")
-	public String pwEmailChange() {
+		@GetMapping("/pwEmailChange")
+		public String pwEmailChange(@RequestParam(name = "exampleInputEmail", required = false) String email)
+				throws AddressException, MessagingException {
+			System.out.println("이메일 출력 확인" + email);
 
-		return "/login";
-	}
+			String userEmail = pwService.userEmail(email);
+			if (userEmail == null) {
+				System.out.println("없음");
+			} else {
+				pwService.emailSend(email);
+			}
+			System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
+			return "redirect:/login";
+		}
 
 }

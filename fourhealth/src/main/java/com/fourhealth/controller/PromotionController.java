@@ -37,6 +37,8 @@ import com.fourhealth.dto.UserDto;
 import com.fourhealth.service.MatchingService;
 import com.fourhealth.service.MemberService;
 import com.fourhealth.service.PromotionService;
+import com.fourhealth.utility.ImageUpload;
+import com.fourhealth.utility.TotalDate;
 
 @Controller
 public class PromotionController {
@@ -49,8 +51,14 @@ public class PromotionController {
 	@Autowired
 	private MemberService memberService;
 
+	@Autowired
+	private ImageUpload imageUpload;
+
+	@Autowired
+	private TotalDate utilTotalDate;
+
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("main/promtion/promotionList")
+	@GetMapping("promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
@@ -107,62 +115,33 @@ public class PromotionController {
 
 	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/promotionInsert")
-	public String trainerPromotionInsert(MultipartHttpServletRequest request, NoticePromotionTrainerDto promotionDto)
+	public String trainerPromotionInsert(NoticePromotionTrainerDto promotionDto)
 			throws ParseException, FileNotFoundException {
 
-		System.out.println(promotionDto);
+		System.out.println("처음 받아온 값----->" + promotionDto);
 
-		String fileName = null;
+		// 사진 업로드
+		MultipartFile trainerPromotionBgImage = promotionDto.getTrainerPromotionBgImage();
+		String rename = imageUpload.imageUpload(trainerPromotionBgImage);
+		System.out.println("파일 이름----->" + rename);
+		promotionDto.setProImageUrl(rename);
 
-		if (!promotionDto.getTrainerPromotionBgImage().isEmpty()) {
-			int rdv = (int) (Math.random() * 1000);
-			fileName = promotionDto.getTrainerPromotionBgImage().getOriginalFilename();
-			String rename = rdv + "_" + fileName;
-			// String path =
-			// "C:\\Users\\ECS\\Documents\\GitHub\\fourhealth\\fourhealth\\src\\main\\resources\\static\\image\\";
-
-			String realPath = ResourceUtils.getFile("src/main/resources/static/image/" + rename).getAbsolutePath();
-			// 배포패스
-
-			try {
-				new File(realPath).mkdir();
-				promotionDto.getTrainerPromotionBgImage().transferTo(new File(realPath));
-
-			} catch (IllegalStateException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
-			promotionDto.setProImageUrl(rename);
-		}
-
+		// 토탈 일자 계산
 		String start = promotionDto.getTrainerPromotionAttendStartDate();
 		String end = promotionDto.getTrainerPromotionRecruitCloseDate();
-
-		System.out.println("proInsert start-------------" + start);
-		System.out.println("proInsert end-------------" + end);
-
-		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
-
-		java.util.Date stDt = format.parse(start);
-		java.util.Date edDt = format.parse(end);
-
-		long diff = edDt.getTime() - stDt.getTime();
-		long diffDays = diff / (24 * 60 * 60 * 1000);
-		String totalDate = Long.toString(diffDays);
-
-		System.out.println(diffDays);
+		String totalDate = utilTotalDate.utilTotalDate(start, end);
+		System.out.println("토탈 일자----->" + totalDate);
 		promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
 
-		System.out.println(promotionDto);
+		System.out.println("수정된 값 ----->" + promotionDto);
 
 		promotionService.promotionInsert(promotionDto);
 
-		return "redirect:/myPromotionList";
+		return "redirect:/trainer/promtion/myPromotionList";
 	}
 
 	// 트레이너 프로모션 내 리스트(트레이너 페이지에서 보는거)
-	@GetMapping("/myPromotionList")
+	@GetMapping("trainer/promtion/myPromotionList")
 	public String trainerMyPromotionList(Model model) {
 		List<NoticePromotionTrainerDto> getTrainerMyPromotionAllList = promotionService
 				.getTrainerMyPromotionAllList("id002");
@@ -190,8 +169,38 @@ public class PromotionController {
 
 	// 트레이너 프로모션 내 수정페이지
 	@GetMapping("trainer/promtion/myPromotionModify")
-	public String myPromotionModify(Model model) {
+	public String modifyMyPromotion(Model model,
+			@RequestParam(name = "trainerPromotionNoticeCode", required = false) String trainerPromotionNoticeCode) {
+
+		NoticePromotionTrainerDto promotionDto = promotionService.promotionDetail(trainerPromotionNoticeCode);
+		System.out.println(promotionDto);
+		model.addAttribute("promotionUpdate", promotionDto);
+
 		return "manage_layout/trainer/promtion/my_promotion_modify";
+	}
+
+	@PostMapping("promotionModify")
+	public String modifyUpdateMyPromotion(NoticePromotionTrainerDto promotionDto)
+			throws FileNotFoundException, ParseException {
+
+		System.out.println(promotionDto);
+
+		// 사진 업로드
+		MultipartFile trainerPromotionBgImage = promotionDto.getTrainerPromotionBgImage();
+		String rename = imageUpload.imageUpload(trainerPromotionBgImage);
+		System.out.println("파일 이름----->" + rename);
+		promotionDto.setProImageUrl(rename);
+
+		// 토탈 일자 계산
+		String start = promotionDto.getTrainerPromotionAttendStartDate();
+		String end = promotionDto.getTrainerPromotionRecruitCloseDate();
+		String totalDate = utilTotalDate.utilTotalDate(start, end);
+		System.out.println("토탈 일자----->" + totalDate);
+		promotionDto.setTrainerPromotionRecruitTotalDate(totalDate);
+
+		System.out.println("수정된 값 ----->" + promotionDto);
+		promotionService.modifyUpdateMyPromotion(promotionDto);
+		return "redirect:/trainer/promtion/myPromotionList";
 	}
 
 	// 트레이너 프로모션 상세정보 컨트롤러

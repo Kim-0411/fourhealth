@@ -160,8 +160,9 @@
 				pt.trainer_promotion_name,
 				pt.trainer_promotion_recruit_start_date,
 				pt.trainer_promtion_recruit_end_date,
-				pt.trainer_promotion_recruit_people
-			
+				pt.trainer_promotion_recruit_people,
+				pt.trainer_matching_system_add_date,
+				pt.trainer_promotion_live_add_people			
 			FROM
 				tb_notice_promotion_trainer AS pt
 			
@@ -178,5 +179,27 @@
 			WHERE 
 				t.trainer_promotion_notice_code = #{trainerPromotionNoticeCode};
 
+		</update>
+
+		<update id ="modifyUpdateMyPromotion" >
+			/*프로모션 수정*/
+			UPDATE 
+				tb_notice_promotion_trainer AS t
+			SET
+				trainer_promotion_name=#{trainerPromotionName},
+				trainer_promotion_goal=#{trainerPromotionGoal},
+				trainer_promotion_short_contents=#{trainerPromotionShortContents},
+				trainer_promotion_details_contents=#{trainerPromotionDetailsContents},
+				trainer_promotion_recruit_people=#{trainerPromotionRecruitPeople},
+				trainer_promotion_live_add_people=#{trainerPromotionLiveAddPeople},
+				trainer_promotion_price=#{trainerPromotionPrice},
+				trainer_promotion_recruit_start_date=#{trainerPromotionRecruitStartDate},
+				trainer_promtion_recruit_end_date=#{trainerPromotionRecruitEndDate},
+				trainer_promotion_attend_start_date=#{trainerPromotionAttendStartDate},
+				trainer_promotion_recruit_close_date=#{trainerPromotionRecruitCloseDate},
+				trainer_promotion_bg_image=#{proImageUrl},
+				trainer_promotion_recruit_total_date=#{trainerPromotionRecruitTotalDate}
+			WHERE 
+				t.trainer_promotion_notice_code = #{trainerPromotionNoticeCode}
 		</update>
 </mapper>

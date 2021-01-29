@@ -9,6 +9,8 @@ import java.util.Map;
 
 import com.fourhealth.mapper.FoodMapper;
 import com.fourhealth.mapper.DiseaseMapper;
+import com.fourhealth.dto.DiseaseDto;
+import com.fourhealth.service.DiseaseService;
 
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
@@ -26,6 +28,8 @@ public class DiseaseController {
 
     @Autowired
     private DiseaseMapper diseaseMapper;
+    @Autowired
+	private DiseaseService diseaseService;
 
 
    
@@ -160,4 +164,9 @@ public class DiseaseController {
 
         return "disease/disease_test";
     }
+    @GetMapping("/disease/disease")
+	public String diseasePage(){
+		
+		return "main_layout/disease/DiseaseList";
+	}
 }
