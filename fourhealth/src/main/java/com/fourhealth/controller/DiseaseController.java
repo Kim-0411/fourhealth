@@ -159,7 +159,7 @@ public class DiseaseController {
         return superDiseaseList;
     }
 
-    @GetMapping("disease")
+    @GetMapping("/disease/disease")
     public String mainDisease(Model model) {
         model.addAttribute("title", "질병정보테스트");
 
