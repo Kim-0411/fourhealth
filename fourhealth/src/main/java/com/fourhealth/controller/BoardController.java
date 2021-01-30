@@ -37,14 +37,13 @@ public class BoardController {
 	}
 
 	// 신고 등록 폼으로 가기 위한 매핑
-	@RequestMapping("board/reportInsert")
-	public String reportBoardInsertForm(HttpSession session, Model model) {
+	@RequestMapping("/board/reportInsert")
+	public String reportBoardInsertForm( Model model) {
 		List<MatchingUserTrainerDto> reportPromotionList;
 		model.addAttribute("title", "신고 등록");
 			reportPromotionList = boardService
 					.reportPromotionList("id001");
 			model.addAttribute("reportPromotionList", reportPromotionList);
-			model.addAttribute("SID", "id001");
 		return "main_layout/board/reportInsert";
 	}
 

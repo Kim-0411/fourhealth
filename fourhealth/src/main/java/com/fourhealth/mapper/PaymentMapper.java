@@ -3,6 +3,7 @@ package com.fourhealth.mapper;
 import java.util.List;
 import java.util.Map;
 
+import com.fourhealth.dto.SettlementAmountDto;
 import com.fourhealth.dto.UserCouponDTO;
 
 import org.apache.ibatis.annotations.Mapper;
@@ -19,5 +20,7 @@ public interface PaymentMapper {
     public String checkCountPromotionPayment(String userId, String trainerPromotionNoticeCode);
 
     public String checkMatching(String userId);
+
+    public List<SettlementAmountDto> settlementAmount(Map<String, Object> map);
 
 }

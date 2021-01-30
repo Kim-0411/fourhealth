@@ -1,23 +1,23 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <h1>음식 비동기 검색 페이지</h1>
-    <!-- 모달로 -->
-    <form action="#" name="searchForm"> 
-        <input type="text" name="searchKeyword" onkeyup="sendKeyoWord();"/>
-        <input type="button" value="검색"/>
-        <div class="suggestionFoodList">
-            <div class="suggestionList"></div>
-        </div>
-    </form>
-</body>
-<script>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{default_layout/main/default}" lang="en">
 
+<th:block layout:fragment="mainContent">
+	<div class="container">
+		<h1>음식 비동기 검색 페이지</h1>
+		<!-- 모달로 -->
+		<form action="#" name="searchForm">
+			<input type="text" name="searchKeyword" onkeyup="sendKeyoWord();" />
+			<input type="button" value="검색" />
+			<div class="suggestionFoodList">
+				<div class="suggestionList"></div>
+			</div>
+		</form>
+	</div>
+</th:block>
+</html>
+<script>
     function showSuggest() {
         
     }
@@ -37,4 +37,3 @@
         // sendRequest();
     }
 </script>
-</html>

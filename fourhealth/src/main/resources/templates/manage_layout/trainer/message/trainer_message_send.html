@@ -8,7 +8,7 @@
 	<h1>메시지 송신</h1>
 	<div class="row">
 		<div class="col-md-9">
-			<form action="sendTrainerSelectPromotionMember" id="message_send"
+			<form action="/trainer/message/sendTrainerSelectPromotionMember" id="message_send"
 				method="post">
 				<div class="card card-primary card-outline">
 					<div class="card-header">
@@ -44,7 +44,7 @@
 		</div>
 		<!-- /.col -->
 		<div class="col-md-3">
-			<a th:href="@{/trainerSendMessage}" class="btn btn-primary btn-block mb-3">쪽지작성</a>
+			<a th:href="@{/trainer/message/trainerSendMessage}" class="btn btn-primary btn-block mb-3">쪽지작성</a>
 			<div class="card">
 				<div class="card-header">
 					<h3 class="card-title">쪽지</h3>
@@ -59,13 +59,13 @@
 				<div class="card-body p-0">
 					<ul class="nav nav-pills flex-column">
 						<li class="nav-item active"><a
-							th:href="@{/trainerMessageReceiveManage}" class="nav-link"> <i
+							th:href="@{/trainer/message/trainerMessageReceiveManage}" class="nav-link"> <i
 								class="fas fa-inbox"></i> 받은쪽지함 <span
 								class="badge bg-primary float-right"
 								th:text="${session.noReadMessageCnt}"></span>
 						</a></li>
 						<li class="nav-item"><a
-							th:href="@{/trainerMessageSendManage}" class="nav-link"> <i
+							th:href="@{/trainer/message/trainerMessageSendManage}" class="nav-link"> <i
 								class="far fa-envelope"></i> 보낸쪽지함
 						</a></li>
 					</ul>

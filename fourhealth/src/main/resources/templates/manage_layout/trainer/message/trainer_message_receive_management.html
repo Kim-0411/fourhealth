@@ -9,16 +9,6 @@
 				<div class="card card-primary card-outline">
 					<div class="card-header">
 						<h3 class="card-title">받은쪽지함</h3>
-						<!-- <div class="card-tools">
-							<div class="input-group input-group-sm">
-								<input type="text" class="form-control" placeholder="Search Mail">
-								<div class="input-group-append">
-									<div class="btn btn-primary">
-										<i class="fas fa-search"></i>
-									</div>
-								</div>
-							</div>
-						</div> -->
 					</div>
 					<!-- /.card-header -->
 					<div class="card-body p-0">
@@ -59,7 +49,7 @@
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
 								  aria-label="Browser: activate to sort column ascending">내용</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
-								  aria-label="Platform(s): activate to sort column ascending">met 발송일자</th>
+								  aria-label="Platform(s): activate to sort column ascending"> 발송일자</th>
 								<th class="sorting" tabindex="0" aria-controls="example1" rowspan="1" colspan="1"
 								  aria-label="Engine version: activate to sort column ascending">읽은일자</th>
 				
@@ -76,7 +66,7 @@
 									th:value="${m.msgCode}" id="msg_code"> <a
 									th:text="${m.sendId}"></a></td>
 								<td><a
-									th:href="@{/trainerReceiveMessageRead(msgCode=${m.msgCode})}"
+									th:href="@{/trainer/message/trainerReceiveMessageRead(msgCode=${m.msgCode})}"
 									th:text="${#strings.substring(m.msgContents,0,7)}+..."></a></td>
 								<td th:text="${m.msgSendDate}"></td>
 								<td><span th:if="${m.msgReadDate == null}">읽지않음</span> <span
@@ -86,44 +76,13 @@
 							  </tr>
 							</tbody>
 						  </table>
-							<!-- <table id="msg_receive_table" class="table table-hover table-striped">
-								<tr>
-									<td></td>
-									<td>보낸사람</td>
-									<td>내용</td>
-									<td>발송일자</td>
-									<td>읽은일자</td>
-								</tr>
-								<tbody>
-									<tr th:each="m : ${receiveMsg}">
-										<td>
-											<div class="icheck-primary">
-												<input type="checkbox" value="" th:id="${m.msgCode}">
-												<label th:for="${m.msgCode}"></label>
-											</div>
-										</td>
-										<td class="msg_val"><input type="hidden"
-											th:value="${m.msgCode}" id="msg_code"> <a
-											th:text="${m.sendId}"></a></td>
-										<td><a
-											th:href="@{/trainerReceiveMessageRead(msgCode=${m.msgCode})}"
-											th:text="${#strings.substring(m.msgContents,0,7)}+..."></a></td>
-										<td th:text="${m.msgSendDate}"></td>
-										<td><span th:if="${m.msgReadDate == null}">읽지않음</span> <span
-											th:unless="${m.msgReadDate == null}"
-											th:text="${m.msgReadDate}"></span>
-										</td>
-									</tr>
-								</tbody>
-							</table> -->
-							<!-- /.table -->
 						</div>
 					</div>
 				</div>
 			</div>
 			<!-- /.card -->
 			<div class="col-md-3">
-				<a th:href="@{/trainerSendMessage}" class="btn btn-primary btn-block mb-3">쪽지작성</a>
+				<a th:href="@{/trainer/message/trainerSendMessage}" class="btn btn-primary btn-block mb-3">쪽지작성</a>
 				<div class="card">
 					<div class="card-header">
 						<h3 class="card-title">쪽지</h3>
@@ -136,12 +95,12 @@
 					</div>
 					<div class="card-body p-0">
 						<ul class="nav nav-pills flex-column">
-							<li class="nav-item active"><a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+							<li class="nav-item active"><a th:href="@{/trainer/message/trainerMessageReceiveManage}" class="nav-link">
 									<i class="fas fa-inbox"></i> 받은쪽지함 <span
 									class="badge bg-primary float-right"
 									th:text="${session.noReadMessageCnt}"></span>
 							</a></li>
-							<li class="nav-item"><a th:href="@{/trainerMessageSendManage}" class="nav-link"> <i
+							<li class="nav-item"><a th:href="@{/trainer/message/trainerMessageSendManage}" class="nav-link"> <i
 									class="far fa-envelope"></i> 보낸쪽지함
 							</a></li>
 						</ul>
