@@ -63,7 +63,7 @@
         <div class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
           <a
             class="dropdown-item"
-            th:href="@{/trainerReceiveMessageRead(msgCode=${msg.msgCode})}"
+            th:href="@{/trainer/message/trainerReceiveMessageRead(msgCode=${msg.msgCode})}"
             th:each="msg : ${session.noReadMeg}"
           >
             <!-- Message Start -->
@@ -92,7 +92,7 @@
           </a>
           <div class="dropdown-divider"></div>
           <a
-            th:href="@{/trainerMessageReceiveManage}"
+            th:href="@{/trainer/message/trainerMessageReceiveManage}"
             class="dropdown-item dropdown-footer"
             >더보기</a
           >
