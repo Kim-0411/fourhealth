@@ -19,6 +19,9 @@ public interface FoodMapper {
 	//Food List 
 	public List<Food> getFoodList();
 
+	//Food Group List
+	public List<Food> getFoodGroupList();
+
 	//public int insertFood2(Map<String, String> data);
 
 	//get Map tpye Object
@@ -27,5 +30,6 @@ public interface FoodMapper {
 	//get List type Object
 	public int insertFoodListInformation(List<Map<String, Object>> data);
 
+	
 
 }

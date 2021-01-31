@@ -54,6 +54,36 @@ public class FoodController {
 		}
 	}
 
+	@RequestMapping(value = "/foodDataInsert", produces = "application/text", method = RequestMethod.POST)
+	public @ResponseBody String foodDataInsertTest(@RequestBody String data){
+		System.out.println(data);
+
+		return "성공";
+	}
+	// insert ajax 호출
+	// @RequestMapping(value = "/foodDataInsert", produces = "application/text", method = RequestMethod.POST)
+	// public @ResponseBody String foodDataInsert(@RequestBody List<Map<String, Object>> data) {
+	// 	System.out.println("음식입력 테스트 중");
+	// 	System.out.println(data.toString());
+	// 	// log.info("data", data.toString());
+
+	// 	// for (int i = 0; i < data.size(); i++) {
+	// 	// 	if (data.get(i).get("foodCal") == "") {
+	// 	// 		data.get(i).put("foodGroup", 0);
+
+	// 	// 	}
+	// 	// }
+
+	// 	// int result = foodMapper.insertFoodListInformation(data);
+
+	// 	// // 성공 여부 판단
+	// 	// System.out.println("############ 성공여부판단 ############");
+	// 	// System.out.println("result" + result);
+	// 	// // //foodService.addFood1(data);
+	// 	return "성공";
+
+	// }
+
 	@GetMapping("/foodListNumbers")
 	public String foodListNumbers(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -113,6 +143,21 @@ public class FoodController {
 	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
 	@GetMapping("/master/foodManage/foodDataInsert")
 	public String foodDataInsert(Model model) {
+
+		model.addAttribute("title", "음식 입력 화면");
+		
+		List<Food> foodGroupList = foodService.getFoodGroupList();
+
+		System.out.println("##########################");
+		
+
+		for(int i=0; i<foodGroupList.size(); i++){
+			System.out.println("########");
+			System.out.println(foodGroupList.get(i).getFoodGroup());
+		}
+	
+		model.addAttribute("foodGroupList", foodGroupList);
+
 		return "manage_layout/master/food_manage/food_data_insert";
 	}
 

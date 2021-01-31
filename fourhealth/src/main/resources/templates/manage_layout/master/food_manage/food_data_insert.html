@@ -1,12 +1,154 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="@{/default_layout/manage/default}"
->
-  <th:block layout:fragment="customContent">
-    <div>
-      <h1>음식 DB 등록 화면</h1>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{/default_layout/manage/default}">
+<th:block layout:fragment="customContent">
+  <div>
+    <row>
+      <h1><i class="fas fa-utensils"></i> 음식 DB 등록 화면</h1>
+    </row>
+  </div>
+  <section class="content">
+    <div class="row">
+      <div class="col-md-6">
+        <div class="card card-primary">
+          <grammarly-extension data-grammarly-shadow-root="true"
+            style="position: absolute; top: 0px; left: 0px; pointer-events: none;" class="cGcvT"></grammarly-extension>
+          <div class="card-header">
+            <h3 class="card-title">음식 기본</h3>
+
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                title="Collapse">
+                <i class="fas fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="food-name">음식이름</label>
+              <input type="text" id="food-name" class="form-control">
+            </div>
+            <!-- <div class="form-group">
+              <label for="inputDescription">음식설명</label>
+              <textarea id="inputDescription" class="form-control" rows="2" spellcheck="false"></textarea>
+            </div> -->
+            <div class="form-group">
+              <label for="inputStatus">음식 분류</label>
+              <select class="form-control custom-select" id="food-group-list">
+                <option selected="" disabled="">음식 분류 선택하기</option>
+                <th:block th:if="${#lists.size(foodGroupList)}>0" th:each="food : ${foodGroupList}">
+                  <option th:text="${food.foodGroup}"></option>
+                </th:block>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="input-foodCompany">음식 제조사</label>
+              <input type="text" id="food-company" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="input-foodCode">음식코드</label>
+              <input type="text" id="food-code" class="form-control">
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
+      <div class="col-md-6">
+        <div class="card card-secondary">
+          <div class="card-header">
+            <h3 class="card-title">음식 상세(영양소)</h3>
+            <div class="card-tools">
+              <button type="button" class="btn btn-tool" data-card-widget="collapse" data-toggle="tooltip"
+                title="Collapse">
+                <i class="fas fa-minus"></i></button>
+            </div>
+          </div>
+          <div class="card-body">
+            <div class="form-group">
+              <label for="nutrient-input">총량(1인분)</label>
+              <input type="number" id="food-gram" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">칼로리(Cal)</label>
+              <input type="number" id="food-cal" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">탄수화물</label>
+              <input type="number" id="food-carbo" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">단백질</label>
+              <input type="number" id="food-protein" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">지방</label>
+              <input type="number" id="food-fat" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">당</label>
+              <input type="number" id="food-sugar" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">나트륨</label>
+              <input type="number" id="food-sodium" class="form-control">
+            </div>
+            <div class="form-group">
+              <label for="nutrient-input">콜레스테롤</label>
+              <input type="text" id="food-chole" class="form-control">
+            </div>
+          </div>
+          <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+      </div>
     </div>
-  </th:block>
+    <div class="row">
+      <div class="col-12">
+        <a href="#" class="btn btn-secondary">취소</a>
+        <input id="btn_food_submit" type="submit" value="음식 데이터 입력" class="btn btn-success float-right">
+      </div>
+    </div>
+  </section>
+
+</th:block>
+
 </html>
+<script>
+  var foodSubmit = $("#btn_food_submit");
+
+  foodSubmit.on('click', function () {
+
+    var foodCode = $("#food-code").val();
+    var foodName = $("#food-name").val();
+    var foodGroupList = $("#food-group-list").val();
+    var foodMakerName = $("#food-company").val();
+    var totalGram = $("#food-gram").val();
+    var protein = $("#food-protein").val();
+    var carbo = $("#food-carbo").val();
+    var fat = $("#food-fat").val();
+    var sodium = $("#food-sodium").val();
+    var sugar = $("#food-sugar").val();
+    var chole = $("#food-chole").val();         //콜레스테롤 변수
+
+    var inputFrom = {
+      foodName, foodGroupList, foodMakerName, totalGram, protein, carbo, fat, sodium, sugar, chole
+    }
+
+    console.log('test success', inputFrom);
+    //console.log(JSON.stringify(inputFrom));
+
+    var reqeust = $.ajax({
+      type: "post",
+      url: "/foodDataInsert",
+      data: JSON.stringify(inputFrom),
+      contentType: "application/json; charset=UTF-8",
+      dataType: "text",
+      success: function (response) {
+        alert("입력에 성공했습니다");
+        //페이지 새로고침(현재 페이지)
+        location.reload(false);
+      }
+    });
+  });
+
+</script>

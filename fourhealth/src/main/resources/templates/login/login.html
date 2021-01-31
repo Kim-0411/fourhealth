@@ -58,7 +58,7 @@ data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true">
 
                   <!-- th:href="@{/facebookLogin}" -->
                   <!-- 페이스북 아이디를 연동해서 로그인 -->
-                  <a href="#" class="btn btn-facebook btn-user btn-block" id="facebookloginBtn">
+                  <a href="#" class="btn btn-facebook btn-user btn-block" id="facebookloginBtn" onclick="_login();">
                     <i class="fab fa-facebook-f fa-fw"></i>Login with Facebook
                     <!-- <div id="access_token"></div>
                     <div id="user_id"></div>
@@ -89,81 +89,84 @@ data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true">
 
 </html>
 <script>
-  //페이스북 연동하여 로그인
-  function getUserData() {
-    FB.api('/me', { fields: 'name,email' }, function (response) {
 
-      var facebookname = response.name;    //페이스북 아이디를 변수에 저장함
-      var facebooke_mail = response.email;
 
-      //해당 주소로 이동
-      window.location.replace("http://" + window.location.hostname + ((location.port == "" ||
-        location.port == undefined) ? "" : ":" + location.port) + "/hansub_project/home?facebookname=" +
-        encodeURI(facebookname) + "&facebooke_mail=" + facebooke_mail);
+  // // JavaScript용 Facebook SDK 설정
+  // window.fbAsyncInit = function () {
+  //   FB.init({
+  //     appId: '422064919022249',
+  //     cookie: true,
+  //     xfbml: true,
+  //     version: 'v9.0'
+  //   });
+  //   FB.AppEvents.logPageView();
+  //   console.log(FB.AppEvents.logPageView());
 
-    });
-  }
+  //
+  // Load the SDK asynchronously
 
-  // JavaScript용 Facebook SDK 설정
+  var facebookBtn = document.getElementById("facebookloginBtn");
+
+
+
+
+  (function (thisdocument, scriptelement, id) {
+    var js, fjs = thisdocument.getElementsByTagName(scriptelement)[0];
+    if (thisdocument.getElementById(id)) return;
+
+    js = thisdocument.createElement(scriptelement); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js"; //you can use 
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
   window.fbAsyncInit = function () {
     FB.init({
-      appId: '422064919022249',
-      cookie: true,
-      xfbml: true,
-      version: 'v9.0'
+      appId: '422064919022249', //Your APP ID
+      cookie: true,  // enable cookies to allow the server to access 
+      // the session
+      xfbml: true,  // parse social plugins on this page
+      version: 'v9.0' // use version 2.1
     });
-    FB.AppEvents.logPageView();
-    console.log(FB.AppEvents.logPageView());
 
-  };
-
-  // (function (d, s, id) {
-  //   var js, fjs = d.getElementsByTagName(s)[0];
-  //   if (d.getElementById(id)) { return; }
-  //   js = d.createElement(s); js.id = id;
-  //   js.src = "https://connect.facebook.net/en_US/sdk.js";
-  //   fjs.parentNode.insertBefore(js, fjs);
-
-
-
-  //유저의 로그인 상태를 판단하는 함수, 로그인이 되어있다면 해당 유저의 데이터를 가져온다.
-  // FB.getLoginStatus(function (response) {
-  //   statusChangeCallback(response);
-  //   sysout.write(response);
-  // });
-
-  //   FB.getLoginStatus(function(response) {
-  //         if (response.status === 'connected') {        //만약 정상적으로 실행되었다면 유저의 데이터를 가져온다.(둘중하나)
-  //             //\\user is authorized
-  //             //document.getElementById('loginBtn').style.display = 'none';
-  //             getUserData(); 
-
-
-
-  //         } else {
-  //             //user is not authorized
-  //         }
-  //     });
-  // };
-
-
-
-  // document.getElementById('facebookloginBtn').addEventListener('click', function (response) {
-  //   (function (d, s, id) {
-  //     var js, fjs = d.getElementsByTagName(s)[0];
-  //     if (d.getElementById(id)) return;
-  //     js = d.createElement(s); js.id = id;
-  //     js.src = "//connect.facebook.net/ko_KR/sdk.js#xfbml=1&version=v2.9&appId=422064919022249";
-  //     fjs.parentNode.insertBefore(js, fjs);
-  //   }(document, 'script', 'facebook-jssdk'));
-  //   console.log(response)
-  //   console.log('test');
-
-  // });
-
-  function checkLoginState() {
+    // These three cases are handled in the callback function.
     FB.getLoginStatus(function (response) {
       statusChangeCallback(response);
     });
+
+  };
+
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      _i();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
   }
+
+  function _login() {
+    FB.login(function (response) {
+      // handle the response
+      if (response.status === 'connected') {
+        _i();
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+  function _i() {
+    FB.api('/me', function (response) {
+      document.getElementById("userId").value = response.first_name;
+      document.getElementById("inputLname").value = response.last_name;
+      document.getElementById("inputEmail").value = response.email;
+
+      console.log(response.first_name);
+
+
+    });
+  }
+
+
 </script>
