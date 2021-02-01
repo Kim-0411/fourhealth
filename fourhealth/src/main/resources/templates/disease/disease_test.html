@@ -1,31 +1,30 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title th:text="${title}"></title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-</head>
-<body>
-    <h1>질병정보 API 호출 테스트</h1>
-    <input type="text" class="disease_test_input">
-    <button class="disease_test_btn">TEST</button>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{default_layout/main/default}" lang="en">
+	<th:block layout:fragment="mainContent">
+		<div class="container">
+			<h1>질병정보 API 호출 테스트</h1>
+			<input type="text" class="disease_test_input">
+			<button class="disease_test_btn">TEST</button>
 
-    <table border="1">
-        <thead>
-            <tr>
-                <td>질병코드</td>
-                <td>질병이름</td>
-            </tr>
-        </thead>
-        <tbody id="wData">
-            <tr>
-                <td colspan="2">버튼 테스트 눌러주세요.</td>
-            </tr>
-        </tbody>
-    </table>
+			<table border="1">
+				<thead>
+					<tr>
+						<td>질병코드</td>
+						<td>질병이름</td>
+					</tr>
+				</thead>
+				<tbody id="wData">
+					<tr>
+						<td colspan="2">버튼 테스트 눌러주세요.</td>
+					</tr>
+				</tbody>
+			</table>
+	</th:block>
+</html>
 
-    <script>
+<script>
        
         const diseaseCheckBtn = $(".disease_test_btn");
 
@@ -62,5 +61,3 @@
         })
 
     </script>
-</body>
-</html>

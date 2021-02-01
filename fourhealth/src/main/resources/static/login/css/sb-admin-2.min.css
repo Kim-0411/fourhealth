@@ -91,56 +91,6 @@ body.login-body-bg {
   justify-content: center;
 }
 
-p {
-  display: block;
-  margin-block-start: 1em;
-  margin-block-end: 1em;
-  margin-inline-start: 0px;
-  margin-inline-end: 0px;
-}
-
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
-div#signup.col-lg-6 {
-  margin-top: 10rem;
-  height: 400px;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  background: #fff;
-  padding: 3rem 1rem;
-  justify-content: center;
-  justify-content: center;
-}
-
-.select-box {
-  border: 1px solid #ced4da;
-  padding: 8px;
-  background-color: #fff;
-  width: 100%;
-}
-
-.select-box a {
-  color: #868e96 !important;
-}
-
-* {
-  box-sizing: border-box;
-}
-
-.select-box.mt-5 {
-  background: green;
-  text-align: center;
-  color: #fff;
-}
-
-.mt-5 {
-  margin-top: 3rem !important;
-}
-
 [tabindex="-1"]:focus:not(:focus-visible) {
   outline: 0 !important;
 }
@@ -299,18 +249,6 @@ textarea {
 button,
 input {
   overflow: visible;
-}
-
-input#userId.form-control.form-control-user {
-  margin-top: 12px;
-  /* width: 100%; */
-}
-
-button#userIdCheck.btn.btn-primary {
-  /* margin: 7px */
-  height: 38px;
-  white-space: nowrap;
-  margin-top: 12px;
 }
 
 button,

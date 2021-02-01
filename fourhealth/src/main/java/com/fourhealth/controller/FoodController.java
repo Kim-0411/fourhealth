@@ -48,9 +48,9 @@ public class FoodController {
 	@Controller
 	public class CommonController {
 
-		@GetMapping("/foodSearch")
+		@GetMapping("/food/foodSearch")
 		public String foodSearch() {
-			return "food/master_food/food_search";
+			return "main_layout/food/food_search";
 		}
 	}
 
@@ -111,7 +111,7 @@ public class FoodController {
 	// }
 
 	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
-	@GetMapping("/foodDataInsert")
+	@GetMapping("/master/foodManage/foodDataInsert")
 	public String foodDataInsert(Model model) {
 		return "manage_layout/master/food_manage/food_data_insert";
 	}

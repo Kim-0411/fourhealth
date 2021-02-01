@@ -162,7 +162,7 @@ public class DiseaseController {
         return superDiseaseList;
     }
 
-    @GetMapping("disease")
+    @GetMapping("/disease/disease")
     public String mainDisease(Model model) {
         model.addAttribute("title", "질병정보테스트");
 
@@ -170,7 +170,7 @@ public class DiseaseController {
     }
     
     /* 관리자 질병DB 관리 페이지 맵핑 시작 */
-    @GetMapping("/diseaseDataInsert")
+    @GetMapping("/master/diseaseManage/diseaseDataInsert")
     public String diseaseDataInsert(Model model) {
         return "manage_layout/master/disease_manage/disease_data_insert";
     }

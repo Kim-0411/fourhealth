@@ -44,8 +44,11 @@ public class EtcController {
 	}
 
 	// 트레이너가 회원에게 쪽지 보내기.
-	@PostMapping("sendTrainerSelectPromotionMember")
+	@PostMapping("trainer/message/sendTrainerSelectPromotionMember")
 	public String sendTrainerSelectPromotionMember(MsgDto msg, HttpServletResponse response) throws IOException {
+		if(msg.getSendId().equals("")){
+			msg.setSendId("id002");
+		}
 
 		String result = messageService.sendTrainerToUser(msg);
 		System.out.println(result);
@@ -92,7 +95,7 @@ public class EtcController {
 	}
 
 	// 보낸메시지 읽기
-	@GetMapping("trainerSendMessageRead")
+	@GetMapping("trainer/message/trainerSendMessageRead")
 	public String trainerSendMessageRead(Model model,
 			@RequestParam(name = "msgCode", required = false) String msgCode) {
 		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
@@ -101,7 +104,7 @@ public class EtcController {
 	}
 
 	// 받은메시지 읽기및 읽음처리
-	@GetMapping("trainerReceiveMessageRead")
+	@GetMapping("trainer/message/trainerReceiveMessageRead")
 	public String trainerReceiveMessageRead(Model model,
 			@RequestParam(name = "msgCode", required = false) String msgCode) {
 		MsgDto getAllSendMessageInfo = messageService.getAllSendMessageInfo(msgCode);
@@ -116,11 +119,4 @@ public class EtcController {
 	public String trainerProfileInsert() {
 		return "manage_layout/trainer/profile/trainer_profile_insert";
 	}
-
-	// 트레이너 프로필 수정페이지
-	@GetMapping("trainer/profile/trainerProfileModify")
-	public String trainerProfileModify() {
-		return "manage_layout/trainer/profile/trainer_profile_Modify";
-	}
-
 }
