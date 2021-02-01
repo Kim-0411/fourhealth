@@ -45,13 +45,55 @@ public class FoodController {
 	private Model model;
 	private String food;
 
-	@Controller
-	public class CommonController {
+	// @Controller
+	// public class CommonController {
 
-		@GetMapping("/food/foodSearch")
-		public String foodSearch() {
-			return "main_layout/food/food_search";
-		}
+	// 	@GetMapping("/food/foodSearch")
+	// 	public String foodSearch() {
+	// 		return "main_layout/food/food_search";
+	// 	}
+	// }
+	@PostMapping("/food/foodSearchList")
+	public String mainFoodSearch(Model model,
+			@RequestParam(name = "food_name", required = false) String foodName,
+			@RequestParam(name = "food_group_list", required = false) String foodGroup,
+			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage){
+
+		System.out.println("####################################");
+		System.out.println("음식이름" + foodName);
+		System.out.println("음식그룹" + foodGroup);
+
+		// All Food List
+		Map<String, Object> searchFoodList = foodService.getSearchMainFoodList(foodName, foodGroup, currentPage);
+
+		System.out.println(searchFoodList);
+
+		List<Food> foodGroupList = foodService.getFoodGroupList();
+		
+		// List<Food> searchFoodList = foodService.getSearchMainFoodList(foodName, foodGroup, currentPage);
+
+		
+
+		model.addAttribute("foodGroupList", foodGroupList);
+
+		model.addAttribute("foodList", searchFoodList.get("foodList"));
+		model.addAttribute("lastPage", searchFoodList.get("lastPage"));
+		model.addAttribute("currentPage", currentPage);
+		model.addAttribute("startPageNum", searchFoodList.get("startPageNum"));
+		model.addAttribute("endPageNum", searchFoodList.get("endPageNum"));
+		// model.addAttribute("foodList", serachFoodList.get("foodList"));
+
+		return "main_layout/food/food_search";
+	}
+
+	@GetMapping("/food/foodList")
+	public String mainFood(Model model){
+
+		List<Food> foodGroupList = foodService.getFoodGroupList();
+
+		model.addAttribute("foodGroupList", foodGroupList);
+
+		return "main_layout/food/food";
 	}
 
 	//Food input ajax call
