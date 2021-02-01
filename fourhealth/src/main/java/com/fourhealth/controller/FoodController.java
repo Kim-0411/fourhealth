@@ -54,6 +54,15 @@ public class FoodController {
 		}
 	}
 
+	//Food input ajax call
+	@RequestMapping(value = "/foodDataInsert", produces = "application/text", method = RequestMethod.POST)
+	public @ResponseBody String foodDataInsertTest(@RequestBody String data){
+		System.out.println(data);
+
+		return "성공";
+	}
+
+
 	@GetMapping("/foodListNumbers")
 	public String foodListNumbers(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
@@ -85,34 +94,25 @@ public class FoodController {
 		return "main_layout/food/foodListNumbers";
 	}
 
-	// 식품리스트
-	@GetMapping("/foodList")
-	public String foodList(Model model) {
-		model.addAttribute("title", "식품리스트");
-		//
-
-		// 식품 리스트 Food type의 List
-		List<Food> foodList = foodService.getFoodList();
-		System.out.println(foodList.size());
-
-		return "food/food_list";
-	}
-
-	// 식품 리스트
-	// @RequestMapping(value = "/foodList", method = RequestMethod.GET)
-	// public String foodList(Model model){
-	// // List<Food> foodList = foodService.getFoodList();
-	// foodService.getFoodList();
-	// model.addAttribute("title", "식품 리스트");
-	// System.out.println("#################");
-	// //System.out.println(foodList.toString());
-
-	// return "food/food_list";
-	// }
 
 	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
 	@GetMapping("/master/foodManage/foodDataInsert")
 	public String foodDataInsert(Model model) {
+
+		model.addAttribute("title", "음식 입력 화면");
+		
+		List<Food> foodGroupList = foodService.getFoodGroupList();
+
+		System.out.println("##########################");
+		
+
+		for(int i=0; i<foodGroupList.size(); i++){
+			System.out.println("########");
+			System.out.println(foodGroupList.get(i).getFoodGroup());
+		}
+	
+		model.addAttribute("foodGroupList", foodGroupList);
+
 		return "manage_layout/master/food_manage/food_data_insert";
 	}
 
