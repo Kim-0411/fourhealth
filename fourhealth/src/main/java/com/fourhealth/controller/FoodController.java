@@ -54,35 +54,14 @@ public class FoodController {
 		}
 	}
 
+	//Food input ajax call
 	@RequestMapping(value = "/foodDataInsert", produces = "application/text", method = RequestMethod.POST)
 	public @ResponseBody String foodDataInsertTest(@RequestBody String data){
 		System.out.println(data);
 
 		return "성공";
 	}
-	// insert ajax 호출
-	// @RequestMapping(value = "/foodDataInsert", produces = "application/text", method = RequestMethod.POST)
-	// public @ResponseBody String foodDataInsert(@RequestBody List<Map<String, Object>> data) {
-	// 	System.out.println("음식입력 테스트 중");
-	// 	System.out.println(data.toString());
-	// 	// log.info("data", data.toString());
 
-	// 	// for (int i = 0; i < data.size(); i++) {
-	// 	// 	if (data.get(i).get("foodCal") == "") {
-	// 	// 		data.get(i).put("foodGroup", 0);
-
-	// 	// 	}
-	// 	// }
-
-	// 	// int result = foodMapper.insertFoodListInformation(data);
-
-	// 	// // 성공 여부 판단
-	// 	// System.out.println("############ 성공여부판단 ############");
-	// 	// System.out.println("result" + result);
-	// 	// // //foodService.addFood1(data);
-	// 	return "성공";
-
-	// }
 
 	@GetMapping("/foodListNumbers")
 	public String foodListNumbers(Model model,
@@ -115,30 +94,6 @@ public class FoodController {
 		return "main_layout/food/foodListNumbers";
 	}
 
-	// 식품리스트
-	@GetMapping("/foodList")
-	public String foodList(Model model) {
-		model.addAttribute("title", "식품리스트");
-		//
-
-		// 식품 리스트 Food type의 List
-		List<Food> foodList = foodService.getFoodList();
-		System.out.println(foodList.size());
-
-		return "food/food_list";
-	}
-
-	// 식품 리스트
-	// @RequestMapping(value = "/foodList", method = RequestMethod.GET)
-	// public String foodList(Model model){
-	// // List<Food> foodList = foodService.getFoodList();
-	// foodService.getFoodList();
-	// model.addAttribute("title", "식품 리스트");
-	// System.out.println("#################");
-	// //System.out.println(foodList.toString());
-
-	// return "food/food_list";
-	// }
 
 	/* 관리자 음식DB 관리 페이지 맵핑 시작 */
 	@GetMapping("/master/foodManage/foodDataInsert")
