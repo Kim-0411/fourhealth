@@ -11,6 +11,8 @@ import com.fourhealth.mapper.FoodMapper;
 import com.fourhealth.service.DiseaseService;
 import com.fourhealth.dto.DiseaseDto;
 import com.fourhealth.mapper.DiseaseMapper;
+import com.fourhealth.dto.DiseaseDto;
+import com.fourhealth.service.DiseaseService;
 
 import org.apache.ibatis.logging.Log;
 import org.jsoup.Jsoup;
@@ -31,6 +33,7 @@ public class DiseaseController {
 
     @Autowired
     private DiseaseMapper diseaseMapper;
+
 
     /**
      * 2020/12/30 Wed 질병API 테스트 메소드 작성 및 테스트
@@ -158,13 +161,6 @@ public class DiseaseController {
 
         return superDiseaseList;
     }
-
-    @GetMapping("/disease/disease")
-    public String mainDisease(Model model) {
-        model.addAttribute("title", "질병정보테스트");
-
-        return "disease/disease_test";
-    }
     
     /* 관리자 질병DB 관리 페이지 맵핑 시작 */
     @GetMapping("/master/diseaseManage/diseaseDataInsert")
@@ -196,4 +192,9 @@ public class DiseaseController {
         return "manage_layout/master/disease_manage/disease_data_modify";
     }
     /* 관리자 질병DB 관리 페이지 맵핑 끝 */
+    @GetMapping("/disease/disease")
+	public String diseasePage(){
+		
+		return "main_layout/disease/DiseaseList";
+	}
 }
