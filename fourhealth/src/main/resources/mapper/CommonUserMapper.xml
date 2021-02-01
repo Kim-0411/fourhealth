@@ -33,4 +33,21 @@
 		WHERE
 			user_id = #{userId};
 	</select>
+	
+	<update id="modifyPrivateProfile" parameterType="CommonUserDto">
+		UPDATE 
+			tb_common_user
+		SET
+			user_level_code=#{userLevelCode},
+			user_pw=#{userPw},
+			user_name=#{userName},
+			user_addr=#{userAddr},
+			user_nickname=#{userNickname},
+			user_phone=#{userPhone},
+			user_email=#{userEmail},
+			user_birth=#{userBirth},
+			user_gender=#{userGender}
+		WHERE 
+			user_id=#{userId};
+	</update>
 </mapper>
