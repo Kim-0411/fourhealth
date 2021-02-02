@@ -23,9 +23,15 @@ public class MainController {
 	@GetMapping("/")
 	public String test(Model model) {
 		model.addAttribute("test", "Hello thymeleaf");
+		return "main_layout/about";
+	}
+	//home page
+	@GetMapping("/home")
+	public String home(Model model) {
+		model.addAttribute("title", "Fourhealth Home");
 		return "index";
 	}
-
+	
 	// Contact page
 	@GetMapping("/contact")
 	public String contact(Model model) {
