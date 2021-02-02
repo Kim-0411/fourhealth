@@ -61,6 +61,17 @@ public class ProfileController {
 		return "redirect:/trainer/profile/trainerProfile";
 	}
 	
-	//트레이너 프로필 수정 페이지
+	// 트레이너 프로필 등록페이지
+	@GetMapping("trainer/profile/trainerProfileInsert")
+	public String trainerProfileInsert(Model model) {
+		CommonProfileDto profile = profileService.getProfile("id002");
+		CommonUserDto commonUserDto = commonUserService.getPrivateProfile("id002");
+		System.out.println(commonUserDto);
+		System.out.println(profile);
+		model.addAttribute("profile", profile);
+		model.addAttribute(commonUserDto);
+		return "manage_layout/trainer/profile/trainer_profile_insert";
+	}
+	
 	//트레이너 프로필 수정
 }
