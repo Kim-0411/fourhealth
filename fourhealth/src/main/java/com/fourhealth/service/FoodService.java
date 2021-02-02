@@ -20,6 +20,64 @@ public class FoodService {
 	@Autowired
 	private FoodMapper foodMapper;
 
+	public Map<String, Object> getSearchMainFoodList(String foodName, String foodGroup, int currentPage){
+		int startRow = 0;
+		int rowPerPage = 30;
+		int startPageNum = 1;
+		
+		double count = 0;
+
+		// last 페이지 구하기
+		
+
+		if(foodGroup.equals("전체")){
+			count = foodMapper.getFoodListCount();
+		}else{
+			count = foodMapper.getAllSearchLastFoodList(foodName, foodGroup);
+		}
+		int lastPage = (int) Math.ceil(count / rowPerPage);
+
+		System.out.println("#########################################");
+		System.out.println(count);
+
+		int endPageNum = lastPage;
+
+		// 페이지 알고리즘
+		startRow = (currentPage - 1) * rowPerPage;
+		// String stRow = String.valueOf(startRow);
+		// String rowPage = String.valueOf(rowPerPage);
+		List<Map<String, Object>> foodList = foodMapper.getAllSearchFoodList(foodName, foodGroup, startRow, rowPerPage);
+
+		for(int i=0; i<foodList.size(); i++){
+			System.out.println("#######");
+			System.out.println(foodList.get(i).get("food_name"));
+		}
+
+		if (currentPage > 6) {
+			startPageNum = currentPage - 5;
+			endPageNum = currentPage + 4;
+
+			if (endPageNum >= lastPage) {
+				startPageNum = (lastPage - 9);
+				endPageNum = lastPage;
+			}
+		}
+
+		System.out.println(lastPage);
+		System.out.println(endPageNum);
+
+		Map<String, Object> resultMap = new HashMap<String, Object>();
+		resultMap.put("foodList", foodList);
+		resultMap.put("lastPage", lastPage);
+		resultMap.put("currentPage", currentPage);
+		resultMap.put("startPageNum", startPageNum);
+		resultMap.put("endPageNum", endPageNum);
+
+		System.out.println(resultMap + "--------->test foodList page List");
+
+		return resultMap;
+	}
+
 	//Food List on limit table
 	public Map<String, Object> getFoosList(int currentPage){
 		int startRow = 0;
@@ -45,6 +103,8 @@ public class FoodService {
 		System.out.println("Test printout foodList : "+foodList);
 
 
+
+
 		if(currentPage > 10){
 			startPageNum = currentPage-5;
 			endPageNum = currentPage+4;
@@ -63,8 +123,8 @@ public class FoodService {
 		resultMap.put("startPageNum", startPageNum);
 		resultMap.put("endPageNum", endPageNum);
 	
-		// return resultMap;
 		return resultMap;
+		// return null;
 	}
 
 	//Food List Service
