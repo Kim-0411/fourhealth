@@ -114,9 +114,4 @@ public class EtcController {
 		return "manage_layout/trainer/message/trainer_receive_message_read";
 	}
 
-	// 트레이너 프로필 등록페이지
-	@GetMapping("trainer/profile/trainerProfileInsert")
-	public String trainerProfileInsert() {
-		return "manage_layout/trainer/profile/trainer_profile_insert";
-	}
 }

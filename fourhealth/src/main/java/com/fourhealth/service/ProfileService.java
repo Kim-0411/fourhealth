@@ -16,8 +16,8 @@ public class ProfileService {
 	@Autowired
 	private ProfileMapper profileMapper;
 	
-	public List<CommonProfileDto> getProfile() {
-		List<CommonProfileDto> profile = profileMapper.getProfile();
+	public CommonProfileDto getProfile(String userId) {
+		CommonProfileDto profile = profileMapper.getProfile(userId);
 		return profile;
 	}
 

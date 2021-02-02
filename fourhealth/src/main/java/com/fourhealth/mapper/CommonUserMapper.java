@@ -7,6 +7,7 @@ import com.fourhealth.dto.CommonUserDto;
 @Mapper
 public interface CommonUserMapper {
 
-	CommonUserDto getPrivateProfile();
-
+	CommonUserDto getPrivateProfile(String userId);
+	
+	int modifyPrivateProfile(CommonUserDto commonUserDto);
 }
