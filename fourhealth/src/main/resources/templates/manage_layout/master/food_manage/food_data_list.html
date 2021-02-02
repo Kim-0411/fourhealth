@@ -126,7 +126,7 @@
                                                         class="page-link">Previous</a></li>
                                                 <th:block
                                                     th:each="number : ${#numbers.sequence(startPageNum,endPageNum)}">
-                                                    <li class="paginate_button page-item">
+                                                    <li class="paginate_button page-item active">
                                                         <a th:unless="${currentPage ==number}"
                                                             th:href="@{/master/foodManage/foodDataList(currentPage = ${number})}"
                                                             aria-controls="example1" class="page-link"
@@ -137,6 +137,7 @@
                                                     </li>
 
                                                 </th:block>
+
 
                                                 <li class="paginate_button page-item next" id="example1_next">
                                                     <a th:if="${currentPage < lastPage}"

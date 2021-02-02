@@ -3,6 +3,7 @@ package com.fourhealth.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.security.Provider.Service;
+import java.util.Enumeration;
 import java.util.List;
 import java.util.Properties;
 
@@ -14,9 +15,11 @@ import javax.mail.Transport;
 import javax.mail.internet.AddressException;
 import javax.mail.internet.InternetAddress;
 import javax.mail.internet.MimeMessage;
+import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletResponse;
 
 import javax.servlet.http.HttpSession;
+import javax.servlet.http.HttpSessionContext;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -304,13 +307,18 @@ public class MemberController {
 		System.out.println("이메일 확인 후 비밀번호 바꿔주며 메일 전송 안됨");
 		return "redirect:/login";
 	}
+	
 
-	// 페이스북으로 로그인 (api)
-	// @GetMapping("/facebookLogin")
-	// public String facebookLoginPage(Model model) {
-	// System.out.println("페이스북 로그인 화면");
-
-	// return "/login/f";
-	// }
+	
+	 @GetMapping("/fLogin")
+	 public String facebookLoginPage(@RequestParam(name = "email",required = false) String email,HttpSession session) {
+		 
+			
+	 System.out.println("페이스북 로그인 화면");
+	 session.setAttribute("SID", email);
+	 session.setAttribute("SNICKNAME", email);
+	 System.out.println(session.getAttribute("SNICKNAME"));
+	 return "index";
+	 }
 
 }

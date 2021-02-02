@@ -74,6 +74,13 @@ public class FoodService {
 		return foodMapper.getFoodList();
 	}
 
+	public List<Food> getFoodGroupList(){
+		System.out.println("foodList service call test");
+		//System.out.println(foodMapper.getFoodList());
+		return foodMapper.getFoodGroupList();
+	}
+
+
 	// Food Input Service
 	
 	public String addFood(Food food) {

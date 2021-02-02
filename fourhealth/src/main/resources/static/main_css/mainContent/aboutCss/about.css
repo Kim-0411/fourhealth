@@ -52,7 +52,7 @@ section .section-title {
 #team .card {
   
   background: white;
-  border-radius: 10%;
+  /* border-radius: 0%; */
 }
 
 .image-flip:hover .backside,
@@ -92,11 +92,12 @@ section .section-title {
   -ms-transform: rotateY(0deg);
   z-index: 2;
   margin-bottom: 30px;
+  border-radius: 10%;
 }
 
 .backside {
   position: absolute;
-  border-radius: 20%;
+  /* border-radius: 20%; */
   top: 0;
   left: 0;
   background: white;
@@ -132,7 +133,12 @@ section .section-title {
 .frontside .card,
 .backside .card {
   min-height: 312px;
+  
  
+}
+
+.frontside .card{
+  border-radius: 10%;
 }
 
 .backside .card a {
