@@ -24,5 +24,7 @@ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 			, profile_reg_date
 		FROM 
 			tb_common_profile
+		WHERE
+			user_id=#{userId}
 	</select>
 </mapper>
