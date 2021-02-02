@@ -1,39 +1,146 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-	layout:decorate="@{default_layout/main/default}" lang="en">
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+    layout:decorate="@{default_layout/main/default}" lang="en">
+
 
 <th:block layout:fragment="mainContent">
-	<div class="container">
-		<h1>음식 비동기 검색 페이지</h1>
-		<!-- 모달로 -->
-		<form action="#" name="searchForm">
-			<input type="text" name="searchKeyword" onkeyup="sendKeyoWord();" />
-			<input type="button" value="검색" />
-			<div class="suggestionFoodList">
-				<div class="suggestionList"></div>
-			</div>
-		</form>
-	</div>
+    <div class="container">
+        <div class="search-box">
+            <form th:action="@{/food/foodSearchList}" method="post">
+                <h3>음식 종류/분류 별 검색하기</h3>
+                <select name="food_group_list">
+                    <option selected="" disabled="">음식 분류 선택하기</option>
+                    <option th:text="전체"></option>
+                    <th:block th:if="${#lists.size(foodGroupList)}>0" th:each="food : ${foodGroupList}">
+                        <option th:text="${food.foodGroup}"></option>
+                    </th:block>
+                </select>
+                <input type="text" name="food_name">
+                <button type="submit" class="btn btn-success">검색하기</button>
+            </form>
+        </div>
+
+        <div class="row">
+            <table class="table">
+                <tbody>
+                    <tr valign="top" class="text-left" th:each="food : ${foodList}">
+                        <td class="borderBottom">
+                                <b th:text="${food.get('food_name')}"></b>
+                            
+                       <div class="smallText greyText">
+                                <p>칼로리:
+                                   <span
+                                        th:text="${food.get('food_calorie')}"></span>
+                                </p>
+                            </div>
+                            <div class="smallText" align="right">
+                                <a href="#"> 총 gram</a>
+                                <span
+                                th:text="${food.get('food_gram')}"></span>
+                            </div> 
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div class="row">
+            <h3>칼로리별 음식 소개도</h3>
+          </div>
+          <div class="row">
+            <table class="table-bordered  col-md-4">
+              <tr>
+                <th colspan="3">저 칼로리</th>
+              </tr>
+              <tr>
+                <td>음식이름</td>
+                <td>칼로리</td>
+                <td>총량(1인분)</td>
+              </tr>
+              <tr th:each="e : ${easy}">
+                <td>
+                  <a th:text="${e.exerciseName}" th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+                </td>
+                <td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+                <td th:text="${e.exerciseMetCoeffcient}"></td>
+              </tr>
+            </table>
+            <table class="table-bordered  col-md-4">
+              <tr>
+                <th colspan="3">중 칼로리</th>
+              </tr>
+              <tr>
+                <td>음식이름</td>
+                <td>칼로리</td>
+                <td>총량(1인분)</td>
+              </tr>
+              <tr th:each="e : ${normal}">
+                <td>
+                  <a th:text="${e.exerciseName}" th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+                </td>
+                <td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+                <td th:text="${e.exerciseMetCoeffcient}"></td>
+              </tr>
+            </table>
+            <table class="table-bordered  col-md-4">
+              <tr>
+                <th colspan="3">고 칼로리</th>
+              </tr>
+              <tr>
+                <td>음식이름</td>
+                <td>칼로리</td>
+                <td>총량(1인분)</td>
+              </tr>
+              <tr th:each="e : ${hard}">
+                <td>
+                  <a th:text="${e.exerciseName}" th:href="@{/exerciseInfo(exerciseName=${e.exerciseName})}"></a>
+                </td>
+                <td th:text="${#numbers.formatInteger(e.exerciseMetCoeffcient*(3.5*70*60/1000)*5,0)}"></td>
+                <td th:text="${e.exerciseMetCoeffcient}"></td>
+              </tr>
+            </table>
+          </div>
+          <div class="row">
+            <a th:href="@{/exercise/allExerciseList}" style="display: block;">전체보기</a>
+          </div>
+        </div>
+
+        <!-- FoodSearchList Paging process -->
+        <nav aria-label="Page navigation" class="nav justify-content-center bg-light">
+			<ul class="pagination">
+       		 	<li>
+          			<a th:href="@{/food/searchFood(food_name=${foodName},food_group=${foodGroupList})}">맨처음</a>
+        		</li>
+        		<!-- disabled가 있으면 마우스 커서가 금지표시로 바뀐다. class=disabled -->
+        		<li>
+        			<a th:if="${currentPage > 1}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage - 1 })}"
+           			 aria-label="Previous">
+          			<span aria-hidden="true">«</span>
+          			</a>
+        		</li>
+        		<th:block th:each="num : ${#numbers.sequence(startPageNum,endPageNum)}">
+      	  				<!-- 현재 페이지 -->
+						<li class="active" th:if="${currentPage == num}">
+							<span th:text="${num}"></span>
+         				</li>
+          				<!-- 다음 페이지 -->
+          				<li>
+          				<th:block th:unless="${num <= 0 }">
+							<a th:unless="${currentPage == num}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${num})}"
+              				th:text="${ num }">
+              				</a>
+              			</th:block>
+     					</li>
+        		</th:block>
+				<li>
+          			<a th:if="${currentPage < lastPage}" th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${currentPage + 1 })}"
+            		aria-label="Next">
+            			<span aria-hidden="true">»</span>
+          			</a>
+          			<a th:href="@{/exercise/serachExercise(exercise_name=${exerciseName},met_coefficient=${metCoefficient},currentPage = ${lastPage})}">맨마지막</a>
+				</li>
+     		 </ul>
+   		 </nav>
+    </div>
 </th:block>
+
 </html>
-<script>
-    function showSuggest() {
-        
-    }
-
-    //서버에 키워드 보내는 함수
-    function sendKeyword() {
-        
-        var searchKeyword = document.searchForm.searchKeyword.value;
-
-        //검색된 키값이 없으면 null표시;
-        if(searchKeyword == ""){
-            hide();
-            return;
-        }
-        var serachKeyword2 = "searchKeyword"+searchKeyword;
-        // 웹페이지 경로 요청 할당
-        // sendRequest();
-    }
-</script>

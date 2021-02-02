@@ -13,8 +13,15 @@ public interface FoodMapper {
 
 	public int getFoodListCount();
 
+	// Food Master Page List
 	public  List<Map<String, Object>> getFoodListBoard(int startRow, int rowPerPage);
 
+	// Food Search Page get Last Nubmer
+	public int getAllSearchLastFoodList(String foodName, String foodGroup);
+
+	// After seraching food with paging
+	public List<Map<String, Object>> getAllSearchFoodList(String foodName, String foodGroup,
+	int startRow, int rowPerPage);
 
 	//Food List 
 	public List<Food> getFoodList();

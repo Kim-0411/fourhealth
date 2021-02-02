@@ -6,23 +6,24 @@
 <th:block layout:fragment="mainContent">
   <div class="container">
     <div class="top-level-header">
-      <h1>신체단련</h1>
-      <span>당신에게 맞는 운동을 찾아서 오늘부터 칼로리를 태워보세요!</span>
+      <h1>음식 Information</h1>
+      <span>음식 정보를 소개합니다.</span>
     </div>
     <div class="search-box">
-      <form th:action="@{/exercise/serachExercise}" method="post">
-        <h3>활동 및 운동찾기</h3>
-        <select name="met_coefficient">
-          <option value="all">전체</option>
-          <option value="easy">가벼움</option>
-          <option value="normal">보통</option>
-          <option value="hard">격렬함</option>
+      <form th:action="@{/food/foodSearchList}" method="post">
+        <h3>음식 종류/분류 별 검색하기</h3>
+        <select name="food_group_list">
+          <option selected="" disabled="">음식 분류 선택하기</option>
+          <option th:text="전체"></option>
+          <th:block th:if="${#lists.size(foodGroupList)}>0" th:each="food : ${foodGroupList}">
+                  <option th:text="${food.foodGroup}"></option>
+                </th:block>
         </select>
-        <input type="text" name="exercise_name">
+        <input type="text" name="food_name">
         <button type="submit" class="btn btn-success">검색하기</button>
       </form>
     </div>
-    <div class="swiper-container col-sm-12 col-xs-12">
+    <!-- <div class="swiper-container col-sm-12 col-xs-12">
       <div class="swiper-wrapper">
         <div class="swiper-slide" th:each="e : ${easy}">
           <div>
@@ -42,19 +43,19 @@
           <div class="swiper-button-next"></div>
         </div>
       </div>
-    </div>
+    </div> -->
     <div class="row">
-      <h3>운동 유형별 에너지 소비량(70kg)</h3>
+      <h3>칼로리별 음식 소개도</h3>
     </div>
     <div class="row">
       <table class="table-bordered  col-md-4">
         <tr>
-          <th colspan="3">가벼운강도</th>
+          <th colspan="3">저 칼로리</th>
         </tr>
         <tr>
-          <td>운동이름</td>
-          <td>cals/시간</td>
-          <td>met계수</td>
+          <td>음식이름</td>
+          <td>칼로리</td>
+          <td>총량(1인분)</td>
         </tr>
         <tr th:each="e : ${easy}">
           <td>
@@ -66,12 +67,12 @@
       </table>
       <table class="table-bordered  col-md-4">
         <tr>
-          <th colspan="3">보통강도</th>
+          <th colspan="3">중 칼로리</th>
         </tr>
         <tr>
-          <td>운동이름</td>
-          <td>cals/시간</td>
-          <td>met계수</td>
+          <td>음식이름</td>
+          <td>칼로리</td>
+          <td>총량(1인분)</td>
         </tr>
         <tr th:each="e : ${normal}">
           <td>
@@ -83,12 +84,12 @@
       </table>
       <table class="table-bordered  col-md-4">
         <tr>
-          <th colspan="3">격렬한강도</th>
+          <th colspan="3">고 칼로리</th>
         </tr>
         <tr>
-          <td>운동이름</td>
-          <td>cals/시간</td>
-          <td>met계수</td>
+          <td>음식이름</td>
+          <td>칼로리</td>
+          <td>총량(1인분)</td>
         </tr>
         <tr th:each="e : ${hard}">
           <td>
