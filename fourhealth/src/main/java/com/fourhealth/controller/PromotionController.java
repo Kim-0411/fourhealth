@@ -83,7 +83,7 @@ public class PromotionController {
 	// 트레이너 프로모션 등록전 최초데이터 체크컨트롤러
 	@GetMapping("trainer/promtion/promotionCheck")
 	public String promotionCheck(@RequestParam(name = "proId", required = false) String proId,
-			HttpServletResponse response) throws IOException {
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
 
 		System.out.println(proId);
 		System.out.println(promotionService.promotionCheck(proId));
@@ -92,7 +92,10 @@ public class PromotionController {
 		if (proId.equals("")) {
 			response.setContentType("text/html; charset=UTF-8");
 			PrintWriter out = response.getWriter();
-			out.println("<script>alert('로그인을 확인해주세요.'); location.href='/login';</script>");
+			HttpSession session = request.getSession();
+			session.setAttribute("SID", "id002");
+			out.println(
+					"<script>alert('로그인을 확인해주세요. 확인을 누르시면 id002로 세션이 처리됩니다.'); location.href='/trainer/promtion/myPromotionInsert';</script>");
 			return null;
 		} else {
 			if (i > 0) {

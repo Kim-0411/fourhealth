@@ -6,6 +6,7 @@
 >
   <th:block layout:fragment="customContent">
     <h1>내 프로모션 관리</h1>
+    <input type="hidden" id="tId" th:value="${session.SID}" />
       <div class="row">
           <div class="col-12">
             <div class="card">
@@ -49,10 +50,10 @@
                       <td th:text="${m.trainerPromotionRecruitPeople}"> </td>
                       <td th:text="${m.trainerPromotionLiveAddPeople}"> </td>
                       <td th:text="${m.trainerMatchingSystemAddDate}"> </td>
-                      <td class="noticeCode" th:text="${m.trainerPromotionNoticeCode}">
+                      <td style="visibility:hidden;position:absolute;" class="noticeCode" th:text="${m.trainerPromotionNoticeCode}">
                       </td>
                       <td><a class="change" th:href="@{/trainer/promtion/myPromotionModify(trainerPromotionNoticeCode=${m.trainerPromotionNoticeCode})}">수정</a></td>
-                      <td><a class="result" href="javascript:a();" >정산</a></td>
+                      <td><a class="result" href="#" >정산</a></td>
                       
 
                     </tr>
@@ -78,7 +79,7 @@
             
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-default" id="schedule-modal-add-btn">Add</button>
+            <button type="button" class="btn btn-default" id="check_module">Add</button>
             <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           </div>
         </div>
@@ -87,9 +88,10 @@
     </div>
     <script>
       $('.result').click(function(){
-        var tr = $(this).parent().parent().find('td:eq(6)');
-        var td = tr.children();
-        var noticeCode = tr.text();
+        var noticeCodeTr = $(this).parent().parent().find('td:eq(6)');
+        var trainerPromotionNameTr = $(this).parent().parent().find('td:eq(0)');              
+        var noticeCode = noticeCodeTr.text();
+        var trainerPromotionName = trainerPromotionNameTr.text();
 
         console.log(noticeCode);
 
@@ -101,13 +103,54 @@
           success: function (response) {
             console.log(response);
             var html = '';
-            html += "정산금액 :<input type='text' id='trainerPromotionNoticeCode' value="+response+">"
+            html += "프로모션 이름 :<input type='text' id='trainerPromotionName' value="+trainerPromotionName+">"
+            html += "<br/>"
+            html += "정산금액 :<input type='text' id='settlementAmountPay' value="+response+">"
+          
             $('.modal-body').html(html);
-
             $("#myModal").modal();
           }
         });
+
+        $("#check_module").click(function () {
+        console.log(trainerPromotionName);
+        console.log(request.responseText)
+        console.log($('#tId').val());
+
+          var IMP = window.IMP; // 생략가능
+          IMP.init("imp52487011");
+
+          IMP.request_pay({
+          pg : 'inicis', // version 1.1.0부터 지원.
+          pay_method : 'card',
+          merchant_uid : 'merchant_' + new Date().getTime(),
+          name : '주문명:'+trainerPromotionName,
+          amount : request.responseText,
+          buyer_name : $('#tId').val(),
+         
+}, function(rsp) {
+    if ( rsp.success ) {
+      $('#myModal').modal("hide"); //닫기 
+        var msg = '결제가 완료되었습니다.';
+        msg += '고유ID : ' + rsp.imp_uid;
+        msg += '상점 거래ID : ' + rsp.merchant_uid;
+        msg += '결제 금액 : ' + rsp.paid_amount;
+
+    } else {
+        var msg = '결제에 실패하였습니다.';
+        msg += '에러내용 : ' + rsp.error_msg;
+    }
+    alert(msg);
+});
+
+        })
+
+
+
       });
+
+
+     
    </script>
   
   </th:block>
