@@ -78,7 +78,7 @@
 												for="check1"></label>
 										</div>
 									</td>
-									<td class="mailbox-name"><a th:href="@{/trainerSendMessageRead(msgCode = ${m.msgCode})}"
+									<td class="mailbox-name"><a th:href="@{/trainer/message/trainerSendMessageRead(msgCode = ${m.msgCode})}"
 										th:text="${m.receiveId}"></a></td>
 									<td class="mailbox-subject"
 										th:text="${#strings.substring(m.msgContents,0,7)}+..."></td>
@@ -99,7 +99,7 @@
 		</div>
 		<!-- /.card -->
 		<div class="col-md-3">
-			<a href="compose.html" class="btn btn-primary btn-block mb-3">쪽지보내기</a>
+			<a href="compose.html" class="btn btn-primary btn-block mb-3">쪽지작성</a>
 			<div class="card">
 				<div class="card-header">
 					<h3 class="card-title">쪽지</h3>
@@ -113,12 +113,12 @@
 				</div>
 				<div class="card-body p-0">
 					<ul class="nav nav-pills flex-column">
-						<li class="nav-item active"><a th:href="@{/trainerMessageReceiveManage}" class="nav-link">
+						<li class="nav-item active"><a th:href="@{/trainer/message/trainerMessageReceiveManage}" class="nav-link">
 								<i class="fas fa-inbox"></i> 받은쪽지함 <span
 								class="badge bg-primary float-right"
 								th:text="${session.noReadMessageCnt}"></span>
 						</a></li>
-						<li class="nav-item"><a th:href="@{/trainerMessageSendManage}" class="nav-link"> <i
+						<li class="nav-item"><a th:href="@{/trainer/message/trainerMessageSendManage}" class="nav-link"> <i
 								class="far fa-envelope"></i> 보낸쪽지함
 						</a></li>
 					</ul>

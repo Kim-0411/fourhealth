@@ -3,7 +3,7 @@
   layout:decorate="@{/default_layout/manage/default}">
 <th:block layout:fragment="customContent">
 
-  <h1>내 프로모션에 등록된 회원 스케줄 등록(id002로그인가정)</h1>
+  <h1>내 프로모션에 등록된 회원 스케줄 등록</h1>
   <div class="row">
     <div class="form-group col-md-4" id="first_schedule">
       <label>진행중인 내프로모션 선택</label>
@@ -16,6 +16,10 @@
       <label>회원선택</label>
       <select multiple="" class="custom-select" id="matching_user">
       </select>
+
+      <!--  -->
+
+
     </div>
     <div class="col-md-5" id="test">
       <div class="card bg-primary">
@@ -50,15 +54,15 @@
       <!-- /.card -->
     </div>
   </div>
- <section class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <!-- /.col -->
-          <div class="col-md-12">
-            <div class="card card-primary">
-              <div class="card-body p-0">
-                <!-- THE CALENDAR -->
-                <div id="calendar" class="fc fc-media-screen fc-direction-ltr fc-theme-bootstrap">
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <!-- /.col -->
+        <div class="col-md-12">
+          <div class="card card-primary">
+            <div class="card-body p-0">
+              <!-- THE CALENDAR -->
+              <div id="calendar" class="fc fc-media-screen fc-direction-ltr fc-theme-bootstrap">
               </div>
               <!-- /.card-body -->
             </div>
@@ -67,12 +71,12 @@
           <!-- /.col -->
         </div>
         <!-- /.row -->
-      	</div>
-      </div><!-- /.container-fluid -->
-    </section>
-    
-    
-    
+      </div>
+    </div><!-- /.container-fluid -->
+  </section>
+
+
+
   <!-- 트레이너 스케쥴 모달 페이지 -->
   <div class="modal fade" id="myModal" role="dialog">
     <div class="modal-dialog modal-xl schedule-modal">
@@ -109,9 +113,9 @@
 
     </div>
   </div>
-  
+
   <!-- 카드(스케줄 넣어준거) 클릭시 뜨게함 -->
-  
+
   <div class="modal fade" id="myCardModal" role="dialog">
     <div class="modal-dialog modal-xl schedule-modal">
       <!-- Modal content-->
@@ -122,7 +126,7 @@
         </div>
         <div class="modal-body">
           <h3>넣어준거</h3>
-          
+
           <table class="table-bordered mt-2 col-md-5">
             <tbody id="exercise_info">
             </tbody>
@@ -139,3 +143,10 @@
 </th:block>
 
 </html>
+<!-- <script>
+  $(function () {
+    $("#calendar").fullCalendar({
+
+    })
+  })
+</script> -->

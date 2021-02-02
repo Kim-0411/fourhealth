@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+	xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+	layout:decorate="@{default_layout/main/default}" lang="en">
+	<th:block layout:fragment="mainContent">
+		<div class="container">
+			<h1>질병정보 API 호출 테스트</h1>
+			<input type="text" class="disease_test_input">
+			<button class="disease_test_btn">TEST</button>
+
+			<table border="1">
+				<thead>
+					<tr>
+						<td>질병코드</td>
+						<td>질병이름</td>
+					</tr>
+				</thead>
+				<tbody id="wData">
+					<tr>
+						<td colspan="2">버튼 테스트 눌러주세요.</td>
+					</tr>
+				</tbody>
+			</table>
+	</th:block>
+</html>
+
+<script>
+       
+        const diseaseCheckBtn = $(".disease_test_btn");
+
+        diseaseCheckBtn.on('click', function () {
+            var diseaseName = $(".disease_test_input").val();
+
+            //check value
+            console.log(diseaseName);
+
+            var request = $.ajax({
+                type: "get",
+                url: "/info_disease",
+                data: {
+                    diseaseName : diseaseName
+                },
+                dataType: "json",
+            });
+            request.done(function (data) {
+                console.log(data);
+                var html = "";
+                for (var i = 0; i < data.length; i++) {
+                        html += '<tr>';
+                        html += '<td>';
+                        html += data[i].diseaseCode;
+                        html += '</td>';
+                        html += '<td>';
+                        html += data[i].diseaseName;
+                        html += '</td>';
+                        html += '</tr>';
+                    }
+                    $('#wData').html(html);
+              
+            });
+        })
+
+    </script>

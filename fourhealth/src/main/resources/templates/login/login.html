@@ -1,96 +1,81 @@
 <!DOCTYPE html>
-<html
-  xmlns:th="http://www.thymeleaf.org"
-  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-  layout:decorate="@{default_layout/login/default}"
-  lang="en"
->
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/login/default}" lang="en">
 
 <th:block layout:fragment="mainContent">
-    <div class="container">
-      <!-- Outer Row -->
-      <div class="row justify-content-center">
-        <div class="col-lg-6 col-md-9">
-          <div class="card o-hidden border-0 shadow-lg my-5">
-            <div class="card-body p-0">
-              <!-- Nested Row within Card Body -->
-              <div>
-                  <div class="p-5">
-                    <div class="text-center">
-                      <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
-                    </div>
-                    <form
-                      th:action="@{/login}"
-                      method="post"
-                      id="memberlogin"
-                      class="memberlogin"
-                    >
-                      <div class="form-group">
-                        <input
-                          type="text"
-                          class="form-control form-control-user"
-                          id="userId"
-                          name="userId"
-                          placeholder="userId"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <input
-                          type="password"
-                          class="form-control form-control-user"
-                          id="userPassword"
-                          name="userPassword"
-                          placeholder="userPassword"
-                        />
-                      </div>
-                      <div class="form-group">
-                        <div class="checkbox">
-                          <label>
-                            <input type="checkbox" name="rememberId" /> &nbsp;
-                            아이디저장
-                          </label>
-                          &nbsp;
-                          <label>
-                            <input type="checkbox" name="useCookie" /> &nbsp;
-                            자동로그인
-                          </label>
-                        </div>
-                      </div>
-                      <button
-                        type="button"
-                        id="login"
-                        class="btn btn-primary btn-user btn-block"
-                      >
-                        Login
-                        <!-- a href="index.html"  -->
-                      </button>
-                      <hr />
-                      <a
-                        href="index.html"
-                        class="btn btn-google btn-user btn-block"
-                      >
-                        <i class="fab fa-google fa-fw"></i> #Login with Google
-                      </a>
-                      <a
-                        href="index.html"
-                        class="btn btn-facebook btn-user btn-block"
-                      >
-                        <i class="fab fa-facebook-f fa-fw" th:href="@{/facebookLogin}"></i> !Login with
-                        Facebook
-                      </a>
-                    </form>
-                    <hr />
-                    <div class="text-center">
-                      <a class="small" th:href="@{/pwFind}"
-                        >Forgot Password?</a
-                      >
-                    </div>
-                    <div class="text-center">
-                      <a class="small" th:href="@{/levelSelect}"
-                        >Create an Account!</a
-                      >
+  <div class="container">
+    <!-- Outer Row -->
+    <div class="row justify-content-center">
+      <div class="col-lg-6 col-md-9">
+        <div class="card o-hidden border-0 shadow-lg my-5">
+          <div class="card-body p-0">
+            <!-- Nested Row within Card Body -->
+            <div>
+              <div class="p-5">
+                <div class="text-center">
+                  <h1 class="h4 text-gray-900 mb-4">Welcome Back!</h1>
+                </div>
+                <form th:action="@{/login}" method="post" id="memberlogin" class="memberlogin">
+                  <div class="form-group">
+                    <input type="text" class="form-control form-control-user" id="userId" name="userId"
+                      placeholder="userId" />
+                  </div>
+                  <div class="form-group">
+                    <input type="password" class="form-control form-control-user" id="userPassword" name="userPassword"
+                      placeholder="userPassword" />
+                  </div>
+                  <div class="form-group">
+                    <div class="checkbox">
+                      <label>
+                        <input type="checkbox" name="rememberId" /> &nbsp;
+                        아이디저장
+                      </label>
+                      &nbsp;
+                      <label>
+                        <input type="checkbox" name="useCookie" /> &nbsp;
+                        자동로그인
+                      </label>
                     </div>
                   </div>
+                  <button type="button" id="login" class="btn btn-primary btn-user btn-block"> Login
+                  </button>
+                  <hr />
+                  <a href="index.html" class="btn btn-google btn-user btn-block">
+                    <i class="fab fa-google fa-fw"></i> #Login with Google
+                  </a>
+                  <!-- ############ -->
+
+
+                  <!-- login btn -->
+                  <!-- <div class="fb-login-button" data-max-rows="1" data-size="large" data-button-type="continue_with"
+data-show-faces="true" data-auto-logout-link="true" data-use-continue-as="true"></div> -->
+
+                  <!-- facebook -->
+                  <!-- <div id="fb-root"></div> -->
+
+                  <!-- ################# -->
+
+
+                  <!-- th:href="@{/facebookLogin}" -->
+                  <!-- 페이스북 아이디를 연동해서 로그인 -->
+                  <a href="#" class="btn btn-facebook btn-user btn-block" id="facebookloginBtn" onclick="_login();">
+                    <i class="fab fa-facebook-f fa-fw"></i>Login with Facebook
+                    <!-- <div id="access_token"></div>
+                    <div id="user_id"></div>
+                    <div id="name"></div>
+                    <div id="email"></div>
+                    <div id="gender"></div>
+                    <div id="birthday"></div>
+                    <div id="id"></div> -->
+                  </a>
+
+                </form>
+                <hr />
+                <div class="text-center">
+                  <a class="small" th:href="@{/pwFind}">Forgot Password?</a>
+                </div>
+                <div class="text-center">
+                  <a class="small" th:href="@{/levelSelect}">Create an Account!</a>
                 </div>
               </div>
             </div>
@@ -98,6 +83,86 @@
         </div>
       </div>
     </div>
+  </div>
+  </div>
 
 
 </html>
+<script>
+
+
+  // // JavaScript용 Facebook SDK 설정
+  // window.fbAsyncInit = function () {
+  //   FB.init({
+  //     appId: '422064919022249',
+  //     cookie: true,
+  //     xfbml: true,
+  //     version: 'v9.0'
+  //   });
+  //   FB.AppEvents.logPageView();
+  //   console.log(FB.AppEvents.logPageView());
+
+  //
+  // Load the SDK asynchronously
+
+  var facebookBtn = document.getElementById("facebookloginBtn");
+
+
+  (function (thisdocument, scriptelement, id) {
+    var js, fjs = thisdocument.getElementsByTagName(scriptelement)[0];
+    if (thisdocument.getElementById(id)) return;
+
+    js = thisdocument.createElement(scriptelement); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js"; //you can use 
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));
+
+  window.fbAsyncInit = function () {
+    FB.init({
+      appId: '422064919022249', //Your APP ID
+      cookie: true,  // enable cookies to allow the server to access 
+      // the session
+      xfbml: true,  // parse social plugins on this page
+      version: 'v9.0' // use version 2.1
+    });
+
+    // These three cases are handled in the callback function.
+    FB.getLoginStatus(function (response) {
+      statusChangeCallback(response);
+    });
+
+  };
+
+  // This is called with the results from from FB.getLoginStatus().
+  function statusChangeCallback(response) {
+    if (response.status === 'connected') {
+      // Logged into your app and Facebook.
+      _i();
+    } else if (response.status === 'not_authorized') {
+      // The person is logged into Facebook, but not your app.
+      document.getElementById('status').innerHTML = 'Please log ' +
+        'into this app.';
+    }
+  }
+
+  function _login() {
+    FB.login(function (response) {
+      // handle the response
+      if (response.status === 'connected') {
+    	  console.log('ㄴㄷㅅㅌ');
+    	    FB.api('/me',{fields: 'id,name,email'}, function (response) {
+    			console.log(response.name);
+    			console.log(response.id);
+    			console.log(response.email);
+    			name = response.name;
+    			id = response.id;
+    			email = response.email;
+	 location.href ='/fLogin?email='+email;  
+        });
+      }
+    }, { scope: 'public_profile,email' });
+  }
+
+
+
+</script>

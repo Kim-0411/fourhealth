@@ -1,7 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="@{default_layout/main/default}" lang="en">
-<title th:text="${title}"></title>
-
+<html
+  xmlns:th="http://www.thymeleaf.org"
+  xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+  layout:decorate="@{default_layout/main/default}"
+  lang="en"
+>
 <th:block layout:fragment="mainContent">
     <div class="container">
         <h2 align="center">신고글 등록</h2>
@@ -11,7 +14,7 @@
                     <td>제목</td>
                     <td>
                         <input type="text" id="reportTitle" class="form-control" name="reportTitle" />
-                        <input type="hidden" th:value="${SID}" id="userId" name="userId" />
+                        <input type="hidden" th:value="id001" id="userId" name="userId" />
                     </td>
                 </tr>
                 <tr>

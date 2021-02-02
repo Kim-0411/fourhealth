@@ -9,6 +9,15 @@
 		<result column="met_coefficient" 		property="exerciseMetCoeffcient"/>
 		<result column="exercise_reg_date" 		property="exerciseRegDate"/>
 	</resultMap>
+
+	<select id="getAllExerciseList2" resultMap="resultMapMetExercise">
+		SELECT
+			exercise_met_code,
+			exercise_name,
+			met_coefficient
+		FROM
+			tb_met_exercise	
+	</select>
 	
 	<select id="getAllExerciseList" resultMap="resultMapMetExercise">
 		SELECT
