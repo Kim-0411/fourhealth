@@ -58,7 +58,7 @@ public class PromotionController {
 	private TotalDate utilTotalDate;
 
 	// 트레이너 프로모션 전체리스트 컨트롤러(회원이 보는거 )공통
-	@GetMapping("promtion/promotionList")
+	@GetMapping("/main/promtion/promotionList")
 	public String commonPromotionList(Model model,
 			@RequestParam(name = "currentPage", required = false, defaultValue = "1") int currentPage) {
 
