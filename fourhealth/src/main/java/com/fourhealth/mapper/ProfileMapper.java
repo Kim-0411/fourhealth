@@ -10,5 +10,5 @@ import com.fourhealth.dto.CommonUserDto;
 @Mapper
 public interface ProfileMapper {
 
-	List<CommonProfileDto> getProfile();
+	CommonProfileDto getProfile(String userId);
 }

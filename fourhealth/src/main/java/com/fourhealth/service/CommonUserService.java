@@ -14,9 +14,19 @@ public class CommonUserService {
 	@Autowired
 	private CommonUserMapper commonUserMapper;
 
-	public CommonUserDto getPrivateProfile() {
-		CommonUserDto commonUserDto = commonUserMapper.getPrivateProfile();
+	public CommonUserDto getPrivateProfile(String userId) {
+		CommonUserDto commonUserDto = commonUserMapper.getPrivateProfile(userId);
 		return commonUserDto;
+	}
+
+	public String modifyPrivateProfile(CommonUserDto commonUserDto) {
+		String result = "회원 수정 실패";
+		
+		int modifyCheck = commonUserMapper.modifyPrivateProfile(commonUserDto);
+		
+		if(modifyCheck > 0) result = "회원 수정 성공";
+		
+		return result;
 	}
 
 }

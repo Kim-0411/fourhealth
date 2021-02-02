@@ -15,7 +15,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6" style="margin-left: -100px;">
-            <h1>Profile Edit</h1>
+            <h1>Private Profile Edit</h1>
           </div>
         </div>
       </div><!-- /.container-fluid -->
@@ -31,26 +31,16 @@
             <div class="card card-primary card-outline">
               <div class="card-body box-profile">
                 <div class="text-center">
-                  <img class="profile-user-img img-fluid img-circle" alt="User profile picture">
+                  <img class="profile-user-img img-fluid img-circle" alt="User profile picture" th:src="'/static/'+${profile.profileCommonImageCode}">
                 </div>
 
-                <h3 class="profile-username text-center" ></h3>
+                <h3 class="profile-username text-center" th:text=${profile.userId}></h3>
 
-                <p class="text-muted text-center">Software Engineer</p>
+                <p class="text-muted text-center" th:text="${commonUserDto.userLevelCode}"></p>
 
-                <ul class="list-group list-group-unbordered mb-3">
-                  <li class="list-group-item">
-                    <b>Followers</b> <a class="float-right">1,322</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Following</b> <a class="float-right">543</a>
-                  </li>
-                  <li class="list-group-item">
-                    <b>Friends</b> <a class="float-right">13,287</a>
-                  </li>
+                <ul class="list-group list-group-unbordered mb-5">
+                  <li class="list-group-item" th:text="${profile.profileCommonIntroduce}" style="text-align: center; text-overflow:ellipsis; max-height: 150px; "></li>
                 </ul>
--
-                <a href="#" class="btn btn-primary btn-block"><b>프로필 수정</b></a>
               </div>	
               <!-- /.card-body -->
             </div>
@@ -60,38 +50,22 @@
             <div class="card card-primary">
               <!-- /.card-header -->
               <div class="card-body">
-                <strong><i class="fas fa-book mr-1"></i> Education</strong>
+                <strong> Name</strong>
 
-                <p class="text-muted">
-                  B.S. in Computer Science from the University of Tennessee at Knoxville
-                </p>
+                <p class="text-muted" th:text="${commonUserDto.userName}"></p>
 
                 <hr>
 
-                <strong><i class="fas fa-map-marker-alt mr-1"></i> Location</strong>
+                <strong> Phone Number</strong>
 
-                <p class="text-muted">Malibu, California</p>
-
-                <hr>
-
-                <strong><i class="fas fa-pencil-alt mr-1"></i> Skills</strong>
-
-                <p class="text-muted">
-                  <span class="tag tag-danger">UI Design</span>
-                  <span class="tag tag-success">Coding</span>
-                  <span class="tag tag-info">Javascript</span>
-                  <span class="tag tag-warning">PHP</span>
-                  <span class="tag tag-primary">Node.js</span>
-                </p>
+                <p class="text-muted" th:text="${commonUserDto.userPhone}"></p>
 
                 <hr>
 
-                <strong><i class="far fa-file-alt mr-1"></i> Notes</strong>
+                <strong> E-mail</strong>
 
-                <p class="text-muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam fermentum enim neque.</p>
+                <p class="text-muted" th:text="${commonUserDto.userEmail}"></p>
               </div>
-               <a href="#" class="btn btn-primary btn-block"><b>개인정보 수정</b></a>
-              
               <!-- /.card-body -->
             </div>
             <!-- /.card -->
@@ -104,19 +78,27 @@
                   <div class="active tab-pane" id="activity">
                     <!-- Post -->
                     <div class="post">
-                    	<form action="">
-                    		<input type="text" class="form-control" name="userId" id="userId" th:value="${session.SID}" readonly="readonly"> <br/>
-                    		<input type="text" class="form-control" name="userLevelCode" id="userLevelCode" th:value="${session.SNAME}"> <br/>
-                    		<input type="text" class="form-control" name="userName" id="userName" > <br/>
-                    		<input type="text" class="form-control" name="userAddr" id="userAddr" > <br/>
-                    		<input type="text" class="form-control" name="userNickname" id="userNickname"> <br/>
-                    		<input type="text" class="form-control" name="userPhone" id="userPhone"> <br/>
-                    		<input type="text" class="form-control" name="userEmail" id="userEmail"> <br/>
-                    		<input type="text" class="form-control" name="userBirth" id="userBirth"> <br/>
-                    		<input type="text" class="form-control" name="userGender" id="userGender"> <br/>
-                    		<input type="text" class="form-control" name="userMainBank" id="userMainBank"> <br/>
-                    		<input type="text" class="form-control" name="userBankNumber" id="userBankNumber"> <br/>
-                    		<input type="text" class="form-control" name="userBankMaster" id="userBankMaster">
+                    	<form th:action="@{/trainer/profile/trainerProfileModify}" method="post">
+                    		<input type="text" class="form-control" name="userId" id="userId" th:value=${profile.userId} readonly="readonly"> <br/>
+                    		<input type="text" class="form-control" name="userLevelCode" id="userLevelCode" th:value="${commonUserDto.userLevelCode}" readonly="readonly"> <br/>
+                    		<input type="password" class="form-control" name="userPw" id="userPw" th:value=${commonUserDto.userPw} placeholder="비밀번호를 입력하세요."> <br/>
+                    		<input type="text" class="form-control" name="userName" id="userName" th:value="${commonUserDto.userName}" placeholder="이름을 입력하세요."> <br/>
+                    		<input type="text" class="form-control" name="userAddr" id="userAddr" th:value="${commonUserDto.userAddr}" placeholder="주소를 입력하세요"> <br/>
+                    		<input type="text" class="form-control" name="userNickname" id="userNickname" th:value="${commonUserDto.userNickname}" placeholder="닉네임을 입력하세요."> <br/>
+                    		<input type="tel" class="form-control" name="userPhone" id="userPhone" th:value="${commonUserDto.userPhone}" placeholder="ex)010-0000-0000"> <br/>
+                    		<input type="email" class="form-control" name="userEmail" id="userEmail" th:value="${commonUserDto.userEmail}" placeholder="ex)0000@gmail.com"> <br/>
+                    		<input type="date" class="form-control" name="userBirth" id="userBirth" th:value="${commonUserDto.userBirth}"> <br/>
+							<div class="custom-control" style="text-align: center;">
+								<select name="userGender" >
+									<option value="::성별::">성별을 선택해주세요.</option>
+									<option value="male">m</option>
+									<option value="female">f</option>
+									<option value="nat">n</option>
+								</select>
+							</div> <br/>
+							<div class="offset-sm-2 col-sm-10">
+                          		<button type="submit" class="btn btn-danger">Submit</button>
+                        	</div>
                     	</form>
                     </div>
                   </div>
