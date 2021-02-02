@@ -40,7 +40,7 @@
 
 ## Server 및 배포
 
-- AWS : Tomcat
+- WAS(Web Application Server) : Tomcat 8
 - cafe24
 
 ## Database
