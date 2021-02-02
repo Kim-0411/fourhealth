@@ -34,7 +34,7 @@ public class SnsController {
 
 	@Autowired
 	private SnsService snsService;
-	
+
 	@RequestMapping(value = "/commentsInsertBtn", method = RequestMethod.POST, produces = "application/json")
 	public @ResponseBody String commentsInsertBtn(@RequestParam Map<String, Object> map) {
 		System.out.println(map);
@@ -68,7 +68,7 @@ public class SnsController {
 		String result = snsService.snsInsert(snsUserDto);
 		System.out.println("폼에서 입력받은 값2" + snsUserDto);
 		System.out.println(result);
-		return "main_layout/sns/snsList";
+		return "redirect:/sns/snsList";
 	}
 
 	@GetMapping("/snsInsert")
