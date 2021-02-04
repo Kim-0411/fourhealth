@@ -1,13 +1,13 @@
 ## Index
 [1. About Service](https://github.com/Kim-0411/fourhealth#about-service)
 
-[2. About Tech](https://github.com/Kim-0411/fourhealth#about-service)
+[2. About Tech](https://github.com/Kim-0411/fourhealth#about-tech)
 
-[3. About Team](https://github.com/Kim-0411/fourhealth#about-service)
+[3. About Team](https://github.com/Kim-0411/fourhealth#about-team)
 
-[4. About Project](https://github.com/Kim-0411/fourhealth#about-service)
+[4. About Project](https://github.com/Kim-0411/fourhealth#about-project)
 
-[5. All Links (Summary)](https://github.com/Kim-0411/fourhealth#about-service)
+[5. All Links (Summary)](https://github.com/Kim-0411/fourhealth#our-all-links)
 
 
 # Fourhealth
@@ -24,7 +24,7 @@
 - 모든 사람은 각자에게 맞는 맞춤형 건강 관리 플랜이 필요하다.
 - 트레이너가 사용자의 정보를 면밀하게 파악할 수 있게 한다.
 
- ## <b><i>회원에게는 회원 맞춤별 다양한 솔루션을, 트레이너에게는 다양한 회원을 접하여 활동반경을 넓힌다. </i></b>
+ ### <b><i>회원에게는 회원 맞춤별 다양한 솔루션을, 트레이너에게는 다양한 회원을 접하여 활동반경을 넓힌다. </i></b>
 
 ## 2. 기대효과
 -  전문적인 트레이너가 사용자에게 솔루션을 제공함으로서 서로의 기대효과 향상(수익증진, 건강 향상)
@@ -58,7 +58,7 @@
 ## Server 및 배포
 
 - WAS(Web Application Server) : Tomcat 8
-- cafe24
+- cafe24(배포)
 
 ## Database
 
