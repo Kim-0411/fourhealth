@@ -118,14 +118,14 @@ public class PromotionController {
 
 	// 트레이너 프로모션 등록컨트롤러
 	@PostMapping("/promotionInsert")
-	public String trainerPromotionInsert(NoticePromotionTrainerDto promotionDto)
+	public String trainerPromotionInsert(HttpServletRequest request, NoticePromotionTrainerDto promotionDto)
 			throws ParseException, FileNotFoundException {
 
 		System.out.println("처음 받아온 값----->" + promotionDto);
 
 		// 사진 업로드
 		MultipartFile trainerPromotionBgImage = promotionDto.getTrainerPromotionBgImage();
-		String rename = imageUpload.imageUpload(trainerPromotionBgImage);
+		String rename = imageUpload.imageUpload(request, trainerPromotionBgImage);
 		System.out.println("파일 이름----->" + rename);
 		promotionDto.setProImageUrl(rename);
 
@@ -183,14 +183,14 @@ public class PromotionController {
 	}
 
 	@PostMapping("promotionModify")
-	public String modifyUpdateMyPromotion(NoticePromotionTrainerDto promotionDto)
+	public String modifyUpdateMyPromotion(HttpServletRequest request, NoticePromotionTrainerDto promotionDto)
 			throws FileNotFoundException, ParseException {
 
 		System.out.println(promotionDto);
 
 		// 사진 업로드
 		MultipartFile trainerPromotionBgImage = promotionDto.getTrainerPromotionBgImage();
-		String rename = imageUpload.imageUpload(trainerPromotionBgImage);
+		String rename = imageUpload.imageUpload(request, trainerPromotionBgImage);
 		System.out.println("파일 이름----->" + rename);
 		promotionDto.setProImageUrl(rename);
 

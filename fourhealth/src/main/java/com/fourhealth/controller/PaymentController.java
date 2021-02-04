@@ -115,7 +115,7 @@ public class PaymentController {
                 return null;
             } else {
                 // 만약 현재 모집기간이 끝나버렸다면
-                if (compare2 > 0) {
+                if (compare2 < 0) {
                     response.setContentType("text/html; charset=UTF-8");
                     PrintWriter out = response.getWriter();
                     out.println("<script>alert('현재모집 기간이 끝났습니다.'); location.href='/';</script>");
