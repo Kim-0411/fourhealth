@@ -141,7 +141,7 @@ public class PaymentController {
                             return null;
                         } else {
                             // 이미 프로모션에 참여중이라면
-                            if (compare < 0) {
+                            if (compare > 0) {
                                 response.setContentType("text/html; charset=UTF-8");
                                 PrintWriter out = response.getWriter();
                                 out.println("<script>alert('이미 프로모션에 참여중입니다.'); location.href='/';</script>");

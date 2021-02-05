@@ -78,6 +78,7 @@
 												for="check1"></label>
 										</div>
 									</td>
+									<input type="hidden" id="msg_val" th:value="${m.msgCode}">
 									<td class="mailbox-name"><a th:href="@{/trainer/message/trainerSendMessageRead(msgCode = ${m.msgCode})}"
 										th:text="${m.receiveId}"></a></td>
 									<td class="mailbox-subject"
