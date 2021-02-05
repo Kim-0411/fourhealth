@@ -55,11 +55,12 @@ public class PaymentController {
     public String promotionPaymentCheck(@RequestParam(name = "userId", required = false) String userId,
             @RequestParam(name = "promotionNoticeCode", required = false) String promotionNoticeCode,
             @RequestParam(name = "trainerPromotionRecruitEndDate", required = false) String trainerPromotionRecruitEndDate,
-            HttpServletResponse response, Model model) throws IOException {
+            HttpServletResponse response, Model model) throws IOException, ParseException {
 
         // html에서 받아온 파라미터 값 확인
         System.out.println(userId + "----------->로그인된 id값 가져오기");
         System.out.println(promotionNoticeCode + "----------->사용자가 클릭한 프로모션 코드값 가져오기");
+        System.out.println(trainerPromotionRecruitEndDate + "---------------프로모션 모집 마감일자");
 
         // 유저가 최초 데이터를 작성했는지에 대한 체크
         String re = paymentService.checkPromotionPayment(userId);
@@ -81,23 +82,20 @@ public class PaymentController {
         System.out.println(promotionCheck);
 
         Date today = new Date();
-        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+        System.out.println(today + "-===============today");
+        SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
-        Date a1 = null;
-        Date a2 = null;
-        try {
-            a1 = dateFormat.parse(promotionCheck);
-            a2 = dateFormat.parse(trainerPromotionRecruitEndDate);
-        } catch (ParseException e) {
+        Date a1 = dateFormat.parse(promotionCheck);
+        Date a2 = dateFormat.parse(trainerPromotionRecruitEndDate);
 
-            e.printStackTrace();
-        }
+        System.out.println(a1 + "===================a1");
+        System.out.println(a2 + "===================a2");
 
         int compare = today.compareTo(a1);
         // 유저가 선택한 프로모션이 기간이 지나지 않았는가에 대한 체크
         int compare2 = today.compareTo(a2);
-        System.out.println(compare);
-        System.out.println(compare2);
+        System.out.println(compare + "-------------------compare");
+        System.out.println(compare2 + "================compare2");
 
         if (userId.equals("")) {
             response.setContentType("text/html; charset=UTF-8");
@@ -110,15 +108,15 @@ public class PaymentController {
                 // 만약 유저가 최초데이터를 작성 하지 않았다면
                 response.setContentType("text/html; charset=UTF-8");
                 PrintWriter out = response.getWriter();
-                out.println("<script>alert('정보를 확인해 주세요.'); location.href='/';</script>");
+                out.println("<script>alert('정보를 확인해 주세요.'); location.href='/promtion/promotionList';</script>");
                 out.flush();
                 return null;
             } else {
                 // 만약 현재 모집기간이 끝나버렸다면
-                if (compare2 < 0) {
+                if (compare2 > 0) {
                     response.setContentType("text/html; charset=UTF-8");
                     PrintWriter out = response.getWriter();
-                    out.println("<script>alert('현재모집 기간이 끝났습니다.'); location.href='/';</script>");
+                    out.println("<script>alert('현재모집 기간이 끝났습니다.'); location.href='/promtion/promotionList';</script>");
                     out.flush();
                     return null;
                 } else {
@@ -127,7 +125,8 @@ public class PaymentController {
                         // 만약 현재 프로모션이 현재인원이 가득 차있다면
                         response.setContentType("text/html; charset=UTF-8");
                         PrintWriter out = response.getWriter();
-                        out.println("<script>alert('현재 매칭인원이 꽉 차있습니다.'); location.href='/promotionList';</script>");
+                        out.println(
+                                "<script>alert('현재 매칭인원이 꽉 차있습니다.'); location.href='/promtion/promotionList';</script>");
                         out.flush();
                         return null;
                     } else {
@@ -136,15 +135,17 @@ public class PaymentController {
                             // 같은프로모션에 결제를 시도한것이 아니라면
                             response.setContentType("text/html; charset=UTF-8");
                             PrintWriter out = response.getWriter();
-                            out.println("<script>alert('이미 참여하신 프로모션있습니다.'); location.href='/';</script>");
+                            out.println(
+                                    "<script>alert('이미 참여하신 프로모션있습니다.'); location.href='/promtion/promotionList';</script>");
                             out.flush();
                             return null;
                         } else {
                             // 이미 프로모션에 참여중이라면
-                            if (compare > 0) {
+                            if (compare < 0) {
                                 response.setContentType("text/html; charset=UTF-8");
                                 PrintWriter out = response.getWriter();
-                                out.println("<script>alert('이미 프로모션에 참여중입니다.'); location.href='/';</script>");
+                                out.println(
+                                        "<script>alert('이미 프로모션에 참여중입니다.'); location.href='/promtion/promotionList';</script>");
                                 out.flush();
                                 return null;
                             } else {
