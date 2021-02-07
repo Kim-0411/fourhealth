@@ -112,13 +112,13 @@
 
 ### 1. About Our Blog
 
-- https://blog.naver.com/kjc0411 김재창
-- https://g-ret.tistory.com/ 문도희
-- https://blog.naver.com/thsgusdnr123 손현욱
-- https://make-something.tistory.com/ 윤정호(Blog -T story)  
-  https://www.notion.so/jeongoworkshop/921f7e6fb42b4c10ab828d2480040ad4(Blog - Notion)  
-- https://octoberls.blogspot.com/ 이승재
-- https://blog.naver.com/internal_c 정다솔
+- [김재창](https://blog.naver.com/kjc0411)
+- [문도희](https://g-ret.tistory.com/)
+- [손현욱](https://blog.naver.com/thsgusdnr123)
+- [윤정호](https://make-something.tistory.com) - Tstory  
+  [윤정호](https://www.notion.so/jeongoworkshop/921f7e6fb42b4c10ab828d2480040ad4) - Notion  
+- [이승재](https://octoberls.blogspot.com)
+- [정다솔](https://blog.naver.com/internal_c)
 
 ### 2. About git
 - [김재창](https://github.com/Kim-0411)
@@ -129,8 +129,14 @@
 - [정다솔](https://github.com/internal7) 
 
 ### 3. Wire Frame
+- 와이어프레임 [PDF version](static/Fourhealth_wireframe.pdf)
 
 ### 4. Flow charts
+- 플로우차트 [PDF version](static/Fourhealth_flowchart.pdf)
 
-### 5. 최종 배포 홈페이지
-- http://kjc0411.cafe24.com Fourhealth 바로가기
+### 5. 종합 문서/완료보고서
+- 종합문서 [PDF version](static/Fourhealth_total.pdf) / [PowerPoint version](static/Fourhealth_total.pdf)
+
+- 완료보고서 [PDF version](static/fourhealth프로젝트_완료보고서.pdf)/ [Word](fourhealth_프로젝트_완료보고서.docx)
+### 6. 최종 배포 홈페이지
+- [Fourhealth 바로가기](http://kjc0411.cafe24.com)
