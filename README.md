@@ -1,4 +1,4 @@
-# Index
+## 📇 Index
 [1. About Service](https://github.com/Kim-0411/fourhealth#about-service)
 
 [2. About Tech](https://github.com/Kim-0411/fourhealth#about-tech)
@@ -10,11 +10,11 @@
 [5. All Links (Summary)](https://github.com/Kim-0411/fourhealth#our-all-links)
 
 
-# Fourhealth
+# 💡 <b>Fourhealth</b>
 
 현재 가지고 있는 질병이나, 기타 만성질환, 알레르기 정보를 바탕으로 매칭된 트레이너를 통해 사용자 맞춤형 건강 관리 플랜을 제공하는 서비스
 
-# About Service
+# 💡 About Service
 
 ## 1. 개발목표
 
@@ -29,7 +29,7 @@
 ## 2. 기대효과
 -  전문적인 트레이너가 사용자에게 솔루션을 제공함으로서 서로의 기대효과 향상(수익증진, 건강 향상)
 - 사용자가 사전에 입력한 질병 및 신체 정보를 바탕으로, 트레이너에게 사용자의 신체 정보를 제공하여 좀더 정확하고, 구체적인 시선으로 사용자에게 가장 적합한 코치를 진행할 수 있을 것으로 기대한다.
-# About Tech
+# 💡 About Tech
 
 ## Prototype & Desgin
 
@@ -83,7 +83,7 @@
 - 이승재
 - 정다솔
 
-# About Project
+# 💡 About Project
 
 ## Workflow
 
@@ -108,7 +108,7 @@
 - 테스트, 오류 수정 및 보완
 ### 7) 2021년 02월 14일 ~ 2020년 02월 16일 <b>(3일)</b>
 - 완료 보고서 작성
-# Our All Links
+# 💡 Our All Links
 
 ### 1. About Our Blog
 
