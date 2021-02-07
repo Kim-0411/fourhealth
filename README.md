@@ -1,4 +1,4 @@
-## Index
+# Index
 [1. About Service](https://github.com/Kim-0411/fourhealth#about-service)
 
 [2. About Tech](https://github.com/Kim-0411/fourhealth#about-tech)
