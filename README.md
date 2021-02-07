@@ -92,7 +92,9 @@
 ### 2) 2020년 11월 05일 ~ 2020년 11월 18일 <b>(14일)</b>
 - 프로젝트 주제 선정
 ### 3) 2020년 11월 18일 ~ 2020년 12월 31일 <b>(43일)</b>
-- 프로젝트 설계 (기능 정의, 테이블 구상)
+- 프로젝트 설계 (기능 정의, 테이블 구상, 기획 구성)
+   - [와이어프레임](static/Fourhealth_wireframe.pdf) 제작
+   - [프로토타입](static/Fourhealth_flowchart.pdf) 제작
 - 설계 자료 취합, 수정 및 보완
 - ERD 작업 및 Method 및 Package 정리
 ### 4) 2020년 12월 31일 ~ 2021년 1월 4일 <b>(5일)</b>
@@ -119,12 +121,12 @@
 - https://blog.naver.com/internal_c 정다솔
 
 ### 2. About git
-- https://github.com/Kim-0411 김재창
-- https://github.com/gret8024 문도희
-- https://github.com/sonhyunuk 손현욱
-- https://github.com/wjdgh7587 윤정호
-- https://github.com/octoberls 이승재
-- https://github.com/internal7 정다솔
+- [김재창](https://github.com/Kim-0411)
+- [문도희](https://github.com/gret8024)
+- [손현욱](https://github.com/sonhyunuk)
+- [윤정호](https://github.com/wjdgh7587)
+- [이승재](https://github.com/octoberls)
+- [정다솔](https://github.com/internal7) 
 
 ### 3. Wire Frame
 
