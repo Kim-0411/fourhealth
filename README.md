@@ -137,6 +137,6 @@
 ### 5. 종합 문서/완료보고서
 - 종합문서 [PDF version](static/Fourhealth_total.pdf) / [PowerPoint version](static/Fourhealth와이어프레임.플로우차트.pptx)
 
-- 완료보고서 [PDF version](static/fourhealth프로젝트_완료보고서.pdf)/ [Word](fourhealth_프로젝트_완료보고서.docx)
+- 완료보고서 [PDF version](static/fourhealth프로젝트_완료보고서.pdf)/ [Word](static/fourhealth_프로젝트_완료보고서.docx)
 ### 6. 최종 배포 홈페이지
 - [Fourhealth 바로가기](http://kjc0411.cafe24.com)
