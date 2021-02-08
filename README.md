@@ -1,20 +1,21 @@
 ## 📇 Index
-[1. About Service](https://github.com/Kim-0411/fourhealth#about-service)
+[1. About Service](https://github.com/Kim-0411/fourhealth#-about-service)
 
-[2. About Tech](https://github.com/Kim-0411/fourhealth#about-tech)
 
-[3. About Team](https://github.com/Kim-0411/fourhealth#about-team)
+[2. About Tech](https://github.com/Kim-0411/fourhealth#-about-tech)
 
-[4. About Project](https://github.com/Kim-0411/fourhealth#about-project)
+[3. About Team](https://github.com/Kim-0411/fourhealth#-about-team)
 
-[5. All Links (Summary)](https://github.com/Kim-0411/fourhealth#our-all-links)
+[4. About Project](https://github.com/Kim-0411/fourhealth#-about-project)
+
+[5. All Links (Summary)](https://github.com/Kim-0411/fourhealth#-our-all-links)
 
 
 # 💡 **Fourhealth**
 
 현재 가지고 있는 질병이나, 기타 만성질환, 알레르기 정보를 바탕으로 매칭된 트레이너를 통해 사용자 맞춤형 건강 관리 플랜을 제공하는 서비스
 
-# 💡 About Service
+# 💡About Service
 
 ## 1. 개발목표
 
