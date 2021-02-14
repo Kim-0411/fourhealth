@@ -165,8 +165,7 @@
 - [김재창](https://blog.naver.com/kjc0411)
 - [문도희](https://g-ret.tistory.com/)
 - [손현욱](https://blog.naver.com/thsgusdnr123)
-- [윤정호](https://make-something.tistory.com) - Tstory  
-  [윤정호](https://www.notion.so/jeongoworkshop/921f7e6fb42b4c10ab828d2480040ad4) - Notion  
+- [윤정호](https://make-something.tistory.com)
 - [이승재](https://octoberls.blogspot.com)
 - [정다솔](https://blog.naver.com/internal_c)
 
