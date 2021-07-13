@@ -1,6 +1,18 @@
 server:
   port: 10112
 
+#Request Call 관련 항목
+uri:
+  api: fourhealth
+  version: v0.1
+  resource: graphql
+
+
+#GraphQL 관련 항목
+graphql:
+  path: /Users/jeongho/Documents/Develop/fourhealth_dev/fourhealth/src/main/resources/graphql_resource
+  files: schema.graphql
+
 
 #DataSource
 spring:
@@ -9,3 +21,8 @@ spring:
     url: jdbc:mysql://kjc0411.cafe24.com:3306
     username: kjc0411
     password: ksmart37!!
+    connection-timeout: 10000
+    validation-timeout: 10000
+    maxLifetime: 580000
+    maximumPoolSize: 30
+    minimumIdle: 10

@@ -57,6 +57,13 @@
 			<artifactId>mariadb-java-client</artifactId>
 			<version>2.2.5</version>
 		</dependency>
+
+		<!-- 그래프큐엘 관련 옵션 처리	-->
+		<dependency>
+			<groupId>com.graphql-java</groupId>
+			<artifactId>graphql-java</artifactId>
+			<version>16.2</version>
+		</dependency>
 	</dependencies>
 
 	<build>
