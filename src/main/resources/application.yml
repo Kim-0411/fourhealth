@@ -1,0 +1,11 @@
+server:
+  port: 10112
+
+
+#DataSource
+spring:
+  datasource:
+    driver-class-name: org.mariadb.jdbc.Driver
+    url: jdbc:mysql://kjc0411.cafe24.com:3306
+    username: kjc0411
+    password: ksmart37!!
